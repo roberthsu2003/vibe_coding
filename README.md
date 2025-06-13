@@ -7,6 +7,9 @@
 - **應用場景**：適用於個人化或小規模的「即用即棄」專案，例如自製工具（如名為 LunchBox Buddy 的應用程式）。由於可能存在未察覺的錯誤，此方式不適合需要高可靠性或安全性的專業應用。
 - **起源**：此術語由電腦科學家 Andrej Karpathy 於 2025 年 2 月提出，並於 2025 年 3 月被 Merriam-Webster 收錄為俚語。
 
+## vibe_coding的觀念影片
+- [VibeCoding的原理是什麼](https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6)
+
 ## vibe_coding常用工具
 - **視窗介面**
 	- cline(vscode擴充套件)
