@@ -21,11 +21,17 @@
 - **CLI**
 	- claude code
 	- openAI codex
+	- Gemini CLI
 
 - **網頁介面**
 	- google jules
 
 ---
+
+## 工具的說明
+
+- [Gemini CLI](./gemini_cli)
+
 
 ## 所需要的文件
 ### PRD
