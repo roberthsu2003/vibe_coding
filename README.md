@@ -296,7 +296,7 @@ Markdown Preview	即時預覽 TODO.md，適合展示與教學
 **Pull Request**
 - 選擇Copilot當Reviewer
 
-### 實際範例展示
-專案資料夾
+### 實際範例展示AI如何協助Code Review和Refactoring
+[專案資料夾](./code_review)
 
 
