@@ -1,0 +1,271 @@
+/* 基礎樣式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+/* 遊戲容器 */
+.game-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* 遊戲標題 */
+.game-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #4a5568;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 遊戲信息面板 */
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: #f7fafc;
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+}
+
+.score-panel, .high-score-panel, .time-panel {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.score-label, .high-score-label, .time-label {
+    color: #718096;
+    margin-right: 5px;
+}
+
+#current-score {
+    color: #38a169;
+}
+
+#high-score {
+    color: #d69e2e;
+}
+
+#game-time {
+    color: #4a5568;
+}
+
+/* 遊戲區域 */
+.game-area {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+#gameCanvas {
+    border: 3px solid #4a5568;
+    border-radius: 10px;
+    background: #2d3748;
+    display: block;
+}
+
+/* 遊戲覆蓋層 */
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: white;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 20px;
+}
+
+#overlay-title {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+#overlay-message {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #cbd5e0;
+    line-height: 1.5;
+}
+
+/* 按鈕樣式 */
+.game-btn, .control-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+.game-btn:hover, .control-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 控制面板 */
+.control-panel {
+    margin-bottom: 20px;
+}
+
+.instructions {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #718096;
+    line-height: 1.4;
+}
+
+.instructions p {
+    margin: 5px 0;
+}
+
+/* 手機觸控控制 */
+.mobile-controls {
+    display: none;
+    margin-top: 20px;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.mobile-btn {
+    background: #4a5568;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    margin: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.mobile-btn:hover {
+    background: #2d3748;
+    transform: scale(1.05);
+}
+
+.mobile-btn:active {
+    transform: scale(0.95);
+    background: #1a202c;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .game-container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .game-header h1 {
+        font-size: 2em;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+    
+    .mobile-controls {
+        display: block;
+    }
+    
+    .instructions {
+        font-size: 0.8em;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        margin: 5px;
+        padding: 10px;
+    }
+    
+    .game-header h1 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+    
+    #gameCanvas {
+        max-width: 300px;
+    }
+    
+    .game-btn, .control-btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}
+
+/* 動畫效果 */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.game-btn:focus {
+    animation: pulse 0.5s ease-in-out;
+    outline: none;
+}
+
+/* 遊戲狀態指示 */
+.game-running .game-overlay {
+    display: none;
+}
+
+.game-paused .game-overlay {
+    display: flex;
+}
+
+.game-over .game-overlay {
+    display: flex;
+    background: rgba(220, 38, 38, 0.9);
+}

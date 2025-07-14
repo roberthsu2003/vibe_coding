@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貪食蛇遊戲</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 遊戲標題 -->
+        <header class="game-header">
+            <h1>🐍 貪食蛇遊戲</h1>
+        </header>
+
+        <!-- 遊戲信息面板 -->
+        <div class="game-info">
+            <div class="score-panel">
+                <span class="score-label">分數:</span>
+                <span id="current-score">0</span>
+            </div>
+            <div class="time-panel">
+                <span class="time-label">時間:</span>
+                <span id="game-time">00:00</span>
+            </div>
+            <div class="high-score-panel">
+                <span class="high-score-label">最高分:</span>
+                <span id="high-score">0</span>
+            </div>
+        </div>
+
+        <!-- 遊戲畫布 -->
+        <div class="game-area">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            
+            <!-- 遊戲覆蓋層 -->
+            <div id="game-overlay" class="game-overlay">
+                <div class="overlay-content">
+                    <h2 id="overlay-title">準備開始遊戲</h2>
+                    <p id="overlay-message">使用方向鍵或WASD控制蛇的移動</p>
+                    <button id="start-btn" class="game-btn">開始遊戲</button>
+                    <button id="restart-btn" class="game-btn" style="display: none;">重新開始</button>
+                    <button id="menu-btn" class="game-btn" style="display: none;">返回主選單</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 控制面板 -->
+        <div class="control-panel">
+            <button id="pause-btn" class="control-btn" disabled>暫停</button>
+            <div class="instructions">
+                <p>控制說明：</p>
+                <p>方向鍵 或 WASD 移動 | 空白鍵 暫停</p>
+            </div>
+        </div>
+
+        <!-- 手機觸控控制 -->
+        <div class="mobile-controls">
+            <div class="control-row">
+                <button class="mobile-btn" data-direction="up">↑</button>
+            </div>
+            <div class="control-row">
+                <button class="mobile-btn" data-direction="left">←</button>
+                <button class="mobile-btn" data-direction="down">↓</button>
+                <button class="mobile-btn" data-direction="right">→</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 檔案 -->
+    <script src="js/utils.js"></script>
+    <script src="js/food.js"></script>
+    <script src="js/snake.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

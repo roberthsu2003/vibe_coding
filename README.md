@@ -252,73 +252,51 @@ Markdown Preview	即時預覽 TODO.md，適合展示與教學
 ⸻
 
 
+## Code Review & Refactoring
 
-### **⬛️ 第一階段（基礎環境與基礎語法，10-15小時）**
-
-✅ 如何安裝 VS Code / Cursor
-
-✅ 了解 Terminal 基本操作（cd, mkdir, ls, rm, touch）
-
-✅ 認識 Git（clone、commit、push）
-
-✅ 基本語法（變數、條件判斷、迴圈、函式）
-
-✅ Debug 基本技巧（VS Code Debugger, console.log）
-
----
-
-### **⬛️ 第二階段（實作應用與測試，20-25小時）**
-
-✅ 透過簡易專案（如Todo App）學習如何分工、專案結構
-
-✅ 如何安裝第三方套件（npm / pip install）
-
-✅ API 調用（Fetch/axios或requests）
-
-✅ 使用測試工具（Jest/pytest）寫簡單的單元測試
-
-✅ 專案管理（Git 分支、PR流程）
-
----
-
-### **⬛️ 第三階段（部署與進階技巧，15小時）**
-
-✅ 建置環境變數（.env）
-
-✅ 如何將應用部署到雲端（Vercel、Heroku、Render）
-
-✅ Docker 基礎（可選，視時間而定）
-
-✅ 部署後的問題排查（logs、debugging）
-
-✅ 如何更新程式、修正 bug 並重新部署
-
----
-
-## **3️⃣ 補充資源建議**
-
-✅ ChatGPT 或 Copilot 協助程式撰寫
-
-✅ Code Review 工具（Pull Requests）
-
-✅ 學習資源（MDN、Stack Overflow、官方文件）
-
----
-
-## **4️⃣ 建議的課程安排（範例）**
-
-| **週次** | **主題**                 | **內容概要**                                    |
-| ------ | ---------------------- | ------------------------------------------- |
-| 1-2    | 編輯器與基礎語法               | VS Code、Cursor、Terminal、Git、變數、流程控制         |
-| 3-4    | 小專案（Todo App）          | 專案結構、npm安裝、簡易API串接                          |
-| 5-6    | 單元測試                   | Jest/pytest 基礎、如何撰寫測試                       |
-| 7-8    | 進階專案（Blog或Weather App） | API串接、佈局、錯誤處理、部屬到雲端                         |
-| 9      | 版本控制與團隊合作              | Git Branch, Pull Request, Conflict 處理       |
-| 10     | 雲端部署與維護                | Vercel/Render/Heroku部署、環境變數、簡易Docker（如時間允許） |
-| 11     | 專案總結與展示                | 展示成果、討論未來擴充與問題排查                            |
-
----
+- Code Review(程式碼審查)
+	- 就像是請另一個人幫你檢查程式碼
+	- 可用來抓錯誤
+	- 提升品質
+	- 維持一致性
 
 
+- Refactoring(重構)
+	- 不改變功能的前提下,重新整理現有程式碼
+	- 使程式碼清楚，容易維護
+
+### AI如何協助Code Review
+
+- 協助簡化函式邏輯
+- 改善變數命名
+- 提升程式結構品質
+	- 自動化建議(Automated suggestions)
+	- 程式風格一致性檢查(Consistency checks)
+	- 重構支援(Refactoring assistance)
+	- 錯誤與低效程式碼偵測(Error detection)
+	- 自動產生註解(Comment support)
+	
+	> [!WARNING]
+	> 注意:仍需人工確認建議是否符合專案需求
+	
+### AI如何協助Code Review
+
+**提示調範例**
+
+- 請協助說明程式碼(黃色小鴨說明法)
+- 這段程式碼可以怎麼改進
+- 這個檔案中有沒有重複的程碼
+- 這段程式碼是否有安全問題
+
+**不知道怎麼提供提示詞(以github copilot為例)**
+
+- Visual Studio Code內直接使用Review and Comment
+- Ctrl + Shift + P 輸入GitHub Copilot:Review and Comment
+
+**Pull Request**
+- 選擇Copilot當Reviewer
+
+### 實際範例展示
+專案資料夾
 
 
