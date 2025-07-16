@@ -34,13 +34,22 @@
 - 這個檔案中有沒有重複的程碼
 - 這段程式碼是否有安全問題
 
+**實際範例展示AI如何協助Code Review和Refactoring**
+[專案資料夾](./code_review)
+
+> [!IMPORTANT]
+> 展示實際案例很重要
+
+---
+
 **不知道怎麼提供提示詞(以github copilot為例)**
 
 - Visual Studio Code內直接使用Review and Comment
 - Ctrl + Shift + P 輸入GitHub Copilot:Review and Comment
 
+---
+
 **Pull Request**
 - 選擇Copilot當Reviewer
 
-### 實際範例展示AI如何協助Code Review和Refactoring
-[專案資料夾](./code_review)
+
