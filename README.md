@@ -29,7 +29,7 @@
 ---
 
 ## 工具的說明
-
+- [GitHub Copilot提示建構教學](./github_copilot_提示建構)
 - [Gemini CLI](./gemini_cli)
 
 

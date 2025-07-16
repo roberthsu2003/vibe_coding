@@ -1,5 +1,26 @@
-# Copilot Chat
-開始使用 Copilot Chat 提示
+# GitHub_Copilot_提示建構
+
+- 斜線命令
+- 聊天參與者
+- 變數(context,mcp)
+
+## Prompt Engineering
+- Prompt Engineering(提示工程)
+	- 設計與優化輸入給AI模型的文字提示
+	- 獲得更準確,相關或可控的輸出結果的技術
+	- 提升GitHub Copilot準確度的關鍵技巧之一是學會提示工程
+
+## 提示關鍵字(提示建構)
+- 幫助GitHub Copilot更好理解需求
+- 避免口語表達習慣造成誤解(贅詞,禮貌用詞,斷句)
+- 簡化並明確表達需求
+
+---
+
+## 提示建構
+
+- **聊天參與者(Chat participants)**
+- 不同領域的專家, 具備
 
 您可以向 Copilot Chat 諮詢專案相關的特定問題或常規軟體問題。您也可以使用 Copilot Chat 編寫程式碼、修復錯誤、編寫測試和說明文件。
 
