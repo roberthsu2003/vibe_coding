@@ -3,7 +3,6 @@ AI輔助 Code Review,下面有多個錯誤的地方,請AI協助查出
 
 #prompts
 - 請解釋這段程式碼
-
 """
 def add_numbers(a, b):
     return a - b
