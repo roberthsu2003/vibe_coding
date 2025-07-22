@@ -17,12 +17,13 @@
 	- git_hub copilt(vscode擴充套件)
 	- currsor(開源vscode)
 	- winsuff(開源vscode)
+	- kiro(開源vscode)
 
 - **CLI**
 	- claude code
 	- openAI codex
 	- Gemini CLI
-
+	- [**rovo dev**](https://www.atlassian.com/blog/announcements/rovo-dev-command-line-interface)
 - **網頁介面**
 	- google jules
 
