@@ -14,7 +14,7 @@
 - **視窗介面**
 	- cline(vscode擴充套件)
 	- roo_code(vscode擴充套件)
-	- [git_hub copilt(vscode擴充套件)](./github_copilot_提示建構)
+	- git_hub copilt(vscode擴充套件)
 	- currsor(開源vscode)
 	- winsuff(開源vscode)
 	- kiro(開源vscode)
@@ -31,6 +31,9 @@
 
 ## 工具的說明
 - [GitHub Copilot提示建構教學](./github_copilot_提示建構)
+
+- [GitHub 程式碼審試和重構](./GitHub_Code_Review)
+
 - [Gemini CLI](./gemini_cli)
 
 

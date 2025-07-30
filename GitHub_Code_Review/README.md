@@ -1,15 +1,38 @@
 # Code_Review & Code_Refactoring
 
-- Code Review(程式碼審查)
-	- 就像是請另一個人幫你檢查程式碼
-	- 可用來抓錯誤
-	- 提升品質
-	- 維持一致性
+了解如何使用 GitHub Copilot 來幫助審查和完善你的程式碼
+
+## 如何實際操作Code review
+
+1. 在程式碼內,按右鍵,選取copilot內的`檢閱並認可`(就是code review),這是針對整個檔案
+
+2. 在chat view內,附加該檔案,並詢問
+
+```prompt
+code review
+```
+
+## 如何實際操作Code refactoring
+
+1. 在chat view內,附加該檔案,並詢問
+
+```prompt
+code refactoring
+```
 
 
-- Refactoring(重構)
-	- 不改變功能的前提下,重新整理現有程式碼
-	- 使程式碼清楚，容易維護
+## Code Review(程式碼審查)
+
+- 就像是請另一個人幫你檢查程式碼
+- 可用來抓錯誤
+- 提升品質
+- 維持一致性
+
+
+## Refactoring(重構)
+
+- 不改變功能的前提下,重新整理現有程式碼
+- 使程式碼清楚，容易維護
 
 ### AI如何協助Code Review
 
@@ -35,7 +58,7 @@
 - 這段程式碼是否有安全問題
 
 **實際範例展示AI如何協助Code Review和Refactoring**
-[專案資料夾](./code_review)
+[範例專案資料夾](./src)
 
 > [!IMPORTANT]
 > 展示實際案例很重要

@@ -64,7 +64,7 @@
 本資料夾（lesson17）已設為預設工作區。所有自動化、查詢、程式操作皆以此資料夾為主。
 	 ```
 	 > [!TIP]
-	 > 必需把這檔案拉至chat內ba
+	 > 必需把這檔案拉至chat view內成為附加檔案
 
 ## /new 可以建立一個新的專案
 - `/new react app with typescript`
@@ -80,3 +80,7 @@
 - Node.js 常用的 Web Server Framework 有以下幾種
 - 我如何建立 Express 應用程式
 - @terminal 如何更新 npm 套件
+
+
+- 
+- 
