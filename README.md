@@ -29,11 +29,15 @@
 
 ---
 
-## 工具的說明
-- [GitHub Copilot提示建構教學](./github_copilot_提示建構)
+## GitHub Copilot工具的說明
+
+- [github的_程式碼自動完成_和_下一個編輯建議_](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions#_next-edit-suggestions)
+
+- [GitHub Copilot的chat view提示建構教學](./github_copilot_提示建構)
 
 - [GitHub 程式碼審試和重構](./GitHub_Code_Review)
 
+## Gemini CLI工具說明
 - [Gemini CLI](./gemini_cli)
 
 
