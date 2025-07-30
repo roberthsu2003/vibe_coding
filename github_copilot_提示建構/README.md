@@ -1,16 +1,31 @@
-# GitHub_Copilot_提示建構
+# GitHub_Copilot
+
+## 官方使用說明
+1. https://github.blog/developer-skills/github/how-to-create-issues-and-pull-requests-in-record-time-on-github/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
+
+2. https://github.blog/ai-and-ml/github-copilot/github-for-beginners-code-review-and-refactoring-with-github-copilot/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
+
+3. https://github.blog/ai-and-ml/github-copilot/agent-mode-101-all-about-github-copilots-powerful-mode/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
+
+4. https://github.blog/ai-and-ml/github-copilot/github-for-beginners-how-to-get-llms-to-do-what-you-want/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
+
+5. https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook?&utm_campaign=LCM_CopilotOnboarding_dev&utm_source=github&utm=medium=email
+
+6. https://github.blog/ai-and-ml/github-copilot/a-guide-to-deciding-what-ai-model-to-use-in-github-copilot/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
+
+## GitHub_Copilot_提示建構
 
 - 斜線命令
 - 聊天參與者
 - 變數(context,mcp)
 
-## Prompt Engineering
+### Prompt Engineering
 - Prompt Engineering(提示工程)
 	- 設計與優化輸入給AI模型的文字提示
 	- 獲得更準確,相關或可控的輸出結果的技術
 	- 提升GitHub Copilot準確度的關鍵技巧之一是學會提示工程
 
-## 提示關鍵字(提示建構)
+### 提示關鍵字(提示建構)
 - 幫助GitHub Copilot更好理解需求
 - 避免口語表達習慣造成誤解(贅詞,禮貌用詞,斷句)
 - 簡化並明確表達需求
