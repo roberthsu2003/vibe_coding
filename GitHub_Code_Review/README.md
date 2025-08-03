@@ -50,7 +50,7 @@ code refactoring
 	
 ### AI如何協助Code Review
 
-**提示調範例**
+**提示詞範例**
 
 - 請協助說明程式碼(黃色小鴨說明法)
 - 這段程式碼可以怎麼改進
@@ -73,6 +73,7 @@ code refactoring
 ---
 
 **Pull Request**
-- 選擇Copilot當Reviewer
+
+- 選擇Copilot當Reviewer(建立分支,合併分支時,可以請Copilot當作Reviewer)
 
 
