@@ -1,17 +1,5 @@
 # GitHub_Copilot
 
-## 官方使用說明
-1. https://github.blog/developer-skills/github/how-to-create-issues-and-pull-requests-in-record-time-on-github/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
-
-2. https://github.blog/ai-and-ml/github-copilot/github-for-beginners-code-review-and-refactoring-with-github-copilot/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
-
-3. https://github.blog/ai-and-ml/github-copilot/agent-mode-101-all-about-github-copilots-powerful-mode/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
-
-4. https://github.blog/ai-and-ml/github-copilot/github-for-beginners-how-to-get-llms-to-do-what-you-want/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
-
-5. https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook?&utm_campaign=LCM_CopilotOnboarding_dev&utm_source=github&utm=medium=email
-
-6. https://github.blog/ai-and-ml/github-copilot/a-guide-to-deciding-what-ai-model-to-use-in-github-copilot/?utm_campaign=LCM_CopilotProOnboarding_dev&utm_source=github&utm=medium=email
 
 ## GitHub_Copilot_提示建構
 
@@ -55,7 +43,7 @@
 
 以下部分範例提示使用了`聊天參與者（以 @ 開頭）`、斜線命令（以 / 開頭）`或`聊天變數（以 # 開頭）`。有關提示中關鍵字的更多信息，
 
-## 設定工作區有2種方式
+## 設定`工作區域`有2種方式
 1. 預設都以vscode開啟的資料夾
 2. 如果要指定以lesson17為工作區,可以建立.github/BASE.md,並輸入以下內容
 	 ```
@@ -66,7 +54,29 @@
 	 > [!TIP]
 	 > 必需把這檔案拉至chat view內成為附加檔案
 
-## /new 可以建立一個新的專案
+## Generate Instructions
+> 可以使用github copilot右上角的設定聊天中`產生指示`自動產生
+
+- 情境 - 自訂指令(custom instructions)與提示檔案(prompt files)
+	- 為了避免每次對話都重複輸入這些資訊,你可以將上下文內容儲存在檔案中,並在每次對話時自動加入
+- .github/copilot-instructions.md
+	- 使用Markdown格式撰寫程式碼產生的指令說明
+	- 所有指令集中儲存在單一檔案中，並存放於工作區(workspace)內
+	- 這些指令會自動包含在每一次的聊天請求中
+	- 可用來定義整體的程式撰寫規範偏好的技術選型與通用的專案需求，這些會套用在所有程式碼產生的任務中
+
+### 專案內自訂Copilot`專用的內建資料夾`
+> 可以使用github copilot右上角的設定聊天中自動產生
+> 提示檔案-> .github/prompts/xxxxx.md.prompt
+> 指示-> .github/instructions/xx.instructions.md
+> 工具集(tools)->建立在user內
+> 模式->自訂模式(.github/chatmodes/xxx.chatmode.md)
+> MCP->.vscode/mcp.json
+> 產生指令
+
+
+#### /new 可以建立一個新的專案
+
 - `/new react app with typescript`
 - `/new python django web application`
 - `/new node.js express server`
