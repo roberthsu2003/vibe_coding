@@ -21,7 +21,7 @@
 GitHub Copilot 提示建構包含三大核心元素：
 - **斜線命令** - 快速執行常見操作
 - **聊天參與者** - 不同領域的專家助手
-- **變數 (context, mcp)** - 提供上下文資訊
+- **聊天變數 (context, mcp)** - 提供上下文資訊
 
 ## Prompt Engineering 提示工程
 
