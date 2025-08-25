@@ -1,5 +1,8 @@
 # GitHub Copilot的ASK,EDIT,AGENT和自訂模式
 
+> [!TIP]
+> 提供一個專案資料夾,做實際操作
+
 ## GitHub Copilot Chat
 - **整合於開發環境中的AI助理**
 	- VS Code
@@ -14,6 +17,16 @@
 	- Ask
 	- Edit
 	- Agent
+
+## 快速鍵
+
+> [!TIP]
+> 也可以直接點選上方的「copilot圖示」
+
+- cmd + i :內嵌對話框
+- cmd + shift + i :chat view
+- cmd + option + shift + l: pop over 的 chat view
+
 
 ## GitHub Copilot Chat - Ask模式
 
@@ -30,13 +43,20 @@
 - **適合情境**
 	- 想快速查詢技術知識(學習技術)-*適合程式初學者*
 	- 尋求語法,API,設計模式等解釋(程式語言與開發技術)
-	- 希望獲得除錯思路或理解現有程式碼意義(程式碼說明)-*適合剛取得新的原始碼*
+	- 希望獲得除錯思路或理解現有程式碼意義(程式碼說明)-*適合剛取得新的原始碼時的詢問動作*
 
-## 快速鍵
 
-> [!TIP]
-> 也可以直接點選上方的「copilot圖示」
+## GitHub Copilot Chat - Edit模式
 
-- cmd + i :內嵌對話框
-- cmd + shift + i :chat view
-- cmd + option + shift + l: pop over 的 chat view
+- **用途**
+	- 讓AI根據你的指示直接編輯,優化或修正檔案中的程式碼
+
+- **特點**
+	- 你可以指令AI進行「重構」,「補上註解」, 「修正bug」等具體行動
+	- AI會直接在您的程式碼檔案中進行變更,通常會顯示差異(diff)讓您確認
+	- 可以一次性處理大沒程式碼修改,或針對某個函式,檔案進行調整
+
+- **適合情境**
+	- 希望自動優化/重構現有程式碼
+	- 想快速修正程式碼錯誤
+	- 需要批次加入註解,型別提示等
