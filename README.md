@@ -35,7 +35,7 @@
 
 - [GitHub Copilot的chat view提示建構教學](./github_copilot/github_copilot_提示建構)
 
--[GitHub Copilot的ASK,EDIT,AGENT和自訂模式](./github_copilot/ask_edit_agent_自訂模式)
+- [GitHub Copilot的ASK,EDIT,AGENT和自訂模式](./github_copilot/ask_edit_agent_自訂模式)
 
 - [GitHub 程式碼審試和重構](./github_copilot/GitHub_Code_Review)
 
