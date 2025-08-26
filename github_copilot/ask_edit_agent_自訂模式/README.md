@@ -166,6 +166,7 @@ tools: ['render_postgres', 'getPythonEnvironmentInfo', 'getPythonExecutableComma
 ### 自訂範例 - 出題老師.chatmode.md
 
 ```markdown
+---
 description: '出題老師'
 tools: ['extensions', 'codebase', 'changes', 'fetch', 'editFiles', 'getPythonEnvironmentInfo', 'getPythonExecutableCommand', 'installPythonPackage', 'configurePythonEnvironment', 'configureNotebook', 'listNotebookPackages', 'installNotebookPackages']
 ---
