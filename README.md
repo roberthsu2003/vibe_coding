@@ -9,7 +9,10 @@
 
 ## AI時代成為開發者的黃金時刻! [GitHub CEO給你最真實的建議](./vibe_coding時代_github_ceo_建議)
 
-## vibe_coding的觀念影片
+> [!IMPORTANT]
+> 建議講解給學員了解,讓學員知道為什麼是`開發都的黃金金時刻!`
+
+## vibe_coding的實現流程影片
 - [VibeCoding的原理是什麼](https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6)
 
 ## vibe_coding常用工具
