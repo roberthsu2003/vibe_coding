@@ -130,7 +130,27 @@
 	- 你也可以使用Markdown語法連結外部的說明檔(instructions)
 	- 這些指令會與你在對話中輸入的提示語結合,共同構成AI的回應依據
 
-### 範例 - postgres.chatmode.md(配合postgresSQL MCP)
+### 野獸模式
+- **定義**
+	- 用於VS Code Copilot Agent的自訂聊天模式
+	- 強化其功能(例如任務規劃，待辦清單管理與網路資訊搜尋)
+	- 這個模式專為大型語言模型(如GPT-4.1)設計，並採用一套有主見的工作流程
+
+- **特色**
+	- 強化規劃能力:可產出詳細的多步執行計畫，並以Markdown格式的todo清單展示
+	- 待辦清單管理:Copilot Agent 會追蹤每個步驟的執行情況，自動更新與顯示目前進度
+	- 網路研究功能:若代理具備存取網路的能力,能自動查詢外部資料補足資訊
+	- 工具指引整合:根據任務需求, 引導使用相關開發工具(如API、生成功能模組等)
+
+- **運作方式**
+	- 規劃任務步驟:先列出具體且可驗證的執行流程
+	- 建立Markdown todo清單:以條例方式記錄所有待辦事項
+	- 自動更新清單:每完成一項任務就自動標記並顯示最新狀態
+	- 無需人工確認:完成一項後會自動進行下一步，不需像某些模式必需手動點選繼續
+
+### [官方提供範例樣本-https://github.com/github/awesome-copilot](https://github.com/github/awesome-copilot)
+
+### 自訂範例 - postgres.chatmode.md(配合postgresSQL MCP)
 
 ```markdown
 ---
