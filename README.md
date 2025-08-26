@@ -44,9 +44,10 @@
 
 - [GitHub Copilot的程式碼審試和重構](./github_copilot/GitHub_Code_Review)
 
+- [GitHub Copilot的MCP使用](./github_copilot/mcp應用)
+
 - [GitHub spark](https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark)
 
--[GitHub Copilot的MCP使用]
 
 ## Gemini CLI工具說明
 - [Gemini CLI](./gemini_cli)
