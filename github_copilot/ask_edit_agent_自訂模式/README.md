@@ -4,7 +4,7 @@
 > 提供一個專案資料夾,做實際操作
 
 > [!IMPORTANT]
-> [官方的tutorials](. https://docs.github.com/en/copilot/tutorials)
+> [官方的tutorials-https://docs.github.com/en/copilot/tutorials](https://docs.github.com/en/copilot/tutorials)
 
 ## GitHub Copilot Chat
 - **整合於開發環境中的AI助理**
@@ -128,7 +128,7 @@
 - #### 主體區塊:聊天模式指令內容(Body)
 	- 這裏可撰寫具體的提示語,指導方針或其它希望AI在此模式中遵循的資訊
 	- 你也可以使用Markdown語法連結外部的說明檔(instructions)
-	- 這些指令會兩你在對話中輸入的提示語結合,共同構成AI的回應依據
+	- 這些指令會與你在對話中輸入的提示語結合,共同構成AI的回應依據
 
 ### 範例 - postgres.chatmode.md(配合postgresSQL MCP)
 
