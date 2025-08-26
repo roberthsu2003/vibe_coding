@@ -112,4 +112,33 @@
 	- 工作區(專案區):使用範圍只有此專案
 	- 使用者:方便誇不同專案重複使用
 
+### 自訂聊天模式檔案結構
 
+- #### Front Matter 中繼資料(YAML格式)
+	- **description**
+		- 簡短描述述此聊天模式的用途
+		- 這段文字會顯示在聊天輸入框中的預設提示文字,以及聊天模式下拉選單中
+	- **tools**
+		- 此聊天模式下可用的工具或工具集,可包含VS Code內建工具, MCP工具, 或由擴充功能提供的工具
+		- 使用「Configure Tools」操作可以從當前工作區中選取
+	- **Model**
+		- 指定使用的AI模型
+		- 若未指定,將使用目前選取的模型
+
+- #### 主體區塊:聊天模式指令內容(Body)
+	- 這裏可撰寫具體的提示語,指導方針或其它希望AI在此模式中遵循的資訊
+	- 你也可以使用Markdown語法連結外部的說明檔(instructions)
+	- 這些指令會兩你在對話中輸入的提示語結合,共同構成AI的回應依據
+
+### 範例 - postgres.chatmode.md(配合postgresSQL MCP)
+
+```markdown
+---
+description: 'postgresSQL專家'
+tools: ['render_postgres', 'getPythonEnvironmentInfo', 'getPythonExecutableCommand', 'installPythonPackage', 'configurePythonEnvironment', 'configureNotebook', 'listNotebookPackages', 'installNotebookPackages']
+---
+您是PostgreSQL專家，請協助解決以下問題：
+1. 呼叫工具,滿足使用者的需求
+2. 提供正確且完整的SQL語法
+3. 解釋SQL語法的目的和功能
+```
