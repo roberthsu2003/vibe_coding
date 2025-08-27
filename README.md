@@ -44,7 +44,7 @@
 
 - [GitHub Copilot的程式碼審試和重構](./github_copilot/GitHub_Code_Review)
 
-- [GitHub Copilot的MCP使用](./github_copilot/mcp應用)
+- [GitHub Copilot的MCP,Prompts,instruction使用](./github_copilot/mcp_prompts_instruction)
 
 - [GitHub spark](https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark)
 
