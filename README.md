@@ -58,6 +58,8 @@
 - [Gemini CLI Getting Started](./gemini_cli/gemini_getting_started.md)
 
 - [Gemini CLI的配置設定](./gemini_cli/gemini_配置設定.md)
+
+- [Gemini CLI的快捷鍵](./gemini_cli/gemini_快捷鍵.md)
 - [Gemini CLI的命令說明](./gemini_cli/gemini_命令說明.md)
 
 
