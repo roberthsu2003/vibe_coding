@@ -27,11 +27,13 @@ Gemini CLI 使用 JSON 設定檔來儲存持久化配置。這些檔案有四個
 
 - **使用者設定檔**：
 	- **位置**：~/.gemini/settings.json（其中 ~ 代表您的Home目錄）。
-	- 作用範圍**：適用於當前使用者所有 Gemini CLI 工作階段。使用者設定會覆寫系統預設值。
+
+	- **作用範圍**：適用於當前使用者所有 Gemini CLI 工作階段。使用者設定會覆寫系統預設值。
 
 - **專案設定檔**：
-		- **位置**：專案根目錄內的 .gemini/settings.json。
-		- **作用範圍**：僅在從該特定專案執行 Gemini CLI 時生效。專案設定會覆寫使用者設定與系統預設值。
+	- **位置**：專案根目錄內的 .gemini/settings.json。
+
+	- **作用範圍**：僅在從該特定專案執行 Gemini CLI 時生效。專案設定會覆寫使用者設定與系統預設值。
 
 - **系統設定檔**：
 	- **位置**：/etc/gemini-cli/settings.json（Linux）、C:\ProgramData\gemini-cli\settings.json（Windows）或 /Library/Application Support/GeminiCli/settings.json（macOS）。可透過 GEMINI_CLI_SYSTEM_SETTINGS_PATH 環境變數覆寫路徑。
