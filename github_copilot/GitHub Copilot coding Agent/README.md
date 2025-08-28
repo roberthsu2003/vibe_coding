@@ -37,6 +37,9 @@
 - 開發者僅需審查與指導Copilot,即可完成任務
 - 團隊更容容參與協作
 
+**參考影片連結**
+
+https://youtu.be/Z9EVVDCgm8M?si=w58wKoMxLb4w7KjN
 
 
 

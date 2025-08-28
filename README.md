@@ -51,16 +51,21 @@
 - [GitHub spark](https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark)
 
 
-## Gemini CLI工具說明
-- [Gemini CLI](./gemini_cli)
+## Gemini CLI
+**官方網站**-[https://github.com/google-gemini/gemini-cli/tree/main](https://github.com/google-gemini/gemini-cli/tree/main)
 
-## Claude Code CLI工具說明
+- [Gemini CLI簡介_安裝](./gemini_cli/gemini_簡介_安裝.md)
+
+
+
+
+
+## Claude Code CLI
 
 ## Currsor 編輯器使用說明
 
 ## Kiro編輯器使用說明
 
-## 如何Vibe Coding
 
 
 ## 所需要的文件
