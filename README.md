@@ -29,9 +29,12 @@
 	- claude code
 	- openAI codex
 	- Gemini CLI
-	- [**rovo dev**](https://www.atlassian.com/blog/announcements/rovo-dev-command-line-interface)
+	- rovo dev
 - **網頁介面**
 	- google jules
+	- firebase Studio
+	- github spark
+	- google stitch
 
 ---
 
@@ -66,8 +69,12 @@
 
 ## [Claude Code CLI](./claude_code_cli/README.md)
 
+## [revo dev](./revo_dev/README.md)
+
 ## [Cursor 編輯器使用說明](./cursor/README.md)
 
 ## [Kiro編輯器使用說明](./kiro/README.md)
+
+## [Zed編輯器使用說明](./zed/README.md)
 
 ## [提示詞](./prompt/README.md)
