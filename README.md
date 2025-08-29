@@ -61,10 +61,7 @@
 
 - [Gemini CLI的快捷鍵](./gemini_cli/gemini_快捷鍵.md)
 - [Gemini CLI的命令說明](./gemini_cli/gemini_命令說明.md)
-
-
-
-
+- [操作範例](./gemini_cli/操作範例/README.md)
 
 ## Claude Code CLI
 
@@ -291,9 +288,3 @@ Markdown Preview	即時預覽 TODO.md，適合展示與教學
 	4.	搭配 Copilot Chat，可以做更高層的對話協作
 
 ⸻
-
-
-
-
-
-
