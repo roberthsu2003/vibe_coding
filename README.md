@@ -64,10 +64,10 @@
 - [Gemini CLI的命令說明](./gemini_cli/gemini_命令說明.md)
 - [操作範例](./gemini_cli/操作範例/README.md)
 
-## Claude Code CLI
+## [Claude Code CLI](./claude_code_cli/README.md)
 
 ## [Cursor 編輯器使用說明](./cursor/README.md)
 
-## Kiro編輯器使用說明
+## [Kiro編輯器使用說明](./kiro/README.md)
 
 ## [提示詞](./prompt/README.md)
