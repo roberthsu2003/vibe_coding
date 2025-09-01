@@ -9,6 +9,9 @@ AI助手
 # codebase:
 python
 
+# AI執行命令時:
+請先進入虛擬環境 `conda activate vibe_coding`
+
 # 主要套件:
 - faseapi
 

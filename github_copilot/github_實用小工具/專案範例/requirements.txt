@@ -1,4 +1,5 @@
 fastapi[standard]
-uvicorn
+uvicorn[standard]
 pytest
 httpx
+fastapi-cli

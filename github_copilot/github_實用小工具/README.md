@@ -53,7 +53,7 @@
 - 工作目錄:[專案範例](./專案目錄)
 - 工作主程式:main.py
 - 執行開發命令: fastapi dev main.py
-- prompt:
+- prompt:`我要增加一個講師的CRUD功能`
 
 
 
