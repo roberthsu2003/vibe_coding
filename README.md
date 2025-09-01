@@ -15,11 +15,9 @@
 ## [AI輔助程式設計的優點](./AI輔助程式設計的優點)
 
 
-## vibe_coding的實現流程影片
-- [VibeCoding的原理是什麼](https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6)
+## VibeCoding的原理是什麼(影片)?[https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6](https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6)
 
 ## 3種類型的AI助手[./3種類型的AI助手]
-
 
 ## vibe_coding常用工具
 
