@@ -53,10 +53,11 @@
 - 工作目錄:[專案範例](./專案目錄)
 - 工作主程式:main.py
 - 執行開發命令: fastapi dev main.py
+- 模型使用:GPT-5 mini(previewi)
 - prompt:`我要增加一個講師的CRUD功能`
 
 
-
+![](./images/pic6.png)
 
 
 
