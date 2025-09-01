@@ -48,6 +48,12 @@
 
 ![](./images/pic5.png)
 
+### 範例實作
+- 專案:fastAPI基本樣版
+- 工作目錄:[專案範例](./專案目錄)
+- 工作主程式:main.py
+- 執行開發命令: fastapi dev main.py
+
 
 
 
