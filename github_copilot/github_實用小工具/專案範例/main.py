@@ -3,8 +3,6 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-
-
 @app.get("/")
 async def read_root():
     """回傳歡迎訊息"""
