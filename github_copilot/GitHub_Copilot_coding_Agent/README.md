@@ -8,13 +8,13 @@
 	- 實作漸進式新功能
 	- 提升測試覆蓋率
 	- 更新文件處理
-	- 技術棧
+
 
 | 功能 | Copilot in the editor | Copilot coding agent |
 |--- |--- |--- |
 | 介面 | 開發工具(code editor)  | issues 與 Pull Requests |
 | 工作範圍 | 本地檔案 | 儲存庫 |
-| 使用方式 | inline code suggestions\n chat view | issue指派 |
+| 使用方式 | inline code suggestions chat view | issue指派 |
 | 客製化 | Custom instructions | Custom instructions |
 | MCP Support | Yes | Yes |
 | Vibe Coding | Yes | Yes |
@@ -36,6 +36,12 @@
 - 開發歷程可追溯，紀錄完整
 - 開發者僅需審查與指導Copilot,即可完成任務
 - 團隊更容容參與協作
+
+## Coding Agent如何將任務交給Copilot
+
+- 指派Issue給Copilot
+- 要求Copilot建立Pull Request(PR)
+	- GitHub的Agents頁面
 
 **參考影片連結**
 
