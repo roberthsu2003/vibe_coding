@@ -7,7 +7,7 @@
 - **應用場景**：適用於個人化或小規模的「即用即棄」專案，例如自製工具（如名為 LunchBox Buddy 的應用程式）。由於可能存在未察覺的錯誤，此方式不適合需要高可靠性或安全性的專業應用。
 - **起源**：此術語由電腦科學家 Andrej Karpathy 於 2025 年 2 月提出，並於 2025 年 3 月被 Merriam-Webster 收錄為俚語。
 
-## AI時代成為開發者的黃金時刻! [GitHub CEO給你最真實的建議](./vibe_coding時代_github_ceo_建議)
+## AI時代成為「開發者的黃金時刻!」 [GitHub CEO給你最真實的建議](./vibe_coding時代_github_ceo_建議)
 
 > [!IMPORTANT]
 > 建議講解給學員了解,讓學員知道為什麼是`開發者的黃金時刻!`
@@ -15,9 +15,9 @@
 ## [AI輔助程式設計的優點](./AI輔助程式設計的優點)
 
 
-## VibeCoding的原理是什麼(影片)?[https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6](https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6)
+## VibeCoding的原理是什麼?[影片介紹](https://youtu.be/ZXzYZ2fk-vk?si=pqpf7jbQPACJmrN6)
 
-## 3種類型的AI助手[./3種類型的AI助手]
+## [3種類型的AI助手](./3種類型的AI助手)
 
 ## vibe_coding常用工具
 

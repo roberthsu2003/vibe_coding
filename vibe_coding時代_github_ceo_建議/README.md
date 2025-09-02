@@ -1,6 +1,6 @@
 # GitHub CEO: Why Now Is the BEST Time to Be a Developer | Thomas Dohmke
 
-## AI時代成為開發者的黃金時刻
+## AI時代成為「開發者的黃金時刻」
 
 [Youtube影片分享](https://youtu.be/PR__eFQsnhg?si=hkpKphGD6qJI9k0p)
 
