@@ -42,15 +42,13 @@
 
 ## Coding Agent如何將任務交給Copilot
 
-- 指派Issue給Copilot
+- 網頁上指派Issue給Copilot(演示1)
 - 要求Copilot建立Pull Request(PR)
-	- GitHub的Agents頁面
+	- 網頁上GitHub的Agents頁面-會對整個repo處理(演示2)
+	- 網頁上GitHub的chat頁面-可指定repo內的特定資料夾處理
+	- 支援GitHub MCP Server的IDE,
 
-**參考影片連結**
-
-https://youtu.be/Z9EVVDCgm8M?si=w58wKoMxLb4w7KjN
-
-
+![](./images/pic1.png)
 
  
 
