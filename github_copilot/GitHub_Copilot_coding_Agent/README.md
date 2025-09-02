@@ -1,6 +1,8 @@
 # GitHub Copilot Coding Agent
 **自動修Bug,寫測試,拉PR**
 
+- [演示專案-專案範例1](../vibe_coding範例樣版)
+
 
 ## 什麼是Coding Agent
 

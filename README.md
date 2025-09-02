@@ -80,6 +80,8 @@
 
 - [Zed編輯器使用說明](./zed/README.md)
 
-## 提示詞
+## 提示詞注意事項
 
 - [提示詞](./prompt/README.md)
+
+## [vibe_coding範例樣版](./vibe_coding範例樣版)
