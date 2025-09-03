@@ -19,3 +19,11 @@
 	請增加一個`學生`所有CRUD的功能
 	```
 	
+### [專案範例2](./專案範例2)
+	
+**說明**
+
+- github提供的範例專案
+- 這是一個fastapi的網頁範例(已更改為繁體中文版)
+- requirements.txt套件要安裝
+- .vscode內有設定debug,使用conda的`vibe_coding`
