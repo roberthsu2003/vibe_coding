@@ -86,3 +86,15 @@
 - 依專案範例1內容詢問
 - 刪除分支,回覆原狀
 
+---
+
+## Coding Agent 使用情境與成本
+**使用情境**
+- 將backlog中簡單的需求交給Copilot,節省時間處理更複雜的任務
+- 委派Copilot處理改善程式品質的任類(如重構、增加紀錄)
+- Copilot可先啟動任務,您再接手處理細節
+- 可快速建立專案架構,節省重複勞動時間
+
+**Coding Agent會消耗**
+- GitHub Actions 執行時間
+- Copilot Premium請求數量
