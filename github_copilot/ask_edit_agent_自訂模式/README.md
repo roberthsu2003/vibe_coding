@@ -3,6 +3,8 @@
 > [!IMPORTANT]
 > [官方的tutorials-https://docs.github.com/en/copilot/tutorials](https://docs.github.com/en/copilot/tutorials)
 
+## [使用專案範例1](../../vibe_coding範例樣版)
+
 ## GitHub Copilot Chat
 - **整合於開發環境中的AI助理**
 	- VS Code
