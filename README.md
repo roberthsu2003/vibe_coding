@@ -43,7 +43,7 @@
 
 **請先安裝vscode的CitHub Copilot extensions**
 
-- [github的_程式碼自動完成_和_下一個編輯建議_](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions#_next-edit-suggestions)
+- [github的-程式碼自動完成和下一個編輯建議](./程式碼自動完成和下一個編輯建議)
 
 - [GitHub Copilot的chat view提示建構教學](./github_copilot/github_copilot_提示建構)
 
@@ -51,7 +51,7 @@
 
 - [GitHub Copilot的程式碼審核和重構](./github_copilot/GitHub_Code_Review)
 
-- [GitHub Copilot的MCP,Prompts,instruction使用](./github_copilot/mcp_prompts_instruction)
+- [GitHub Copilot的MCP,Prompts,instruction設定](./github_copilot/mcp_prompts_instruction)
 
 - [GitHub Copilot coding Agent「github網站執行-(並行執行,背景執行)」](./github_copilot/GitHub_Copilot_coding_Agent)
 
