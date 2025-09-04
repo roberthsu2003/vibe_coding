@@ -2,7 +2,7 @@
 
 了解如何使用 GitHub Copilot 來幫助審查和完善你的程式碼
 
-## [使用演示範例3](../../vibe_coding範例樣版)
+## [使用演示範例4](../../vibe_coding範例樣版)
 
 ## 如何實際操作Code review
 
@@ -59,23 +59,11 @@ code refactoring
 - 這個檔案中有沒有重複的程碼
 - 這段程式碼是否有安全問題
 
-**實際範例展示AI如何協助Code Review和Refactoring**
-[範例專案資料夾](./src)
-
-> [!IMPORTANT]
-> 展示實際案例很重要
-
----
-
-**不知道怎麼提供提示詞(以github copilot為例)**
-
 - Visual Studio Code內直接使用Review and Comment
 - Ctrl + Shift + P 輸入GitHub Copilot:Review and Comment
 
 ---
 
-**Pull Request**
 
-- 選擇Copilot當Reviewer(建立分支,合併分支時,可以請Copilot當作Reviewer)
 
 
