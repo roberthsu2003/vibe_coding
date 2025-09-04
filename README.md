@@ -42,12 +42,19 @@
 ## GitHub Copilot工具的說明
 
 - [github的_程式碼自動完成_和_下一個編輯建議_](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions#_next-edit-suggestions)
+
 - [GitHub Copilot的chat view提示建構教學](./github_copilot/github_copilot_提示建構)
+
 - [GitHub Copilot的ASK,EDIT,AGENT和自訂模式](./github_copilot/ask_edit_agent_自訂模式)
+
 - [GitHub Copilot的程式碼審核和重構](./github_copilot/GitHub_Code_Review)
+
 - [GitHub Copilot的MCP,Prompts,instruction使用](./github_copilot/mcp_prompts_instruction)
+
 - [GitHub Copilot coding Agent「github網站執行-(並行執行,背景執行)」](./github_copilot/GitHub_Copilot_coding_Agent)
+
 - [GitHub Copilot的小功能(MCP自動開啟,AI Stats,Todolist,UI Integration,agent_session)](./github_copilot/github_實用小工具)
+
 - [GitHub spark](https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark)
 
 ## Gemini CLI
