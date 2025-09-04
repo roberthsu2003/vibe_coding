@@ -47,8 +47,6 @@
 
 - [GitHub Copilot的chat view提示建構教學](./github_copilot/github_copilot_提示建構)
 
-- [GitHub Copilot的ASK,EDIT,AGENT和自訂模式](./github_copilot/ask_edit_agent_自訂模式)
-
 - [GitHub Copilot的MCP,Prompts,instruction設定](./github_copilot/mcp_prompts_instruction)
 
 
@@ -61,6 +59,8 @@
 	- [功能說明](./github_copilot/程式碼自動完成和下一個編輯建議/README.md)
 
 - [GitHub Copilot的程式碼審核和重構](./github_copilot/GitHub_Code_Review)
+
+- [GitHub Copilot的ASK,EDIT,AGENT和自訂模式](./github_copilot/ask_edit_agent_自訂模式)
 
 
 - [GitHub Copilot coding Agent「github網站執行-(並行執行,背景執行)」](./github_copilot/GitHub_Copilot_coding_Agent)
