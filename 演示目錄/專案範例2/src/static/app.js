@@ -10,8 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/activities");
       const activities = await response.json();
 
-      // Clear loading message
+      // Clear loading message and select options
       activitiesList.innerHTML = "";
+      activitySelect.innerHTML = '<option value="">-- 請選擇活動 --</option>';
 
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
@@ -27,7 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="participants-section">
               <strong>參與者：</strong>
               <ul class="participants-list">
-                ${details.participants.map(email => `<li>${email}</li>`).join("")}
+                ${details.participants.map(email => `
+                  <li>
+                    ${email}
+                    <button class="delete-participant" data-activity="${name}" data-email="${email}" title="取消報名">
+                      ✕
+                    </button>
+                  </li>
+                `).join("")}
               </ul>
             </div>
           `;
@@ -83,6 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
         signupForm.reset();
+        // 重新載入活動列表以更新顯示
+        await fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
@@ -99,6 +109,46 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
       console.error("Error signing up:", error);
+    }
+  });
+
+  // 處理參與者移除
+  document.addEventListener('click', async (event) => {
+    if (event.target.classList.contains('delete-participant')) {
+      const activity = event.target.dataset.activity;
+      const email = event.target.dataset.email;
+      
+      if (confirm(`確定要取消 ${email} 的 ${activity} 活動報名嗎？`)) {
+        try {
+          const response = await fetch(
+            `/activities/${encodeURIComponent(activity)}/participants/${encodeURIComponent(email)}`,
+            {
+              method: 'DELETE'
+            }
+          );
+
+          const result = await response.json();
+
+          if (response.ok) {
+            messageDiv.textContent = result.message;
+            messageDiv.className = 'success';
+            // 重新載入活動列表
+            fetchActivities();
+          } else {
+            messageDiv.textContent = result.detail || '發生錯誤';
+            messageDiv.className = 'error';
+          }
+        } catch (error) {
+          messageDiv.textContent = '取消報名失敗，請稍後再試';
+          messageDiv.className = 'error';
+          console.error('Error removing participant:', error);
+        }
+
+        messageDiv.classList.remove('hidden');
+        setTimeout(() => {
+          messageDiv.classList.add('hidden');
+        }, 5000);
+      }
     }
   });
 
