@@ -1,5 +1,13 @@
 # 專案範例1操作流程_使用github_coding_agent
 
+## 直接使用GitHub的網站
+
+### 先前步驟
+
+1. 將`專案範例1`copy至`演示目錄`內
+2. `commit`後,push至`github上`
+
+
 ### 演示1流程:
 1. 進入vibe_coding的repo
 2. 建立一個issue
