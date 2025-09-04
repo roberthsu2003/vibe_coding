@@ -1,8 +1,5 @@
 # GitHub Copilot的ASK,EDIT,AGENT和自訂模式
 
-> [!TIP]
-> 提供一個專案資料夾,做實際操作
-
 > [!IMPORTANT]
 > [官方的tutorials-https://docs.github.com/en/copilot/tutorials](https://docs.github.com/en/copilot/tutorials)
 
