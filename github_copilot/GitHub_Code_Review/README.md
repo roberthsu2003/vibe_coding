@@ -2,6 +2,8 @@
 
 了解如何使用 GitHub Copilot 來幫助審查和完善你的程式碼
 
+## [使用演示範例3](../../vibe_coding範例樣版)
+
 ## 如何實際操作Code review
 
 1. 在程式碼內,按右鍵,選取copilot內的`檢閱並認可`(就是code review),這是針對整個檔案
