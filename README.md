@@ -43,15 +43,19 @@
 
 **請先安裝vscode的CitHub Copilot extensions**
 
+### 僅功能說明(無實作)
+
+- [GitHub Copilot的chat view提示建構教學](./github_copilot/github_copilot_提示建構)
+
+- [GitHub Copilot的ASK,EDIT,AGENT和自訂模式](./github_copilot/ask_edit_agent_自訂模式)
+
+### 功能說明(有實作)
+
 - github的-程式碼自動完成和下一個編輯建議
 
 	- [官網說明](https://code.visualstudio.com/docs/copilot/ai-powered-suggestions#_next-edit-suggestions)
 
 	- [功能說明](./github_copilot/程式碼自動完成和下一個編輯建議/README.md)
-
-- [GitHub Copilot的chat view提示建構教學](./github_copilot/github_copilot_提示建構)
-
-- [GitHub Copilot的ASK,EDIT,AGENT和自訂模式](./github_copilot/ask_edit_agent_自訂模式)
 
 - [GitHub Copilot的程式碼審核和重構](./github_copilot/GitHub_Code_Review)
 
