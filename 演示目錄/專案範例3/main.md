@@ -1,62 +1,8 @@
-# 專案範例2操作流程
+# 使用 GitHub Copilot 輔助程式碼編寫與修正
 
-個別python檔案的操作
+本教學將示範如何使用 GitHub Copilot 自動完成和修正程式碼。`1main.py` 中包含了一些常見的錯誤或未完成的函數，我們將使用 Copilot 來完成和修正它們。
 
-## 系統預先需求
-
-- git
-- conda
-
-## 檢查預先需求
-
-### 使用terminal inline chat
-
-1. ❗️檢查是否安裝git
-
-> 
-```
-系統是否有安裝git
-```
-
-> 如果沒有安裝,請安裝git
-
-2. ❗️git是否初始化
-
-- 注意:老師的不要初始化(老師的上層目錄已經初始化),學員的要初始化(學員的是新專案)
-
-> 
-```
-git是否有已經初始化
-```
-
-> 如果沒有,請初始化git。
-> `git init`
-
-3. ❗️是否有安裝conda
-
->
-```
-系統是否安裝conda
-```
-
-> 如果沒有,請安裝conda
-> 注意:conda安裝完,必需執行`conda init`
-
-4. ❗️檢查conda是否有安裝`vibe_coding`虛擬環境
-
-> 
-```
-conda 是否已經建立"vibe_coding"虛擬環境?
-```
-
-> 如果沒有請建立”vibe_coding”虛擬環境,也可嘗試請ai建立
-> `conda create -n vibe_coding python=3.11`
-
-5. 終端機進入虛擬環境
-
-`conda activate vibe_coding`
-
-## 使用程式碼自動完成和下一段建議
+## 基礎 Prompt 示例
 
 ### 1. 程式碼解釋與修正
 ```
@@ -228,4 +174,3 @@ def subtract(a, b):
 4. 使用 Copilot 完成 `is_prime` 和 `fibonacci` 函數
 5. 讓 Copilot 為 `main` 函數添加功能，展示上述所有函數的使用
 6. 使用 Copilot 為所有函數添加恰當的文件註解
-
