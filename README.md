@@ -77,6 +77,7 @@
 - [Gemini CLI的配置設定](./gemini_cli/gemini_配置設定.md)
 - [Gemini CLI的快捷鍵](./gemini_cli/gemini_快捷鍵.md)
 - [Gemini CLI的命令說明](./gemini_cli/gemini_命令說明.md)
+- [Gemini CLI待加入文章和範例參考](gemini_chatGPT提供.md)
 - [操作範例](./gemini_cli/操作範例/README.md)
 
 ## Claude Code CLI
