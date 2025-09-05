@@ -43,7 +43,10 @@
 - 這個檔案中有沒有重複的程碼
 - 這段程式碼是否有安全問題
 
-- Visual Studio Code內直接使用Review and Comment
+
+### 不知道提示詞如何寫
+
+- Visual Studio Code chat view內直接使用Review and Comment
 - Ctrl + Shift + P 輸入GitHub Copilot:Review and Comment
 
 
