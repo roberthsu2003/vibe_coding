@@ -30,6 +30,7 @@ brew install gemini-cli
 ```
 
 > 整合vscode 和 currsor 編輯器
+
 > 安裝擴充套件:Gemini Code Assist, Gemini CLI Companion
 
 ## 主要功能
