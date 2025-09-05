@@ -1,42 +1,26 @@
-# Code_Review & Code_Refactoring
+# 使用github copilot進行程式碼審查和重構
 
 了解如何使用 GitHub Copilot 來幫助審查和完善你的程式碼
 
 ## [使用演示範例4](../../vibe_coding範例樣版)
 
-## 如何實際操作Code review
 
-1. 在程式碼內,按右鍵,選取copilot內的`檢閱並認可`(就是code review),這是針對整個檔案
-
-2. 在chat view內,附加該檔案,並詢問
-
-```prompt
-code review
-```
-
-## 如何實際操作Code refactoring
-
-1. 在chat view內,附加該檔案,並詢問
-
-```prompt
-code refactoring
-```
 
 
 ## Code Review(程式碼審查)
 
-- 就像是請另一個人幫你檢查程式碼
-- 可用來抓錯誤
-- 提升品質
-- 維持一致性
+- **就像是請另一個人幫你檢查程式碼**
+  - 可用來抓錯誤
+  - 提升品質
+  - 維持一致性
 
 
 ## Refactoring(重構)
 
-- 不改變功能的前提下,重新整理現有程式碼
+- **不改變功能**的前提下,**重新整理**現有程式碼
 - 使程式碼清楚，容易維護
 
-### AI如何協助Code Review
+### GitHub Copilot如何協助Code Review
 
 - 協助簡化函式邏輯
 - 改善變數命名
@@ -50,7 +34,7 @@ code refactoring
 	> [!WARNING]
 	> 注意:仍需人工確認建議是否符合專案需求
 	
-### AI如何協助Code Review
+### GitHub Copilot如何協助Code Review
 
 **提示詞範例**
 
@@ -62,7 +46,7 @@ code refactoring
 - Visual Studio Code內直接使用Review and Comment
 - Ctrl + Shift + P 輸入GitHub Copilot:Review and Comment
 
----
+
 
 
 

@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "name": "Python: Conda vibe_coding",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/${input:pythonFile}",
+      "console": "integratedTerminal",
+      "env": {
+        "CONDA_DEFAULT_ENV": "vibe_coding"
+      },
+      "python": "/opt/miniconda3/envs/vibe_coding/bin/python" 
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "pythonFile",
+      "description": "Select the Python file to debug",
+      "options": [
+        "1main.py",
+        "2nestedLogic.py",
+        "3performance.py",
+        "4readability.py",
+        "5security.py"
+      ]
+    }
+  ]
+}
