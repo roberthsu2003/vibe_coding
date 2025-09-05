@@ -20,6 +20,28 @@ def subtract(a, b):
     """
     return a - b
 
+def print_christmas_tree(height):
+    """
+    印出一個指定高度的聖誕樹。
+
+    :param height: 聖誕樹的高度 (不包含樹幹)
+    """
+    if height <= 0:
+        print("高度需要是正整數！")
+        return
+
+    # 印出樹葉
+    for i in range(height):
+        spaces = " " * (height - i - 1)
+        stars = "*" * (2 * i + 1)
+        print(spaces + stars)
+
+    # 印出樹幹
+    trunk_spaces = " " * (height - 1)
+    print(trunk_spaces + "|")
+    print(trunk_spaces + "|")
+
+
 import unittest
 
 class TestMathFunctions(unittest.TestCase):
@@ -34,4 +56,7 @@ class TestMathFunctions(unittest.TestCase):
         self.assertEqual(subtract(0, 0), 0)
 
 if __name__ == '__main__':
+    print("為您獻上聖誕樹：")
+    print_christmas_tree(10)
+    print("\n接著執行單元測試...\n")
     unittest.main()
