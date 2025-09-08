@@ -119,6 +119,8 @@ gemini
 
 ### **1) 檔案讀寫**
 
+[使用專案範例7資料夾](../vibe_coding範例樣版)
+
 - 目標：讓模型讀 README.md 並自動生成 CONTRIBUTING.md。
 - 步驟：
     1. 在 CLI 中輸入：
