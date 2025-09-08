@@ -70,7 +70,9 @@
 - [GitHub spark](https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark)
 
 ## Gemini CLI
-**官方網站**-[https://github.com/google-gemini/gemini-cli/tree/main](https://github.com/google-gemini/gemini-cli/tree/main)
+**官方GitHub網站**-[https://github.com/google-gemini/gemini-cli/tree/main](https://github.com/google-gemini/gemini-cli/tree/main)
+
+[**非官方繁體中文操作說明**](https://gemini-cli.gh.miniasp.com/extension.html)
 
 - [Gemini CLI簡介_安裝](./gemini_cli/gemini_簡介_安裝.md)
 - [Gemini CLI Getting Started](./gemini_cli/gemini_getting_started.md)
