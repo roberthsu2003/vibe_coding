@@ -50,8 +50,8 @@ Gemini CLI 使用 JSON 設定檔來儲存持久化配置。這些檔案有四個
 
 - **contextFileName (string or array of strings):**
 
-	Description: Specifies the filename for context files (e.g., GEMINI.md, AGENTS.md). Can be a single filename or a list of accepted filenames.
-	
+	描述：指定上下文檔案的檔案名稱（例如 GEMINI.md、AGENTS.md）。可以是單一檔案名，也可以是可接受檔案名稱的清單。
+		
 	Default: GEMINI.md
 	
 	Example: "contextFileName": “AGENTS.md”
