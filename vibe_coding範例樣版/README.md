@@ -44,13 +44,13 @@
 
 
 ## Gemini CLI
-- 學習使用Gemini Code Assist chat view內提供的自動完成
+- 目的:學習使用Gemini Code Assist chat view內提供的自動完成
 
 [專案範例5-下載範例檔](./專案範例5)
 
 [專案範例5執行流程說明](./專案範例5操作流程.md)
 
-- 單獨由Gemini CLI建立一個網頁小程式(貪食蛇遊戲)
+- 目的:單獨由Gemini CLI建立一個網頁小程式(貪食蛇遊戲)
 
 專案範例6-沒有範例檔
 
