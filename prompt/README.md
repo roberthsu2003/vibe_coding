@@ -49,6 +49,7 @@
 
 假設你有一個 Python 網頁專案：
 
+```
 my_project/
 ├── app.py
 ├── routes/
@@ -58,6 +59,7 @@ my_project/
 ├── tests/
 │   └── test_user.py
 └── requirements.txt
+```
 
 這整個 my_project 資料夾就是你的 code base。
 
