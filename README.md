@@ -105,5 +105,11 @@
 ## 提示詞注意事項
 
 - [提示詞](./prompt/README.md)
+- [提示詞範例1](./prompt/範例1/README.md)
+	- 使用Gemini CLI
+	- 下載指定網頁內容和圖片
+	- 將英文翻譯為繁體中文版的markdown格式
+	- 將英文翻譯為繁英版的markdown格式
+
 
 ## [vibe_coding範例樣版](./vibe_coding範例樣版)
