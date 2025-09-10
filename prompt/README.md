@@ -89,251 +89,82 @@ my_project/
 ### 在 Vibe Coding 中使用 To-Do List
 Vibe Coding 時可以建立一個 To Do List 檔案，並讓 AI 按順序執行每一個任務。因為 Vibe Coding 本身的設計偏向「逐步互動」而非完全自動化的腳本執行，你可以透過以下方式達成目標：
 
-#### 方法 1：在編輯器中建立 To Do List + 手動執行
-1. 在專案根目錄中建立一個文字檔案，例如 TODO.md 或 steps.todo。
-2. 清單格式可以是：
 
-```
-- [ ] 初始化一個 Node.js 專案
-- [ ] 安裝 Express 套件
-- [ ] 建立基本的伺服器架構
-- [ ] 撰寫一個簡單的 API
-```
+了解 👍
 
-3. 在 Vibe Coding 中，你可以：
-   - 一步步將清單項目複製貼上給 AI，請它完成。
-   - 每當一項完成時，將 [ ] 改成 [x]。
+你想做的主題是 **如何設計一份最佳化的 todolist.md**，讓 AI（像 GitHub Copilot Chat、Cursor、Claude、ChatGPT 等）可以依據你的清單內容來進行程式設計。
 
-#### 方法 2：結合「System Prompt」與「工作清單」
-如果你是進階使用者，可以試試下面這個方式：
-
-1. 建立一個指令（Prompt）像這樣：
-
-```
-你是一個程式開發助手，我會提供你一個步驟清單，請你**依序**執行每個任務。完成一個再繼續下一個，並在每個任務前請回報「已完成上一步，準備執行第 N 步」。
-
-步驟如下：
-1. 初始化一個 Node.js 專案
-2. 安裝 Express 套件
-3. 建立基本伺服器架構
-4. 撰寫一個 GET /hello API
-```
-
-2. 把這段話貼到 Vibe Coding 裡讓 AI 按順序執行。
-
-#### 方法 3：程式化自動控制（進階）
-如果你希望完全自動化整個執行流程（例如 AI 自動跳到下一步），Vibe Coding 本身不支援程式觸發多回合對話（這種需求屬於 Agent 風格），但你可以考慮：
-- 使用 Python + OpenAI API 撰寫一個腳本控制每一個任務（使用 LangChain 或 AutoGen）。
-- 或者用 Open WebUI + Ollama 本地模型，來執行你的 Agent。
-- 使用 Cursor IDE（支援多步驟指令和檔案追蹤能力）來實作。
-
-#### 小結
-| 方法 | 特性 | 適合對象 |
-|------|------|----------|
-| TODO 檔 + 手動進行 | 最簡單、直觀 | 初學者 |
-| 清單 + 系統提示 | 半自動、有邏輯控制 | 中階 |
-| API + Agent 控制 | 全自動執行 | 進階開發者 |
-
-### 在 VS Code 中使用 GitHub Copilot 結合 To-Do List
-如果你在 VS Code 中使用 GitHub Copilot，而且希望**逐步完成一個 To Do List（像任務清單）**的開發流程，以下方式可以讓你工作既清楚又高效：
-
-#### 目標
-建立一份逐步任務清單，讓 Copilot 按照每一個步驟協助你完成程式開發。
-
-#### 1. 建立 TODO.md 或 tasks.todo
-在 VS Code 專案資料夾中建立一個 TODO.md 檔案，格式如下：
-
-```markdown
-# 專案開發 To Do List
-
-- [ ] 初始化 Node.js 專案
-- [ ] 安裝 Express
-- [ ] 建立基本伺服器（port 3000）
-- [ ] 設計 GET /api/hello 回傳 JSON
-- [ ] 將錯誤訊息統一處理
-```
-
-#### 2. 逐步執行 + Copilot 配合方式
-你可以一個一個任務進行，並善用 Copilot 的能力：
-
-**步驟一：手動選擇任務**
-1. 選定第一個任務（例如「初始化 Node.js 專案」）
-2. 在終端機手動執行（Copilot 不會操作 CLI）：
-   ```
-   npm init -y
-   ```
-
-**步驟二：開始寫程式時，讓 Copilot 參與**
-1. 在 index.js 或其他檔案中打下如下注解：
-   ```javascript
-   // 建立一個 Express 應用並監聽在 3000 port
-   ```
-
-2. Copilot 通常會自動補出一段程式碼，例如：
-   ```javascript
-   const express = require('express');
-   const app = express();
-   app.listen(3000, () => {
-     console.log('Server is running on port 3000');
-   });
-   ```
-
-3. 你可以接受 (Tab) 或修改 Copilot 提供的內容。
-
-#### 3. 逐步進行每一個 To Do 項目
-每完成一項，就在 TODO.md 中將 [ ] 改為 [x]：
-
-```
-- [x] 初始化 Node.js 專案
-- [x] 安裝 Express
-- [ ] 建立基本伺服器（port 3000）
-```
-
-這樣你可以：
-- 清楚追蹤目前的進度。
-- 控制 Copilot 的參與方式（透過提示文字或註解讓它補出你需要的程式碼）。
-
-#### 小技巧：如何讓 Copilot 更聰明幫你
-- 使用具體描述的註解會讓 Copilot 提供更符合需求的建議。例如：
-  ```javascript
-  // 建立一個 GET /api/hello 路由，回傳 { message: "Hello World" }
-  ```
-
-- 若 Copilot 沒有出現建議，可以按下 Ctrl + Enter（或 macOS 的 Cmd + Enter）呼叫 Copilot Chat 幫你生成一段程式碼。
-
-#### 附加工具（如果你想更進階）
-| 工具 | 說明 |
-|------|------|
-| Copilot Chat | 可對話問 Copilot「幫我根據這個 todo 建立 API」 |
-| Tasks Extension | VS Code 插件，可讓你管理 todo 和標註完成 |
-| Markdown Preview | 即時預覽 TODO.md，適合展示與教學 |
-
-#### 最佳實作流程小總結
-1. 建立 TODO.md 並依照任務排序
-2. 每完成一項，就手動勾選
-3. 使用 Copilot 在程式檔案中寫註解讓 AI 協助產生程式碼
-4. 搭配 Copilot Chat，可以做更高層的對話協作
-
-
-	2.	把這段話貼到 Vibe Coding 裡讓 AI 按順序執行。
-
-⸻
-
-✅ 方法 3：程式化自動控制（進階）
-
-如果你希望完全自動化整個執行流程（例如 AI 自動跳到下一步），Vibe Coding 本身不支援程式觸發多回合對話（這種需求屬於 Agent 風格），但你可以考慮：
-	•	使用 Python + OpenAI API 撰寫一個腳本控制每一個任務（使用 LangChain 或 AutoGen）。
-	•	或者用 Open WebUI + Ollama 本地模型，來執行你的 Agent。
-	•	使用 Cursor IDE（支援多步驟指令和檔案追蹤能力）來實作。
-
-⸻
-
-🔁 小結
-
-方法	特性	適合對象
-TODO 檔 + 手動進行	最簡單、直觀	初學者
-清單 + 系統提示	半自動、有邏輯控制	中階
-API + Agent 控制	全自動執行	進階開發者
-
+我幫你整理一份 **最佳化 todolist.md 設計指南**，包含 **結構、格式、範例**，讓 AI 容易理解並執行。
 
 ---
 
-如果你在 VS Code 中使用 GitHub Copilot，而且希望**逐步完成一個 To Do List（像任務清單）**的開發流程，建議這樣操作可以讓你又清楚又高效：
+## **📘 todolist.md 最佳化設計原則**
 
-⸻
+### **1. 明確化 (Clarity)**
 
-✅ GitHub Copilot 開發流程建議（結合 To Do List）
+- 每一項任務要具體、可執行，避免模糊。
+- 避免寫「完成前端」，應寫「建立登入頁面的 React 元件」。
 
-🎯 目標
+### **2. 原子化 (Atomic)**
 
-建立一份逐步任務清單，讓 Copilot 按照每一個步驟協助你完成程式開發。
+- 將任務拆解成最小可完成單位。
+- 一個任務不要同時包含「建立 API + 測試 API + 部署」。
 
-⸻
+### **3. 可驗證性 (Verifiable)**
 
-🧩 1. 建立 TODO.md 或 tasks.todo
+- 每個任務應有 **完成標準** (Definition of Done)。
+- AI 才知道完成的程式碼是否達到要求。
 
-在 VS Code 專案資料夾中建立一個 TODO.md 檔案，格式如下：
+### **4. 指令化 (Instructional)**
 
-# 專案開發 To Do List
+- 使用 **動詞開頭**（實作、建立、撰寫、測試）。
+- 提供範例或限制（例如語言、框架、檔名）。
 
-- [ ] 初始化 Node.js 專案
-- [ ] 安裝 Express
-- [ ] 建立基本伺服器（port 3000）
-- [ ] 設計 GET /api/hello 回傳 JSON
-- [ ] 將錯誤訊息統一處理
+### **5. 層級化 (Hierarchical)**
 
+- 用 # / ## / - 組織結構。
+- 方便 AI 從上而下逐步完成。
 
-⸻
+---
 
-🛠 2. 逐步執行 + Copilot 配合方式
+## **📂 範例 todolist.md**
 
-你可以一個一個任務進行，並善用 Copilot 的能力：
+```other
+# Project: Todo App (最佳化 todolist.md)
 
-步驟一：手動選擇任務
-	1.	選定第一個任務（例如「初始化 Node.js 專案」）
-	2.	在終端機手動執行（Copilot 不會操作 CLI）：
+## 1. 初始化專案
+- [ ] 使用 `npm init -y` 建立 Node.js 專案
+- [ ] 安裝必要套件: `express`, `cors`, `nodemon`
 
-npm init -y
+## 2. 建立後端 API
+- [ ] 建立檔案 `server.js`
+- [ ] 建立 `GET /todos`，回傳 JSON 格式的待辦事項
+- [ ] 建立 `POST /todos`，接收並新增新的待辦事項
+- [ ] 建立 `DELETE /todos/:id`，刪除指定待辦事項
+- [ ] 測試 API 是否可正常運作 (使用 `curl` 或 `Postman`)
 
+## 3. 建立前端
+- [ ] 使用 `create-react-app` 建立前端
+- [ ] 建立元件 `TodoList.jsx` 顯示所有待辦事項
+- [ ] 建立元件 `AddTodo.jsx`，可以輸入並新增待辦
+- [ ] 在前端呼叫後端 API (`GET`, `POST`, `DELETE`)
 
+## 4. 測試與驗證
+- [ ] 測試新增、刪除、顯示功能是否正常
+- [ ] 確認前後端連線成功
+- [ ] README.md 撰寫專案啟動說明
+```
 
-步驟二：開始寫程式時，讓 Copilot 參與
-	1.	在 index.js 或其他檔案中打下如下注解：
+---
 
-// 建立一個 Express 應用並監聽在 3000 port
+## **📌 小技巧**
 
+1. **明確指定語言/框架**：例如「用 Python Flask 建立 API」而不是「建立 API」。
+2. **加入輸入/輸出格式**：讓 AI 知道該怎麼寫。
+3. **加上檔名**：避免 AI 把程式碼寫到錯的檔案。
+4. **善用核取方塊 [ ]**：AI 可以逐項完成。
+5. **模組化**：一個模組一個區塊，讓 AI 可以分開執行。
 
-	2.	Copilot 通常會自動補出一段程式碼，例如：
+---
 
-const express = require('express');
-const app = express();
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
-
-
-	3.	你可以接受 (Tab) 或修改 Copilot 提供的內容。
-
-⸻
-
-💡 3. 逐步進行每一個 To Do 項目
-
-每完成一項，就在 TODO.md 中將 [ ] 改為 [x]：
-
-- [x] 初始化 Node.js 專案
-- [x] 安裝 Express
-- [ ] 建立基本伺服器（port 3000）
-
-這樣你可以：
-	•	清楚追蹤目前的進度。
-	•	控制 Copilot 的參與方式（透過提示文字或註解讓它補出你需要的程式碼）。
-
-⸻
-
-🧠 小技巧：如何讓 Copilot 更聰明幫你
-	•	使用具體描述的註解會讓 Copilot 提供更符合需求的建議。例如：
-
-// 建立一個 GET /api/hello 路由，回傳 { message: "Hello World" }
-
-
-	•	若 Copilot 沒有出現建議，可以按下 Ctrl + Enter（或 macOS 的 Cmd + Enter）呼叫 Copilot Chat 幫你生成一段程式碼。
-
-⸻
-
-🧰 附加工具（如果你想更進階）
-
-工具	說明
-Copilot Chat	可對話問 Copilot「幫我根據這個 todo 建立 API」
-Tasks Extension	VS Code 插件，可讓你管理 todo 和標註完成
-Markdown Preview	即時預覽 TODO.md，適合展示與教學
-
-
-⸻
-
-✅ 最佳實作流程小總結
-	1.	建立 TODO.md 並依照任務排序
-	2.	每完成一項，就手動勾選
-	3.	使用 Copilot 在程式檔案中寫註解讓 AI 協助產生程式碼
-	4.	搭配 Copilot Chat，可以做更高層的對話協作
-
-⸻
+要不要我幫你設計一個 **todolist.md 範本**，讓你未來做任何專案（例如 Python、Web、AI 任務）都能套用？
