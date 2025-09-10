@@ -25,8 +25,12 @@
 ```
 文章網址:https://cloud.google.com/blog/topics/developers-practitioners/gemini-cli-custom-slash-commands
 
-把這篇文章翻譯成中文，並且保存markd格式，在下載裡面所有的圖片
+把這篇文章翻譯成中文，並且保存markdown格式，在下載裡面所有的圖片
 ```
+
+**測試1結果**
+
+
 
 ## 測試2:像程式設計師一樣思考：分解任務（輸入、輸出、過程）
 
@@ -37,6 +41,8 @@
 - 過程 (Process)：AI需要執行的具體步驟是什麼？
 
 **Prompt第1版**
+
+- 建立`任務1.md`檔
 
 ```
 # 下載網頁內容和圖片
@@ -57,6 +63,8 @@ https://cloud.google.com/blog/topics/developers-practitioners/gemini-cli-custom-
 為了消除不同AI Agent內建網頁瀏覽功能差異造成的不確定性（例如Gemini 可能只返回文本而遺漏圖片連結），最佳方法是指定一個統一可靠的訪問方式
 
 **Prompt第2版**
+
+- 建立`任務2.md`檔
 
 ```
 # 下載網頁內容和圖片
@@ -91,6 +99,16 @@ https://cloud.google.com/blog/topics/developers-practitioners/gemini-cli-custom-
 
 
 ## 測試3:解決AI的「短期記憶」問題,導入「長期記憶」方式
+
+> [!IMPORTANT]
+> 由ai產生todolist.md
+
+**prompt**
+
+```
+{這裏方上面的prompt內容}
+可以將以上內容轉換為1個1個步驟執行的todolist.md,並且要求ai,每執行完一個任務,就必需更新todolist.md,而且要讓使用者知道目前的進度   
+```
 
 ## 結果:
 
