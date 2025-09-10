@@ -110,64 +110,22 @@ https://cloud.google.com/blog/topics/developers-practitioners/gemini-cli-custom-
 可以將以上內容轉換為1個1個步驟執行的todolist.md,並且要求ai,每執行完一個任務,就必需更新todolist.md,而且要讓使用者知道目前的進度   
 ```
 
-## 結果:
+## ai產生的todolist.md:
 
 ```
-輸入：
-文章URL：https://cloud.google.com/blog/topics/developers-practitioners/gemini-cli-custom-slash-commands
-
-輸出：
-1. 格式化後的原文 article.md
-2. 中英文雙語版 article-en-zh-hant.md
-3. 中文版 article-zh-hant.md
-4. 文章中所有的圖片資源
-
-每完成一步，都必須更新 progress.md
-
-步驟0: 生成筆記
-- 仿照例子和當前任務生成筆記 progress.md
-
-步驟1: 存取網站
-- 存取上文輸入中的網址
-- 必須使用 "lynx -dump -image_links URL" 指令存取網站
-- 網站內容保存在 raw.txt 中
-
-步驟2：下載圖片
-- 從 raw.txt 中提取文章相關圖片連結
-- 把圖片連結寫入 progress.md
-- 逐一下載到 resources/ 資料夾
-- 每下載完成一個圖片，必須更新圖片下載進度
-- 你必須使用 curl 指令進行下載
-
-步驟3：改寫成 markdown
-- 把 raw.txt 改寫成 markdown 格式
-- 保存在 article.md 中
-- 將 article.md 中的圖片連結指向 resources/ 資料夾
-
-步驟4：翻譯成中英文
-- 把 article.md 翻譯成中英文對照
-- 保存在 article-en-zh-hant.md 中
-
-步驟5：翻譯成中文
-- 提取 article-en-zh-hant.md 中的中文
-- 保存在 article-zh-hant.md 中
-
-----
-progress.md 筆記格式
-
-## 任務
-[x] xxxxx
-[ ] yyyyy
-[ ] zzzzz
-...
-
-## 圖片下載進度
-[x] https://xxxx/yyy.png
-[ ] https://foo/bar.png
-...
-
-## 當前任務
-正在下載 https://foo/bar.png
+- [ ] 訪問網站:
+    - [ ] 使用~~Links~~ curl命令列瀏覽器
+    - [ ] 將獲取到的原始內容保存到raw.txt文件中
+- [ ] 下載圖片:
+    - [ ] 讓AI分析raw.txt文件，提取所有圖片連結
+    - [ ] 一張一張地下載到resources文件夾
+- [ ] 改寫成Markdown格式:
+    - [ ] 將raw.txt轉換成為article.md
+    - [ ] 將article.md中的圖片連結指向resources文件夾
+- [ ] 翻譯成中英文版本:
+    - [ ] 將article.md轉換為article-en-zh-hant.md
+- [ ] 生成中文版本:
+    - [ ] 提取article-en-zh-hant.md的中文,轉換為article-zh-hant.md
 ```
 
 
