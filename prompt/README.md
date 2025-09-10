@@ -1,4 +1,14 @@
 # 提示詞
+## Prompt ⼯程是未來關鍵技能
+與 AI 的溝通能⼒決定了其輔助的成效｡善⽤｢ROSES 架構｣等提⽰技巧能讓 AI 更精準地理解需求｡
+
+### ROSES架構:
+- Role(角色)
+- Objective(目標)
+- Scenario(情境)
+- Expected Solution(預期結果)
+- Steps(步驟)
+
 ## Google公布AI提示萬用公式
 
 **掌握「21字黃金法則」:先穩80分基本功再求好**
