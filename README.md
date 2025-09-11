@@ -102,6 +102,8 @@
 
 - [Zed編輯器使用說明](./zed/README.md)
 
+## Spec-Driven 規範驅動開發工具
+
 ## 提示詞注意事項
 
 - [提示詞](./prompt/README.md)
