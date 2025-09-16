@@ -74,7 +74,9 @@
 
 [**Gemini CLI功能與應用探索**](./gemini_cli/功能與應用探索.md)
 
-**Gemini CLI功能與應用探索(語音摘要)** [點擊這裏播放](./gemini_cli/voice/突破性開發體驗Google_Gemini_CLI如何轉型你的程式碼協作與AI代理工作流.m4a)
+**Gemini CLI功能與應用探索(語音摘要)** 
+
+https://github.com/roberthsu2003/vibe_coding/raw/refs/heads/main/gemini_cli/voice/%E7%AA%81%E7%A0%B4%E6%80%A7%E9%96%8B%E7%99%BC%E9%AB%94%E9%A9%97Google_Gemini_CLI%E5%A6%82%E4%BD%95%E8%BD%89%E5%9E%8B%E4%BD%A0%E7%9A%84%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%8D%94%E4%BD%9C%E8%88%87AI%E4%BB%A3%E7%90%86%E5%B7%A5%E4%BD%9C%E6%B5%81.m4a
 
 [**非官方繁體中文操作說明**](https://gemini-cli.gh.miniasp.com/extension.html)
 - [Gemini CLI簡介_安裝](./gemini_cli/gemini_簡介_安裝.md)
