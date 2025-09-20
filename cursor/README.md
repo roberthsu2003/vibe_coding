@@ -21,7 +21,9 @@
 ## 專案階層的system-prompt
 
 ### 設定方法:
-- 根目錄新增`.cursorrules`
+- 根目錄新增`.cursorrules` -> 這是舊方式了
+- 目錄新增AGENTS.md -> 新方法
+  - 可以在每個目錄內設定
 
 **範例**
 
