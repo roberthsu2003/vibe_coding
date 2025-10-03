@@ -85,7 +85,7 @@
 
 ### [Gemini Code Assist System prompt設定](./gemini_code_assist/system_prompt設定)
 
-
+### [Gemini Code Assist MCP設定](./gemini_code_assist/mcp設定)
 ---
 
 ## Gemini CLI
