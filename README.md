@@ -75,6 +75,19 @@
 
 - [GitHub spark](https://docs.github.com/en/copilot/tutorials/easy-apps-with-spark)
 
+## Gemini Code Assist
+
+### [官網說明](https://codeassist.google/?hl=zh-tw)
+
+### 安裝方式
+1. 安裝擴統套件-Gemini Code Assist`
+2. 登入Google帳號
+
+### [Gemini Code Assist System prompt設定](./gemini_code_assist/system_prompt設定)
+
+
+---
+
 ## Gemini CLI
 **官方GitHub網站**-[https://github.com/google-gemini/gemini-cli/tree/main](https://github.com/google-gemini/gemini-cli/tree/main)
 
