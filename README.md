@@ -43,6 +43,15 @@
 
 **請先安裝vscode的CitHub Copilot extensions**
 
+
+### [System Prompt設定](./github_copilot/github_system_prompt)
+
+
+
+
+
+
+
 ### 僅功能說明(無實作)
 
 - [GitHub Copilot的chat view提示建構教學](./github_copilot/github_copilot_提示建構)
