@@ -1,6 +1,6 @@
 # Gemini Code Assist的System prompt的設定
 
-### Gemini Code Assist 使用者層級設定
+## Gemini Code Assist 使用者層級設定
 
 **位置**
 
@@ -37,13 +37,9 @@
 
 - excludeTools: 這允許您防止代理人使用特定的內建工具。
 
-### 在 VS Code 中為 Gemini Code Assist 設定工作區層級的系統提示
-
-Of course. Here is the information on how to configure the workspace-level system prompt for the Gemini Code Assist extension in VS Code, translated into Traditional Chinese.
-
 -----
 
-### 在 VS Code 中為 Gemini Code Assist 設定工作區層級的系統提示
+## 在 VS Code 中為 Gemini Code Assist 設定工作區層級的系統提示
 
 為 Gemini Code Assist 設定工作區（Workspace）或專案層級的系統提示，主要且官方建議的方法是在您專案的根目錄中建立一個名為 `GEMINI.md` 的檔案。這個檔案能為 Gemini 提供針對該特定專案的持續性上下文和指令。
 
@@ -131,7 +127,7 @@ Of course. Here is the information on how to configure the workspace-level syste
 
 ### 資料夾層級的System prompt
 
-好的，這個問題非常好。您可以為專案中的特定資料夾（例如 `lesson1`）建立專屬的系統提示。方法與設定整個工作區的提示相同，就是**在該資料夾內也建立一個 `GEMINI.md` 檔案**。
+您可以為專案中的特定資料夾（例如 `lesson1`）建立專屬的系統提示。方法與設定整個工作區的提示相同，就是**在該資料夾內也建立一個 `GEMINI.md` 檔案**。
 
 Gemini Code Assist 的設計非常靈活，它會以階層化的方式來讀取和整合指令。
 
