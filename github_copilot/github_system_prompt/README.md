@@ -53,6 +53,19 @@
 
 ## 🏗️ 專案層級設定
 
+#### 必需先設定vscode setting
+
+**設定步驟：**
+1. 使用 VS Code 命令面板 (`Cmd + Shift + P`)
+2. 執行 `> Preferences: Open WorkSpace Settings (JSON)`
+3. 在 `settings.json` 中加入：
+
+```json
+{
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true
+}
+```
+
 ### 檔案位置與建立方式
 
 **檔案路徑：** `.github/copilot-instructions.md`
