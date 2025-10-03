@@ -44,12 +44,9 @@
 **請先安裝vscode的CitHub Copilot extensions**
 
 
-### [System Prompt設定](./github_copilot/github_system_prompt)
+### [GitHub Copilot 的System Prompt設定](./github_copilot/github_system_prompt)
 
-
-
-
-
+### [GitHub Copilot 的  MCP設定](./github_copilot/github_mcp_setting)
 
 
 ### 僅功能說明(無實作)
