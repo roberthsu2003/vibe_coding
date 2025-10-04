@@ -1,7 +1,5 @@
 # Cursor 重要設定
 
-- Cursor AI 自動化工作流程精通指南：[從自訂命令到高階規則](./自訂命令到高階規則)
-
 ## 查看目前的system prompt
 
 **直接在chat view內問**
