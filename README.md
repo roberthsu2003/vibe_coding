@@ -106,12 +106,13 @@
 - [Gemini CLI待加入文章和範例參考](./gemini_cli/gemini_chatGPT提供.md)
 - [操作範例](./gemini_cli/操作範例.md)
 
-## Claude Code CLI
+## Claude Code
 
-- [Claude Code for VSCode](./claude_code/claude_code_vscode/README.md)
-	- [Claude Code for VSCode 的 system prompt](./claude_code/claude_code_vscode_system_prompt_設定)
+- [Claude Code for VSCode](./claude_code/claude_code_vscode/README.md)	
 
 - [Claude Code CLI](./claude_code/claude_code_cli/README.md)
+
+- [Claude Code 的 system prompt](./claude_code/claude_code_vscode_system_prompt_設定)
 
 ## revo dev
 

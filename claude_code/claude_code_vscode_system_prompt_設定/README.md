@@ -1,6 +1,6 @@
-# 🚀 Claude Code For VSCode 的 System Prompt 設定指南
+# 🚀 Claude Code 的 System Prompt 設定指南
 
-> 本指南將詳細說明如何為 Claude Code VSCode 擴充套件設定系統提示(System Prompt),讓 AI 助手更了解您的專案需求並提供更精準的協助。
+> 本指南將詳細說明如何為 **Claude Code** (包括 VSCode 擴充套件和 CLI 工具)設定系統提示(System Prompt),讓 AI 助手更了解您的專案需求並提供更精準的協助。
 
 ---
 
@@ -16,11 +16,12 @@
 
 ### 📁 [第二章:專案層級設定 (CLAUDE.md)](./docs/chapter2/README.md)
 
-深入學習如何建立和使用專案層級的 `CLAUDE.md` 檔案
+深入學習如何建立和使用專案層級的 `CLAUDE.md` 檔案,以及 VSCode 和 CLI 的差異
 
 - [2.1 CLAUDE.md 核心概念](./docs/chapter2/2.1-claude-md-concept.md)
 - [2.2 建立第一個 CLAUDE.md](./docs/chapter2/2.2-create-first-claude-md.md)
 - [2.3 完整範例解析](./docs/chapter2/2.3-complete-example.md)
+- [2.4 VSCode 擴充套件 vs CLI 工具的差異](./docs/chapter2/2.4-vscode-vs-cli.md) ⭐ 新增
 
 ### 📂 [第三章:資料夾層級設定](./docs/chapter3/README.md)
 
@@ -98,11 +99,24 @@ System Prompt 的進階應用技巧
 
 ## 📊 設定層級一覽
 
+### VSCode 擴充套件
+
 | 設定類型 | 檔案位置 | 影響範圍 | 優先級 |
 |:---------|:---------|:---------|:-------|
 | **專案層級** | `CLAUDE.md` | 整個專案 | 高 |
 | **資料夾層級** | `src/*/CLAUDE.md` | 特定資料夾 | 最高 |
 | **VS Code 設定** | `.vscode/settings.json` | 工作區 | 中 |
+
+### CLI 工具 (額外支援)
+
+| 設定類型 | 檔案位置 | 影響範圍 | 說明 |
+|:---------|:---------|:---------|:-----|
+| **全域 CLAUDE.md** | `~/.claude/CLAUDE.md` | 所有專案 | CLI 獨有 |
+| **全域 settings.json** | `~/.claude/settings.json` | 所有專案 | CLI 獨有 |
+| **專案 settings.json** | `.claude/settings.json` | 當前專案 | CLI 獨有 |
+| **命令列參數** | `--append-system-prompt` | 單次執行 | CLI 獨有 |
+
+> **📖 詳細說明:** [2.4 VSCode 擴充套件 vs CLI 工具的差異](./docs/chapter2/2.4-vscode-vs-cli.md)
 
 ---
 

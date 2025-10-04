@@ -2,13 +2,14 @@
 
 ## 章節簡介
 
-本章將詳細說明如何在專案根目錄建立和配置 `CLAUDE.md` 檔案,這是 Claude Code 官方建議的主要設定方式。
+本章將詳細說明如何在專案根目錄建立和配置 `CLAUDE.md` 檔案,這是 Claude Code 官方建議的主要設定方式。同時也會說明 VSCode 擴充套件和 CLI 工具在設定上的差異。
 
 ## 本章內容
 
 - [2.1 CLAUDE.md 核心概念](./2.1-claude-md-concept.md)
 - [2.2 建立第一個 CLAUDE.md](./2.2-create-first-claude-md.md)
 - [2.3 完整範例解析](./2.3-complete-example.md)
+- [2.4 VSCode 擴充套件 vs CLI 工具的差異](./2.4-vscode-vs-cli.md) ⭐ 新增
 
 ## 導航
 
