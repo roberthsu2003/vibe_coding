@@ -108,6 +108,8 @@
 
 ## Claude Code CLI
 
+- [Claude Code for VSCode](./claude_code_vscode/README.md))
+
 - [Claude Code CLI](./claude_code_cli/README.md)
 
 ## revo dev
