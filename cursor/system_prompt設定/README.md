@@ -79,3 +79,29 @@
 
 - **在chat view內**
 	- 使用@rules,加入至這次的chat view內。
+
+## cursor資料夾階層的system prompt 
+
+1. 在資料夾內建立`AGENTS.md` 
+
+2. 建立`.cursor/rules`資料夾,建立`mdc`檔案
+
+
+	```
+	範例:假設作用至lesson1的資料夾
+	建立1個`lesson1.mdc`檔
+	```
+	
+	**格式如下:**
+	
+	```
+	---
+	description: "lesson1專用"
+	globs: "lesson1/**"
+	alwaysApply: true
+	---
+	這是一個lesson1資料夾專用的system prompt
+	```
+	
+	
+

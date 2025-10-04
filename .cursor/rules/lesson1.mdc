@@ -1,0 +1,6 @@
+---
+description: "lesson1 專屬規則"
+globs: "lesson1/**"
+alwaysApply: true
+---
+這是一個lesson1資料夾專用的system prompt
