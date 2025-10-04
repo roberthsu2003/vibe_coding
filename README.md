@@ -19,6 +19,8 @@
 
 ## [3種類型的AI助手](./3種類型的AI助手)
 
+## [什麼是System Prompt](./system_prompt)
+
 ## vibe_coding常用工具
 
 | 類型 | 工具名稱 | 備註 |
