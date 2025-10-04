@@ -114,7 +114,8 @@
 
 ## Cursor 編輯器使用說明
 
-- [Cursor 編輯器使用說明](./cursor/README.md)
+### [cursor System prompt設定](./cursor/system_prompt設定)
+
 
 ## Kiro編輯器使用說明
 
