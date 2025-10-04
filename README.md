@@ -118,6 +118,10 @@
 
 ### [cursor System prompt設定](./cursor/system_prompt設定)
 
+### [cursor MCP設定](./cursor/mcp設定)
+
+### [cursor 從自訂命令到高階規則](./cursor/自訂命令到高階規則)
+
 
 ## Kiro編輯器使用說明
 
