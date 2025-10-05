@@ -73,8 +73,12 @@ src/
 | 資料夾 | `src/*/CLAUDE.md` | 特定模組 |
 | 專案 | `CLAUDE.md` | 專案規範 |
 | 專案配置 | `.claude/settings.json` | CLI 專案設定 |
+| 自訂指令 | `.claude/commands/*.md` | Slash Commands |
+| Prompt 模板 | `.claude/prompts/*.md` | 可重用模板 |
 | 全域文件 | `~/.claude/CLAUDE.md` | 所有專案預設 |
 | 全域配置 | `~/.claude/settings.json` | CLI 全域設定 |
+
+> **詳細說明:** [2.5 .claude/ 目錄設定完整指南](../chapter2/2.5-claude-directory.md)
 
 ---
 
@@ -123,6 +127,20 @@ claude mcp list
 
 # 移除 MCP 伺服器
 claude mcp remove my-server
+```
+
+### 自訂指令 (Slash Commands)
+
+```bash
+# 使用自訂指令
+claude /review src/userService.ts
+
+# 建立新指令檔案
+mkdir -p .claude/commands
+echo "指令內容" > .claude/commands/mycommand.md
+
+# 列出可用指令
+ls .claude/commands/
 ```
 
 ---

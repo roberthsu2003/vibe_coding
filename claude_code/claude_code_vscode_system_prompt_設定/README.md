@@ -21,7 +21,8 @@
 - [2.1 CLAUDE.md 核心概念](./docs/chapter2/2.1-claude-md-concept.md)
 - [2.2 建立第一個 CLAUDE.md](./docs/chapter2/2.2-create-first-claude-md.md)
 - [2.3 完整範例解析](./docs/chapter2/2.3-complete-example.md)
-- [2.4 VSCode 擴充套件 vs CLI 工具的差異](./docs/chapter2/2.4-vscode-vs-cli.md) ⭐ 新增
+- [2.4 VSCode 擴充套件 vs CLI 工具的差異](./docs/chapter2/2.4-vscode-vs-cli.md)
+- [2.5 .claude/ 目錄設定完整指南](./docs/chapter2/2.5-claude-directory.md) ⭐ 新增
 
 ### 📂 [第三章:資料夾層級設定](./docs/chapter3/README.md)
 
