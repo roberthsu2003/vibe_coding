@@ -112,7 +112,9 @@
 
 - [Claude Code CLI](./claude_code/claude_code_cli/README.md)
 
-- [Claude Code 的 system prompt](./claude_code/claude_code_vscode_system_prompt_設定)
+- [Claude Code 的 system prompt設定](./claude_code/claude_code_vscode_system_prompt_設定)
+
+- [Claude Code 的 MCP 設定](./claude_code/claude_code_mcp_設定)
 
 ## revo dev
 
