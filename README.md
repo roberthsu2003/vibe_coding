@@ -93,6 +93,8 @@
 ## Gemini CLI
 **官方GitHub網站**-[https://github.com/google-gemini/gemini-cli/tree/main](https://github.com/google-gemini/gemini-cli/tree/main)
 
+**Gemini官方網站說明** [連結](https://geminicli.com/docs/)
+
 [**Gemini CLI功能與應用探索**](./gemini_cli/功能與應用探索.md)
 
 **Gemini CLI功能與應用探索(語音摘要)**[下載位址](./gemini_cli/voice/突破性開發體驗Google_Gemini_CLI如何轉型你的程式碼協作與AI代理工作流.mp3)
@@ -114,11 +116,13 @@
 
 - [Claude Code 的 system prompt設定](./claude_code/claude_code_vscode_system_prompt_設定)
 
-- [Claude Code 的 MCP 設定](./claude_code/claude_code_mcp_設定)
+- **[Claude Code 的 MCP 設定](./claude_code/claude_code_mcp_設定)**
 
 ## revo dev
 
 - [revo dev](./revo_dev/README.md)
+
+---
 
 ## Cursor 編輯器使用說明
 
@@ -128,16 +132,23 @@
 
 ### [cursor 從自訂命令到高階規則](./cursor/自訂命令到高階規則)
 
+---
 
 ## Kiro編輯器使用說明
 
 - [Kiro編輯器使用說明](./kiro/README.md)
 
+---
+
 ## Zed編輯器使用說明
 
 - [Zed編輯器使用說明](./zed/README.md)
+- ---
 
-## Spec-Driven 規範驅動開發工具
+## Spec-Driven-Development 規範驅動開發工具(SDD)
+
+[GitHub Spec-kit](/sdd開發/github_spec-kit)
+---
 
 ## 提示詞注意事項
 
