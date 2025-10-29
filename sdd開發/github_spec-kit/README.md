@@ -69,15 +69,16 @@ specify init . --no-git 或都 specify init --here --no-git
 /speckit.constitution
 
 ## 工作目錄和工作區
-- 2025_08_31-Chihlee_raspberry/貪食蛇2
+- 2025_08_31_Chihlee_raspberry/貪食蛇2/
 
 ## 虛擬環境
 - 使用uv的虛擬環境
 - 已經有建立虛擬環境
-- 進入虛擬環境指令`source ../.venv/bin/activate`
+- 進入虛擬環境指令`source .venv/bin/activate`
 
 ## 注意事項
 - 所有回應請使用繁體中文
+- 所有建立的md檔也使用繁體中文
 ```
 
 
@@ -86,6 +87,16 @@ specify init . --no-git 或都 specify init --here --no-git
 ```
 /speckit.specify \
 我要建立一個視窗版繁體中文的貪食蛇遊戲
+
+## ai目標
+- 使用pygame製作貪食蛇遊戲
+- 必需要有計分功能
+- 必需有等級功能
+- 結束後可以讓使用者重玩
+- 必需記錄使用者的名稱和等級
+- 使用者不可以重覆
+- 遊戲時,必需要顯示使用者名稱和最高紀錄
+- 遊戲過程中,如果使用者超過自已最高紀錄,必需提示
 ```
 
 
@@ -118,3 +129,4 @@ specify init . --no-git 或都 specify init --here --no-git
 
 
 
+Q
