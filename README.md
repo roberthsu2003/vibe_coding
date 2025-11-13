@@ -25,7 +25,7 @@
 
 | 類型 | 工具名稱 | 備註 |
 | :--- | :--- | :--- |
-| **視窗介面** | [Cursor](./cursor/README.md) | 整合 AI 功能的 VSCode 分支 |
+| **視窗介面** | [Cursor](#Cursor-編輯器使用說明) | 整合 AI 功能的 VSCode 分支 |
 | | [Kiro](./kiro/README.md) | 開源的 AI 程式碼編輯器 |
 | | [Zed](./zed/README.md) | 高效能的程式碼編輯器 |
 | | GitHub Copilot | VSCode 擴充套件 |
