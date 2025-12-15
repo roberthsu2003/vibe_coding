@@ -2,8 +2,10 @@
 
 ## 實作
 
-## Vibe Coding的3種方法
+## Vibe Coding 學習路徑
 
+0.  [AI Coding 基礎 (Basics)](00_ai_coding_basics/README.md)
+    -   *建立基礎：Suggestion, Code Review, Refactoring*
 1.  [迭代方式 (The Iterative Way)](01_iterative_method/README.md)
 2.  [SDD (軟體設計說明書)](02_sdd/README.md)
 3.  [TDD (測試驅動開發)](03_tdd/README.md)
