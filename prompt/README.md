@@ -4,6 +4,9 @@
 
 ### Prompt 工程是未來關鍵技能
 與 AI 的溝通能力決定了其輔助的成效。善用「ROSES 架構」等提示技巧能讓 AI 更精準地理解需求。
+### Prompt 文字格式:
+
+[**內容格式**](./內容格式/README.md)
 
 ### ROSES Prompt Framework（建議定義）:
 - **R – Role (角色)**：指定 AI 的角色（如：Python 專家、Code Reviewer）。
