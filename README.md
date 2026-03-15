@@ -26,7 +26,7 @@
 - **[掌握迭代的力量](./掌握迭代的力量/README.md)**
   - *探索開發思維的轉變：以小步迭代驅動專案成長。*
 - **[PRD (產品需求文件)](PRD/README.md)**
-- **[工作清單](todolist/README.md)**
+- **[工作清單todolist](todolist/README.md)**
 - **[SDD (軟體設計說明書)](sdd/README.md)**
 - **[TDD (測試驅動開發)](03_tdd/README.md)**
 
