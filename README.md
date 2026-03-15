@@ -9,6 +9,7 @@
     - *建立基礎：Suggestion, Code Review, Refactoring*
 - [迭代方式 (The Iterative Way)](iterative_method/README.md)
 - [PRD (產品需求文件)](prd/README.md)
+- [工作清單](todolist/README.md)
 - [SDD (軟體設計說明書)](sdd/README.md)
 - [TDD (測試驅動開發)](03_tdd/README.md)
 
