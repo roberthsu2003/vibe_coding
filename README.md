@@ -12,7 +12,7 @@
         - 方便日後修改
         - 方便協作
         - 方便 AI 閱讀
-- [迭代方式 (The Iterative Way)](iterative_method/README.md)
+- [掌握迭代的力量](./掌握迭代的力量/README.md)
 - [PRD (產品需求文件)](prd/README.md)
 - [工作清單](todolist/README.md)
 - [SDD (軟體設計說明書)](sdd/README.md)
