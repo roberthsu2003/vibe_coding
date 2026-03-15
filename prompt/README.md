@@ -83,7 +83,7 @@ bash:curl http://127.0.0.1:5000/users
 
 ---
 
-## Prompt常見的指令(coding)
+## 使用AI編輯器coding時,AI編輯器可以輔助的工作
 
 這些像 **codebase, workspace** 的詞，常出現在 **AI coding prompt / 開發環境** 裡，尤其是 GitHub Copilot Chat、Cursor、VSCode 插件裡面。它們其實是一種 **指令詞 (Context 指令)**，用來告訴 AI 如何理解專案結構與程式範圍。
 

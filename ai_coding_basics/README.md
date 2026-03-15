@@ -1,4 +1,6 @@
-# 0. AI Coding 基礎 (AI Coding Basics)
+# AI Coding 基礎 (AI Coding Basics)
+
+## 使用AI編輯器coding時,AI編輯器可以輔助的工作
 
 本章節專為初學者設計，旨在介紹如何利用 AI 輔助工具來提升程式撰寫的效率與品質。
 

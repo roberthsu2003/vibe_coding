@@ -6,7 +6,7 @@
 
 - [Prompt Engineering](prompt/README.md)
 - [AI Coding 基礎 (Basics)](ai_coding_basics/README.md)
-    -   *建立基礎：Suggestion, Code Review, Refactoring*
+    - *建立基礎：Suggestion, Code Review, Refactoring*
 - [迭代方式 (The Iterative Way)](iterative_method/README.md)
 - [PRD (產品需求文件)](prd/README.md)
 - [SDD (軟體設計說明書)](sdd/README.md)
