@@ -7,6 +7,11 @@
 - [Prompt Engineering](prompt/README.md)
 - [AI Coding 基礎 (Basics)](ai_coding_basics/README.md)
     - *建立基礎：Suggestion, Code Review, Refactoring*
+- [維護專案的技巧](./維護專案的技巧/README.md)
+    - 目的: 
+        - 方便日後修改
+        - 方便協作
+        - 方便 AI 閱讀
 - [迭代方式 (The Iterative Way)](iterative_method/README.md)
 - [PRD (產品需求文件)](prd/README.md)
 - [工作清單](todolist/README.md)
