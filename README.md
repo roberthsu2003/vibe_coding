@@ -58,3 +58,7 @@
 
 > 詳細的使用指引請參考 [SDD 章節](02_sdd/README.md#找參考範例的管道) 或 [需求模板](templates/requirement_template.md)
 
+## 其它
+
+[其它1](./中華電信/README.md)
+[其它2](./新北市稅捐稽徵處/README.md)
