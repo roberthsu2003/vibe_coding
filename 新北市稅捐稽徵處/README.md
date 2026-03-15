@@ -19,4 +19,5 @@
 
 ## 課程大綱
 
-### 如何prompt?
+### prompt內容格式
+- [prompt內容格式](./prompt內容格式/README.md)
