@@ -4,12 +4,13 @@
 
 ## Vibe Coding 學習路徑
 
-0.  [AI Coding 基礎 (Basics)](00_ai_coding_basics/README.md)
+- [AI Coding 基礎 (Basics)](ai_coding_basics/README.md)
     -   *建立基礎：Suggestion, Code Review, Refactoring*
-1.  [迭代方式 (The Iterative Way)](01_iterative_method/README.md)
-2.  [Prompt Engineering](prompt/README.md)
-3.  [SDD (軟體設計說明書)](02_sdd/README.md)
-4.  [TDD (測試驅動開發)](03_tdd/README.md)
+- [迭代方式 (The Iterative Way)](iterative_method/README.md)
+- [Prompt Engineering](prompt/README.md)
+- [PRD (產品需求文件)](prd/README.md)
+- [SDD (軟體設計說明書)](sdd/README.md)
+- [TDD (測試驅動開發)](03_tdd/README.md)
 
 
 這是一個從「操作心法」進階到「架構思維」，最後落實為「品質保證」的紮實路徑。這三個步驟正好對應了在 AI 協作開發（Vibe Coding）中，如何從「寫得快」進化到「寫得穩」。
