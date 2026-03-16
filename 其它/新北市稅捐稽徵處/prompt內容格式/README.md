@@ -6,6 +6,12 @@
 
 ---
 
+## 使用工具:
+
+- google AI studio
+
+---
+
 ## 提示詞工程基礎
 
 ### ROSES Prompt Framework（建議定義）
