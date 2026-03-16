@@ -1,12 +1,72 @@
-# Prompt 的三大文字格式與實戰技巧
+# AI 提示詞工程指南：文字格式與實戰技巧
 
-在與 AI 溝通時，我們給予指令（Prompt）的格式，會直接決定 AI 輸出的精準度與品質。特別是在進行 Vibe Coding（用語感/直覺請 AI 寫程式） 時，選擇對的格式能讓 AI 更懂你的心！
+在與 AI 溝通時，我們給予指令（Prompt）的格式，會直接決定 AI 輸出的精準度與品質。與 AI 的溝通能力決定了其輔助的成效，善用「ROSES 架構」與適當的文字格式能讓 AI 更精準地理解需求。特別是在進行 Vibe Coding（用語感/直覺請 AI 寫程式）時，選擇對的格式能讓 AI 更懂你的心！
 
 為了解釋差異，我們統一設定一個目標：「**請 AI 寫一個網頁版的貪食蛇小遊戲**」。來看看三種格式分別會怎麼寫：
 
 ---
 
-## 1. 自然語言 (Natural Language)
+## 提示詞工程基礎
+
+### ROSES Prompt Framework（建議定義）
+
+- **R – Role (角色)**：指定 AI 的角色（如：Python 專家、Code Reviewer）。
+- **O – Objective (目標)**：清楚描述要完成的任務。
+- **S – Steps (步驟)**：拆解任務的步驟，讓 AI 照順序處理。
+- **E – Examples (範例)**：提供輸入/輸出的範例，避免模糊。
+- **S – Scope & Style (範圍/風格)**：限制語言、框架、程式風格。
+
+> [!IMPORTANT]
+> 透過**描述**建立符合 **ROSES** 的 Prompt 樣版。
+
+#### 範本範例：建立 Python API
+
+```
+# ROSES Prompt: Python API 建立
+
+## R – Role (角色)
+你是一位 Python Flask 專家。
+
+## O – Objective (目標)
+建立一個簡單的 RESTful API，提供 `GET /users` 回傳 JSON 格式的使用者資料。
+
+## S – Steps (步驟)
+1. 建立 Flask 專案檔案 `app.py`
+2. 在 `app.py` 內建立 `/users` 路由
+3. 回傳一個 JSON 陣列，包含 `id`, `name`, `email`
+4. 確保程式可直接執行 `python app.py` 啟動
+
+## E – Examples (範例)
+
+### 輸入：
+bash:curl http://127.0.0.1:5000/users
+
+### 輸出:
+[
+  {"id": 1, "name": "Alice", "email": "alice@example.com"},
+  {"id": 2, "name": "Bob", "email": "bob@example.com"}
+]
+
+## S – Scope & Style (範圍/風格)
+- 使用 Python 3.12
+- 僅用 Flask，不可使用 FastAPI
+- 程式碼要有註解，遵循 PEP8
+```
+
+### 補充：Google 公布 AI 提示萬用公式
+
+**掌握「21 字黃金法則」：先穩 80 分基本功再求好**
+
+1. **角色設定**：要 LLM 調度哪些領域知識
+2. **任務**：你想完成什麼目標
+3. **背景**：任務的起源 / 目標的限制 / 涉及的人士等
+4. **格式**：輸出類型、編排格式
+
+---
+
+## Prompt 的三大文字格式
+
+### 1. 自然語言 (Natural Language)
 
 ✏️ **概念說明**：
 就像平常跟朋友聊天、交代工程師做事一樣，直接用口語化的文字寫出你的需求。這是最直覺的 Prompt 寫法，著重在「描述感覺」。
@@ -21,7 +81,7 @@
 
 ---
 
-## 2. YAML 格式 (YAML Format)
+### 2. YAML 格式 (YAML Format)
 
 ✏️ **概念說明**：
 YAML 是一種資料序列化語言，特色是利用「縮排」和「鍵值對 (Key-Value)」來呈現資料層級。
@@ -59,7 +119,7 @@ Output_Requirement: |
 
 ---
 
-## 3. Markdown 格式 (Markdown Format)
+### 3. Markdown 格式 (Markdown Format)
 
 ✏️ **概念說明**：
 利用簡單的符號（如 `#` 代表標題、`-` 代表清單）來組織文字。這是目前最主流、泛用性最高的結構化 Prompt 寫法，也是 Vibe Coding 中最常被使用的格式。
