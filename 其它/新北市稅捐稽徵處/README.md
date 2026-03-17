@@ -17,21 +17,20 @@
  - google AI studio
  - vscode
 
-## 課程大綱
+## 🎯 課程大綱（學習路徑）
 
-### **[自然語言+迭代的開發方法](./掌握迭代的力量/README.md)**
+- **[自然語言+迭代的開發方法](../../自然語言+迭代的開發方法/README.md)**
   - *探索開發思維的轉變：以小步迭代驅動專案成長。*
 
-### prompt內容格式
+- **[Prompt 內容格式](prompt內容格式/README.md)**
+  - *認識自然語言、YAML、Markdown 三種 Prompt 格式，以及 ROSES 架構與實戰範例。*
 
-- [prompt內容格式](./prompt內容格式/README.md)
-- [不會寫prompt怎麼辦](./不會寫prompt怎麼辦/README.md)
+- **[不會寫 Prompt 怎麼辦](不會寫prompt怎麼辦/README.md)**
+  - *五種方式帶你從零開始：請 AI 給範本、一問一答引導、搜尋 Prompt 庫、從一句話擴充、參考範例改寫。*
 
-### 輕量化規格紀錄手冊
+- **[輕量化規格紀錄手冊](輕量化規格紀錄手冊/README.md)**
+  - *用 README.md 與 spec.md 記錄專案說明、專案規格與目前開發進度，方便日後修改並讓 AI 易於對齊。*
 
-- [輕量化規格紀錄手冊](./輕量化規格紀錄手冊/README.md)
-
-### 從一個 Prompt 到 PRD 與 Todo List：自動化專案規劃流程
-
-- [從一個 Prompt 到 PRD 與 Todo List：自動化專案規劃流程](../../PRD/README.md)
+- **[從一個 Prompt 到 PRD 與 Todo List](../../PRD/README.md)**
+  - *學會撰寫一份 Prompt 讓 AI 自動產生 PRD.md 與 todolist.md，並依 todo 每步完成後記錄、暫停測試的開發循環。*
 
