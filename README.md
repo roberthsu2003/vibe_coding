@@ -21,7 +21,7 @@
   - *學習如何下達精準指令，與 AI 高效溝通。*
 - **[AI Coding 基礎 (Basics)](ai_coding_basics/README.md)**
   - *建立基礎：Suggestion、Code Review 與 Refactoring 技巧。*
-- **[輕量化規格紀錄手冊](./輕量化規格紀錄手冊/README.md)**
+- **[專案說明與規格文件（README.md & spec.md）](./輕量化規格紀錄手冊/README.md)**
   - *目的：方便日後修改、促進團隊協作，並建立讓 AI 易於閱讀的上下文。*
 - **[掌握迭代的力量](./掌握迭代的力量/README.md)**
   - *探索開發思維的轉變：以小步迭代驅動專案成長。*
