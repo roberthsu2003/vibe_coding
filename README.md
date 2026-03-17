@@ -27,7 +27,8 @@
 - **[專案說明與規格文件（README.md & spec.md）](./輕量化規格紀錄手冊/README.md)**
   - *目的：方便日後修改、促進團隊協作，並建立讓 AI 易於閱讀的上下文。*
 
-- **[PRD (產品需求文件)](PRD/README.md)**
+- **[從一個 Prompt 到 PRD 與 Todo List：自動化專案規劃流程](PRD/README.md)**
+  - *學會只需撰寫一份 Prompt，讓 AI 自動產生 `PRD.md` 與 `todolist.md`，並進一步依據 PRD 內容推動 todo list 的開發循環。*
 - **[工作清單todolist](todolist/README.md)**
 - **[SDD (軟體設計說明書)](sdd/README.md)**
 - **[TDD (測試驅動開發)](03_tdd/README.md)**
