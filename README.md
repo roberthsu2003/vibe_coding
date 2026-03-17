@@ -35,6 +35,17 @@
 
 ---
 
+## 部署專案
+
+1. 使用 [Github Pages](https://pages.github.com/) 部署專案
+2. 使用 [Netlify](https://www.netlify.com/) 部署專案
+3. 使用 [Railway](https://railway.app/) 部署專案
+4. 使用 [Render](https://render.com/) 部署專案
+5. 使用 [Vercel](https://vercel.com/) 部署專案
+6. 使用 [Google Cloud Run](https://cloud.google.com/run) 部署專案
+
+
+
 ## 🛠️ 雲端 AI 編輯器與開發工具
 
 目前市面上有許多優秀的 AI 輔助工具，幫助您加速開發流程：
