@@ -31,3 +31,7 @@
 
 - [輕量化規格紀錄手冊](./輕量化規格紀錄手冊/README.md)
 
+### 從一個 Prompt 到 PRD 與 Todo List：自動化專案規劃流程
+
+- [從一個 Prompt 到 PRD 與 Todo List：自動化專案規劃流程](../../PRD/README.md)
+
