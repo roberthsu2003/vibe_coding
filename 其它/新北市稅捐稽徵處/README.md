@@ -34,3 +34,6 @@
 - **[從一個 Prompt 到 PRD 與 Todo List](../../PRD/README.md)**
   - *學會撰寫一份 Prompt 讓 AI 自動產生 PRD.md 與 todolist.md，並依 todo 每步完成後記錄、暫停測試的開發循環。*
 
+## 部署專案
+
+1. 使用 [Github Pages](../../佈署/Github的部署/README.md) 部署專案
