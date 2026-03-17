@@ -3,6 +3,11 @@
 - 18小時3天課程vibe coding課程
 - 目的: 協助製作3個小遊戲
 
+---
+
+[**課程大綱**](課程大綱.md)
+
+---
 ## 現有小遊戲(scratch)
 
 - [發票接物挑戰](https://scratch.mit.edu/projects/1190581926)
