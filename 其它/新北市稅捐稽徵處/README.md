@@ -22,6 +22,7 @@
 ### prompt內容格式
 
 - [prompt內容格式](./prompt內容格式/README.md)
+- [不會寫prompt怎麼辦](./不會寫prompt怎麼辦/README.md)
 
 ### 輕量化規格紀錄手冊
 
