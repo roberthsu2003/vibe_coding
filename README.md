@@ -35,14 +35,7 @@
 
 ---
 
-## 部署專案
-
-1. 使用 [Github Pages](./佈署/Github的部署/README.md) 部署專案
-2. 使用 [Netlify](https://www.netlify.com/) 部署專案
-3. 使用 [Railway](https://railway.app/) 部署專案
-4. 使用 [Render](https://render.com/) 部署專案
-5. 使用 [Vercel](https://vercel.com/) 部署專案
-6. 使用 [Google Cloud Run](https://cloud.google.com/run) 部署專案
+## [vibe_coding先修](https://github.com/roberthsu2003/react_typescript_vite)
 
 ---
 
@@ -55,6 +48,17 @@
 - **[Replit](https://replit.com/)**：功能強大的線上 IDE。內建 AI 輔助功能 (Ghostwriter)，讓您在瀏覽器中直接編寫、測試、部署及協作。（提供應用程式下載；每日有免費次數，無邀請獎勵機制）
 - **[Manus](https://manus.co/)**：專注於將設計稿轉化為程式碼的 AI 工具。能讀取 Figma 設計稿並自動生成高品質前端程式碼。（採訂閱制，提供免費應用程式下載；每日登入與邀請皆可獲得點數）
 - **[v0.dev](https://v0.dev/)**：由 Vercel 團隊打造的生成式 UI 工具。只需輸入文字描述，即可快速產出基於 React、Shadcn UI 與 Tailwind CSS 的介面。（採訂閱制；每日提供免費額度，內建豐富樣板直接套用，亦可下載程式碼）
+
+---
+
+## 部署專案
+
+1. 使用 [Github Pages](./佈署/Github的部署/README.md) 部署專案
+2. 使用 [Netlify](https://www.netlify.com/) 部署專案
+3. 使用 [Railway](https://railway.app/) 部署專案
+4. 使用 [Render](https://render.com/) 部署專案
+5. 使用 [Vercel](https://vercel.com/) 部署專案
+6. 使用 [Google Cloud Run](https://cloud.google.com/run) 部署專案
 
 ---
 
