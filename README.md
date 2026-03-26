@@ -56,12 +56,14 @@
 
 ## 部署專案
 
-1. 使用 [Github Pages](./佈署/Github的部署/README.md) 部署專案
-2. 使用 [Netlify](https://www.netlify.com/) 部署專案
-3. 使用 [Railway](https://railway.app/) 部署專案
-4. 使用 [Render](https://render.com/) 部署專案
-5. 使用 [Vercel](https://vercel.com/) 部署專案
-6. 使用 [Google Cloud Run](https://cloud.google.com/run) 部署專案
+可依專案類型（純靜態前端、全端應用、容器化服務等）選擇下列平台，將程式碼建置並對外提供服務。
+
+1. **[GitHub Pages](./佈署/Github的部署/README.md)**：GitHub 內建免費靜態網站託管；與儲存庫連動即可發布，適合專案文件、單頁應用等不需要後端運算環境的內容。
+2. **[Netlify](https://www.netlify.com/)**：常見的 JAMstack 託管服務，支援從 Git 自動建置與預覽網址，並提供表單、分流測試等周邊功能；免費方案適合學習與小型專案。
+3. **[Railway](https://railway.app/)**：偏向全端與後端的 PaaS，可部署 API、背景任務與資料庫等，以專案用量計費，適合需要長連線或傳統伺服器形態的服務。
+4. **[Render](https://render.com/)**：提供 Web Service、靜態網站、背景 Worker 與受管資料庫等選項，介面偏「一把部署」，可涵蓋前後端與排程類需求。
+5. **[Vercel](https://vercel.com/)**：與前端框架（尤其 Next.js）整合緊密，具邊緣網路與 Serverless／Edge Functions；適合以 React / 現代前端為主的專案快速上線。
+6. **[Google Cloud Run](https://cloud.google.com/run)**：在 Google Cloud 上以容器方式執行應用，依請求自動擴縮容；適合已容器化、或需要與 GCP 其他服務深度整合的部署情境。
 
 ---
 
