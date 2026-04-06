@@ -34,27 +34,44 @@
 
 因此請區分兩件事：
 
-- **分享連結或範例給別人**：對方若在自己的 Google 帳號開啟 AI Studio、並使用 **Remix**（見下一段）把專案收到自己的工作區，之後執行時會改為**對方專案的金鑰與額度**。
+- **Share（分享）**：代表您把自己寫好的 App **分享出去**，讓別人透過連結**能夠 Remix**（在您作品上「分叉」成他們自己的副本再改）。收到連結的人在**自己的 Google 帳號**裡 **Remix** 之後，呼叫 Gemini 會使用**該使用者自己的** API 金鑰與 **Google Cloud 專案**額度，**不會**用到您（建立分享連結者）專案裡的金鑰。
 - **請勿**把 API 金鑰寫進公開網頁、GitHub 或給學員複製到前端；否則任何人呼叫都會**消耗該金鑰所屬專案**的額度，且有外洩風險。
 
 ## Remix：想改內容時怎麼做？
 
 **Remix** 會把 Gallery 或既有專案（含您自己的）**複製一份到您目前的工作區**，讓您在**不覆寫原版**的前提下修改 Prompt、參數、介面或流程。教學上可視為「以範例為底稿分叉」：**先 Remix → 再依課程需求改內容**，比從零撰寫快，也較容易對照差異。
 
-**Share（分享）**與 **Publish（發布）**：在 AI Studio 的流程裡，通常要**先完成 Remix**，讓範例成為您帳號下**可編輯的專案副本**之後，**才能**對該副本進行分享連結或發布等操作；若僅停留在 Gallery 預覽或他人範例的唯讀情境，往往**無法**以您要的方式 Share／Publish。按鈕是否出現、名稱為何，以當前介面為準。
+**Share（分享）**與 **Publish（發布）**：
+
+- **Share**：**您寫的 App** 完成後，可產生分享連結，讓**別人**能對您的作品按 **Remix**，在他們的帳號下複製一份再改（原版仍在您這裡）。若您是從 **Gallery** 起步，通常也要先 **Remix** 成「自己的 App」，之後才能 Share／Publish 您這一份。若僅停留在他人範例的唯讀預覽、未完成 Remix，往往**無法**以您要的方式操作。按鈕是否出現、名稱為何，以當前介面為準。
+- **Publish**：見下表與「Publish 畫面」小節（公開網址、綁定 GCP 專案等）。
+
+**Share 與 Publish 的差異（教學上請先記這個）**：**Share** 的目的是讓人 **Remix**；對方 **Remix** 後在自己環境裡執行時，用的是**對方自己的** API 金鑰與配額。**Publish** 則是把網站公開上線，訪客使用時通常仍由**您發布時選定的** Google Cloud 專案與金鑰承擔流量（可設 spend cap）。
 
 ### Share／Publish 之後，Gemini API 配額算誰的？
 
-官方文件**沒有**用單一條文概括「所有 Share／Publish 情境一律扣誰的額度」；實務上取決於**對方怎麼開啟專案**，以及**已發布的應用程式如何呼叫 Gemini API**（金鑰放在伺服器或瀏覽器、是否要求使用者登入等）。以下為教學上常用的區分方式：
+**Share** 與 **Publish** 的計費邏輯不同：**Share** 是讓人 **Remix** 您的 App；對方在自己帳號裡 **Remix** 並開發／執行時，使用**自己的**帳號與 API。**Publish** 則依發布時綁定的專案而定。其餘情境仍可能因實作方式不同（例如金鑰寫在前端）而有所不同。以下為教學上常用的區分方式：
 
 | 情境 | 額度／計費大致歸屬（原則） |
 | --- | --- |
-| 您把專案 **Share** 給別人，對方在自己的 Google 帳號開啟並 **Remix** 成**自己的副本**，之後在 AI Studio 裡開發、執行 | 通常使用**對方帳號**底下的 **Google Cloud 專案**與 **API 配額**（與本頁「使用 Gemini API 時，用的是誰的金鑰？」一致）。 |
-| 您 **Publish** 成**公開網址**，訪客在瀏覽器使用該網站，而應用**以您專案的金鑰在後端**（或部署時綁定的專案）呼叫 Gemini | **一般用戶的每次呼叫**多半計入**該部署專案／金鑰所屬帳戶**的用量與[計費／額度](https://ai.google.dev/gemini-api/docs/billing)，直到達上限或需付費為止。 |
+| 您對自己寫的 App 按 **Share**，對方透過連結在**自己的 Google 帳號** **Remix** 並開發、執行 | 使用**Remix 的那一方（使用者）自己的** API 金鑰與 **Google Cloud 專案**配額；**不**扣您（分享者）專案的額度。 |
+| 您 **Publish** 成**公開網址**，訪客使用該網站，而應用經您選定的 **Google Cloud 專案**呼叫 Gemini | **一般用戶的每次呼叫**多半計入**該專案／您帳號下**的用量與[計費／額度](https://ai.google.dev/gemini-api/docs/billing)；發布畫面可另設 **spend cap（支出上限）**，見下一段。 |
 | 應用程式把 **API 金鑰寫在**前端網頁並公開 | 任何人造訪都可能觸發呼叫 → **該金鑰所屬專案**承擔用量；官方**不建議**在正式環境如此做（見 [Using Gemini API keys](https://ai.google.dev/gemini-api/docs/api-key) 的安全說明）。 |
 | 應用改為要求使用者**各自登入**、或使用 **ephemeral tokens** 等機制（依實作） | 可能改為由**使用者端**或**不同計費邏輯**承擔，**完全視您怎麼寫**；無單一預設答案。 |
 
-**建議**：在 Google AI Studio 的 **Dashboard** 查看 **Usage**、**Projects／Billing**，並對照 [Gemini API Billing](https://ai.google.dev/gemini-api/docs/billing) 與 [Rate limits](https://ai.google.dev/gemini-api/docs/rate-limits)；若仍不確定，可先用**測試專案**小規模 Publish，觀察用量再調整。
+#### Publish（發布）畫面上：專案、自己的 API，與「額度／上限」
+
+在 **Publish your app** 步驟中（頂部可能有 **Share／Publish／Versions／Secrets** 等分頁，名稱以當前介面為準）：
+
+- 必須先**選取一個 Google Cloud 專案**（例如下拉選單中的專案；旁邊可能連到 Google Cloud Console）。發布後的應用會使用**該專案**底下的 **Gemini API** 與金鑰／計費設定，也就是**使用您自己（該專案擁有者）的 API 資源**。
+- **Protect your Gemini API usage** 區塊可設定 **Gemini API spend cap（支出上限）**（按鈕可能顯示為 *Set spend cap*）。介面會說明：**達到設定的 spend cap 後，Gemini API 用量會停止**（例如 *Gemini API usage will stop once spend cap is reached*），用來避免公開上線後費用或用量失控。
+- 按下 **Publish** 前，畫面通常會提示您已閱讀並同意 **Google Cloud Platform Terms of Service**（以當時條款連結為準）。
+
+**建議**：在 Google AI Studio 的 **Dashboard** 查看 **Usage**、**Projects／Billing**，並對照 [Gemini API Billing](https://ai.google.dev/gemini-api/docs/billing) 與 [Rate limits](https://ai.google.dev/gemini-api/docs/rate-limits)；若仍不確定，可先用**測試專案**小規模 Publish，必要時先設 **spend cap** 再觀察用量。
+
+## 刪除應用（App）
+
+若要刪除已不再使用的應用，請至 Google AI Studio 的 **Your apps**（您的應用）頁面，在列表中找出該 App 並執行刪除。側邊選單或 **Dashboard** 的實際名稱、位置可能隨改版調整，請以當前介面為準。
 
 ## Code 模式與 Preview 模式
 
@@ -77,6 +94,7 @@
 - 完成一個最小可行作品：**文字產生器**（例如依主題產生段落、改寫語氣、條列重點等）。
 - 切換到 **Code 模式**下載專案到本機；**Preview 僅供預覽**，無法下載整包。
 - 整理本次使用的 Prompt 要點與失敗／成功經驗，作為後續主題的基礎。
+- 選讀：Prompt 撰寫對照範例見 [範例_雙班競賽計時器.md](./範例_雙班競賽計時器.md)（原始一句話需求 → 潤飾後完整 Prompt）。
 
 ## 作品（產出）
 
