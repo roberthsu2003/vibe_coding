@@ -61,8 +61,41 @@
 ## 環境變數與 CI/CD（原則）
 
 - 變數例：`GEMINI_API_KEY`（或平台慣用命名）、`MODEL_NAME` 等。
-- **GitHub**：用 **Secrets** 存金鑰；Actions 內注入為環境變數再部署。
 - **靜態網站**：建置時 **不要** 把金鑰打進 JS bundle。
+
+### GitHub Secrets 是什麼？
+
+**Secrets** 是 GitHub 在儲存庫（或組織）內提供的 **機密變數** 儲存區，用來放 API 金鑰、token、密碼等，**不要**寫進程式碼或公開 `README`。
+
+- 常見設定路徑：**Settings → Secrets and variables → Actions**，新增名稱（例如 `GEMINI_API_KEY`）與值。
+- 儲存後，瀏覽儲存庫的人 **看不到** 實際內容；**GitHub Actions** 執行時可依名稱讀取，並 **注入為環境變數** 給建置／部署步驟。
+- 目的：金鑰留在 GitHub 受控機制內，**不進 git 歷史、不進公開檔案**。
+
+### 為什麼會用到 GitHub Actions？
+
+**GitHub Actions** 是 GitHub 內建的 **CI/CD**：在 push、PR、手動觸發等事件時，自動執行安裝依賴、建置、測試、**部署到 Vercel／雲端** 等步驟。
+
+部署常需要 `GEMINI_API_KEY`，但：
+
+- 不能寫死在 repo；
+- 本機的 `.env` **不會**自動出現在 GitHub 雲端 runner 上。
+
+因此若 **由 GitHub 自動建置／部署**，Workflow 需要金鑰時，應透過 **Secrets** 注入（例如 `${{ secrets.GEMINI_API_KEY }}`），而不是把金鑰提交到程式碼。
+
+### Serverless 後台已設定 API key，還需要 GitHub Secrets 嗎？
+
+兩件事要分開：**金鑰在「哪裡執行」** 與 **「GitHub 是否在流程裡需要那份金鑰」**。
+
+- **讓線上服務正確讀到金鑰**：重點是放在 **執行後端的那個平台**（Vercel、Cloudflare Workers、Netlify 等）的 **環境變數**。瀏覽器與 GitHub 公開程式碼都不應內含金鑰——這樣就對了。
+- **若你從不使用 GitHub Actions 部署**，只在本機或各平台後台手動／圖形介面設定變數，**可以只在 Serverless／PaaS 後台設金鑰**，不必為了「執行」而額外建立 GitHub Secrets（但 **仍不要**把真鑰 commit 進 repo）。
+- **需要 GitHub Secrets 的情況**：多了一條 **在 GitHub 上自動跑** 的部署流程（Actions），而該流程必須帶著金鑰才能完成（例如 CLI 部署、建置步驟要讀環境變數）。此時 runner 看不到你在 Vercel 後台設的變數，除非透過 Secrets 傳入，或改用平台提供的 OAuth／Deploy Hook 等進階做法。
+
+**與 GitHub Pages 的關係**：Pages **只提供靜態檔**，無法在該處「安全地」存放會被前端讀到的金鑰。金鑰應在 **Serverless／後端** 或 **由 CI 注入後端建置**；課程才會同時談 **Pages + Serverless** 與 **Secrets + Actions**。
+
+| 情境 | 金鑰主要放哪裡 |
+|------|----------------|
+| 手動或用 **Vercel／Cloudflare 等後台** 連 repo 部署，金鑰只在該平台設定 | **不必**為了執行而再用 GitHub Secrets；**repo 仍不要**提交真鑰 |
+| **GitHub Actions** 自動部署且步驟需要讀金鑰 | 用 **GitHub Secrets** 注入；**不要**寫進程式碼 |
 
 ---
 
