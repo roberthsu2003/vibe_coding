@@ -25,11 +25,39 @@
 
 ### 技巧
 
+- **[Prompt Engineering](prompt/README.md)**
+  - *學習如何下達精準指令，與 AI 高效溝通。*
+
 - **[自然語言+迭代的開發方法](./自然語言+迭代的開發方法/README.md)**
   - *探索開發思維的轉變：以小步迭代驅動專案成長。*
 
-- **[Prompt Engineering](prompt/README.md)**
-  - *學習如何下達精準指令，與 AI 高效溝通。*
+---
+
+### 實作範例：AI First 課程規劃（Google AI Studio）
+
+> **目標**：在 **Google AI Studio** 上以 AI First 流程完成可展示、可實用的作品；降低手寫程式門檻，並強調「把需求說清楚」與**迭代式 Prompt**（小步嘗試、邊做邊改、逐步收斂）的實務能力。
+
+---
+
+#### 課程總表
+
+實作與延伸材料請置於資料夾 **[`AIFirst實作課程/`](./AIFirst實作課程/)**（每一主題一個子資料夾；順序可隨課程調整，詳見該目錄索引）。
+
+| 主題 | 作品（產出） |
+| --- | --- |
+| [認識 Google AI Studio](./AIFirst實作課程/認識GoogleAIStudio/) | 第一個 AI 應用：文字產生器 |
+| [GitHub 與 GitHub Pages](./AIFirst實作課程/GitHub與GitHubPages/) | 上傳程式碼並發布個人作品集網站 |
+| [建立小遊戲](./AIFirst實作課程/建立小遊戲/) | 以 AI 產生網頁小遊戲（猜數字或反應力遊戲） |
+| [網頁產生器](./AIFirst實作課程/網頁產生器/) | 以 AI 產生個人／作品集介紹頁 |
+| [Serverless（無伺服器）Web API](./AIFirst實作課程/ServerlessWebAPI/) | 以託管環境串接 Gemini API，練習無伺服器部署概念 |
+| [文件生成工具](./AIFirst實作課程/文件生成工具/) | 以 AI 產生會議紀錄、Email 草稿或簡要報告 |
+| [資料整理工具](./AIFirst實作課程/資料整理工具/) | 匯入 CSV，由 AI 分析並輸出摘要報告 |
+| [API 產生器](./AIFirst實作課程/API產生器/) | 以 AI 建立資料的 CRUD API |
+| [Chatbot 建立](./AIFirst實作課程/Chatbot建立/) | 以 AI 建立客服問答型 Chatbot |
+| [自動化流程](./AIFirst實作課程/自動化流程/) | 自動摘要文件並彙整成報告 |
+| [建立公司表單](./AIFirst實作課程/建立公司表單/) | 以 AI 建立報名表單，並自動整理提交結果 |
+
+---
 
 ## 🎯 AI 輔助型（AI Assisted）學習路徑
 
