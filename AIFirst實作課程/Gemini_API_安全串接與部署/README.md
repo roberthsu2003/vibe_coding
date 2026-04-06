@@ -52,11 +52,19 @@
 
 本單元透過**三個可實際部署的小專案**，讓你具體看到：**Gemini API key 只存在伺服器端的環境變數**，**不**寫進前端、**不**提交到公開 GitHub；並體驗 **「靜態站 + 獨立 Serverless」** 與 **「Next.js 全端、同倉庫」** 兩條常見路線。
 
+**三個小專案連結（各資料夾內另有說明）：**
+
+- [專案一：GitHub Pages + Vercel Serverless](./projects/01-github-pages-and-vercel-serverless/README.md)
+- [專案二：GitHub Pages + Cloudflare Workers](./projects/02-github-pages-and-cloudflare-workers/README.md)
+- [專案三：Next.js on Vercel](./projects/03-nextjs-vercel/README.md)
+
+（[`projects/` 目錄總覽](./projects/README.md)）
+
 | 編號 | 架構 | 建議託管（可替換為同類服務） | 你將練習驗證的重點 |
 |------|------|---------------------------|-------------------|
-| **專案一** | **GitHub Pages**（靜態前端）+ **Serverless API** | 例如 **Vercel**（Serverless Functions／Edge API） | 前端只呼叫你的 `https://…` API；在 **Vercel 專案環境變數** 設定 `GEMINI_API_KEY`；設定 **CORS** 以允許 Pages 網域。 |
-| **專案二** | **GitHub Pages** + **另一套 Serverless**（與專案一**不同平台**） | 例如 **Cloudflare Workers**（或 **Netlify Functions**） | 再次實作「金鑰只在該平台後台」：靜態站與程式碼中仍不出現真鑰；並對照 **Wrangler／儀表板** 與專案一的設定差異。 |
-| **專案三** | **Next.js**（頁面 + API Route／Route Handler） | **Vercel**（與 Next 整合） | 在**同一份 repo** 中區分：瀏覽器載入的是頁面；**`app/api`／`pages/api` 僅在伺服器執行**，於該處讀取環境變數並呼叫 Gemini。 |
+| [**專案一**](./projects/01-github-pages-and-vercel-serverless/README.md) | **GitHub Pages**（靜態前端）+ **Serverless API** | 例如 **Vercel**（Serverless Functions／Edge API） | 前端只呼叫你的 `https://…` API；在 **Vercel 專案環境變數** 設定 `GEMINI_API_KEY`；設定 **CORS** 以允許 Pages 網域。 |
+| [**專案二**](./projects/02-github-pages-and-cloudflare-workers/README.md) | **GitHub Pages** + **另一套 Serverless**（與專案一**不同平台**） | 例如 **Cloudflare Workers**（或 **Netlify Functions**） | 再次實作「金鑰只在該平台後台」：靜態站與程式碼中仍不出現真鑰；並對照 **Wrangler／儀表板** 與專案一的設定差異。 |
+| [**專案三**](./projects/03-nextjs-vercel/README.md) | **Next.js**（頁面 + API Route／Route Handler） | **Vercel**（與 Next 整合） | 在**同一份 repo** 中區分：瀏覽器載入的是頁面；**`app/api`／`pages/api` 僅在伺服器執行**，於該處讀取環境變數並呼叫 Gemini。 |
 
 ### 4.2 三個專案共同的實作規範
 
@@ -76,6 +84,8 @@ Gemini_API_安全串接與部署/
 │   └── 03-nextjs-vercel/                        # Next.js 全端 → Vercel
 └── README.md
 ```
+
+對應連結：[專案一](./projects/01-github-pages-and-vercel-serverless/README.md) · [專案二](./projects/02-github-pages-and-cloudflare-workers/README.md) · [專案三](./projects/03-nextjs-vercel/README.md) · [`projects/README.md`](./projects/README.md)
 
 若你希望兩個「Pages + Serverless」都留在 **Vercel** 生態，也可以改為「一個用 Vercel Functions、一個用 **Cloudflare Workers**」；重點是**兩種後台的設定方式**都能親自操作過。
 
@@ -159,7 +169,7 @@ Gemini_API_安全串接與部署/
 
 ## 九、實作檔案放置說明
 
-- 建議在 `projects/01-…`、`02-…`、`03-…` 各放置一個子專案（見第四節）；每個子資料夾內可另有 **README**（部署步驟、環境變數名稱）。
+- 建議在下列三個資料夾各放置一個子專案（見第四節）：[專案一](./projects/01-github-pages-and-vercel-serverless/README.md)、[專案二](./projects/02-github-pages-and-cloudflare-workers/README.md)、[專案三](./projects/03-nextjs-vercel/README.md)；每個子資料夾內可另有 **README**（部署步驟、環境變數名稱）。
 - 請附上雲端／託管平台的設定備註，以及環境變數範例（**勿提交金鑰**）。
 - 請包含 API 路由與 **Service 層** 程式，以及根目錄或子專案內的 **`.env.example`**。
 
