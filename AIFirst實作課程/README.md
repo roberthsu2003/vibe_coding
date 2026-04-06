@@ -7,7 +7,7 @@
 | GitHub 與 GitHub Pages | [GitHub與GitHubPages](./GitHub與GitHubPages/) |
 | 建立小遊戲 | [建立小遊戲](./建立小遊戲/) |
 | 網頁產生器 | [網頁產生器](./網頁產生器/) |
-| Serverless（無伺服器）Web API | [ServerlessWebAPI](./ServerlessWebAPI/) |
+| Gemini API 安全串接與部署 | [Gemini_API_安全串接與部署](./Gemini_API_安全串接與部署/) |
 | 文件生成工具 | [文件生成工具](./文件生成工具/) |
 | 資料整理工具 | [資料整理工具](./資料整理工具/) |
 | API 產生器 | [API產生器](./API產生器/) |
