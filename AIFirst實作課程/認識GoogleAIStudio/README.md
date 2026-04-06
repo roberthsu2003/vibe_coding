@@ -12,19 +12,23 @@
 | --- | --- |
 | **Select model for chat** | 選擇此 App 在**對話／生成程式與內容**時使用的 **Gemini 模型**（下拉選單，例如預設或 Flash／Pro 等版本）。 |
 | **System instructions** | **系統提示**：可寫專案層級指令，約束語氣、風格、預設行為或補充背景（與單次 Prompt 不同，屬「整個專案」的長期規則）。 |
-| **Framework** | 前端框架：**React**、**Next.js**、**Angular** 擇一；會影響產出專案的技術棧與檔案結構。 |
+| **Framework** | 僅能從介面提供的選項擇一（常見為 **React**、**Next.js**、**Angular**）；**無法**在此選到「任意技術棧」（例如 Vue、Svelte、純 HTML 等需另想辦法）。 |
 | **Usage Tier** | 顯示目前請求所屬額度（例如是否為 **free tier** 等提示）。 |
 | **Microphone source** | 若應用需要**語音輸入**，可指定麥克風來源（無需語音時可略過）。 |
 
 初學者可先**保留預設**，熟悉 Preview／Code 後再改模型或 Framework。
 
-### 技術棧可以寫在 System instructions 裡嗎？
+### 技術棧：實務上「無法只靠 System instructions／介面」完全指定
 
-依 [Gemini API 文件](https://ai.google.dev/gemini-api/docs/system-instructions)，**system instructions**（系統提示）的用途是**引導模型行為**（例如角色、語氣、輸出格式、規則），在 API 裡對應 `system_instruction`／`GenerateContentConfig` 等設定，**不是**用來取代專案建立精靈裡的腳手架選項。
+依 [Gemini API 文件](https://ai.google.dev/gemini-api/docs/system-instructions)，**system instructions** 主要用來**引導模型行為**（角色、語氣、風格、規則），**不是**可靠的「技術棧設定檔」。實際操作時，**在 System instructions 裡寫死要用的框架或套件，往往無法穩定生效**；模型仍可能依預設或對話內容產出與預期不符的結構。
 
-在 **Google AI Studio** 建立 App 時，**Framework** 下拉選單（React／Next.js／Angular）才是**明確指定前端技術棧與預設專案結構**的欄位。若只在 **System instructions** 用文字寫「請用某某框架／某某套件」，模型**可能**會試著配合，但容易與 **Framework** 已選好的堆疊**不一致**，或與產生出的檔案結構衝突。
+**Framework** 下拉選單也**只限**少數選項（如 React／Next.js／Angular），**不能**涵蓋所有堆疊；若目標不是其中一種，介面上**沒有**對應「指定技術棧」的萬用欄位。
 
-**建議**：**技術棧以 Framework（及後續 Prompt）為主**；**System instructions** 用來補充**風格與約束**（例如：註解用繁體中文、優先函式元件、錯誤處理原則），並避免與已選 Framework 互相矛盾。
+**務實作法**：
+
+1. **在對話／Prompt 裡明確寫**：要單一 HTML、或限定某框架、套件、建置工具，並**多輪修正**直到 Preview/Code 符合預期。  
+2. **切換到 Code 模式手動改**檔案與依賴，最可控。  
+3. **System instructions** 仍適合補充**風格與規範**（例如註解語言、錯誤處理原則），但**不要**假設只靠它就能鎖死技術棧。
 
 ## 關於 Gemini API 金鑰：免費與付費
 
