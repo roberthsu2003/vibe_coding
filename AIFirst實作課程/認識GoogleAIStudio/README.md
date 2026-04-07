@@ -4,6 +4,10 @@
 
 **Google AI Studio**（[aistudio.google.com](https://aistudio.google.com/)）是 Google 提供的 **Gemini** 系列生成式模型之**網頁工作台**：在瀏覽器裡即可試 Prompt、對話、測試多模態輸入，並**建立／管理 Gemini API 金鑰**，把同一套模型接到自己的應用程式（Python、JavaScript、REST 等）。官方文件將其描述為以最快方式開始使用 **Gemini API**、建置多模態生成式 AI 應用的入口之一。詳見 [Google AI Studio | Gemini API 說明](https://ai.google.dev/aistudio)。
 
+> **補充（Gemini AI Studio 實務）**  
+> 使用 **Gemini API key** 時，常見做法包含 **Gemini API Proxy** 與 **Secrets 注入**。  
+> 在 AI Studio 內直接分享（Share）可作為 prototype；此外也可用新提供的 Deploy 流程，直接部署到 **Google Cloud Run**。  
+
 ## 建立新 App 時可調的選項（Advanced settings）
 
 建立／新建應用時，**Advanced settings**（進階設定）內常見項目如下（名稱與選項可能隨改版變動，以當前介面為準）：
