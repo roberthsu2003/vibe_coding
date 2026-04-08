@@ -148,6 +148,15 @@ npm run start
 
 當本地端測試一切運作正常後，您可以將專案推送到 GitHub，接著串連至 Render、Heroku 或其他雲端平台進行自動化部署。
 
+**💡 部署時的重要設定欄位 (以 Render 等雲端平台為例)：**
+
+在建立 Web Service (網頁服務) 時，請確保以下欄位設定正確，專案才能順利建置與啟動：
+
+- **Build Command (建置指令)**：`npm install && npm run build`
+  - *說明：安裝所有依賴套件，並執行 Vite 前端的打包編譯程序。*
+- **Start Command (啟動指令)**：`npm run start` 
+  - *說明：啟動 Express 伺服器，此伺服器會做為後端 API Proxy，並同時對外提供編譯好的前端靜態檔案。*
+
 **⚠️ 雲端部署的重大注意事項：**
 
 1. **絕對不可上傳 `.env` 檔案**：`.env` 檔案包含您最敏感的 API 金鑰資訊，絕不能推送至 GitHub。請再三確認專案內的 `.gitignore` 檔案中已經包含 `.env` 以防止意外提交。
