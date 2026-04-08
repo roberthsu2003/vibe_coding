@@ -149,12 +149,10 @@ npm run build
 
 ## 使用githbu action自動部署
 
-Viewed package.json:1-35
-Listed directory dual-competition-timers
 
-是的，您**絕對可以**使用 GitHub Actions 來自動執行 `npm install` 和 `npm run build`，並且自動將建置好的檔案部署到 GitHub Pages。這是目前非常主流且推薦的做法！
+使用 GitHub Actions 來自動執行 `npm install` 和 `npm run build`，並且自動將建置好的檔案部署到 GitHub Pages。這是目前非常主流且推薦的做法！
 
-因為您的專案是使用 **Vite** 建置的（根據您的 `package.json` 內容可以看出有 `vite build` 指令），設定起來非常簡單。以下是您可以如何完成設定的步驟：
+專案是使用 **Vite** 建置的（根據您的 `package.json` 內容可以看出有 `vite build` 指令），設定起來非常簡單。以下是您可以如何完成設定的步驟：
 
 ### 第一步：設定 Vite 的 Base URL (在 `vite.config.ts` 中)
 
@@ -240,6 +238,29 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
+
+### 📋 deploy.yml 設定檔詳細說明
+
+以下表格詳細說明了上方 YAML 檔案中的每一個重要設定區塊。**請特別注意標示為「必填」與包含「重點」的項目，必須符合您的專案現況。**
+
+| YAML 設定階層 / 名稱 | 描述說明 | 是否必填 | 重點註記 ⚠️ |
+| :--- | :--- | :---: | :--- |
+| `name` | 工作流程名稱（顯示於 GitHub Actions 頁面上） | 否 | 建議保留，方便在後台上辨識用途。 |
+| `on` > `push.branches` | 觸發自動部署的條件與監聽的分支 | **是** | **⭐ 重要：** 預設監聽 `['main']`。如果您的主要分支名稱是 `master`，請務必將其改為 `['master']`！ |
+| `permissions` | 賦予 Action 腳本讀寫 GitHub Pages 的系統權限 | **是** | 絕對必要設定。若缺少 `contents`, `pages`, `id-token` 等權限將會部署失敗。 |
+| `concurrency` | 併發控制。防止在短時間內連續 Push 造成多個部署任務打結。 | 否 | 建議保留。若有新推送會自動取消舊部署，確保最後能上線最新版。 |
+| `jobs` | 宣告各個工作階段。目前分為 `build` 與 `deploy` 兩階段。 | **是** | |
+| └ `build` | **工作階段一：專案建置** (專案打包出靜態網頁) | **是** | |
+| 　└ `runs-on` | 指定執行這項工作的雲端虛擬作業系統環境 | **是** | 使用官方預設的 `ubuntu-latest` 即可。 |
+| 　└ `steps` > `setup-node` | 建立專案需要的 Node.js 環境 | **是** | 預設指定 `node-version: 20`，可根據開發環境做對應更改。 |
+| 　└ `steps` > `npm ci` | 安裝相依套件 (功能類似 `npm install`) | **是** | 持續整合環境下建議使用 `npm ci` 來保證依賴版本的絕對一致。 |
+| 　└ `steps` > `npm run build` | 執行 Vite (或專案設定) 的建置指令 | **是** | 會根據專案 `package.json` 中的 `build` 腳本，編譯為靜態檔案。 |
+| 　└ `steps` > `upload-pages-artifact`| **⭐ 核心步驟：** 找到打包完成的靜態檔並上傳至快取 | **是** | **⭐ 最重點：`path: './dist'` 必須和您設定的打包目錄一致！** 如果改成了 `./docs`，請務必在這裡修改！(Vite 預設為 `./dist`) |
+| └ `deploy` | **工作階段二：發行部署** (將打包好的網頁發布) | **是** | |
+| 　└ `needs: build` | 指定這一步驟必須「依賴」並等待 `build` 成功。| **是** | 沒加的話兩個階段會同時跑，導致找不到靜態資源而中途出錯。 |
+| 　└ `uses: deploy-pages` | 呼叫官方所撰寫的「發布至 GitHub Pages 工具」腳本 | **是** | 實際將網頁放置並發布的官方必備流程。 |
+
+<br>
 
 ### 第三步：在 GitHub 上的 Pages 設定
 
