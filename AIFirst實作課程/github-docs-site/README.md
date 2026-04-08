@@ -123,6 +123,11 @@ npm run build
 
 建置完成後，您會在專案根目錄中看到一個新增的 `docs` 資料夾，裡面就是編譯好的靜態網頁內容！
 
+**提供變更後的專案資料夾**
+
+- [專案完成zip檔](./專案完成/dual-competition-timers完成.zip)
+- [專案完成資料夾](./專案完成/dual-competition-timers完成)
+
 ---
 
 ## 5. 推送程式碼並發佈至 GitHub Pages
