@@ -1,0 +1,5 @@
+{
+  "name": "Dual Competition Timers",
+  "description": "A clean, dual-timer application for tracking competitions between two classes with independent start, pause, and reset controls.",
+  "requestFramePermissions": []
+}
