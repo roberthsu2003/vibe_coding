@@ -144,3 +144,109 @@ npm run build
    - 點選 **Save** 儲存。
 4. **大功告成 🎉**：
    等待約 1~2 分鐘，重新整理頁面，就會看到上方出現部署成功的網址（例如 `https://<您的帳號>.github.io/<專案名稱>/`）。點選該網址即可看到您的網頁成品了！
+
+--- 
+
+## 使用githbu action自動部署
+
+Viewed package.json:1-35
+Listed directory dual-competition-timers
+
+是的，您**絕對可以**使用 GitHub Actions 來自動執行 `npm install` 和 `npm run build`，並且自動將建置好的檔案部署到 GitHub Pages。這是目前非常主流且推薦的做法！
+
+因為您的專案是使用 **Vite** 建置的（根據您的 `package.json` 內容可以看出有 `vite build` 指令），設定起來非常簡單。以下是您可以如何完成設定的步驟：
+
+### 第一步：設定 Vite 的 Base URL (在 `vite.config.ts` 中)
+
+如果您將要把專案部署到一個名為 `vibe_coding` (或其他名稱) 的 GitHub 儲存庫（其網址會像是 `https://<你的帳號>.github.io/<儲存庫名稱>/`），您需要在您的 `vite.config.ts` 裡面設定 `base` 屬性，這樣打包出來的資源路徑才會正確：
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  // 將這裡替換成您未來在 GitHub 上的 repository 名稱
+  // 例如：您未來的 repo 叫做 "my-timer-app"，這裡就填 '/my-timer-app/'
+  base: '/<你的 repository 名稱>/', 
+  plugins: [react()],
+})
+```
+*(注意：如果您的 repository 名稱就是 `<你的帳號>.github.io`，則不需要設定 `base` 或將其設定為 `'/'`)*
+
+### 第二步：建立 GitHub Actions 工作流程檔案
+
+在您的專案根目錄下，建立資料夾 `.github/workflows/`，並在裡面新增一個檔案，例如叫做 `deploy.yml`。這個檔案會告訴 GitHub 什麼時候要執行什麼指令。
+
+檔案內容請貼上以下程式碼：
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy static content to Pages
+
+on:
+  # 當有程式碼 push 到 main 分支時觸發
+  push:
+    branches: ['main'] # 如果您的主要分支叫 master，請改為 'master'
+
+# 設定權限以允許部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允許一個 concurrent 部署，避免衝突
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # 第一個工作：建置專案 (npm install & build)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # 使用 Node.js 20 
+          cache: 'npm'     # 快取 npm 套件加速之後的建置
+          
+      - name: Install dependencies
+        run: npm ci # 使用 ci 可以確保根據 package-lock.json 完全復原依賴，比 install 更穩定
+        
+      - name: Build project
+        run: npm run build
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 將您的建置資料夾(通常 Vite 的預設資料夾是 dist) 打包上傳
+          path: './dist'
+
+  # 第二個工作：將剛剛建置好的檔案佈署至 GitHub Pages
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### 第三步：在 GitHub 上的 Pages 設定
+
+當您將這些程式碼與設定檔一起 Push 到 GitHub 之後，您還需要調整 Repository 的設定：
+1. 到您 GitHub 專案網頁，點選上方的 **Settings**。
+2. 點擊左側邊欄的 **Pages**。
+3. 在 **Build and deployment** > **Source** 的下拉式選單中，選擇 **GitHub Actions**。
+
+一旦這個設定完成，而且這個 `.yml` 檔案被上傳到 `main` 分支，GitHub 就會自動幫你執行 `npm install` 與 `build`，並把 `dist` 資料夾發布成網頁了！
+
