@@ -1,0 +1,5 @@
+{
+  "name": "Gemini 一句話問答",
+  "description": "一個簡單的 Gemini 問答應用程式，使用 Express 後端保護 API 金鑰。",
+  "requestFramePermissions": []
+}
