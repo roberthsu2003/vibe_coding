@@ -50,7 +50,7 @@
 
 - [**git和github先修**](https://github.com/roberthsu2003/git)
   - *熟悉 Git／GitHub：版本紀錄、分支與 PR，讓 AI 改動可追蹤、可還原並串接部署。*
-- [**vibe_coding 先修**](https://github.com/roberthsu2003/react_typescript_vite)
+- [**vibe_coding 先修**](https://github.com/roberthsu2003/vibe-coding-to-pro-react)
   - *TypeScript、React、Vite 實作與架構補強，銜接進入 Vibe Coding 實戰。*
 - [**AI Coding 基礎 (Basics)**](ai_coding_basics/README.md)
   - *建立基礎：Suggestion、Code Review 與 Refactoring 技巧。*
