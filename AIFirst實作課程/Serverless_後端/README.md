@@ -100,7 +100,6 @@ my-ai-app/
 ```
 ### 提供的實際專案
 - [**轉換為 Serverless 的專案zip檔**](./轉換為Serverless專案/gemini-一句話問答.zip)
-- 
 - [**轉換為 Serverless 的專案程式碼**](./轉換為Serverless專案/gemini-一句話問答/)
 
 **改寫後的架構如下：**
