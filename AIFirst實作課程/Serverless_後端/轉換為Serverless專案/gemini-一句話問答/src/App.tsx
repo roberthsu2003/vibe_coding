@@ -1,7 +1,6 @@
 import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Send, Loader2, Sparkles, AlertCircle } from "lucide-react";
-import { GoogleGenAI } from "@google/genai";
 
 export default function App() {
   const [prompt, setPrompt] = useState("");
@@ -18,21 +17,25 @@ export default function App() {
     setResponse("");
 
     try {
-      const apiKey = process.env.GEMINI_API_KEY;
-      if (!apiKey) {
-        throw new Error("API 金鑰未設定，請檢查 AI Studio 設定。");
-      }
-
-      const ai = new GoogleGenAI({ apiKey });
-      const result = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: prompt,
+      /**
+       * 前端只呼叫我們自己的 Serverless Function（/api/gemini）
+       * GEMINI_API_KEY 完全不會出現在前端程式碼或瀏覽器中
+       */
+      const res = await fetch("/api/gemini", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
       });
 
-      setResponse(result.text || "AI 沒有回傳內容。");
+      if (!res.ok) {
+        throw new Error(`伺服器回應錯誤：${res.status}`);
+      }
+
+      const data = await res.json();
+      setResponse(data.text || "AI 沒有回傳內容。");
     } catch (err: any) {
       console.error(err);
-      setError("呼叫 Gemini 失敗，請確認網路連線或 API 設定。");
+      setError("呼叫 Gemini 失敗，請確認網路連線或伺服器設定。");
     } finally {
       setLoading(false);
     }
@@ -40,7 +43,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col items-center py-12 px-4 font-sans">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-2xl"
@@ -49,9 +52,7 @@ export default function App() {
           <h1 className="text-4xl font-bold text-slate-900 tracking-tight mb-2">
             Gemini 一句話問答
           </h1>
-          <p className="text-slate-500 text-lg">
-            輸入任何問題，讓 AI 為你解答
-          </p>
+          <p className="text-slate-500 text-lg">輸入任何問題，讓 AI 為你解答</p>
         </header>
 
         <main className="bg-white rounded-3xl shadow-xl shadow-slate-200/60 p-6 md:p-8 border border-slate-100">
@@ -119,7 +120,7 @@ export default function App() {
         </main>
 
         <footer className="mt-12 text-center text-slate-400 text-sm">
-          使用 Google Gemini 3.0 Flash 模型驅動
+          使用 Google Gemini 2.0 Flash 模型驅動 · API Key 安全保存於伺服器端
         </footer>
       </motion.div>
     </div>

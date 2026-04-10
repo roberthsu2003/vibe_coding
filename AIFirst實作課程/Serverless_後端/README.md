@@ -80,7 +80,7 @@ gemini-一句話問答/
 請幫我將目前的 React 專案改寫並升級為 Serverless Functions 架構，主要目的是隱藏並保護 API Key，避免將其暴露在前端程式碼中。
 具體需求如下：
 
-## 建議加構
+## 建議架構
 
 
 my-ai-app/
