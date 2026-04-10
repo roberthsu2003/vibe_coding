@@ -222,11 +222,23 @@ git commit -m "feat: 轉換為 Vercel Serverless Functions 架構"
 git push
 ```
 
-**2. 在 Vercel 匯入專案**
+**2. 在 Vercel 匯入專案（Monorepo 子資料夾設定）**
 
-前往 [vercel.com](https://vercel.com) → Import Git Repository → 選擇此 repo。
+前往 [vercel.com](https://vercel.com) → Import Git Repository → 選擇 `vibe_coding` 這個 repo。
 
-Vercel 會自動偵測 Vite 設定並正確設定 Build Command（`npm run build`）。
+> **💡 重要：設定 Root Directory**
+>
+> 由於這個專案只是 repo 中的**其中一個子資料夾**，匯入時必須指定 Root Directory，否則 Vercel 會嘗試從 repo 根目錄建置（會失敗）。
+>
+> 在 Import 畫面找到 **Root Directory** 欄位，填入：
+> ```
+> AIFirst實作課程/Serverless_後端/轉換為Serverless專案/gemini-一句話問答
+> ```
+> 或在匯入後至 **Settings → General → Root Directory** 修改。
+
+設定正確後，Vercel 會自動偵測 Vite 設定並使用 `npm run build` 作為建置指令。
+
+> **📌 同一個 repo 可以建立多個 Vercel Project，每個 Project 指向不同的子資料夾，互不干擾。**
 
 **3. 設定環境變數（重要）**
 
