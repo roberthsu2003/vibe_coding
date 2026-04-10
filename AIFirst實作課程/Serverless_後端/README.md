@@ -217,9 +217,9 @@ npm run dev
 
 **1. 推送至 GitHub**
 ```bash
-git add .
-git commit -m "feat: 轉換為 Vercel Serverless Functions 架構"
-git push
+git add . 
+git commit -m "feat: 轉換為 Vercel Serverless Functions 架構" 
+git push 
 ```
 
 **2. 在 Vercel 匯入專案（Monorepo 子資料夾設定）**
