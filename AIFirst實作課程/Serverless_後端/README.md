@@ -262,3 +262,31 @@ Vercel Dashboard → 選取專案 → Settings → Environment Variables
 https://your-app-name.vercel.app
 ```
 在瀏覽器開發者工具的 Network 頁籤中，確認所有請求只會看到 `/api/gemini`，而非任何含有 API Key 的請求。
+
+---
+
+### 🔄 之後的自動部署（永久生效）
+
+第一次設定完成後，**往後更新程式碼只需要 `git push`**，Vercel 會全自動處理剩下的一切：
+
+```
+修改程式碼
+    ↓
+git push 到 main
+    ↓
+Vercel 自動偵測到變更（約 1~2 分鐘）
+    ↓
+自動 build + 部署
+    ↓
+https://your-app.vercel.app 立即更新 ✅
+```
+
+**部署內容包含：**
+
+| 項目 | 說明 |
+|---|---|
+| 前端靜態頁面 | Vite build 後的 `index.html` + `assets/` |
+| `api/gemini.ts` | 自動識別並部署為 Vercel Serverless Function |
+| `GEMINI_API_KEY` | 從 Vercel 環境變數安全讀取，不隨程式碼上傳 |
+
+> **💡 Vercel 只監視您指定的 Root Directory 內的變更。** 若修改的是 repo 中其他子專案的檔案，不會觸發此 Project 的重新部署。
