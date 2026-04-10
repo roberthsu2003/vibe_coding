@@ -123,17 +123,6 @@ gemini-一句話問答/
 ```
 ---
 
-### 改寫重點說明
-
-| 項目 | 改寫前（原始 AI Studio 專案） | 改寫後（Serverless Functions） |
-|---|---|---|
-| **API Key 位置** | 前端 bundle（`define` 注入，瀏覽器可見） | Vercel 伺服器端環境變數（前端完全無法取得） |
-| **Gemini 呼叫方** | 前端 `App.tsx`（使用 `@google/genai`） | `api/gemini.ts` Serverless Function |
-| **前端發送對象** | 直接呼叫 Gemini API | 呼叫自己的 `/api/gemini` Proxy |
-| **套件** | 包含 `express`、`dotenv`、`tsx` | 移除，只需 `@vercel/node` 型別 |
-| **CI/CD** | 無 | 加入 GitHub Actions（自動 build & type check）|
-
----
 
 ### 🚀 本機端測試與驗證
 
@@ -147,12 +136,67 @@ cp .env.example .env
 
 #### 方式 A（推薦）：使用 Vercel CLI 完整模擬
 
-安裝 Vercel CLI 後，同時啟動前端與 Serverless Function 模擬環境：
+##### Step 1：安裝 Vercel CLI 與專案套件
+
+⚠️ **請注意順序，必須先安裝套件再執行 `vercel dev`！**
 
 ```bash
-npm install -g vercel   # 若尚未安裝 Vercel CLI
+npm install -g vercel   # 全域安裝 Vercel CLI
+npm install             # 安裝專案的 node_modules（此步驟不可跳過）
+```
+
+##### Step 2：啟動 Vercel 開發伺服器
+
+```bash
+vercel dev
+```
+
+> **💡 `vercel dev` 是純本機模擬，不會上傳任何東西！**
+>
+> | 指令 | 執行位置 | 是否上傳至雲端 | 存取網址 |
+> |---|---|---|---|
+> | `vercel dev` | 您的電腦本機 | ❌ 沒有 | `http://localhost:3000` |
+> | `vercel` / `vercel --prod` | Vercel 雲端伺服器 | ✅ 有 | `https://xxx.vercel.app` |
+>
+> `vercel dev` 在本機同時模擬兩件事：前端 Vite 開發伺服器，以及 `/api/gemini.ts` Serverless Function 的執行。程式碼全都在您電腦上，API Key 從本機 `.env` 讀取，外部無法存取。關掉終端機後便結束，不留任何雲端紀錄。
+
+首次執行會出現一系列互動式設定問題，請依以下方式回答：
+
+| 問題 | 正確回答 |
+|---|---|
+| `Set up and develop "...gemini-一句話問答"?` | **Y（Enter）** |
+| `Which scope should contain your project?` | 選擇您的帳號 |
+| `Link to existing project?` | **N（建立全新專案）** ← 重要！ |
+| `What's your project's name?` | 輸入任意名稱（例如 `gemini-test`）|
+| `In which directory is your code located?` | 直接按 Enter（使用 `./`）|
+| `Want to modify these settings?` | N |
+
+設定完成後，系統會自動啟動：
+- **前端**：http://localhost:3000
+- **Serverless Function（API）**：自動由 Vercel CLI 模擬
+
+##### ⚠️ 常見錯誤與解決方式
+
+**錯誤 1：誤選連結到舊有的既有專案**
+```
+? Link to existing project? yes
+→ 選到了其他舊專案（例如 v0-shaders-landing-page）
+sh: yarn: command not found   ← 因為舊專案用 yarn，導致 build 失敗
+```
+**解決：** 刪除自動建立的 `.vercel` 資料夾，重新執行 `vercel dev`，這次在 "Link to existing project?" 選 **N**。
+```bash
+rm -rf .vercel
+vercel dev
+```
+
+**錯誤 2：忘記先執行 `npm install`**
+```
+sh: vite: command not found
+```
+**解決：** 先安裝專案套件後再啟動：
+```bash
 npm install
-vercel dev              # 同時啟動前端（port 3000）與 Function 模擬（port 3001）
+vercel dev
 ```
 
 #### 方式 B：只啟動前端（僅測試 UI 畫面）
@@ -163,6 +207,7 @@ npm run dev
 ```
 
 > 注意：方式 B 下，點擊「送出」按鈕會因找不到 `/api/gemini` 而回傳錯誤，這是正常的。
+
 
 ---
 
