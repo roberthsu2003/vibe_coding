@@ -1,6 +1,6 @@
 # 將 Google AI Studio 單純 React 專案轉為-靜態網頁+ Vercel serverless functions
 
-
+> 詳細說明請參考[將 Google AI Studio 單純 React 專案轉為-靜態網頁+ Vercel serverless functions](./serverless_functions_說明.md)
 
 ## 什麼是Serverless functions？為什麼需要它？
 
@@ -77,26 +77,26 @@ gemini-一句話問答/
 **prompt**
 
 ```markdown
-請幫我將目前的 React 專案改寫並升級為 BFF (Backend For Frontend) 架構，主要目的是隱藏並保護 API Key，避免將其暴露在前端程式碼中。
+請幫我將目前的 React 專案改寫並升級為 Serverless Functions 架構，主要目的是隱藏並保護 API Key，避免將其暴露在前端程式碼中。
 具體需求如下：
 
-### 1. 新增後端 (Express)
-- 在專案根目錄下建立 `server.ts` 作為後端 API Proxy 伺服器。
-- 建立一個 Endpoint (例如 `/api/chat`)，接收前端發送的請求後，在後端使用 `@google/genai` 發送請求給 Google Gemini API。
-- 將取得的結果處理後，回傳給前端。
+## 建議加構
 
-### 2. 前端邏輯修改 (React + Vite)
-- 移除原本前端介面中直接呼叫 Gemini API 的邏輯程式碼。
-- 修改原本傳送訊息的流程，改為使用 `fetch` 將使用者的輸入發送到我們建立的後端 API (`/api/chat`) 取得回覆。
-- 修改 `vite.config.ts` 中的 `proxy` 設定，將開發環境對 `/api` 的請求代理解析到後端 Express 伺服器，解決 CORS 跨域問題。
 
-### 3. 安全性設定與環境變數管理
-- 確認 `.env` 檔案中只保留未加 `VITE_` 前綴的 `GEMINI_API_KEY`，使其只在後端伺服器被讀取。
-- 確保前端 Vite 打包後的檔案中，不會外洩任何 API Key 與敏感資訊。
+my-ai-app/
+├── src/
+│   ├── App.tsx
+│   └── main.tsx
+│
+├── api/
+│   └── gemini.ts      ← Vercel 會自動識別為 Serverless Function
+│
+├── package.json
+├── vite.config.ts
+└── .github/
+    └── workflows/
+        └── deploy.yml
 
-### 4. 專案套件與啟動環境配置
-- 更新 `package.json`，加入必要的依賴套件與 TypeScript 型別檔（例如 `express`, `cors`, `@types/express`, `ts-node` 等）。
-- 調整 `package.json` 中的 `scripts` 區塊配置（可引入 `npm-run-all` 或 `concurrently`），使我們在執行 `npm run dev` 啟動指令時，能**同時啟動**「Vite 前端開發伺服器」與「Express 後端伺服器」。
 ```
 ### 提供的實際專案
 - [**產生出的BFF專案資料夾zip檔**](./轉換為BFF架構的專案/轉換為BBF的專案.zip)
