@@ -1,5 +1,9 @@
 # ⽤ AI 寫總結和翻譯
 
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+
 本單元將帶領學員使用 AI 來進行會議紀錄的重點總結與多國語言翻譯。我們將透過撰寫精準的 Prompt 來約束 AI 的輸出格式。
 
 ## 技術棧 (Tech Stack)
@@ -41,25 +45,28 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 
 ## 實作 Prompt 範例
 
-您可以直接複製下方的 Markdown 語法，將其作為開發時的**系統提示詞 (System Prompt)**，藉此優化 AI 生成的結果與排版。
-
 ```markdown
-請扮演專業的會議記錄助理。
-我會提供一段會議的逐字稿或重點筆記，請幫我將內容整理成格式化報告，並翻譯為英文。
+請幫我開發一個「AI 會議記錄生成與翻譯工具」的網頁前端應用程式。
+具體的開發需求與規格如下：
 
-請務必包含以下項目，並使用 Markdown 格式輸出：
+### 1. 技術棧與框架 (Tech Stack)
+- 建置工具：Vite
+- 核心框架：React
+- 程式語言：TypeScript
+- 樣式框架：Tailwind CSS (或其他適合的 UI 函式庫，請幫我設計美觀的現代化介面)
 
-### 1. 會議摘要 (Executive Summary)
-用 3-5 句話簡潔總結會議核心目的與結論。
+### 2. 核心功能與介面
+- **介面語系**：整個應用程式（App）的 UI 介面與所有提示文字都必須使用**繁體中文**呈現。
+- **輸入區**：提供一個大型文字方塊（Textarea），讓使用者可以貼上「會議逐字稿」或「重點筆記」。
+- **操作按鈕**：包含一個「生成總結與翻譯」的按鈕，點擊時必須顯示 Loading 讀取狀態。
+- **輸出顯示區**：將 AI 處理後的結果格式化顯示於畫面中（支援 Markdown 渲染為佳），並且為結果區塊提供一個「一鍵複製」的按鈕。
 
-### 2. 重點討論事項 (Key Discussions)
-條列式整理各部門或各位講者的重點發言。
+### 3. API 整合邏輯
+- 請在前端撰寫一個呼叫 AI 模型（例如 Google Gemini 或 OpenAI API）的串接邏輯。
+- 當使用者送出文本時，請將以下 Prompt 包裝後發送給 AI 服務：
+  > "請扮演專業的會議記錄助理。根據提供的逐字稿，整理出：1. 摘要 2. 重點討論 3. Checkbox 格式的待辦清單，接著再將上述內容提供一份專業的英文翻譯版本。"
 
-### 3. 待辦事項清單 (Action Items)
-使用 Markdown 的 Checkbox 語法 (`- [ ]`) 呈現。必須明確列出對應的「負責人」與「預計完成時間」。
-
-### 4. 英文翻譯 (English Translation)
-請將上述整理後的「會議摘要」與「待辦事項清單」翻譯為專業的商務英文。
+請列出完整的專案結構，並提供各個檔案所需的完整程式碼。
 ```
 
 ## 實作專案請放此處
