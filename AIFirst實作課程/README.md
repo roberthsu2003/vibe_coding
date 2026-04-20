@@ -19,7 +19,6 @@
 - [自動化流程](./自動化流程/)
 - [建立公司表單](./建立公司表單/)
 
-## 發佈至其它雲端服務(非Google Run)
+## 發佈至其它雲端服務(Vercel serverless)
+- [請參考-路徑二：Vercel Serverless Functions（部署至 Vercel）](https://github.com/roberthsu2003/vibe-coding-to-pro-react)
 
-- [AI Studio React專案下載後轉BFF + Express API Proxy（Render）](./BFF+Express_API_proxy/README.md)
-- [AI Studio React專案下載後轉Serverless 後端](./Serverless_後端/)

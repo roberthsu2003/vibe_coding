@@ -97,6 +97,8 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 請將上述整理好的「會議摘要」與「待辦事項清單」部分，翻譯為專業流暢的商務英文。
 ```
 
+### [gemini_ai_studio完成範例檔下載](./gemini_ai_完成的範例zip檔/meeting-minutes-assistant.zip)
+
 ### 3. 專案升級：遷移至 Vercel Serverless 後端 Prompt
 因為直接在前端（React）呼叫 AI API 會有暴露 API Key 的巨大資安風險。當您將專案下載到本地端之後，可以把這段指令餵給本地端的 AI（例如 Cursor、ChatGPT 或 GitHub Copilot），請它幫您把專案改寫為 Vercel Serverless 架構：
 
