@@ -4,6 +4,9 @@
 - [認識 Google AI Studio](./認識GoogleAIStudio/)
 
 ## 前端網頁
+
+> 必需申請GitHub帳號 
+
 - [建立小遊戲](./建立小遊戲/)
 - [網頁產生器](./網頁產生器/)
 
@@ -20,5 +23,8 @@
 - [建立公司表單](./建立公司表單/)
 
 ## 發佈至其它雲端服務(Vercel serverless)
+
+> 必需申請vercel帳號
+
 - [請參考-路徑二：Vercel Serverless Functions（部署至 Vercel）](https://github.com/roberthsu2003/vibe-coding-to-pro-react)
 
