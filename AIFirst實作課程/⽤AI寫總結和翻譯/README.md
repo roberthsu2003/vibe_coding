@@ -1,8 +1,6 @@
 # ⽤ AI 寫總結和翻譯
 
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+
 
 本單元將帶領學員使用 AI 來進行會議紀錄的重點總結與多國語言翻譯。我們將透過撰寫精準的 Prompt 來約束 AI 的輸出格式。
 
@@ -97,6 +95,22 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 
 ### 4. 🌐 翻譯版本 (Translation)
 請將上述整理好的「會議摘要」與「待辦事項清單」部分，翻譯為專業流暢的商務英文。
+```
+
+### 3. 專案升級：遷移至 Vercel Serverless 後端 Prompt
+因為直接在前端（React）呼叫 AI API 會有暴露 API Key 的巨大資安風險。當您將專案下載到本地端之後，可以把這段指令餵給本地端的 AI（例如 Cursor、ChatGPT 或 GitHub Copilot），請它幫您把專案改寫為 Vercel Serverless 架構：
+
+```markdown
+這是一個基於 Vite + React 所建立的前端專案。為了避免在前端程式碼中暴露 API Key，我需要將呼叫 AI 服務的邏輯遷移至後端。
+
+請幫我將這個專案加入 Vercel Serverless Functions 的支援，具體需求如下：
+
+1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型（例如 Google Gemini）的 Serverless Function（例如 `api/generate.ts`）。
+2. **環境變數安全**：請將 API Key （如 `GEMINI_API_KEY`） 的讀取設定為 Node.js 環境變數（`process.env`），確保私鑰絕不外洩至前端。
+3. **改寫前端串接邏輯**：請幫我找出目前前端直接呼叫 AI 平台的 `fetch` / axios 程式碼，將其改為呼叫我們自己建立的 `/api/generate` 本地端點。
+4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。
+
+請列出所有需要新增或修改的檔案完整程式碼。
 ```
 
 ## 🎯 學生課後練習
