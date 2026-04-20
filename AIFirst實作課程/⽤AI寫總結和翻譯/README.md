@@ -109,9 +109,35 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 2. **環境變數安全**：請將 API Key （如 `GEMINI_API_KEY`） 的讀取設定為 Node.js 環境變數（`process.env`），確保私鑰絕不外洩至前端。
 3. **改寫前端串接邏輯**：請幫我找出目前前端直接呼叫 AI 平台的 `fetch` / axios 程式碼，將其改為呼叫我們自己建立的 `/api/generate` 本地端點。
 4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。
+5. **本地端測試方法**：改為 Serverless 後，單純執行 Vite (`npm run dev`) 無法啟動 `/api` 端點。請告訴我需要安裝什麼工具（例如 Vercel CLI）或做什麼設定（如 Vite Proxy），並列出非常具體的完整本地端測試步驟。
 
 請列出所有需要新增或修改的檔案完整程式碼。
 ```
+
+### 4. Vercel Serverless 本地端測試指南
+因為 Vite 原生的開發伺服器無法執行 Vercel 的 Node.js 函數，所以當 AI 幫您改完 Serverless 架構後，原本的 `npm run dev` 必定會出錯或遇到 404。
+請跟著以下步驟設定，才能在本地端測試包含 `/api` 的全端網站：
+
+1. **全域安裝 Vercel CLI**：
+   ```bash
+   npm install -g vercel
+   ```
+2. **登入並連結專案**：
+   在您的專案根目錄中，將本地程式碼與 Vercel 雲端專案進行連結：
+   ```bash
+   vercel link
+   ```
+3. **同步環境變數**：
+   將設定在 Vercel 雲端上的 `GEMINI_API_KEY` 拉取到本地專案的潛藏設定檔中（會自動建立 `.env.local` 且不會上傳到 GitHub）：
+   ```bash
+   vercel env pull .env.local
+   ```
+4. **啟動全端測試伺服器**：
+   請停用原本的 `npm run dev`，一律改用以下指令啟動專案：
+   ```bash
+   vercel dev
+   ```
+   啟動後，前端 Vite 畫面與後端 `/api` 將會合併在同一個本地網址運行（通常是 `http://localhost:3000`），即可順利測試！
 
 ## 🎯 學生課後練習
 
