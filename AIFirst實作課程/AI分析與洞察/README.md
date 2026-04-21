@@ -78,6 +78,8 @@ ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
 請列出完整的專案結構，並提供各個檔案所需的完整程式碼。
 ```
 
+### [gemini_ai_studio完成範例檔下載](./gemini_ai_完成的範例zip檔/data-analysis-assistant.zip)
+
 ### 2. 專案升級：遷移至 Vercel Serverless 後端 Prompt
 因為直接在前端（React）呼叫 AI API 會有暴露 API Key 的巨大資安風險。當您將專案下載到本地端之後，可以把這段指令餵給本地端的 AI（例如 Cursor、ChatGPT 或 GitHub Copilot），請它幫您把專案改寫為 Vercel Serverless 架構：
 
