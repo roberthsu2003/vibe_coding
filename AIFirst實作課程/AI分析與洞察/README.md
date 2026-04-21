@@ -78,23 +78,7 @@ ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
 請列出完整的專案結構，並提供各個檔案所需的完整程式碼。
 ```
 
-### 2. 擴充功能：新增下載 PDF 按鈕 Prompt
-
-當第一步的「分析工具」順利運作後，您可以接著向 AI 提出以下後續需求，為應用程式加入匯出為 PDF 文件的功能，方便使用者留存報告：
-
-```markdown
-這個工具目前運作得很好！現在我想為它加上「匯出為 PDF 報告」的功能。
-
-具體需求如下：
-1. **新增下載按鈕**：在「一鍵複製」按鈕的旁邊，新增一個美觀的「下載 PDF」按鈕。
-2. **套件選擇**：請幫我在前端引入並使用適合的套件（例如 `html2pdf.js` 或 `react-to-pdf`）來實作這個功能。
-3. **匯出目標**：當點擊下載按鈕時，僅將畫面上的「輸出顯示區（也就是 AI 分析報告的 Markdown 渲染結果）」轉換為 PDF。
-4. **中文字體支援**：請確保匯出的 PDF 支援繁體中文，絕對不能出現亂碼，並保持排版整齊。
-
-請給我需要執行的 npm 安裝指令，以及修改後的完整元件程式碼。
-```
-
-### 3. 專案升級：遷移至 Vercel Serverless 後端 Prompt
+### 2. 專案升級：遷移至 Vercel Serverless 後端 Prompt
 因為直接在前端（React）呼叫 AI API 會有暴露 API Key 的巨大資安風險。當您將專案下載到本地端之後，可以把這段指令餵給本地端的 AI（例如 Cursor、ChatGPT 或 GitHub Copilot），請它幫您把專案改寫為 Vercel Serverless 架構：
 
 ```markdown
@@ -103,9 +87,33 @@ ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
 請幫我將這個專案加入 Vercel Serverless Functions 的支援，具體需求如下：
 
 1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型的 Serverless Function（例如 `api/analyze.ts`）。請務必明確指定呼叫 `gemini-2.5-pro` 模型，避免使用到過期的舊版模型。
-2. **環境變數安全**：請將 API Key （如 `GEMINI_API_KEY`） 的讀取設定為 Node.js 環境變數（`process.env`），確保私鑰絕不外洩至前端。
+2. **環境變數安全**：請要求將 API Key （如 `GEMINI_API_KEY`） 放置於 `.env` 檔案中，並設定為 Node.js 環境變數（`process.env`）讀取，確保私鑰絕不外洩至前端。
 3. **改寫前端串接邏輯**：請幫我找出目前前端直接呼叫 AI 平台的 `fetch` / axios 程式碼，將其改為呼叫我們自己建立的 `/api/analyze` 本地端點。
-4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。
+4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。請確保 `vercel.json` 的設定採用以下標準寫法：
+   ```json
+   {
+     "version": 2,
+     "builds": [
+       {
+         "src": "package.json",
+         "use": "@vercel/static-build",
+         "config": {
+           "distDir": "dist"
+         }
+       },
+       {
+         "src": "api/**/*.ts",
+         "use": "@vercel/node"
+       }
+     ],
+     "routes": [
+       {
+         "src": "/api/(.*)",
+         "dest": "/api/$1.ts"
+       }
+     ]
+   }
+   ```
 5. **本地端測試方法**：改為 Serverless 後，單純執行 Vite (`npm run dev`) 無法啟動 `/api` 端點。請告訴我需要安裝什麼工具（例如 Vercel CLI）或做什麼設定（如 Vite Proxy），並列出非常具體的完整本地端測試步驟。
 
 請列出所有需要新增或修改的檔案完整程式碼。
