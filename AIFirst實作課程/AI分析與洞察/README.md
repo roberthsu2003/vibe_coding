@@ -52,7 +52,7 @@ ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
 - **輸出顯示區**：將 AI 分析後的結果格式化顯示於畫面中（支援 Markdown 渲染為佳），並且為結果區塊提供一個「一鍵複製」的按鈕。
 
 #### 3. API 整合邏輯與 System Instructions
-- 請在前端撰寫一個呼叫 AI 模型（例如 Google Gemini 等 API）的串接邏輯。
+- 請在前端撰寫一個呼叫 AI 模型的串接邏輯（請務必明確指定使用最新模型 `gemini-2.5-pro`，避免使用到過期的舊版模型）。
 - 當使用者點擊送出按鈕時，將文字框的 CSV 內容作為 User Prompt 發送。
 - 請務必將以下的 `System Instructions` 一字不漏地設定於 API 的**系統提示詞 (System Prompt)** 中，用來約束 AI 對數據分析的產出格式：
 
@@ -102,7 +102,7 @@ ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
 
 請幫我將這個專案加入 Vercel Serverless Functions 的支援，具體需求如下：
 
-1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型（例如 Google Gemini）的 Serverless Function（例如 `api/analyze.ts`）。
+1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型的 Serverless Function（例如 `api/analyze.ts`）。請務必明確指定呼叫 `gemini-2.5-pro` 模型，避免使用到過期的舊版模型。
 2. **環境變數安全**：請將 API Key （如 `GEMINI_API_KEY`） 的讀取設定為 Node.js 環境變數（`process.env`），確保私鑰絕不外洩至前端。
 3. **改寫前端串接邏輯**：請幫我找出目前前端直接呼叫 AI 平台的 `fetch` / axios 程式碼，將其改為呼叫我們自己建立的 `/api/analyze` 本地端點。
 4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。
