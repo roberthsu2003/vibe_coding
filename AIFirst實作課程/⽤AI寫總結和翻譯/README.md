@@ -107,10 +107,34 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 
 請幫我將這個專案加入 Vercel Serverless Functions 的支援，具體需求如下：
 
-1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型（例如 Google Gemini）的 Serverless Function（例如 `api/generate.ts`）。
-2. **環境變數安全**：請將 API Key （如 `GEMINI_API_KEY`） 的讀取設定為 Node.js 環境變數（`process.env`），確保私鑰絕不外洩至前端。
+1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型的 Serverless Function（例如 `api/generate.ts`）。請務必明確指定呼叫 `gemini-2.5-pro` 模型，避免使用到過期的舊版模型。
+2. **環境變數安全**：請要求將 API Key （如 `GEMINI_API_KEY`） 放置於 `.env` 檔案中，並設定為 Node.js 環境變數（`process.env`）讀取，確保私鑰絕不外洩至前端。
 3. **改寫前端串接邏輯**：請幫我找出目前前端直接呼叫 AI 平台的 `fetch` / axios 程式碼，將其改為呼叫我們自己建立的 `/api/generate` 本地端點。
-4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。
+4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。請確保 `vercel.json` 的設定採用以下標準寫法：
+   ```json
+   {
+     "version": 2,
+     "builds": [
+       {
+         "src": "package.json",
+         "use": "@vercel/static-build",
+         "config": {
+           "distDir": "dist"
+         }
+       },
+       {
+         "src": "api/**/*.ts",
+         "use": "@vercel/node"
+       }
+     ],
+     "routes": [
+       {
+         "src": "/api/(.*)",
+         "dest": "/api/$1.ts"
+       }
+     ]
+   }
+   ```
 5. **本地端測試方法**：改為 Serverless 後，單純執行 Vite (`npm run dev`) 無法啟動 `/api` 端點。請告訴我需要安裝什麼工具（例如 Vercel CLI）或做什麼設定（如 Vite Proxy），並列出非常具體的完整本地端測試步驟。
 
 請列出所有需要新增或修改的檔案完整程式碼。
