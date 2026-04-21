@@ -6,7 +6,7 @@
 ## 複雜遊戲
 - 包含圖片,音效,動畫
 
-## 1. [發票接物挑戰 (Invoice Catching Challenge)](./發票接物挑戰/README.md)
+## 1. [發票接物挑戰 (Invoice Catching Challenge)](發票接物挑戰/README.md)
 接住各種發票獲得高分，避開炸彈！接住雲端發票 (+3)、電子發票 (+2)、收據 (+1)，碰到炸彈 (-5)。
 
 ## 2. [使用牌照稅迷宮大冒險](./使用牌照稅迷宮大冒險/README.md)
