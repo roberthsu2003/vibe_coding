@@ -26,7 +26,7 @@
 - [自動化流程](./自動化流程/)
 - [建立公司表單](./建立公司表單/)
 
-## 發佈至其它雲端服務(Vercel serverless)
+## 發佈至雲端服務平台(Vercel serverless)
 
 > 必需申請vercel帳號
 
