@@ -1,6 +1,15 @@
 # 娛樂稅VS納保法記憶翻牌
 16張暗光鳥卡牌,點擊翻牌,翻出2張相同的牌即完成配對,有15次挑戰機會,於時間內配對完成即過關!
 
+## 資源檔
+- [google_ai_studio_完成範例zip檔](./google_ai_studio_完成範例/娛樂稅-vs-納保法-記憶翻牌遊戲.zip)
+
+- [背景聲](./assets/bgm.mp3)
+
+- [github repo](https://github.com/roberthsu2003/__Memory_Challenge__)
+
+- [上架遊戲](https://roberthsu2003.github.io/__Memory_Challenge__/)
+
 ## Prompt
 
 ```
