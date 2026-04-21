@@ -10,8 +10,9 @@
 - [建立小遊戲](./建立小遊戲/)
 - [網頁產生器](./網頁產生器/)
 
-- [GitHub 與 GitHub Pages](./GitHub與GitHubPages/README.md)
-- 若要將靜態網頁發佈到 **GitHub Pages**（建置輸出至倉庫根目錄 `docs/`），請參考 [docs-site 說明](./github-docs-site/README.md)
+- [將靜態網頁部署至 GitHub Pages](https://github.com/roberthsu2003/vibe-coding-to-pro-react/blob/main/github-docs-site/README.md)
+
+
 
 ## 全端網頁
 
