@@ -5,6 +5,14 @@
 2.方向鍵控制車輛移動，滑鼠點擊問題選項。
 ★幫助暗光鳥解答謎題，讓他們順利回家吧！
 
+## 資源檔
+
+- [google ai studio 範例zip檔下載](./google_ai_studio_完成範例/使用牌照稅迷宮大冒險(license-tax-maze).zip)
+
+- [github repo](https://github.com/roberthsu2003/__license_tax_maze__)
+
+- [遊戲Demo](https://roberthsu2003.github.io/__license_tax_maze__/)
+
 ## prompts
 
 ```
