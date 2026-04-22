@@ -122,20 +122,4 @@
    - 實作匯入按鈕，允許玩家讀取先前的記錄檔
 ```
 
----
 
-## 技術建議
-
-- **環境建置**：建議使用 `npm create vite@latest game -- --template react-ts` 快速建立專案。
-- **時間測量精度**：強烈建議使用 **`performance.now()`** 來精確測量時間。在 React 中，為了避免 State 更新造成的重新渲染延遲，記錄開始時間點時請使用 **`useRef`** 儲存。
-- **狀態機設計**：遊戲流程（Idle -> Waiting -> Ready -> Result）非常適合用狀態機概念設計，可用 `useState` 或 `useReducer` 清楚管理。
-- **資料儲存**：使用 **`localStorage`** 來持久化測試記錄。
-- **圖表套件**：資料分析視覺化強烈建議安裝 React 專用的圖表套件，例如 **Recharts** 或 **react-chartjs-2**。
-
-## 學習重點
-
-1. **階段1**：學習精確時間測量 (`performance.now()`)、`useRef` 保存跨渲染變數、`useEffect` 與 `setTimeout` 清除機制 (Cleanup)。
-2. **階段2**：學習陣列狀態管理、陣列方法 (map, reduce) 計算統計數據、元件 Props 傳遞。
-3. **階段3**：學習更複雜的狀態控制 (挑戰模式邏輯)、條件渲染與元件共用設計。
-4. **階段4**：學習 React 中的音效控制 (`Audio` API 與 `useRef`)、Tailwind/CSS 動畫整合。
-5. **階段5**：學習第三方套件整合 (如圖表庫)、自訂 Hook 封裝、Blob 檔案下載與 JSON 處理。

@@ -124,19 +124,3 @@
    - 在 React 介面加上精緻的字體、分數跳動動畫
 ```
 
----
-
-## 技術建議
-
-- **環境建置**：建議使用 `npm create vite@latest game -- --template react-ts` 快速建立專案。
-- **渲染與效能分離**：UI 介面（分數、生命、開始按鈕）使用 **React State (`useState`)** 渲染；而遊戲畫布、球的座標、磚塊狀態等高頻率變動的資料，強烈建議使用 **`useRef`** 儲存，並完全透過 **HTML5 Canvas** 搭配 **`requestAnimationFrame`** 繪製，以避免 React 頻繁重新渲染導致卡頓。
-- **碰撞數學**：使用基本的幾何運算（AABB 碰撞檢測）來處理球與磚塊、平台的碰撞及反彈角度邏輯。
-- **資料持久化**：使用 **`localStorage`** 來儲存最高分或關卡解鎖進度。
-
-## 學習重點
-
-1. **階段1**：學習 React `useRef` 與 Canvas 的完美結合、實作不依賴 React Render 的高效能 Game Loop、基礎物理反彈與 AABB 碰撞演算法。
-2. **階段2**：學習 React UI 狀態與 Canvas 遊戲狀態的溝通與整合、遊戲生命週期管理。
-3. **階段3**：學習 TypeScript Interface 設計（定義複雜的磚塊屬性與道具）、陣列/多物件狀態更新邏輯。
-4. **階段4**：學習資料驅動設計 (Data-driven design)、使用 JSON/陣列結構定義關卡地圖。
-5. **階段5**：學習 Canvas 粒子系統實作、Web Audio API 整合、視覺特效優化。

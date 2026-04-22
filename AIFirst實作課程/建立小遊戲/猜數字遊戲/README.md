@@ -138,21 +138,5 @@
    - 計算勝率
 ```
 
----
 
-## 技術建議
 
-- **環境建置**：建議使用 `npm create vite@latest game -- --template react-ts` 快速建立專案
-- 使用 **React State (`useState`)** 來管理數字範圍、猜測次數、歷史紀錄等狀態
-- 將畫面拆分為多個獨立的 **React 元件 (Components)**（例如：`StartScreen`、`GameBoard`、`ResultPanel`）
-- 使用 **TypeScript** 定義 Props 和狀態的型別 (`interface` / `type`)
-- 使用 **`localStorage`** 搭配 `useEffect` 來儲存遊戲記錄和最佳成績
-- 介面排版可搭配 **CSS Modules**、**Tailwind CSS** 或一般 CSS，並加入過渡動畫提升體驗
-
-## 學習重點
-
-1. **階段1**：學習 React 狀態管理 (`useState`)、事件處理 (Event Handling)、基礎 TypeScript 型別
-2. **階段2**：學習複雜狀態維護、條件渲染 (Conditional Rendering)
-3. **階段3**：學習元件拆分 (Component Composition)、Props 傳遞、表單受控元件 (Controlled Components)
-4. **階段4**：學習進階邏輯實作、陣列操作、自訂 Hook (Custom Hooks) 封裝共用邏輯
-5. **階段5**：學習更複雜的資料結構設計、狀態同步與組件間的溝通

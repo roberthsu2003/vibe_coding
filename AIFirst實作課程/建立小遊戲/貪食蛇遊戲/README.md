@@ -147,20 +147,4 @@
    - 在主選單或結算畫面顯示統計面板
 ```
 
----
 
-## 技術建議
-
-- **環境建置**：建議使用 `npm create vite@latest game -- --template react-ts` 快速建立專案。
-- **渲染方式**：可以使用 **HTML5 Canvas** 搭配 `useRef` 來繪製高效能的遊戲畫面，或是直接使用 React 渲染 **CSS Grid** 網格系統。
-- **狀態管理**：使用 `useState`、`useReducer` 或 `useRef` 來管理遊戲狀態（如蛇的位置陣列、食物座標、分數、生命值）。注意：頻繁更新的遊戲座標建議使用 `useRef` 以避免不必要的重新渲染，或結合 `requestAnimationFrame` 進行最佳化。
-- **副作用處理**：使用 `useEffect` 來綁定鍵盤事件監聽器，以及處理遊戲迴圈的計時器（`setInterval` 或 `requestAnimationFrame`）。
-- **資料持久化**：使用 `localStorage` 來儲存遊戲記錄。
-
-## 學習重點
-
-1. **階段1**：學習 React `useRef` 與 Canvas 的整合、陣列操作（蛇的身體推進）、基礎 TypeScript 型別
-2. **階段2**：學習 React 狀態管理 (`useState`)、遊戲迴圈實作與元件生命週期 (`useEffect` cleanup)
-3. **階段3**：學習 TypeScript Interface 定義（不同食物與效果型別）、條件生成與碰撞邏輯
-4. **階段4**：學習配置驅動開發 (Configuration-driven development)、關卡切換邏輯
-5. **階段5**：學習 Audio API 整合、自訂 Hook 封裝 (如 `useLocalStorage`)、進階動畫與效能最佳化
