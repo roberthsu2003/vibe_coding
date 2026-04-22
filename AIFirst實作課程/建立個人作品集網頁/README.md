@@ -2,6 +2,12 @@
 
 > 建立個人作品集網頁主要目的是讓學生學習如何使用 Vite + React + TypeScript 結合現代化前端技術，打造出個人專屬的網站。同時學習如何將資料結構與 UI 元件進行抽離與綁定。
 
+## 作品資源
+
+- [作品集](https://modern-tech-portfolio.vercel.app)
+
+- [GitHub](https://github.com/roberthsu2004/__Modern_Tech_Portfolio__)
+
 ## Prompt
 
 請複製以下 Prompt 貼給 AI (如 ChatGPT, Claude)，讓 AI 幫你建立完整的專案架構，同時為你生成專屬的個人假資料：
