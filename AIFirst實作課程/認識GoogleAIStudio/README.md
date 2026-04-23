@@ -7,25 +7,6 @@
 - 可以 Share（給他人 Remix）或 Deploy（對外發布）。
 
 
-> **補充（Gemini AI Studio 實務）**  
-> 使用 **Gemini API key** 時，常見做法是透過 **Google AI Studio Gemini App Proxy Server**，並以 **環境變數（或 Cloud Run secrets）** 注入金鑰。  
-> 在 Google AI Studio 的預設流程下，**Share** 與 **Deploy** 都是相對安全的做法：前者讓他人在自己的環境 Remix 與執行，後者由伺服器端機制處理金鑰，重點都是**不把 API key 暴露在瀏覽器端**。  
-
-**專案完成後可直接提問的安全檢查 Prompt（貼給 Google AI Studio）：**
-
-```
-請幫我做 **Gemini API key 洩露風險檢查**。請逐項檢查這個專案是否有以下問題：
-
-1. 前端程式碼或打包檔是否包含 API key
-2. 是否有直接從瀏覽器呼叫 `generativelanguage.googleapis.com` 並夾帶金鑰
-3. 是否改用伺服器端 Proxy（例如 App Proxy／Express API）轉發
-4. 金鑰是否只存在環境變數或 secrets
-5. Share／Deploy 後一般使用者是否能從 DevTools、原始碼或網路請求取得金鑰
-
-最後請用 **「安全」** 或 **「需修正」** 給結論，並列出具體修正步驟。
-```
-
-
 ## 建立 App 前先設定（Advanced settings）
 
 開始建立 App 前，先確認這 4 個欄位：
