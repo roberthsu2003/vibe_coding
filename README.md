@@ -25,11 +25,11 @@
 
 ### 技巧
 
-- **[Prompt Engineering](prompt/README.md)**
-  - *學習如何下達精準指令，與 AI 高效溝通。*
-
 - **[自然語言+迭代的開發方法](./自然語言+迭代的開發方法/README.md)**
   - *探索開發思維的轉變：以小步迭代驅動專案成長。*
+
+- **[Prompt Engineering](prompt/README.md)**
+  - *學習如何下達精準指令，與 AI 高效溝通。*
 
 
 ### [實作範例：AI First（Google AI Studio）](./AIFirst實作課程/README.md)
