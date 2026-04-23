@@ -1,7 +1,8 @@
 # 認識 Google AI Studio
 
 ## 學習重點
-
+- Playground 的用途：認識 Google 提供的各種模型（部分需要付費 API Key，部分可用免費 API Key）。
+- Gallery 的用途：瀏覽各種模型應用範例 App，並可 Remix 快速改造（同樣可能使用付費或免費 API Key）。
 - Google AI Studio 是 Gemini 的網頁工作台，可快速做出 AI prototype。
 - 可用 Prompt 反覆迭代，並在 Code/Preview 間調整成果。
 - 可以 Share（給他人 Remix）或 Deploy（對外發布）。
@@ -42,5 +43,6 @@
 
 ## 練習作品：Prompt（雙班競賽計時器）
 
+```
 請用 HTML/CSS/JavaScript 做單一網頁：兩個獨立計時器，給兩班比賽同時計時；每組有開始、暫停、重設；時間用 MM:SS（或 HH:MM:SS）、字大易讀；兩組互不干擾；不需後端。請給完整程式碼與簡短操作說明。
-
+```
