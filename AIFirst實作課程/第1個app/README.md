@@ -1,6 +1,9 @@
 # AI First 實作課程 - 第一個 App
 
-> **注意：** 本篇教學適用於以 **Vite** 作為打包工具的 React 靜態專案。若您的專案並非透過 Vite 建立，請先考慮將專案遷移至 Vite 環境，再依照本篇進行部署。（另外，由於 GitHub Pages 僅支援純前端靜態內容，因此不適合部署需依賴 Express 或其他後端伺服器的 BFF 架構專案。）
+## Google AI Studio 迭代的修改方式
+> 使用prompt chat
+> 使用選取功能的 - Focus mode
+> 使用選取功能的 - Annotate mode
 
 ---
 
