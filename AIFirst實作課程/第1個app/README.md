@@ -1,9 +1,9 @@
 # AI First 實作課程 - 第一個 App
 
 ## Google AI Studio 迭代的修改方式
-> 使用prompt chat
-> 使用選取功能的 - Focus mode
-> 使用選取功能的 - Annotate mode
+> 使用prompt chat 
+> 使用選取功能的 - Focus mode 
+> 使用選取功能的 - Annotate mode 
 
 ---
 
