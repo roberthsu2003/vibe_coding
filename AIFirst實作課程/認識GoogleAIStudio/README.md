@@ -15,6 +15,7 @@
 *   **風險管理意識**：建立對雲端服務（Google Cloud Run）和 API 費用（Gemini Spend Cap）的敏銳感知，有效控制成本。
 
 ---
+![GoogleAIStudio](./images/google-ai-studio-infographic.png)
 
 ## 🛠️ 實作準備：建立 App 前的關鍵設定 (Advanced Settings)
 
