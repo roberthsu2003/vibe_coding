@@ -24,7 +24,7 @@
    - 點擊左下角「+」新增一個工作表，命名為 `Orders` (注意大小寫)。
    - 點擊儲存格 **A1**，直接**複製並貼上**下方這個區塊的內容作為標題：
      ```text
-     時間戳記	訂購人	飲料名稱	甜度	冰塊	數量	總金額
+     訂單編號	時間戳記	訂購人	飲料名稱	甜度	冰塊	數量	總金額
      ```
 
 ### 步驟 2：設定 Google Apps Script (GAS)
@@ -38,48 +38,78 @@
  * 辦公室飲料訂購系統 - GAS 後端 API
  */
 
-// 1. 處理 GET 請求：回傳菜單
+// 1. 處理 GET 請求：回傳菜單與現有訂單
 function doGet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName("Menu");
-  const data = sheet.getDataRange().getValues();
-  const headers = data[0];
-  const rows = data.slice(1);
 
-  const menu = rows.map(row => {
+  // 取得菜單
+  const menuSheet = ss.getSheetByName("Menu");
+  const menuData = menuSheet.getDataRange().getValues();
+  const menuHeaders = menuData[0];
+  const menu = menuData.slice(1).map(row => {
     let obj = {};
-    headers.forEach((header, index) => {
-      obj[header] = row[index];
-    });
+    menuHeaders.forEach((header, index) => obj[header] = row[index]);
     return obj;
   });
 
-  return ContentService.createTextOutput(JSON.stringify(menu))
+  // 取得訂單
+  const orderSheet = ss.getSheetByName("Orders");
+  const orderData = orderSheet.getDataRange().getValues();
+  let orders = [];
+  if (orderData.length > 1) {
+    const orderHeaders = orderData[0];
+    orders = orderData.slice(1).map(row => {
+      let obj = {};
+      orderHeaders.forEach((header, index) => obj[header] = row[index]);
+      return obj;
+    });
+  }
+
+  return ContentService.createTextOutput(JSON.stringify({ menu: menu, orders: orders }))
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// 2. 處理 POST 請求：寫入訂單
+// 2. 處理 POST 請求：支援新增、修改、刪除
 function doPost(e) {
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = ss.getSheetByName("Orders");
-    const params = JSON.parse(e.postData.contents);
+    const payload = JSON.parse(e.postData.contents);
+    const action = payload.action; // "create", "update", "delete"
+    const data = payload.data;
 
-    // 依照欄位順序排列
-    const newRow = [
-      new Date(),
-      params.name,
-      params.drink,
-      params.sugar,
-      params.ice,
-      params.quantity,
-      params.totalPrice
-    ];
+    const orderData = sheet.getDataRange().getValues();
 
-    sheet.appendRow(newRow);
+    if (action === "create") {
+      const orderId = Utilities.getUuid(); // 產生唯一識別碼
+      const newRow = [orderId, new Date(), data.name, data.drink, data.sugar, data.ice, data.quantity, data.totalPrice];
+      sheet.appendRow(newRow);
+      return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "訂單新增成功" })).setMimeType(ContentService.MimeType.JSON);
+    }
 
-    return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "訂單送出成功" }))
-      .setMimeType(ContentService.MimeType.JSON);
+    if (action === "update") {
+      for (let i = 1; i < orderData.length; i++) {
+        if (orderData[i][0] === data.orderId) { // 找到對應的訂單編號
+          // 更新第 3 欄到第 8 欄 (訂購人到總金額)
+          sheet.getRange(i + 1, 3, 1, 6).setValues([[data.name, data.drink, data.sugar, data.ice, data.quantity, data.totalPrice]]);
+          return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "訂單更新成功" })).setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+      throw new Error("找不到該筆訂單");
+    }
+
+    if (action === "delete") {
+      for (let i = 1; i < orderData.length; i++) {
+        if (orderData[i][0] === data.orderId) {
+          sheet.deleteRow(i + 1);
+          return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "訂單刪除成功" })).setMimeType(ContentService.MimeType.JSON);
+        }
+      }
+      throw new Error("找不到該筆訂單");
+    }
+
+    throw new Error("未知的操作 (action 必須為 create, update 或 delete)");
+
   } catch (error) {
     return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -126,15 +156,20 @@ function doPost(e) {
 [請填入你的 GAS 網址]
 
 這個 API 的規格如下：
-1. 發送 GET 請求時，會回傳 JSON 陣列，格式為：[{"品項名稱": "珍珠奶茶", "類別": "奶茶", "價格": 60}]
-2. 發送 POST 請求時，需要傳送 JSON 物件，格式為：{"name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}
+1. 發送 GET 請求時，會回傳 JSON 物件，包含菜單與目前訂單，格式為：
+   {"menu": [{"品項名稱": "珍珠奶茶", "類別": "奶茶", "價格": 60}], "orders": [{"訂單編號": "xyz-123", "時間戳記": "...", "訂購人": "王小明", "飲料名稱": "珍珠奶茶", "甜度": "半糖", "冰塊": "少冰", "數量": 1, "總金額": 60}]}
+2. 發送 POST 請求時，需要傳送 JSON 物件，支援三種 action：
+   - 新增：{"action": "create", "data": {"name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}}
+   - 修改：{"action": "update", "data": {"orderId": "xyz-123", "name": "王小明", "drink": "錫蘭紅茶", "sugar": "全糖", "ice": "正常", "quantity": 2, "totalPrice": 70}}
+   - 刪除：{"action": "delete", "data": {"orderId": "xyz-123"}}
 
-請幫我產生完整的專案代碼，包含以下三個檔案：
-1. src/types.ts：定義 Drink 和 Order 的 TypeScript 型別介面。
-2. src/components/OrderForm.tsx：一個美觀的訂購表單元件，包含姓名(文字輸入)、飲料(下拉選單)、甜度(單選鈕)、冰塊(單選鈕)、數量(數字輸入)。請在元件載入時自動使用 fetch GET 取得菜單，並在選取飲料和數量時自動計算總價。提交表單時將資料 POST 到 API。
-3. src/App.tsx：引入並在畫面中央顯示該表單元件。
+請幫我產生完整的專案代碼，包含以下四個檔案：
+1. src/types.ts：定義 Drink 和 Order 等 TypeScript 型別。
+2. src/components/OrderForm.tsx：填寫與提交訂單的表單。送出時自動呼叫 POST API (action: create 或 update)。
+3. src/components/OrderList.tsx：顯示目前的訂單列表。每筆訂單旁需有「編輯」和「刪除」按鈕。點擊編輯時可以將資料帶入表單修改；點擊刪除時呼叫 POST API (action: delete)。
+4. src/App.tsx：整合上述元件，在載入時 GET 取得資料。
 
-請直接給我這三個檔案的完整程式碼，並請直接將上述的 API 網址寫進 fetch 的 URL 中。
+請直接給我這四個檔案的完整程式碼，並把 fetch 的 URL 直接寫死為上述的 API 網址。
 ```
 
 ### 步驟 3：整合程式碼
