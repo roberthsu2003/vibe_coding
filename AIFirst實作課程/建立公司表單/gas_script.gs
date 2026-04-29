@@ -9,24 +9,30 @@ function doGet() {
   // 取得菜單
   const menuSheet = ss.getSheetByName("Menu");
   const menuData = menuSheet.getDataRange().getValues();
-  const menuHeaders = menuData[0];
-  const menu = menuData.slice(1).map(row => {
-    let obj = {};
-    menuHeaders.forEach((header, index) => obj[header] = row[index]);
-    return obj;
-  });
+  let menu = [];
+  if (menuData.length > 1) {
+    menu = menuData.slice(1).map(row => ({
+      name: row[0],
+      category: row[1],
+      price: row[2]
+    }));
+  }
 
   // 取得訂單
   const orderSheet = ss.getSheetByName("Orders");
   const orderData = orderSheet.getDataRange().getValues();
   let orders = [];
   if (orderData.length > 1) {
-    const orderHeaders = orderData[0];
-    orders = orderData.slice(1).map(row => {
-      let obj = {};
-      orderHeaders.forEach((header, index) => obj[header] = row[index]);
-      return obj;
-    });
+    orders = orderData.slice(1).map(row => ({
+      orderId: row[0],
+      timestamp: row[1],
+      name: row[2],
+      drink: row[3],
+      sugar: row[4],
+      ice: row[5],
+      quantity: row[6],
+      totalPrice: row[7]
+    }));
   }
 
   return ContentService.createTextOutput(JSON.stringify({ menu: menu, orders: orders }))

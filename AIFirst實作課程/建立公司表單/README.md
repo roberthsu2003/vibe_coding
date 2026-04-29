@@ -45,24 +45,30 @@ function doGet() {
   // 取得菜單
   const menuSheet = ss.getSheetByName("Menu");
   const menuData = menuSheet.getDataRange().getValues();
-  const menuHeaders = menuData[0];
-  const menu = menuData.slice(1).map(row => {
-    let obj = {};
-    menuHeaders.forEach((header, index) => obj[header] = row[index]);
-    return obj;
-  });
+  let menu = [];
+  if (menuData.length > 1) {
+    menu = menuData.slice(1).map(row => ({
+      name: row[0],
+      category: row[1],
+      price: row[2]
+    }));
+  }
 
   // 取得訂單
   const orderSheet = ss.getSheetByName("Orders");
   const orderData = orderSheet.getDataRange().getValues();
   let orders = [];
   if (orderData.length > 1) {
-    const orderHeaders = orderData[0];
-    orders = orderData.slice(1).map(row => {
-      let obj = {};
-      orderHeaders.forEach((header, index) => obj[header] = row[index]);
-      return obj;
-    });
+    orders = orderData.slice(1).map(row => ({
+      orderId: row[0],
+      timestamp: row[1],
+      name: row[2],
+      drink: row[3],
+      sugar: row[4],
+      ice: row[5],
+      quantity: row[6],
+      totalPrice: row[7]
+    }));
   }
 
   return ContentService.createTextOutput(JSON.stringify({ menu: menu, orders: orders }))
@@ -183,7 +189,7 @@ function doPost(e) {
 
 這個 API 的規格如下：
 1. 發送 GET 請求時，會回傳 JSON 物件，包含菜單與目前訂單，格式為：
-   {"menu": [{"品項名稱": "珍珠奶茶", "類別": "奶茶", "價格": 60}], "orders": [{"訂單編號": "xyz-123", "時間戳記": "...", "訂購人": "王小明", "飲料名稱": "珍珠奶茶", "甜度": "半糖", "冰塊": "少冰", "數量": 1, "總金額": 60}]}
+   {"menu": [{"name": "珍珠奶茶", "category": "奶茶", "price": 60}], "orders": [{"orderId": "xyz-123", "timestamp": "...", "name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}]}
 2. 發送 POST 請求時，需要傳送 JSON 物件，支援三種 action：
    - 新增：{"action": "create", "data": {"name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}}
    - 修改：{"action": "update", "data": {"orderId": "xyz-123", "name": "王小明", "drink": "錫蘭紅茶", "sugar": "全糖", "ice": "正常", "quantity": 2, "totalPrice": 70}}
