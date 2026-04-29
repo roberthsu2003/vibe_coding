@@ -2,6 +2,11 @@
 
 本單元將帶領學生完成一個完整的全端應用。我們將手動設定 Google Sheets 作為資料庫，並使用 Google Apps Script (GAS) 作為 API 後端。接著，我們將學習如何使用 **Google AI Studio**，透過精確的 Prompt 讓 AI 自動生成前端網頁代碼 (React + Vite + TypeScript)。
 
+
+## 完成網址
+
+https://test1-nine-gray-14.vercel.app/
+
 ---
 
 ## 第一階段：後端資料庫設定 (詳細圖文步驟)
