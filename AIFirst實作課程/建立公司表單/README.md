@@ -117,23 +117,25 @@ function doPost(e) {
 ### 步驟 2：貼上 Prompt 讓 AI 寫程式
 請將以下提示詞 (Prompt) 完整複製。**請記得把 `[請填入你的 GAS 網址]` 替換成你剛剛在步驟 3 複製的網址**，然後發送給 AI：
 
-> **請完整複製以下內容貼給 AI：**
-> 
-> 「我需要建立一個辦公室飲料訂購系統的前端網頁。請使用 Vite + React + TypeScript + Tailwind CSS 的技術棧。
-> 
-> 我已經有一個 Google Apps Script 的 API 端點：
-> `[請填入你的 GAS 網址]`
-> 
-> 這個 API 的規格如下：
-> 1. 發送 GET 請求時，會回傳 JSON 陣列，格式為：`[{"品項名稱": "珍珠奶茶", "類別": "奶茶", "價格": 60}]`
-> 2. 發送 POST 請求時，需要傳送 JSON 物件，格式為：`{"name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}`
-> 
-> 請幫我產生完整的專案代碼，包含以下三個檔案：
-> 1. `src/types.ts`：定義 `Drink` 和 `Order` 的 TypeScript 型別介面。
-> 2. `src/components/OrderForm.tsx`：一個美觀的訂購表單元件，包含姓名(文字輸入)、飲料(下拉選單)、甜度(單選鈕)、冰塊(單選鈕)、數量(數字輸入)。請在元件載入時自動使用 fetch GET 取得菜單，並在選取飲料和數量時自動計算總價。提交表單時將資料 POST 到 API。
-> 3. `src/App.tsx`：引入並在畫面中央顯示該表單元件。
-> 
-> 請直接給我這三個檔案的完整程式碼，並請直接將上述的 API 網址寫進 fetch 的 URL 中。」
+**請完整複製以下內容貼給 AI：**
+
+```text
+我需要建立一個辦公室飲料訂購系統的前端網頁。請使用 Vite + React + TypeScript + Tailwind CSS 的技術棧。
+
+我已經有一個 Google Apps Script 的 API 端點：
+[請填入你的 GAS 網址]
+
+這個 API 的規格如下：
+1. 發送 GET 請求時，會回傳 JSON 陣列，格式為：[{"品項名稱": "珍珠奶茶", "類別": "奶茶", "價格": 60}]
+2. 發送 POST 請求時，需要傳送 JSON 物件，格式為：{"name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}
+
+請幫我產生完整的專案代碼，包含以下三個檔案：
+1. src/types.ts：定義 Drink 和 Order 的 TypeScript 型別介面。
+2. src/components/OrderForm.tsx：一個美觀的訂購表單元件，包含姓名(文字輸入)、飲料(下拉選單)、甜度(單選鈕)、冰塊(單選鈕)、數量(數字輸入)。請在元件載入時自動使用 fetch GET 取得菜單，並在選取飲料和數量時自動計算總價。提交表單時將資料 POST 到 API。
+3. src/App.tsx：引入並在畫面中央顯示該表單元件。
+
+請直接給我這三個檔案的完整程式碼，並請直接將上述的 API 網址寫進 fetch 的 URL 中。
+```
 
 ### 步驟 3：整合程式碼
 當 AI 給你程式碼後，你只需要：
