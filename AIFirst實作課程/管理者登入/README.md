@@ -1,8 +1,8 @@
 # 管理者登入-登出流程
 
 ## 完成專案
-[github repo](https://github.com/roberthsu2004/__supaManager__)
-[deploy link](https://supa-manager-gmzvs78u2-roberthsu2004s-projects.vercel.app)
+- [**github repo**](https://github.com/roberthsu2004/__supaManager__)  
+- [**deploy link**](https://supa-manager-gmzvs78u2-roberthsu2004s-projects.vercel.app)
 
 ## 建立一個簡單網站，使用 React + Vite + Supabase。
 
