@@ -10,6 +10,8 @@
 
 Google AI Studio 的 Build mode 可用自然語言快速建立 App，也支援 npm 套件與安全祕密管理；Supabase Auth 則負責登入，RLS 負責授權控管。([Google AI for Developers][1])
 
+👉 **[點此了解本專案詳細的技術架構與原理](./技術架構說明.md)**
+
 ## 第一步：Supabase 建一張 `profiles` 表
 
 到 Supabase → SQL Editor 執行：
