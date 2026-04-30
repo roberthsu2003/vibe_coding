@@ -97,6 +97,8 @@ VITE_SUPABASE_ANON_KEY
 
 ## 第四步：前端環境變數
 
+必需至supabase查詢,才可以找到要的資訊
+
 `.env` 放：
 
 ```env
