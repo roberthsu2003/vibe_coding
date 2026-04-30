@@ -31,6 +31,25 @@ for select
 using (true);
 ```
 
+<details>
+<summary>💡 點擊展開：這段 SQL 程式碼在做什麼？（初學者必看）</summary>
+
+這段程式碼是用來告訴資料庫「我要建立一個儲存使用者資料的地方，並設定好安全規則」。詳細解釋如下：
+
+1. **`create table public.profiles (...)`**：
+   - 就像在 Excel 開一個新的工作表，命名為 `profiles`。
+   - `id uuid primary key...`：這行確保這個表格裡面的 ID，會和 Supabase 註冊系統（`auth.users`）的 ID 連動。`on delete cascade` 表示如果使用者刪除帳號，這裡的資料也會自動同步刪除。
+   - `email text`：建立一個欄位用來存 Email。
+   - `role text default 'user'`：建立一個欄位記錄權限角色，預設身分是一般使用者（`'user'`）。
+
+2. **`alter table public.profiles enable row level security;`**：
+   - 這是一個非常重要的安全開關！開啟「資料列層級安全 (RLS)」。開啟後，預設情況下**沒有人**能讀取或修改這張表，把資料徹底鎖住。
+
+3. **`create policy "anyone can read profiles" ...`**：
+   - 因為我們剛剛把資料全鎖了，所以需要訂立規則：「允許任何人（`using (true)`）讀取（`select`）這張表」。這樣網頁前端在登入後，才能查詢到使用者的權限是不是管理者。
+
+</details>
+
 ## 第二步：先建立管理者帳號
 
 在 Supabase → Authentication → Users → Add user
