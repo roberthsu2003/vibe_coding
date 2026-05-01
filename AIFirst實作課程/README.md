@@ -37,11 +37,19 @@
 
 - [自動化流程](./自動化流程/)
 
+## 整合通訊軟體
+
+- Telegram Bot 的建立與應用
+
+- Line Bot 的建立與應用
+
 
 ## 整合supabase-認證與資料庫
 
 - [管理者登入](./管理者登入/README.md)
 > repo:2004
+
+- pos應用程式
 
 
 ## 發佈至雲端服務平台(Vercel serverless)
