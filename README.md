@@ -4,6 +4,10 @@
 
 ---
 
+[![非技術部門也需具備程式開發能力](./images/非技術部門也需具備程式開發能力.jpeg)](./https://www.bnext.com.tw/article/90853/nvidia-huang-codex-ai-agents)
+
+> 出處:數位時代(https://www.bnext.com.tw/article/90853/nvidia-huang-codex-ai-agents)
+
 ## 👥 課程受眾
 
 本指南將 Vibe Coding 拆成兩條可並行參考的學習路徑：**AI 主導型（AI First）** 以自然語言與 Prompt 驅動、強調快速產出；**AI 輔助型（AI Assisted）** 假設您仍具備工程師角色，以 AI 加速寫程式、讀程式與品質實務。請依學員背景，決定主要走哪一條、另一條要讀到多深：
