@@ -71,6 +71,8 @@
 
 目前市面上有許多優秀的 AI 輔助工具，幫助您加速開發流程：
 
+![3種AI編輯器比較](./images/3種AI編輯器比較.png)
+
 - **[Google AI Studio](https://aistudio.google.com/)**：Google 官方提供的 Gemini 模型實驗與開發平台。可在瀏覽器中調校提示詞、比對不同模型版本、測試多模態與工具呼叫，並取得 Gemini API 金鑰以整合到自己的應用程式。（主要為網頁工具；依 Google 帳號享有免費額度，亦可透過 Google Cloud 擴充付費配額）
 - **[Lovable](https://lovable.dev/)**：您的專屬 AI 前端工程師。能學習您現有的 UI 組件庫，自動建構新頁面與功能。（支援 GitHub 下載；採用點數機制，每日登入或邀請皆可增加點數）
 - **[Bolt](https://www.bolt.dev/)**：AI 原生開發工作環境。透過深度整合 AI 功能，讓您以「思維的速度」進行編碼與建構。（支援 GitHub 下載；採訂閱制，每月提供 1M Token，邀請可增加額度）
