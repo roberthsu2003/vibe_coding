@@ -4,9 +4,8 @@
 
 ---
 
-[![非技術部門也需具備程式開發能力](./images/非技術部門也需具備程式開發能力.jpeg)](./https://www.bnext.com.tw/article/90853/nvidia-huang-codex-ai-agents)
+[黃仁勳認為：非技術部門也需具備程式開發能力](./https://www.bnext.com.tw/article/90853/nvidia-huang-codex-ai-agents)
 
-> 出處:數位時代(https://www.bnext.com.tw/article/90853/nvidia-huang-codex-ai-agents)
 
 ## 👥 課程受眾
 
