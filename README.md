@@ -4,7 +4,7 @@
 
 ---
 
-[黃仁勳認為：非技術部門也需具備程式開發能力](./https://www.bnext.com.tw/article/90853/nvidia-huang-codex-ai-agents)
+[**黃仁勳認為：非技術部門也需具備程式開發能力**](./https://www.bnext.com.tw/article/90853/nvidia-huang-codex-ai-agents)
 
 
 ## 👥 課程受眾
@@ -104,15 +104,15 @@
 - **[模板庫 (Templates)](templates/README.md)**：包含產品需求、計畫與任務清單等模板。
 - **[AI Prompt 範本集](templates/prompt_templates/README.md)**：收錄 Code Review、重構、測試與除錯的專用提示詞（Prompt）範本。
 
+
+> 💡 *詳細的使用指引請參考 [SDD 章節](02_sdd/README.md#找參考範例的管道) 或 [需求模板](templates/requirement_template.md)*
+
+---
+
 ### 找靈感與參考範例
 設計專案時若缺乏靈感，以下資源能作為極佳的視覺與功能參考：
 
-- **Mobbin**：依功能分類的 UI 介面範例（極度推薦給初學者）。
-- **Dribbble**：全球設計師的作品集，擁有大量的 UI 設計圖與視覺靈感。
-- **Figma Community**：社群驅動的開源設計檔案庫。
-- **Google 搜尋**：直接參考線上實際運作的產品介面。
-
-> 💡 *詳細的使用指引請參考 [SDD 章節](02_sdd/README.md#找參考範例的管道) 或 [需求模板](templates/requirement_template.md)*
+- [**Figma Community**](https://www.figma.com/community)：社群驅動的開源設計檔案庫。
 
 ---
 
