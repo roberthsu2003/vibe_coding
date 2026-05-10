@@ -62,7 +62,7 @@ npm run dev
 
 ---
 
-## 3. 修改 Vite 配置 (GitHub Pages 必備設定)
+## 3.0 修改 Vite 配置 (GitHub Pages 必備設定)
 
 在部署到 GitHub Pages 之前，我們需要修正 Vite 的基礎路徑 (`base`)，確保網頁資源（JS/CSS）在 GitHub 的網址下能被正確讀取。
 
