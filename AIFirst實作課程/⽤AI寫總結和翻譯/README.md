@@ -151,8 +151,10 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 
 請依照以下步驟設定，才能在本地端順利測試包含 `/api` 的全端網站：
 
-1. **全域安裝 Vercel CLI**：
+1. **安裝專案套件與全域安裝 Vercel CLI**：
+   請先安裝專案所需的依賴套件，並全域安裝 Vercel CLI：
    ```bash
+   npm install
    npm install -g vercel
    ```
 2. **登入並連結專案**：
@@ -161,9 +163,9 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
    vercel link
    ```
 3. **同步環境變數**：
-   將設定在 Vercel 雲端上的 `GEMINI_API_KEY` 拉取到本地專案的隱藏設定檔中（會自動建立 `.env.local`，此檔案不會上傳到 GitHub）：
+   將設定在 Vercel 雲端上的 `GEMINI_API_KEY` 拉取到本地專案中（請下載為 `.env` 檔案，因為我們的專案程式碼是設定讀取 `.env`，並確保此檔案不會上傳到 GitHub）：
    ```bash
-   vercel env pull .env.local
+   vercel env pull .env
    ```
 4. **啟動全端測試伺服器**：
    請停用原本的 `npm run dev`，一律改用以下指令啟動專案：
