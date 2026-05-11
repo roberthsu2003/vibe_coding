@@ -143,14 +143,14 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 5. **本地端測試方法**：改為 Serverless 後，單純執行 Vite (`npm run dev`) 無法啟動 `/api` 端點。請告訴我需要安裝什麼工具（例如 Vercel CLI）或做什麼設定（如 Vite Proxy），並列出非常具體的完整本地端測試步驟。
 
 請列出所有需要新增或修改的檔案完整程式碼。
-```
+
 
 ### 💻 Vercel Serverless 本地端測試指南
 
 因為 Vite 原生的開發伺服器無法執行 Vercel 的 Node.js 函數，改寫為 Serverless 架構後，原本的 `npm run dev` 必定會出錯或遇到 404 找不到 `/api` 路由的問題。
 
 請依照以下步驟設定，才能在本地端順利測試包含 `/api` 的全端網站：
-
+```
 1. **安裝專案套件與全域安裝 Vercel CLI**：
    請先安裝專案所需的依賴套件，並全域安裝 Vercel CLI：
    ```bash
@@ -158,7 +158,8 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
    npm install -g vercel
    ```
 2. **登入並連結專案**：
-   在您的專案根目錄中，將本地程式碼與 Vercel 雲端專案進行連結：
+   （**⚠️ 帳號提醒**：由於學員可能共用電腦或擁有多個帳號，請先執行 `vercel logout` 登出前一個帳號，再以 `vercel login` 重新登入自己的帳號。）
+   確認登入無誤後，在您的專案根目錄中，將本地程式碼與 Vercel 雲端專案進行連結：
    ```bash
    vercel link
    ```
@@ -173,6 +174,26 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
    vercel dev
    ```
    啟動後，前端 Vite 畫面與後端 `/api` 將會合併在同一個本地網址運行（通常是 `http://localhost:3000`），您就可以順利進行測試了！
+
+<details>
+<summary>💡 進階說明：由 Google AI Studio 完成的專案為何需要這些設定？</summary>
+
+因為這些程式是由 **Google AI Studio** 協助完成的專案，原本通常是單純的前端架構。當我們為了安全性加入後端 API 時，就需要透過上述指令來設定 Vercel 的環境。
+
+**1. 如何確認專案架構已經符合上傳至 Vercel？**
+在上傳或測試前，請檢查您的專案目錄是否具備以下結構：
+- **`api/` 資料夾**：專案根目錄必須包含 `api/` 資料夾，並且裡面有處理 API 請求的 Serverless 函數程式碼（例如 `generate.ts`）。
+- **`vercel.json` 檔案**：根目錄必須包含此設定檔，裡面確實配置了 `builds` 與 `routes`，以確保 Vercel 知道如何編譯前端與啟動後端路由。
+- **不包含機密金鑰**：確保程式碼中已經將寫死的 API Key 移除，改為透過 `process.env` 讀取環境變數。
+
+**2. 為什麼要加入這些指令？**
+- **`npm install`**：從 Google AI Studio 或外部取得的專案原始碼，並不會包含 `node_modules` 資料夾。必須先執行此指令安裝所有必備套件，專案才能正常運作。
+- **`npm install -g vercel`**：安裝 Vercel 官方提供的 CLI 工具，讓我們可以在本地電腦上模擬完整的 Vercel 雲端環境。
+- **`vercel link`**：將您本地電腦的專案資料夾與 Vercel 雲端上已經建立的專案綁定，確保後續操作能對應到正確的雲端專案。
+- **`vercel env pull .env`**：為確保安全，我們將 API Key 儲存在 Vercel 雲端。透過這個指令能安全地將雲端環境變數拉取回本機的 `.env` 檔案，供本地測試時讀取。
+- **`vercel dev`**：原本 Vite 的 `npm run dev` 無法啟動 `/api` 後端程式。`vercel dev` 能夠同時啟動前端畫面與後端 API，完美模擬最終部署上線的全端伺服器環境。
+
+</details>
 
 ---
 
