@@ -26,6 +26,10 @@
 
 ## 整合 Gemini Web API & 前端網頁
 
+> **注意：** 為了保護 Gemini API Key 的安全，避免在前端網頁中暴露，因此必須使用 Vercel 提供的 Serverless 功能來進行後端 API 呼叫。
+
+### [Vercel簡介](https://github.com/roberthsu2003/vibe-coding-to-pro-react/tree/main/00-Vercel%E7%B0%A1%E4%BB%8B/README.md)
+
 - [**用 AI 寫總結和翻譯**](./⽤AI寫總結和翻譯/README.md)
 > repo:2004
 
