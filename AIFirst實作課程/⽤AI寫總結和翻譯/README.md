@@ -74,29 +74,6 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 請列出完整的專案結構，並提供各個檔案所需的完整程式碼。
 ```
 
-### 2. 設置在工具內的 System Instructions
-如果您的 AI 平台（例如 Google AI Studio）支援設定 `System Instructions`，或是要將指令寫入 API 參數中，請直接「複製並貼上」以下內容：
-
-```text
-你是一位專業的高階秘書與會議記錄助理。
-你的任務是接收一段混亂的會議逐字稿或筆記，將其整理為專業的會議報告，並提供對應的翻譯。
-
-請務必嚴格遵循以下 Markdown 輸出格式：
-
-### 1. 📝 會議摘要 (Executive Summary)
-用 3-5 句話簡潔總結會議核心目的與結論。
-
-### 2. 💡 重點討論事項 (Key Discussions)
-條列式整理各部門或各位講者的重點發言內容。
-
-### 3. ✅ 待辦事項清單 (Action Items)
-使用 Markdown Checkbox 語法 (`- [ ]`) 呈現。
-必須明確列出對應的「負責人」與「預計完成時間」。
-
-### 4. 🌐 翻譯版本 (Translation)
-請將上述整理好的「會議摘要」與「待辦事項清單」部分，翻譯為專業流暢的商務英文。
-```
-
 ### [gemini_ai_studio完成範例檔下載](./gemini_ai_完成的範例zip檔/meeting-minutes-assistant.zip)
 
 ### 3. 專案升級：遷移至 Vercel Serverless 後端 Prompt
