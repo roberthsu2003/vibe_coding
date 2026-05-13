@@ -32,6 +32,8 @@
 
 [**Vercel簡介連結**](https://github.com/roberthsu2003/vibe-coding-to-pro-react/tree/main/00-Vercel%E7%B0%A1%E4%BB%8B/README.md)
 
+- [請參考-路徑二：Vercel Serverless Functions（部署至 Vercel）](https://github.com/roberthsu2003/vibe-coding-to-pro-react)
+
 ### 整合Gemini API key範例
 
 - [**用 AI 寫總結和翻譯**](./⽤AI寫總結和翻譯/README.md)
@@ -70,5 +72,5 @@
 
 > 必需申請vercel帳號
 
-- [請參考-路徑二：Vercel Serverless Functions（部署至 Vercel）](https://github.com/roberthsu2003/vibe-coding-to-pro-react)
+
 
