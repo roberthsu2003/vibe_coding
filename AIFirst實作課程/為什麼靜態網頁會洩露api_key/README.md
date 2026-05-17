@@ -103,7 +103,7 @@ export default async function handler(req, res) {
 打開下方的示範頁面，輸入一個（測試用）API Key 並送出問題，  
 然後打開 DevTools → Network，親眼看看 Key 如何出現在請求裡。
 
-👉 [index.html — API Key 洩露示範](./index.html)
+👉 [立即開啟示範頁面（點選即可測試）](https://htmlpreview.github.io/?https://github.com/roberthsu2003/vibe_coding/blob/main/AIFirst%E5%AF%A6%E4%BD%9C%E8%AA%B2%E7%A8%8B/%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9D%9C%E6%85%8B%E7%B6%B2%E9%A0%81%E6%9C%83%E6%B4%A9%E9%9C%B2api_key/index.html)
 
 ---
 
