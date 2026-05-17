@@ -127,6 +127,13 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
        GEMINI_API_KEY=你的_Gemini_API_Key
        NVIDIA_API_KEY=你的_NVIDIA_API_Key
 
+   同時，請在專案根目錄建立 `.env.local` 檔案，內容如下（供本地開發測試使用）：
+
+       GEMINI_API_KEY=你的_Gemini_API_Key
+       NVIDIA_API_KEY=你的_NVIDIA_API_Key
+
+   > ⚠️ **重要**：`.env.local` 包含機密金鑰，請確認 `.gitignore` 中已有此條目，**絕對不可上傳至 GitHub**。
+
 ```
 
 ### 💻 Vercel Serverless 本地端測試指南
