@@ -115,42 +115,17 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型的 Serverless Function（例如 `api/generate.ts`）。請明確指定呼叫 `gemini-2.5-pro` 模型，避免使用到過期的舊版模型。
 2. **環境變數安全**：請要求將 API Key （如 `GEMINI_API_KEY`） 放置於 `.env` 檔案中，並設定為 Node.js 環境變數（`process.env`）讀取，確保私鑰絕不外洩至前端。
 3. **改寫前端串接邏輯**：請幫我找出目前前端直接呼叫 AI 平台的 `fetch` / axios 程式碼，將其改為呼叫我們自己建立的 `/api/generate` 本地端點。
-4. **Vercel 部署設定**：如果需要處理型別或是配置檔（如 `vercel.json`），請一併提供必要的設定與修改。請確保 `vercel.json` 的設定採用以下標準寫法：
-   ```json
-   {
-     "version": 2,
-     "builds": [
-       {
-         "src": "package.json",
-         "use": "@vercel/static-build",
-         "config": {
-           "distDir": "dist"
-         }
-       },
-       {
-         "src": "api/**/*.ts",
-         "use": "@vercel/node"
-       }
-     ],
-     "routes": [
-       {
-         "src": "/api/(.*)",
-         "dest": "/api/$1.ts"
-       }
-     ]
-   }
-   ```
-5. **本地端測試方法**：改為 Serverless 後，單純執行 Vite (`npm run dev`) 無法啟動 `/api` 端點。請告訴我需要安裝什麼工具（例如 Vercel CLI）或做什麼設定（如 Vite Proxy），並列出非常具體的完整本地端測試步驟。
+4. **Vercel 部署設定**：Vercel 現在支援零配置（Zero Configuration），能自動偵測 Vite 專案並處理 `api/` 資料夾的路由，**不需要建立 `vercel.json`**。如果專案中已存在 `vercel.json`，請直接將其刪除。
+5. **確保本地端相容性**：請確認所有程式碼修改皆能透過 `vercel dev` 指令在本地端正常運行，前端與 `/api` 端點將合併在同一個本地網址（通常是 `http://localhost:3000`）中運行。
 
 請列出所有需要新增或修改的檔案完整程式碼。
-
+```
 
 ### 💻 Vercel Serverless 本地端測試指南
 
 因為 Vite 原生的開發伺服器無法執行 Vercel 的 Node.js 函數，改寫為 Serverless 架構後，原本的 `npm run dev` 必定會出錯或遇到 404 找不到 `/api` 路由的問題。
 
 請依照以下步驟設定，才能在本地端順利測試包含 `/api` 的全端網站：
-```
 1. **安裝專案套件與全域安裝 Vercel CLI**：
    請先安裝專案所需的依賴套件，並全域安裝 Vercel CLI：
    ```bash
@@ -164,9 +139,9 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
    vercel link
    ```
 3. **同步環境變數**：
-   將設定在 Vercel 雲端上的 `GEMINI_API_KEY` 拉取到本地專案中（請下載為 `.env` 檔案，因為我們的專案程式碼是設定讀取 `.env`，並確保此檔案不會上傳到 GitHub）：
+   將設定在 Vercel 雲端上的 `GEMINI_API_KEY` 拉取到本地專案中（請下載為 `.env.local` 檔案，Vite 優先讀取此檔案，並確保此檔案不會上傳到 GitHub）：
    ```bash
-   vercel env pull .env
+   vercel env pull .env.local
    ```
 4. **啟動全端測試伺服器**：
    請停用原本的 `npm run dev`，一律改用以下指令啟動專案：
@@ -183,27 +158,20 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 **1. 如何確認專案架構已經符合上傳至 Vercel？**
 在上傳或測試前，請檢查您的專案目錄是否具備以下結構：
 - **`api/` 資料夾**：專案根目錄必須包含 `api/` 資料夾，並且裡面有處理 API 請求的 Serverless 函數程式碼（例如 `generate.ts`）。
-- **`vercel.json` 檔案 (非必要)**：如有特殊路由或編譯需求，可能會包含此配置檔。但在目前的 Vercel 環境中，這通常可以省略（詳見下方第 3 點補充）。
+- **不需要 `vercel.json`**：Vercel 的零配置功能會自動偵測 Vite 專案並處理 `api/` 路由，無需此檔案。若專案中已有 `vercel.json`，請直接刪除。
 - **不包含機密金鑰**：確保程式碼中已經將寫死的 API Key 移除，改為透過 `process.env` 讀取環境變數。
 
 **2. 為什麼要加入這些指令？**
 - **`npm install`**：從 Google AI Studio 或外部取得的專案原始碼，並不會包含 `node_modules` 資料夾。必須先執行此指令安裝所有必備套件，專案才能正常運作。
 - **`npm install -g vercel`**：安裝 Vercel 官方提供的 CLI 工具，讓我們可以在本地電腦上模擬完整的 Vercel 雲端環境。
 - **`vercel link`**：將您本地電腦的專案資料夾與 Vercel 雲端上已經建立的專案綁定，確保後續操作能對應到正確的雲端專案。
-- **`vercel env pull .env`**：為確保安全，我們將 API Key 儲存在 Vercel 雲端。透過這個指令能安全地將雲端環境變數拉取回本機的 `.env` 檔案，供本地測試時讀取。
+- **`vercel env pull .env.local`**：為確保安全，我們將 API Key 儲存在 Vercel 雲端。透過這個指令能安全地將雲端環境變數拉取回本機的 `.env.local` 檔案，供本地測試時讀取。Vite 優先讀取 `.env.local`，因此使用此檔名最為正確。
 - **`vercel dev`**：原本 Vite 的 `npm run dev` 無法啟動 `/api` 後端程式。`vercel dev` 能夠同時啟動前端畫面與後端 API，完美模擬最終部署上線的全端伺服器環境。
 
-**3. 補充說明：關於 `vercel.json` 與零配置 (Zero Configuration)**
-這個 `vercel.json` 檔案在現在的 Vercel 環境中**通常不是絕對必要的**。Vercel 現在擁有非常強大的「Zero Configuration (零配置)」功能，會自動幫你處理大部分的設定。
-
-- **原本檔案的作用**：
-  - **`builds`**：原意是告訴 Vercel 前端使用 `@vercel/static-build`（打包出 `dist` 資料夾），並將 `api/**/*.ts` 轉換成 Serverless Functions。
-  - **`routes`**：原意是設定將 `/api/` 開頭的請求對應導向到 `api/` 資料夾下的 `.ts` 檔案。
-- **為什麼通常可以省略？**
-  - **前端自動偵測**：Vercel 會自動偵測到你的專案是使用 Vite (從 `package.json` 判斷)，並自動幫你執行 `npm run build`，且預設就知道輸出目錄是 `dist`。
-  - **API 自動路由**：Vercel **預設**就會將專案根目錄下 `api/` 資料夾裡面的檔案自動視為 Serverless Functions，並且自動處理好路由（例如：打 `/api/chat` 的 API 會自動對應到 `api/chat.ts`），完全不需要手動寫 `routes` 或 `builds` 來定義。
-- **結論與建議**：
-  在大部分標準的 Vite + React + Vercel Serverless Functions 專案中，**你可以直接刪除這個 `vercel.json` 檔案**。Vercel 官方建議，除非你有非常特殊的客製化需求（例如特定的 redirects、自訂的 header 等），否則盡量依賴自動偵測即可。您可以試著將它改名（例如改成 `vercel.json.backup`）或是移除，然後執行 `vercel dev` 測試看看，一切應該都能夠正常運作！
+**3. Vercel 零配置 (Zero Configuration) 說明**
+Vercel 擁有強大的零配置功能，會自動幫你處理大部分的設定：
+- **前端自動偵測**：Vercel 會自動偵測到你的專案是使用 Vite（從 `package.json` 判斷），並自動執行 `npm run build`，且預設知道輸出目錄是 `dist`。
+- **API 自動路由**：Vercel 預設會將專案根目錄下 `api/` 資料夾裡面的檔案自動視為 Serverless Functions，並自動處理好路由（例如：打 `/api/generate` 的請求會自動對應到 `api/generate.ts`），完全不需要手動設定。
 
 </details>
 
