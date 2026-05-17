@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚠️ API Key 洩露示範</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 32px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #4285f4;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      background: #4285f4;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover { background: #3367d6; }
+    button:disabled { background: #aaa; cursor: not-allowed; }
+
+    .result-box {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 60px;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      margin-top: 14px;
+    }
+
+    /* 警告區塊 */
+    .warning-card {
+      background: #fff8e1;
+      border: 2px solid #f9a825;
+      border-radius: 12px;
+      padding: 24px 28px;
+      width: 100%;
+      max-width: 680px;
+      margin-bottom: 24px;
+    }
+
+    .warning-card h2 {
+      color: #e65100;
+      font-size: 1.05rem;
+      margin-bottom: 14px;
+    }
+
+    .warning-card ol {
+      padding-left: 20px;
+      line-height: 2;
+      font-size: 0.93rem;
+    }
+
+    .code-highlight {
+      background: #fff3e0;
+      border: 1px solid #ffe082;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      margin-top: 10px;
+      overflow-x: auto;
+    }
+
+    .key-revealed {
+      color: #c62828;
+      font-weight: bold;
+      background: #ffcdd2;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .devtools-tip {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    .devtools-tip strong { color: #2e7d32; }
+
+    .badge {
+      display: inline-block;
+      background: #c62828;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 99px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚠️ 靜態網頁 API Key 洩露示範</h1>
+  <p class="subtitle">這個範例示範：直接在前端 JavaScript 放入 API Key 的危險性</p>
+
+  <!-- Step 1：輸入 API Key 並送出問題 -->
+  <div class="card">
+    <h2>🧪 Step 1：輸入你的 Gemini API Key 並提問</h2>
+
+    <label for="apiKey">Gemini API Key（直接寫在 JS 裡）</label>
+    <input type="text" id="apiKey" placeholder="貼上你的 API Key，例如：AIzaSy..." />
+
+    <label for="question">問題</label>
+    <textarea id="question" placeholder="輸入任何問題，例如：台灣的首都是哪裡？"></textarea>
+
+    <button id="sendBtn" onclick="sendToGemini()">送出問題（直接呼叫 Gemini API）</button>
+
+    <div class="result-box" id="result">回應結果會顯示在這裡...</div>
+  </div>
+
+  <!-- Step 2：說明洩露原理 -->
+  <div class="warning-card">
+    <h2>🔍 Step 2：打開開發者工具，看看 API Key 在哪裡 <span class="badge">關鍵</span></h2>
+
+    <ol>
+      <li>按下 <strong>F12</strong>（或右鍵 → 檢查）開啟開發者工具</li>
+      <li>點選上方的 <strong>「Network（網路）」</strong> 分頁</li>
+      <li>重新點「送出問題」</li>
+      <li>點選出現的 <strong>generativelanguage.googleapis.com</strong> 請求</li>
+      <li>在 <strong>Headers（標頭）</strong> 或 <strong>Request URL</strong> 中，可以直接看到你的 API Key！</li>
+    </ol>
+
+    <div class="devtools-tip">
+      <strong>📌 你也可以在原始碼中找到 API Key：</strong><br/>
+      右鍵 → 「檢視頁面原始碼」<br/>
+      使用 Ctrl+F 搜尋 <code>API_KEY</code> 或 <code>AIzaSy</code>，Key 就直接在原始碼裡！
+    </div>
+
+    <div id="codeBlock" class="code-highlight" style="display:none;">
+      <!-- 動態顯示 -->
+    </div>
+  </div>
+
+  <!-- Step 3：說明後果 -->
+  <div class="card">
+    <h2>💸 Step 3：洩露 API Key 的後果</h2>
+    <ul style="padding-left:20px; line-height:2.2; font-size:0.93rem;">
+      <li>任何人只要「檢視原始碼」就能拿走你的 Key</li>
+      <li>別人用你的 Key 大量呼叫 API → <strong style="color:#c62828;">你付費！</strong></li>
+      <li>Google 可能因為濫用而<strong style="color:#c62828;">停用你的帳號</strong></li>
+      <li>Key 一旦公開，即使刪掉也可能已被爬蟲收走</li>
+    </ul>
+  </div>
+
+  <!-- Step 4：正確做法 -->
+  <div class="card" style="border-left: 4px solid #34a853;">
+    <h2>✅ Step 4：正確做法 — 用後端保護 API Key</h2>
+    <p style="font-size:0.93rem; line-height:1.8; margin-bottom:12px;">
+      API Key 應該放在<strong>伺服器端（後端）</strong>，前端只和你自己的後端溝通，後端再去呼叫 Gemini。
+      這樣使用者永遠看不到 Key。
+    </p>
+    <div class="code-highlight">
+<span style="color:#888;">// ❌ 錯誤：Key 直接寫在前端 JS</span>
+const API_KEY = "AIzaSy...";
+fetch(`https://generativelanguage.googleapis.com/...?key=${API_KEY}`, ...)
+
+<span style="color:#888;">// ✅ 正確：前端只呼叫自己的後端 API</span>
+fetch("/api/ask", {
+  method: "POST",
+  body: JSON.stringify({ question: "..." })
+})
+<span style="color:#888;">// 後端（Vercel Function / Express）才持有 API Key</span>
+    </div>
+  </div>
+
+  <script>
+    // ⚠️ 示範用：API Key 直接寫在前端 JavaScript 中
+    // 任何人打開開發者工具或檢視原始碼都看得到
+
+    async function sendToGemini() {
+      const API_KEY = document.getElementById("apiKey").value.trim();
+      const question = document.getElementById("question").value.trim();
+      const resultEl = document.getElementById("result");
+      const btn = document.getElementById("sendBtn");
+
+      if (!API_KEY) {
+        alert("請先輸入 Gemini API Key！");
+        return;
+      }
+      if (!question) {
+        alert("請輸入問題！");
+        return;
+      }
+
+      // 動態顯示原始碼洩露區塊
+      const codeBlock = document.getElementById("codeBlock");
+      codeBlock.style.display = "block";
+      codeBlock.innerHTML =
+        `<span style="color:#888;">// 在 Network 分頁的 Request URL 可以看到：</span>\n` +
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent\n` +
+        `  ?key=<span class="key-revealed">${API_KEY}</span>\n\n` +
+        `<span style="color:#888;">// 在頁面原始碼中也可以直接搜尋到此 Key！</span>`;
+
+      btn.disabled = true;
+      resultEl.textContent = "請求中...";
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: question }] }]
+          })
+        });
+
+        if (!response.ok) {
+          const err = await response.json();
+          resultEl.textContent = `錯誤：${err.error?.message || response.statusText}`;
+          return;
+        }
+
+        const data = await response.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text ?? "（無回應）";
+        resultEl.textContent = text;
+      } catch (e) {
+        resultEl.textContent = `網路錯誤：${e.message}`;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+
+</body>
+</html>
