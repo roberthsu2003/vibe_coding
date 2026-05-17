@@ -141,29 +141,43 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 因為 Vite 原生的開發伺服器無法執行 Vercel 的 Node.js 函數，改寫為 Serverless 架構後，原本的 `npm run dev` 必定會出錯或遇到 404 找不到 `/api` 路由的問題。
 
 請依照以下步驟設定，才能在本地端順利測試包含 `/api` 的全端網站：
+
 1. **安裝專案套件與全域安裝 Vercel CLI**：
    請先安裝專案所需的依賴套件，並全域安裝 Vercel CLI：
    ```bash
    npm install
    npm install -g vercel
    ```
-2. **登入並連結專案**：
+
+2. **登入 Vercel 帳號**：
    （**⚠️ 帳號提醒**：由於學員可能共用電腦或擁有多個帳號，請先執行 `vercel logout` 登出前一個帳號，再以 `vercel login` 重新登入自己的帳號。）
-   確認登入無誤後，在您的專案根目錄中，將本地程式碼與 Vercel 雲端專案進行連結：
+   ```bash
+   vercel logout
+   vercel login
+   ```
+
+3. **手動建立 `.env.local` 檔案**：
+   在專案根目錄建立 `.env.local`，填入您的 API Key（此步驟取代從雲端拉取，適合尚未部署至 Vercel 的情境）：
+   ```
+   GEMINI_API_KEY=你的_Gemini_API_Key
+   NVIDIA_API_KEY=你的_NVIDIA_API_Key
+   ```
+   > ⚠️ 請確認 `.gitignore` 中已包含 `.env.local`，**絕對不可上傳至 GitHub**。
+
+4. **連結 Vercel 專案**：
+   在專案根目錄執行以下指令，依照提示建立或連結一個 Vercel 雲端專案（本機測試必須完成此步驟，`vercel dev` 才能正常運作）：
    ```bash
    vercel link
    ```
-3. **同步環境變數**：
-   將設定在 Vercel 雲端上的 `GEMINI_API_KEY` 拉取到本地專案中（請下載為 `.env.local` 檔案，Vite 優先讀取此檔案，並確保此檔案不會上傳到 GitHub）：
-   ```bash
-   vercel env pull .env.local
-   ```
-4. **啟動全端測試伺服器**：
+
+5. **啟動全端測試伺服器**：
    請停用原本的 `npm run dev`，一律改用以下指令啟動專案：
    ```bash
    vercel dev
    ```
    啟動後，前端 Vite 畫面與後端 `/api` 將會合併在同一個本地網址運行（通常是 `http://localhost:3000`），您就可以順利進行測試了！
+
+> 💡 **已部署至 Vercel 並在後台設定好環境變數的學員**：可跳過步驟 3，改在步驟 4 之後執行 `vercel env pull .env.local`，從雲端直接同步環境變數。
 
 <details>
 <summary>💡 進階說明：由 Google AI Studio 完成的專案為何需要這些設定？</summary>
