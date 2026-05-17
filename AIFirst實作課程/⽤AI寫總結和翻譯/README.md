@@ -114,7 +114,7 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 
 1. **新增 AI 服務選擇介面**：在 UI 介面中加入一個下拉選單或切換按鈕，讓使用者可以在送出前選擇要使用的 AI 服務：
    - **Google Gemini**（模型：`gemini-2.5-flash-lite`）
-   - **NVIDIA**（模型：`nvidia/nemotron-3-content-safety`）
+   - **NVIDIA**（模型：`nvidia/nemotron-mini-4b-instruct`）
 
 2. **建立 Serverless Function**：在專案根目錄建立 `/api/generate.ts`，在後端根據前端傳入的服務選擇，動態呼叫對應的 AI API：
    - **Gemini API**：使用 `process.env.GEMINI_API_KEY` 讀取 API Key，模型為 `gemini-2.5-flash-lite`。
