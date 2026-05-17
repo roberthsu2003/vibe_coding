@@ -35,7 +35,9 @@
 
 ## 🔑 整合 Gemini API Key & 前端網頁
 
-> 🛡️ **安全提醒：** 為了保護 Gemini API Key，避免直接暴露在前端程式碼中，必須透過 **Vercel Serverless Functions** 進行後端 API 呼叫。
+> 🛡️ **安全提醒：** 為了保護 Gemini API Key，避免直接暴露在前端程式碼中，必須透過 **Vercel Serverless Functions** 進行後端 API 呼叫。 
+
+> [為什麼靜態網頁會洩露api key](./為什麼靜態網頁會洩露api_key/README.md)
 
 ### 📖 Vercel 簡介
 
@@ -78,13 +80,7 @@
 | [💰 記帳網頁](./記帳網頁/README.md) | 個人收支管理系統 | |
 | 🛒 POS 應用程式 | 銷售點管理系統 | 即將推出 |
 
----
 
-## 🚀 發佈至雲端服務平台（Vercel Serverless）
-
-> ⚠️ 需要先申請 [Vercel 帳號](https://vercel.com)
-
----
 
 <div align="center">
 
