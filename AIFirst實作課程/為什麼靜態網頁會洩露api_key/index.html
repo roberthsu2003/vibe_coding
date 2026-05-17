@@ -270,14 +270,14 @@ fetch("/api/ask", {
       codeBlock.style.display = "block";
       codeBlock.innerHTML =
         `<span style="color:#888;">// 在 Network 分頁的 Request URL 可以看到：</span>\n` +
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent\n` +
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent\n` +
         `  ?key=<span class="key-revealed">${API_KEY}</span>\n\n` +
         `<span style="color:#888;">// 在頁面原始碼中也可以直接搜尋到此 Key！</span>`;
 
       btn.disabled = true;
       resultEl.textContent = "請求中...";
 
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
       try {
         const response = await fetch(url, {
