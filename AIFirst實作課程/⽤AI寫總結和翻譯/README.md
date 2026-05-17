@@ -108,15 +108,24 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 當您在本地端完成初步測試後，請務必將呼叫 AI 服務的邏輯遷移至後端。您可以將以下 Prompt 餵給 AI，請它幫您將專案改寫為 Vercel Serverless 架構：
 
 ```markdown
-這是一個基於 Vite + React 所建立的前端專案。為了避免在前端程式碼中暴露 API Key，我需要將呼叫 AI 服務的邏輯遷移至後端。
+這是一個由 **Google AI Studio** 協助建立的 Vite + React 純前端專案，專案結構與 Vercel Serverless Functions 的標準架構不同，在加入 `/api` 後端時可能需要額外調整。
 
-請幫我將這個專案加入 Vercel Serverless Functions 的支援，具體需求如下：
+請在現有的前端專案中，新增**多 AI 服務提供商選擇功能**，並透過 Vercel Serverless Function 呼叫 AI API，具體需求如下：
 
-1. **建立 Serverless 函數**：在專案根目錄建立 `/api` 資料夾，並撰寫一個對接 AI 模型的 Serverless Function（例如 `api/generate.ts`）。請明確指定呼叫 `gemini-2.5-pro` 模型，避免使用到過期的舊版模型。
-2. **環境變數安全**：請要求將 API Key （如 `GEMINI_API_KEY`） 放置於 `.env` 檔案中，並設定為 Node.js 環境變數（`process.env`）讀取，確保私鑰絕不外洩至前端。
-3. **改寫前端串接邏輯**：請幫我找出目前前端直接呼叫 AI 平台的 `fetch` / axios 程式碼，將其改為呼叫我們自己建立的 `/api/generate` 本地端點。
-4. **Vercel 部署設定**：Vercel 現在支援零配置（Zero Configuration），能自動偵測 Vite 專案並處理 `api/` 資料夾的路由，**不需要建立 `vercel.json`**。如果專案中已存在 `vercel.json`，請直接將其刪除。
-5. **確保本地端相容性**：請確認所有程式碼修改皆能透過 `vercel dev` 指令在本地端正常運行，前端與 `/api` 端點將合併在同一個本地網址（通常是 `http://localhost:3000`）中運行。
+1. **新增 AI 服務選擇介面**：在 UI 介面中加入一個下拉選單或切換按鈕，讓使用者可以在送出前選擇要使用的 AI 服務：
+   - **Google Gemini**（模型：`gemini-2.5-flash-lite`）
+   - **NVIDIA**（模型：`nvidia/nemotron-3-content-safety`）
+
+2. **建立 Serverless Function**：在專案根目錄建立 `/api/generate.ts`，在後端根據前端傳入的服務選擇，動態呼叫對應的 AI API：
+   - **Gemini API**：使用 `process.env.GEMINI_API_KEY` 讀取 API Key，模型為 `gemini-2.5-flash-lite`。
+   - **NVIDIA API**：使用 `process.env.NVIDIA_API_KEY` 讀取 API Key，Base URL 為 `https://integrate.api.nvidia.com/v1`，模型為 `nvidia/nemotron-3-content-safety`。
+
+3. **改寫前端串接邏輯**：前端將使用者選擇的服務商與輸入內容一起傳送至 `/api/generate`，不直接呼叫任何 AI 平台。
+
+4. **環境變數設定**：將兩組 API Key 儲存於 Vercel 後台的環境變數中，並透過 Node.js 的 `process.env` 讀取，確保私鑰不外洩至前端：
+
+       GEMINI_API_KEY=你的_Gemini_API_Key
+       NVIDIA_API_KEY=你的_NVIDIA_API_Key
 
 請列出所有需要新增或修改的檔案完整程式碼。
 ```
