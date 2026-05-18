@@ -107,9 +107,11 @@ Alex：好，那今天會議就先到這邊，謝謝大家。
 當您在本地端完成初步測試後，請務必將呼叫 AI 服務的邏輯遷移至後端。您可以將以下 Prompt 餵給 AI，請它幫您將專案改寫為 Vercel Serverless 架構：
 
 ```markdown
-這是一個由 **Google AI Studio** 協助建立的 Vite + React + express 全端專案，專案結構與 Vercel Serverless Functions 的標準架構不同，在加入 `/api` 後端時可能需要額外調整。
+這是一個由 **Google AI Studio** 協助建立的 Vite + React + Express 全端專案，原本使用 Express 作為後端伺服器，但 Vercel 不支援 Express 長駐伺服器的部署方式，因此需要將後端架構遷移至 Vercel Serverless Functions。
 
-請在現有的前端專案中，新增**多 AI 服務提供商選擇功能**，並透過 Vercel Serverless Function 呼叫 AI API，具體需求如下：
+請在現有的全端專案中，新增**多 AI 服務提供商選擇功能**，並透過 Vercel Serverless Function 呼叫 AI API，具體需求如下：
+
+0. **移除 Express 後端**：若專案中存在 `server.ts`（Express 伺服器）及相關依賴（如 `express`、`cors` 等），請一併移除，改以 Vercel Serverless Functions 取代。
 
 1. **新增 AI 服務選擇介面**：在 UI 介面中加入一個下拉選單或切換按鈕，讓使用者可以在送出前選擇要使用的 AI 服務：
    - **Google Gemini**（模型：`gemini-2.5-flash-lite`）
