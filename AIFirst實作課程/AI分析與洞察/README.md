@@ -65,7 +65,6 @@ ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
 - 請設計一個 `System Instructions` 常數，用來設定 AI 的行為與輸出格式，並在呼叫 API 時帶入。
 - 當使用者點擊送出按鈕時，將文字框的 CSV 內容作為 User Prompt 發送。
 
-請列出完整的專案結構，並提供各個檔案所需的完整程式碼。
 ```
 
 ### 2. AI 模型的 System Instructions
@@ -106,7 +105,7 @@ ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
 當您在本地端完成初步測試後，請務必將呼叫 AI 服務的邏輯遷移至後端。您可以將以下 Prompt 餵給 AI，請它幫您將專案改寫為 Vercel Serverless 架構：
 
 ```markdown
-這是一個由 **Google AI Studio** 協助建立的 Vite + React 純前端專案，專案結構與 Vercel Serverless Functions 的標準架構不同，在加入 `/api` 後端時可能需要額外調整。
+這是一個由 **Google AI Studio** 協助建立的 Vite + React + express 全端專案，專案結構與 Vercel Serverless Functions 的標準架構不同，在加入 `/api` 後端時可能需要額外調整。
 
 請在現有的前端專案中，新增**多 AI 服務提供商選擇功能**，並透過 Vercel Serverless Function 呼叫 AI API，具體需求如下：
 
