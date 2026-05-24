@@ -82,7 +82,6 @@ A：3C 類商品提供原廠保固，保固期間依品牌規定（通常為 1 �
 - 請設計一個 `SYSTEM_INSTRUCTIONS` 常數，用來設定 AI 的角色與回答規則，並在每次 API 呼叫時帶入。
 - 將完整的 `messages`（對話歷史）陣列傳送給 API，格式為 `[{ role: 'user' | 'model', parts: [{ text: string }] }]`。
 
-請列出完整的專案結構，並提供各個檔案所需的完整程式碼。
 ```
 
 ### 2. AI 模型的 System Instructions

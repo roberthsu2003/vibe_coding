@@ -1,216 +1,335 @@
-# 建立公司表單：辦公室飲料訂購系統
+# 建立公司表單：辦公室飲料訂購系統 🥤
 
-本單元將帶領學生完成一個完整的全端應用。我們將手動設定 Google Sheets 作為資料庫，並使用 Google Apps Script (GAS) 作為 API 後端。接著，我們將學習如何使用 **Google AI Studio**，透過精確的 Prompt 讓 AI 自動生成前端網頁代碼 (React + Vite + TypeScript)。
-
-
-## 完成網址
-
-https://test1-nine-gray-14.vercel.app/
+本單元將帶領學生完成一個完整的全端 Web 應用。我們將手動設定 Google Sheets（Google 試算表）作為資料庫，並使用 Google Apps Script (GAS) 部署一個具備完整 **CRUD（新增、查詢、修改、刪除）** 功能的 API 後端。最後，我們將使用 **Google AI Studio**，透過精確的 Prompt 讓 AI 自動為我們生成極具設計感的前端網頁（React + Vite + TypeScript + Tailwind CSS）。
 
 ---
 
-## 第一階段：後端資料庫設定 (詳細圖文步驟)
+## 📅 課程架構
+1. **第一階段**：後端資料庫與 API 設定（Google Sheets + Google Apps Script）
+2. **第二階段**：使用 Google AI Studio 發送 Prompt 生成前端網頁並於本地運行
 
-因為這部分需要正確的權限設定，請初學者務必一步步跟著做！
+---
+
+## 🛠️ 第一階段：後端資料庫與 API 設定
+
+因為這部分需要正確的雲端權限設定，請務必按照步驟仔細操作！
 
 ### 步驟 1：建立 Google 試算表 (Google Sheets)
-1. 前往 Google 雲端硬碟，建議先**建立一個專屬的資料夾**（例如：`AIFirst_實作專案`）並點擊進入該資料夾。
-2. 在該資料夾內，點擊左上角「新增」>「Google 試算表」，並將左上角的檔案名稱命名為「辦公室飲料訂購系統」。
+1. 前往 [Google 雲端硬碟](https://drive.google.com/)，建議先**建立一個專屬資料夾**（例如：`AIFirst_飲料實作`）並進入該資料夾。
+2. 點擊左上角「**新增**」 > 「**Google 試算表**」，並將左上角的檔案名稱命名為「**辦公室飲料訂購系統**」。
 3. **建立菜單分頁 (`Menu`)**：
-   - 將下方第一個工作表重新命名為 `Menu` (注意大小寫)。
-   - 點擊儲存格 **A1**，直接**複製並貼上**下方這個區塊的內容（貼上後會自動分為三欄）：
+   - 將第一個工作表（分頁）重新命名為 **`Menu`** (請注意大小寫與拼字)。
+   - 點擊儲存格 **A1**，複製並貼上以下表格內容（貼上後會自動分為四欄）：
      ```text
-     品項名稱	類別	價格
-     珍珠奶茶	奶茶	60
-     錫蘭紅茶	純茶	35
-     冰淇淋紅茶	特調	50
+     飲料名稱	單價	類別分類	備註描述
+     茉莉綠茶	35	原味茶類	選用新鮮茉莉花薰製而成，清香解膩。
+     珍珠奶茶	55	經典奶茶類	Q彈珍珠搭配濃郁奶茶，店內人氣冠軍。
+     燕麥拿鐵	65	鮮奶茶類	使用職人鮮奶與澳洲燕麥，口感豐富有層次。
+     翡翠檸檬	60	特調果茶類	新鮮現榨檸檬汁搭配清爽綠茶，夏季首選。
      ```
 4. **建立訂單分頁 (`Orders`)**：
-   - 點擊左下角「+」新增一個工作表，命名為 `Orders` (注意大小寫)。
-   - 點擊儲存格 **A1**，直接**複製並貼上**下方這個區塊的內容作為標題：
+   - 點擊工作表左下角的「**+**」新增一個分頁，命名為 **`Orders`** (請注意大小寫與拼字)。
+   - 點擊儲存格 **A1**，直接複製並貼上以下標題文字作為首列：
      ```text
      訂單編號	時間戳記	訂購人	飲料名稱	甜度	冰塊	數量	總金額
      ```
 
+---
+
 ### 步驟 2：設定 Google Apps Script (GAS)
-1. 在試算表上方選單，點擊 **「擴充功能」 > 「Apps Script」**。
-2. 這會開啟一個新的腳本編輯器視窗。
-3. 將編輯器中原本的 `function myFunction() {}` 刪除。
-4. **完全複製**以下程式碼，並貼上到編輯器中：
+1. 在試算表上方選單中，點擊 **「擴充功能」 > 「Apps Script」**。
+2. 這會開啟 Google Apps Script 瀏覽器編輯器。
+3. 將編輯器中預設的 `function myFunction() {}` 全部刪除。
+4. **完整複製**以下程式碼，貼入編輯器中：
 
 ```javascript
 /**
- * 辦公室飲料訂購系統 - GAS 後端 API
+ * 辦公室飲料訂購系統 - Google Apps Script 後端 API
+ *
+ * 提供給學生實作全端應用的 API 腳本，支援：
+ * 1. GET 請求：撈取「Menu」菜單與「Orders」現有訂單
+ * 2. POST 請求：支援新增 (create)、修改 (update)、刪除 (delete) 訂單
  */
 
 // 1. 處理 GET 請求：回傳菜單與現有訂單
 function doGet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
-  // 取得菜單
+  // (1) 取得 Menu 工作表資料
   const menuSheet = ss.getSheetByName("Menu");
-  const menuData = menuSheet.getDataRange().getValues();
   let menu = [];
-  if (menuData.length > 1) {
-    menu = menuData.slice(1).map(row => ({
-      name: row[0],
-      category: row[1],
-      price: row[2]
-    }));
+  if (menuSheet) {
+    const menuData = menuSheet.getDataRange().getValues();
+    if (menuData.length > 1) {
+      // 排除第一列標題，並對應到最新 Excel 欄位：
+      // row[0] (飲料名稱), row[1] (單價), row[2] (類別分類), row[3] (備註描述)
+      menu = menuData.slice(1).map(row => ({
+        name: row[0] ? row[0].toString().trim() : "",
+        price: parseFloat(row[1]) || 0,
+        category: row[2] ? row[2].toString().trim() : "",
+        description: row[3] ? row[3].toString().trim() : ""
+      }));
+    }
   }
 
-  // 取得訂單
+  // (2) 取得 Orders 工作表資料
   const orderSheet = ss.getSheetByName("Orders");
-  const orderData = orderSheet.getDataRange().getValues();
   let orders = [];
-  if (orderData.length > 1) {
-    orders = orderData.slice(1).map(row => ({
-      orderId: row[0],
-      timestamp: row[1],
-      name: row[2],
-      drink: row[3],
-      sugar: row[4],
-      ice: row[5],
-      quantity: row[6],
-      totalPrice: row[7]
-    }));
+  if (orderSheet) {
+    const orderData = orderSheet.getDataRange().getValues();
+    if (orderData.length > 1) {
+      // 排除第一列標題，並對應到 Orders 欄位：
+      // row[0] (訂單編號), row[1] (時間戳記), row[2] (訂購人), row[3] (飲料名稱)
+      // row[4] (甜度), row[5] (冰塊), row[6] (數量), row[7] (總金額)
+      orders = orderData.slice(1).map(row => ({
+        orderId: row[0] ? row[0].toString().trim() : "",
+        timestamp: row[1],
+        name: row[2] ? row[2].toString().trim() : "",
+        drink: row[3] ? row[3].toString().trim() : "",
+        sugar: row[4] ? row[4].toString().trim() : "",
+        ice: row[5] ? row[5].toString().trim() : "",
+        quantity: parseInt(row[6]) || 0,
+        totalPrice: parseFloat(row[7]) || 0
+      }));
+    }
   }
 
-  return ContentService.createTextOutput(JSON.stringify({ menu: menu, orders: orders }))
-    .setMimeType(ContentService.MimeType.JSON);
+  // 包裝成 JSON 格式回傳
+  return createJsonResponse({ menu: menu, orders: orders });
 }
 
-// 2. 處理 POST 請求：支援新增、修改、刪除
+// 2. 處理 POST 請求：支援新增、修改、刪除訂單
 function doPost(e) {
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     const sheet = ss.getSheetByName("Orders");
+    
+    if (!sheet) {
+      throw new Error("找不到名為 'Orders' 的工作表，請先建立！");
+    }
+
     const payload = JSON.parse(e.postData.contents);
     const action = payload.action; // "create", "update", "delete"
     const data = payload.data;
 
     const orderData = sheet.getDataRange().getValues();
 
+    // ─── [新增訂單] ───
     if (action === "create") {
-      const orderId = Utilities.getUuid(); // 產生唯一識別碼
-      const newRow = [orderId, new Date(), data.name, data.drink, data.sugar, data.ice, data.quantity, data.totalPrice];
+      const orderId = Utilities.getUuid(); // 產生唯一的 UUID 作為訂單編號
+      
+      // 依照 Excel Orders 工作表的欄位順序寫入：
+      // 1.訂單編號, 2.時間戳記, 3.訂購人, 4.飲料名稱, 5.甜度, 6.冰塊, 7.數量, 8.總金額
+      const newRow = [
+        orderId,
+        new Date(),
+        data.name || "無名氏",
+        data.drink || "",
+        data.sugar || "正常糖",
+        data.ice || "正常冰",
+        parseInt(data.quantity) || 1,
+        parseFloat(data.totalPrice) || 0
+      ];
+      
       sheet.appendRow(newRow);
-      return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "訂單新增成功" })).setMimeType(ContentService.MimeType.JSON);
+      return createJsonResponse({ status: "success", message: "訂單新增成功！", orderId: orderId });
     }
 
+    // ─── [修改訂單] ───
     if (action === "update") {
+      if (!data.orderId) {
+        throw new Error("修改訂單時缺少 'orderId' 參數");
+      }
+
       for (let i = 1; i < orderData.length; i++) {
-        if (orderData[i][0] === data.orderId) { // 找到對應的訂單編號
-          // 更新第 3 欄到第 8 欄 (訂購人到總金額)
-          sheet.getRange(i + 1, 3, 1, 6).setValues([[data.name, data.drink, data.sugar, data.ice, data.quantity, data.totalPrice]]);
-          return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "訂單更新成功" })).setMimeType(ContentService.MimeType.JSON);
+        if (orderData[i][0].toString().trim() === data.orderId.toString().trim()) {
+          // 找到對應的訂單編號，更新第 3 欄到第 8 欄 (訂購人 到 總金額)
+          // i + 1 代表第 i + 1 列，3 代表第 3 欄 (C欄: 訂購人)
+          sheet.getRange(i + 1, 3, 1, 6).setValues([[
+            data.name,
+            data.drink,
+            data.sugar,
+            data.ice,
+            parseInt(data.quantity) || 1,
+            parseFloat(data.totalPrice) || 0
+          ]]);
+          return createJsonResponse({ status: "success", message: "訂單更新成功！" });
         }
       }
-      throw new Error("找不到該筆訂單");
+      throw new Error("找不到該筆訂單編號：" + data.orderId);
     }
 
+    // ─── [刪除訂單] ───
     if (action === "delete") {
+      if (!data.orderId) {
+        throw new Error("刪除訂單時缺少 'orderId' 參數");
+      }
+
       for (let i = 1; i < orderData.length; i++) {
-        if (orderData[i][0] === data.orderId) {
-          sheet.deleteRow(i + 1);
-          return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "訂單刪除成功" })).setMimeType(ContentService.MimeType.JSON);
+        if (orderData[i][0].toString().trim() === data.orderId.toString().trim()) {
+          sheet.deleteRow(i + 1); // 刪除對應的列
+          return createJsonResponse({ status: "success", message: "訂單刪除成功！" });
         }
       }
-      throw new Error("找不到該筆訂單");
+      throw new Error("找不到該筆訂單編號：" + data.orderId);
     }
 
     throw new Error("未知的操作 (action 必須為 create, update 或 delete)");
 
   } catch (error) {
-    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createJsonResponse({ status: "error", message: error.toString() });
   }
+}
+
+/**
+ * 輔助函式：建立 JSON 回傳格式
+ */
+function createJsonResponse(data) {
+  return ContentService.createTextOutput(JSON.stringify(data))
+                       .setMimeType(ContentService.MimeType.JSON);
 }
 ```
 
-5. 點擊上方工具列的 **「儲存」** 圖示 (或按 Ctrl+S / Cmd+S)，專案名稱可改為「DrinkOrderAPI」。
+5. 點擊編輯器上方工具列的「**儲存**」💾 圖示（或按快捷鍵 Ctrl+S / Cmd+S），並將專案名稱命名為「**DrinkOrderAPI**」。
+
+---
 
 ### 步驟 3：部署並取得 API 網址 (非常重要！)
-這是讓前端網頁能連線到試算表的關鍵步驟。
+這是讓前端網頁能夠透過網路存取 Google 試算表資料庫的關鍵步驟：
 1. 點擊右上角的藍色按鈕 **「部署」 > 「新增部署作業」**。
-2. 點擊左側「選取類型」旁邊的齒輪圖示 ⚙️，勾選 **「網頁應用程式」**。
-3. 在右側設定欄位：
-   - **說明**：填入 `初次部署`。
-   - **執行身分**：選擇 **「我」** (你的 Google 帳號)。
-   - **誰可以存取**：**務必選擇「所有人」** (這樣網頁才能跨網域存取)。
-4. 點擊 **「部署」**。
-5. **授權存取** (初次執行會要求權限)：
-   - 點擊「授權存取」並選擇你的帳號。
-   - 若出現安全警告，點擊左下角的「進階」>「前往 DrinkOrderAPI (不安全)」。
-   - 點擊「允許」。
-6. 部署完成後，會出現一串 **「網頁應用程式網址」 (Web App URL)**。
-7. **📋 請將這串網址複製並保存下來**，我們馬上就會用到！
+2. 點擊「選取類型」旁邊的齒輪圖示 ⚙️，勾選 **「網頁應用程式」**。
+3. 填入以下欄位設定：
+   - **說明**：`V1.0.0`
+   - **執行身分**：選擇 **「我」** (您的 Google 帳號)。
+   - **誰可以存取**：**務必選擇「所有人」** (這樣前端網頁才能跨網域存取 API)。
+4. 點擊 **「部署」** 按鈕。
+5. **授權存取**（初次部署會要求帳號權限）：
+   - 點擊「**授權存取**」，選擇您的 Google 帳號。
+   - 若出現安全警告「Google 尚未驗證此應用程式」，請點擊左下角的「**進階**」 > 「**前往 DrinkOrderAPI（不安全）**」。
+   - 點擊「**允許**」。
+6. 部署成功後，會看到 **「網頁應用程式網址」 (Web App URL)**。
+7. **📋 請將這串網址完整複製並妥善保存**，我們在下一階段馬上會用到！
 
 > [!WARNING]
 > **修改 GAS 程式碼的注意事項**：
-> 如果你未來修改了 GAS 的程式碼（例如增加新功能），直接按「儲存」是不會生效的，**必須重新部署**：
-> 1. 點擊「部署」>「**管理部署作業**」。
+> 如果你未來修改了 GAS 中的任何程式碼，直接按「儲存」是不會生效的，**必須重新部署**：
+> 1. 點擊「部署」 > 「**管理部署作業**」。
 > 2. 點擊右上角的「編輯」（鉛筆圖示）。
 > 3. 將「版本」下拉選單改為 **「新版本」**。
 > 4. 點擊「部署」。
 > 
-> ⚠️ **千萬不要**再次點選「新增部署作業」，否則會產生一個全新的網址，你原本放在 React 裡的網址就會失效！
-
-### 步驟 4：測試你的 API (排錯指南)
-在請 AI 寫前端程式碼之前，我們必須確保後端 API 是正常運作的！
-
-1. **如何測試？**
-   打開一個新的瀏覽器分頁，直接將剛剛複製的 **網頁應用程式網址 (Web App URL)** 貼上並按下 Enter。
-2. **正確的結果**：
-   你應該會看到畫面上出現類似下方這樣的純文字 JSON 資料：
-   `{"menu":[{"品項名稱":"珍珠奶茶","類別":"奶茶","價格":60}...],"orders":[]}`
-3. **常見錯誤與解決方式**：
-   - ❌ **前端回報「缺少 menu 屬性」或「資料格式不正確」**：
-     代表你修改了程式碼或建立表單後**沒有重新部署新版本**。API 還是舊的空殼。請依照上方的警告指示，發佈一個「新版本」。
-   - ❌ **畫面上顯示「需要授權」或出現 Google 登入畫面**：
-     代表你在部署時，「誰可以存取」沒有設定為「所有人」。請重新部署並更改權限。
-   - ❌ **畫面上顯示 Script 錯誤 (例如 TypeError: Cannot read properties of null)**：
-     通常是因為你的試算表分頁名稱打錯了。請檢查左下方工作表名稱是否精準為大寫開頭的 `Menu` 和 `Orders`，結尾不能有多餘的空白。
+> ⚠️ **千萬不要**每次都點選「新增部署作業」，否則會產生一個全新的網址，你原本放在網頁裡的網址就會失效！
 
 ---
 
-## 第二階段：使用 Google AI Studio 生成前端網頁
+### 步驟 4：測試你的 API (排錯指南)
+在請 AI 寫前端網頁之前，先確保後端 API 是正常通訊的！
 
-現在我們有了後端 API，接著我們要請 AI 幫我們寫 React 前端程式碼。
+1. **如何測試？**
+   開啟瀏覽器新分頁，將剛剛複製的 **網頁應用程式網址** 貼上並按下 Enter。
+2. **正確的結果**：
+   您應該會看到瀏覽器輸出類似下方的純 JSON 資料（會包含您在 `Menu` 建立的商品）：
+   ```json
+   {"menu":[{"name":"茉莉綠茶","price":35,"category":"原味茶類","description":"選用新鮮茉莉花薰製而成，清香解膩。"},...],"orders":[]}
+   ```
+3. **常見問題與解決方案**：
+   - ❌ **出現 Google 登入畫面或「需要授權」**：代表您在部署時，「誰可以存取」沒有設為「所有人」。請依照步驟 3 重新部署。
+   - ❌ **畫面顯示 Script 錯誤 (例如 Sheet 不存在)**：請檢查您的 Google 試算表左下角的分頁名稱，是否精確為 **`Menu`** 與 **`Orders`** (首字母大寫，結尾不可以有空格)。
+
+---
+
+## 🎨 第二階段：使用 Google AI Studio 生成前端網頁
+
+現在我們有了運作中的後端 API，接著我們要使用 Google AI Studio 發送 Prompt 來生成漂亮的 React 前端系統。
 
 ### 步驟 1：開啟 Google AI Studio
 前往 [Google AI Studio](https://aistudio.google.com/)，準備開始對話。
 
-### 步驟 2：貼上 Prompt 讓 AI 寫程式
-請將以下提示詞 (Prompt) 完整複製。**請記得把 `[請填入你的 GAS 網址]` 替換成你剛剛在步驟 3 複製的網址**，然後發送給 AI：
+### 步驟 2：修改並送出 Prompt
+請複製下方完整的提示詞 (Prompt)，**請務必把 `[請填入你的 GAS 網址]` 替換成您在第一階段步驟 3 所獲得的網頁應用程式網址**，然後發送給 AI：
 
-**請完整複製以下內容貼給 AI：**
+**👉 請複製以下內容貼給 AI：**
 
 ```text
-我需要建立一個辦公室飲料訂購系統的前端網頁。請使用 Vite + React + TypeScript + Tailwind CSS 的技術棧。
+請幫我建立一個精美的「辦公室飲料訂購系統」前端網頁。
+技術棧使用：Vite + React + TypeScript + Tailwind CSS。
 
-我已經有一個 Google Apps Script 的 API 端點：
+我已經建立好 Google Apps Script 的 API 後端，網址如下：
 [請填入你的 GAS 網址]
 
-這個 API 的規格如下：
-1. 發送 GET 請求時，會回傳 JSON 物件，包含菜單與目前訂單，格式為：
-   {"menu": [{"name": "珍珠奶茶", "category": "奶茶", "price": 60}], "orders": [{"orderId": "xyz-123", "timestamp": "...", "name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}]}
-2. 發送 POST 請求時，需要傳送 JSON 物件，支援三種 action：
-   - 新增：{"action": "create", "data": {"name": "王小明", "drink": "珍珠奶茶", "sugar": "半糖", "ice": "少冰", "quantity": 1, "totalPrice": 60}}
-   - 修改：{"action": "update", "data": {"orderId": "xyz-123", "name": "王小明", "drink": "錫蘭紅茶", "sugar": "全糖", "ice": "正常", "quantity": 2, "totalPrice": 70}}
-   - 刪除：{"action": "delete", "data": {"orderId": "xyz-123"}}
+此 API 規格如下：
+1. GET 請求：回傳包含菜單 (menu) 與訂單 (orders) 的 JSON 資料：
+   - menu 陣列中每個物件格式為：{ "name": "飲料名稱", "price": 35, "category": "原味茶類", "description": "選用新鮮茉莉花..." }
+   - orders 陣列中每個物件格式為：{ "orderId": "uuid-string", "timestamp": "...", "name": "訂購人", "drink": "飲料名稱", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70 }
 
-請幫我產生完整的專案代碼，包含以下四個檔案：
-1. src/types.ts：定義 Drink 和 Order 等 TypeScript 型別。
-2. src/components/OrderForm.tsx：填寫與提交訂單的表單。送出時自動呼叫 POST API (action: create 或 update)。
-3. src/components/OrderList.tsx：顯示目前的訂單列表。每筆訂單旁需有「編輯」和「刪除」按鈕。點擊編輯時可以將資料帶入表單修改；點擊刪除時呼叫 POST API (action: delete)。
-4. src/App.tsx：整合上述元件，在載入時 GET 取得資料。
+2. POST 請求：傳送 JSON 物件，且支援 3 種 action：
+   - 新增：{"action": "create", "data": {"name": "王小明", "drink": "茉莉綠茶", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70}}
+   - 修改：{"action": "update", "data": {"orderId": "uuid-string", "name": "王小明", "drink": "珍珠奶茶", "sugar": "微糖", "ice": "去冰", "quantity": 1, "totalPrice": 55}}
+   - 刪除：{"action": "delete", "data": {"orderId": "uuid-string"}}
 
-請直接給我這四個檔案的完整程式碼，並把 fetch 的 URL 直接寫死為上述的 API 網址。
+請幫我產生完整的專案代碼，包含以下 4 個檔案：
+1. src/types.ts：定義 Drink 和 Order 的 TypeScript 型別（請與上述規格一致）。
+2. src/components/OrderForm.tsx：精美的飲料填單與修改表單。
+   - 欄位包含：訂購人、選擇飲料（附帶單價與備註描述展示）、甜度（提供：正常糖、七分糖、半糖、微糖、無糖 的按鈕或下拉選單）、冰塊（提供：正常冰、少冰、微冰、去冰、溫熱 的按鈕或下拉選單）、數量（可增減按鈕）。
+   - 送出時需自動計算總金額，並呼叫 POST API（新增 action: "create"；若在編輯狀態則為 action: "update"）。
+3. src/components/OrderList.tsx：精美的現有訂單列表。
+   - 顯示所有已訂購的項目、甜度冰塊、數量與總金額。
+   - 提供「編輯訂單」與「刪除訂單」按鈕，點擊編輯時能將資料填回 OrderForm；點擊刪除時呼叫 POST API（action: "delete"）。
+4. src/App.tsx：整合上述元件，有精緻的標題列（以大氣的漸層色與 icon 裝飾），並在頁面載入時自動 GET 獲取最新資料。
+
+請在設計上追求極簡優雅的現代風格（例如使用卡片式佈局、細緻的陰影、平滑的 transition 動畫、柔和的 HSL 漸層配色）。請直接給我這 4 個檔案的完整程式碼，並將 API 網址寫死在代碼中。
 ```
 
-### 步驟 3：整合程式碼
-當 AI 給你程式碼後，你只需要：
-1. 在你的電腦上初始化 Vite 專案。
-2. 將 AI 提供的 `types.ts`, `OrderForm.tsx`, `App.tsx` 代碼貼入對應的檔案中。
-3. 啟動測試伺服器，你的全端飲料訂購系統就大功告成了！
+---
+
+### 步驟 3：在本地運行與測試前端專案
+當 AI 為您生成這 4 個檔案的程式碼後，請依照以下指令在您的電腦上啟動專案：
+
+1. **初始化專案**：
+   開啟您的終端機 (Terminal)，切換到您的工作資料夾，執行以下指令建立全新的 Vite 專案：
+   ```bash
+   # 1. 建立 Vite + React + TypeScript 專案
+   npm create vite@latest drink-order-app -- --template react-ts
+   
+   # 2. 進入專案資料夾
+   cd drink-order-app
+   
+   # 3. 安裝相依套件與 Tailwind CSS (用於快速美化 UI)
+   npm install
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+   ```
+
+2. **配置 Tailwind CSS**：
+   - 開啟專案中的 `tailwind.config.js`，將內容修改為：
+     ```javascript
+     /** @type {import('tailwindcss').Config} */
+     export default {
+       content: [
+         "./index.html",
+         "./src/**/*.{js,ts,jsx,tsx}",
+       ],
+       theme: {
+         extend: {},
+       },
+       plugins: [],
+     }
+     ```
+   - 開啟 `src/index.css`，將原本內容清空，並貼上：
+     ```css
+     @tailwind base;
+     @tailwind components;
+     @tailwind utilities;
+     ```
+
+3. **貼上代碼**：
+   - 在 `src/` 目錄下新增 `types.ts`，並將 AI 生成的 `types.ts` 代碼貼入。
+   - 在 `src/` 目錄下建立一個 `components` 資料夾，並在裡面分別新增 `OrderForm.tsx` 與 `OrderList.tsx`，將 AI 的元件代碼貼入。
+   - 開啟 `src/App.tsx`，將其內容清空，並貼入 AI 的 `App.tsx` 代碼。
+
+4. **啟動專案**：
+   在終端機中執行：
+   ```bash
+   npm run dev
+   ```
+   打開瀏覽器存取終端機顯示的網址（通常是 `http://localhost:5173`），您的全端「辦公室飲料訂購系統」就完美誕生了！🎉
