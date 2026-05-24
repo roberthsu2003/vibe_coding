@@ -1,12 +1,12 @@
 # 建立公司表單：辦公室飲料訂購系統 🥤
 
-本單元將帶領學生完成一個完整的全端 Web 應用。我們將手動設定 Google Sheets（Google 試算表）作為資料庫，並使用 Google Apps Script (GAS) 部署一個具備**動態日期自動建表**與完整 **CRUD（新增、查詢、修改、刪除）** 功能的 API 後端。最後，我們將使用 **Google AI Studio**，透過精確的 Prompt 讓 AI 自動為我們生成極具設計感的前端網頁（React + Vite + TypeScript + Tailwind CSS）。
+本單元將帶領學生完成一個完整的全端 Web 應用。我們將手動設定 Google Sheets（Google 試算表）作為資料庫，並使用 Google Apps Script (GAS) 部署一個具備**動態日期自動建表**與完整 **CRUD（新增、查詢、修改、刪除）** 功能的 API 後端。最後，我們將學習如何使用 **Google AI Studio**，透過老師分享的 Prompt 連結讓 AI 直接為我們生成一個**雙擊即用的單一網頁檔案 (`index.html`)**，讓前端網頁不需要任何安裝與部署即可直接運行！
 
 ---
 
 ## 📅 課程架構
 1. **第一階段**：後端資料庫與 API 設定（Google Sheets + Google Apps Script）
-2. **第二階段**：使用 Google AI Studio 發送 Prompt 生成前端網頁並於本地運行
+2. **第二階段**：使用 Google AI Studio 的 Share（分享）功能直接獲取並運行前端網頁
 
 ---
 
@@ -19,7 +19,7 @@
 2. 點擊左上角「**新增**」 > 「**Google 試算表**」，並將左上角的檔案名稱命名為「**辦公室飲料訂購系統**」。
 3. **建立菜單分頁 (`Menu`)**：
    - 將第一個工作表（分頁）重新命名為 **`Menu`** (請注意大小寫與拼字)。
-   - 點擊儲存格 **A1**，複製並貼上以下表格內容（貼上後會自動分為四欄）：
+   - 點擊儲格 **A1**，複製並貼上以下表格內容（貼上後會自動分為四欄）：
      ```text
      飲料名稱	單價	類別分類	備註描述
      茉莉綠茶	35	原味茶類	選用新鮮茉莉花薰製而成，清香解膩。
@@ -40,7 +40,7 @@
 
 ---
 
-### 步驟 2：設定 Google Apps Script (GAS)
+### 步驟 2：複製貼上後端程式碼 (GAS)
 1. 在試算表上方選單中，點擊 **「擴充功能」 > 「Apps Script」**。
 2. 這會開啟 Google Apps Script 瀏覽器編輯器。
 3. 將編輯器中預設的 `function myFunction() {}` 全部刪除。
@@ -265,54 +265,79 @@ function createJsonResponse(data) {
 
 ---
 
-## 🎨 第二階段：使用 Google AI Studio 生成前端網頁
+## 🎨 第二階段：使用 Google AI Studio 免安裝快速生成前端
 
-現在我們有了運作中的後端 API，接著我們要使用 Google AI Studio 發送 Prompt 來生成漂亮的 React 前端系統。
+在這個階段，我們將直接使用 Google AI Studio 的 **Share (分享)** 功能，不需要在您的電腦上下載 Node.js，也不需要執行複雜的 `npm` 指令，只需一鍵建立副本，就能獲得一個雙擊即用的 `index.html` 網頁！
 
-### 步驟 1：開啟 Google AI Studio
-前往 [Google AI Studio](https://aistudio.google.com/)，準備開始對話。
-
-### 步驟 2：修改並送出 Prompt
-請複製下方完整的提示詞 (Prompt)，**請務必把 `[請填入你的 GAS 網址]` 替換成您在第一階段步驟 3 所獲得的網頁應用程式網址**，然後發送給 AI：
-
-**👉 請複製以下內容貼給 AI：**
-
-```text
-請幫我建立一個精美的「辦公室飲料訂購系統」前端網頁。
-技術棧使用：Vite + React + TypeScript + Tailwind CSS。
-
-我已經建立好 Google Apps Script 的 API 後端，網址如下：
-[請填入你的 GAS 網址]
-
-此 API 規格與運作邏輯如下：
-1. 這個 API 支援每日分頁功能。當載入時發送 GET 請求，後端會自動定位今天日期（如 2026-05-24）的工作表，並回傳包含菜單 (menu) 與今天訂單 (orders) 的 JSON 資料：
-   - menu 陣列中每個物件格式為：{ "name": "飲料名稱", "price": 35, "category": "原味茶類", "description": "選用新鮮茉莉花..." }
-   - orders 陣列中每個物件格式為：{ "orderId": "uuid-string", "timestamp": "...", "name": "訂購人", "drink": "飲料名稱", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70 }
-   - 如果今天是當天第一筆訂購（試算表中尚未有今日日期的分頁），API 會自動回傳 orders 為空陣列 []。
-
-2. POST 請求：傳送 JSON 物件，且支援 3 種 action：
-   - 新增：{"action": "create", "data": {"name": "王小明", "drink": "茉莉綠茶", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70}}
-     (當天第一筆新增時，後端會自動動態建立以今日日期命名的工作表並寫入表頭)
-   - 修改：{"action": "update", "data": {"orderId": "uuid-string", "name": "王小明", "drink": "珍珠奶茶", "sugar": "微糖", "ice": "去冰", "quantity": 1, "totalPrice": 55}}
-   - 刪除：{"action": "delete", "data": {"orderId": "uuid-string"}}
-
-請幫我產生完整的專案代碼，包含以下 4 個檔案：
-1. src/types.ts：定義 Drink 和 Order 的 TypeScript 型別（請與上述規格一致）。
-2. src/components/OrderForm.tsx：精美的飲料填單與修改表單。
-   - 欄位包含：訂購人、選擇飲料（附帶單價與備註描述展示）、甜度（提供：正常糖、七分糖、半糖、微糖、無糖 的按鈕或下拉選單）、冰塊（提供：正常冰、少冰、微冰、去冰、溫熱 的按鈕或下拉選單）、數量（可增減按鈕）。
-   - 送出時需自動計算總金額，並呼叫 POST API（新增 action: "create"；若在編輯狀態則為 action: "update"）。
-3. src/components/OrderList.tsx：精美的現有訂單列表。
-   - 顯示今天所有已訂購的項目、甜度冰塊、數量與總金額。
-   - 提供「編輯訂單」與「刪除訂單」按鈕，點擊編輯時能將資料填回 OrderForm；點擊刪除時呼叫 POST API（action: "delete"）。
-4. src/App.tsx：整合上述元件，有精緻的標題列（以大氣的漸層色與 icon 裝飾，並副標題說明「今日點單統計」），並在頁面載入時自動 GET 獲取最新資料。
-
-請在設計上追求極簡優雅的現代風格（例如使用卡片式佈局、細緻的陰影、平滑的 transition 動畫、柔和的 HSL 漸層配色）。請直接給我這 4 個檔案的完整程式碼，並將 API 網址寫死在代碼中。
-```
+### 步驟 1：開啟老師分享的 AI Studio Prompt 連結
+1. **點選連結**：請直接點擊老師在課堂上分享的 **Google AI Studio 分享連結**（連結將會直接載入設定好的 Prompt 範本）。
+2. **複製副本**：在開啟的 AI Studio 頁面右上角，點擊 **「Create Copy」**（建立副本），將該對話複製到您的個人工作區。
 
 ---
 
-### 步驟 3：在本地運行與測試前端專案
-當 AI 為您生成這 4 個檔案的程式碼後，請依照以下指令在您的電腦上啟動專案：
+### 步驟 2：替換 API 網址並 Run 生成
+1. 在複製好的對話框中，找到 Prompt 裡面的：
+   `[請填入你的 GAS 網址]`
+2. **將其替換**為您在 **第一階段步驟 3** 所獲得的**網頁應用程式網址**。
+3. 點擊頁面下方的 **「Run」** 按鈕。
+4. AI 將會立刻為您生成一個**完整的單一 `index.html` 網頁程式碼**！
+
+> [!TIP]
+> **💡 老師為您準備的 AI Prompt 內容備份**：
+> 如果您想自行調整 Prompt，或者分享連結因故無法存取，可以點開下方展開查看我們完整的 Prompt 內容：
+> <details>
+> <summary>點擊展開：老師設定好的 AI Studio 完整 Prompt 內容</summary>
+> 
+> ```text
+> 請幫我建立一個精美的「辦公室飲料訂購系統」前端網頁。
+> 為了讓使用者雙擊檔案即可立即運行，請將所有的邏輯都集中在一個「單一的 index.html 檔案」中！
+> 
+> 【技術要求】
+> 1. 請在 HTML 內使用 CDN 載入 React 18、ReactDOM 18、Babel Standalone（用於在瀏覽器端解析 JSX 語法）以及 Tailwind CSS CDN。
+> 2. 所有的 TypeScript/JavaScript 邏輯、型別定義、OrderForm 元件、OrderList 元件與 App 整合元件全部寫在同一個 <script type="text/babel"> 區塊中。
+> 
+> 【API 規格與連線邏輯】
+> 我已經建立好 Google Apps Script 的 API 後端，網址如下：
+> [請填入你的 GAS 網址]
+> 
+> 1. 當網頁加載時，發送 GET 請求，後端會自動定位今天日期（如 2026-05-24）的工作表，並回傳包含菜單 (menu) 與今天訂單 (orders) 的 JSON 資料：
+>    - menu 格式為：{ "name": "飲料名稱", "price": 35, "category": "原味茶類", "description": "選用新鮮茉莉花..." }
+>    - orders 格式為：{ "orderId": "uuid-string", "timestamp": "...", "name": "訂購人", "drink": "飲料名稱", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70 }
+>    - 若今天是當天第一筆訂單，orders 會自動回傳 []。
+> 
+> 2. POST 請求：傳送 JSON 物件，且支援 3 種 action：
+>    - 新增：{"action": "create", "data": {"name": "王小明", "drink": "茉莉綠茶", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70}}
+>    - 修改：{"action": "update", "data": {"orderId": "uuid-string", "name": "王小明", "drink": "珍珠奶茶", "sugar": "微糖", "ice": "去冰", "quantity": 1, "totalPrice": 55}}
+>    - 刪除：{"action": "delete", "data": {"orderId": "uuid-string"}}
+> 
+> 【UI 與元件設計要求】
+> 1. OrderForm 元件：精美的填單與修改表單。欄位包含：訂購人、選擇飲料（附帶單價與備註描述展示）、甜度（提供：正常糖、七分糖、半糖、微糖、無糖 的按鈕）、冰塊（提供：正常冰、少冰、微冰、去冰、溫熱 的按鈕）、數量（加減按鈕）。送出時自動計算總金額並呼叫 POST API。
+> 2. OrderList 元件：精美的當日訂單列表。顯示今天所有已訂購的項目、甜度冰塊、數量與總金額。並提供「編輯」與「刪除」按鈕，點擊編輯時能將資料填回 OrderForm；點擊刪除時呼叫 POST API。
+> 3. App 元件：整合上述元件，有精緻的標題列（大氣的漸層色與 icon 裝飾，並副標題說明「今日點單統計」），並在頁面載入時自動 GET 獲取最新資料。
+> 
+> 請在設計上追求極簡優雅的現代風格（例如使用卡片式佈局、細緻的陰影、平滑的 transition 動畫、柔和的 HSL 漸層配色）。請直接給我這一個 index.html 檔案的完整程式碼，並將 API 網址寫死在代碼中。
+> ```
+> </details>
+
+---
+
+### 步驟 3：在本地雙擊即刻運行！ (僅需 3 步)
+當 AI 為您生成了單一 HTML 的程式碼後，您只需要完成以下極簡步驟，就能直接運行：
+
+1. **新建檔案**：
+   在您的電腦桌面或資料夾中，點擊滑鼠右鍵「**新增**」 > 「**文字文件**」，並將該檔案重新命名為 **`index.html`** (請確保副檔名是 `.html` 而不是 `.txt`。Mac 用戶可直接在文字編輯器中建立並儲存為 html)。
+2. **貼上並儲存**：
+   用記事本或任何文字編輯器打開 `index.html`，將 AI 生成的**全部網頁程式碼複製並貼進去**，接著存檔儲存！
+3. **滑鼠雙擊打開**：
+   用滑鼠**雙擊打開 `index.html` 檔案**。瀏覽器會立刻載入一個精美的飲料訂購系統前端，並與您的 Google 試算表 API 即時通訊。您的全端專案宣告完美成功！🎉
+
+---
+
+### 💡 進階課後挑戰：使用 Vite + React + TypeScript 專案架構
+<details>
+<summary>點擊展開：適合有程式基礎學生在本地部署 React 的完整指令</summary>
+
+如果您想學習如何在本地端以專業的前端工程師架構 (Vite 專案) 運行本系統，請依照以下指令在您的電腦上啟動專案：
 
 1. **初始化專案**：
    開啟您的終端機 (Terminal)，切換到您的工作資料夾，執行以下指令建立全新的 Vite 專案：
@@ -323,14 +348,14 @@ function createJsonResponse(data) {
    # 2. 進入專案資料夾
    cd drink-order-app
    
-   # 3. 安裝相依套件與 Tailwind CSS (用於快速美化 UI)
+   # 3. 安裝相依套件與 Tailwind CSS
    npm install
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init -p
    ```
 
 2. **配置 Tailwind CSS**：
-   - 開啟專案中的 `tailwind.config.js`，將內容修改為：
+   * 開啟專案中的 `tailwind.config.js`，將內容修改為：
      ```javascript
      /** @type {import('tailwindcss').Config} */
      export default {
@@ -344,7 +369,7 @@ function createJsonResponse(data) {
        plugins: [],
      }
      ```
-   - 開啟 `src/index.css`，將原本內容清空，並貼上：
+   * 開啟 `src/index.css`，將原本內容清空，並貼上：
      ```css
      @tailwind base;
      @tailwind components;
@@ -352,13 +377,11 @@ function createJsonResponse(data) {
      ```
 
 3. **貼上代碼**：
-   - 在 `src/` 目錄下新增 `types.ts`，並將 AI 生成的 `types.ts` 代碼貼入。
-   - 在 `src/` 目錄下建立一個 `components` 資料夾，並在裡面分別新增 `OrderForm.tsx` 與 `OrderList.tsx`，將 AI 的元件代碼貼入。
-   - 開啟 `src/App.tsx`，將其內容清空，並貼入 AI 的 `App.tsx` 代碼。
+   * 在 `src/` 目錄下新增 `types.ts`。
+   * 在 `src/` 目錄下建立一個 `components` 資料夾，並在裡面分別新增 `OrderForm.tsx` 與 `OrderList.tsx`。
+   * 將 AI Studio 為您產生的 React 分離檔案代碼貼入對應檔案。
+   * 開啟 `src/App.tsx`，將其內容清空，並貼入 AI 的 `App.tsx` 代碼。
 
 4. **啟動專案**：
-   在終端機中執行：
-   ```bash
-   npm run dev
-   ```
-   打開瀏覽器存取終端機顯示的網址（通常是 `http://localhost:5173`），您的全端「辦公室飲料訂購系統」就完美誕生了！🎉
+   在終端機中執行 `npm run dev`，打開瀏覽器存取 `http://localhost:5173` 即可！
+</details>
