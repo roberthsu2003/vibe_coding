@@ -1,6 +1,6 @@
 # 建立公司表單：辦公室飲料訂購系統 🥤
 
-本單元將帶領學生完成一個完整的全端 Web 應用。我們將手動設定 Google Sheets（Google 試算表）作為資料庫，並使用 Google Apps Script (GAS) 部署一個具備完整 **CRUD（新增、查詢、修改、刪除）** 功能的 API 後端。最後，我們將使用 **Google AI Studio**，透過精確的 Prompt 讓 AI 自動為我們生成極具設計感的前端網頁（React + Vite + TypeScript + Tailwind CSS）。
+本單元將帶領學生完成一個完整的全端 Web 應用。我們將手動設定 Google Sheets（Google 試算表）作為資料庫，並使用 Google Apps Script (GAS) 部署一個具備**動態日期自動建表**與完整 **CRUD（新增、查詢、修改、刪除）** 功能的 API 後端。最後，我們將使用 **Google AI Studio**，透過精確的 Prompt 讓 AI 自動為我們生成極具設計感的前端網頁（React + Vite + TypeScript + Tailwind CSS）。
 
 ---
 
@@ -26,13 +26,17 @@
      珍珠奶茶	55	經典奶茶類	Q彈珍珠搭配濃郁奶茶，店內人氣冠軍。
      燕麥拿鐵	65	鮮奶茶類	使用職人鮮奶與澳洲燕麥，口感豐富有層次。
      翡翠檸檬	60	特調果茶類	新鮮現榨檸檬汁搭配清爽綠茶，夏季首選。
+     烏龍拿鐵	60	鮮奶茶類	重烘焙烏龍茶香與鮮奶的完美融合。
+     葡萄柚綠茶	70	特調果茶類	內含豐富果粒，建議微糖微冰最能襯托果香。
+     仙草凍奶茶	50	經典奶茶類	滑嫩手作仙草凍，香甜不膩口。
+     炭焙鐵觀音	40	原味茶類	茶韻濃厚回甘，適合喜愛重茶感的顧客。
+     百香雙響炮	65	特調果茶類	加入珍珠與椰果，口感豐富多變。
+     紅豆抹茶拿鐵	75	季節限定類	慢火熬煮紅豆搭配日本靜岡抹茶，風味優雅。
      ```
-4. **建立訂單分頁 (`Orders`)**：
-   - 點擊工作表左下角的「**+**」新增一個分頁，命名為 **`Orders`** (請注意大小寫與拼字)。
-   - 點擊儲存格 **A1**，直接複製並貼上以下標題文字作為首列：
-     ```text
-     訂單編號	時間戳記	訂購人	飲料名稱	甜度	冰塊	數量	總金額
-     ```
+
+> [!NOTE]
+> **✨ 試算表自動化設計**：
+> 這次的教學非常精簡！您**不需要**手動建立訂單分頁（如 `Orders`）。我們的 Apps Script API 會在每天第一筆訂單進來時，自動以當天日期（例如：`2026-05-24`）建立一個全新的工作表，並自動生成表頭及美化排版。這樣既方便每日對帳，又免去了手動設定的繁瑣步驟！
 
 ---
 
@@ -46,12 +50,12 @@
 /**
  * 辦公室飲料訂購系統 - Google Apps Script 後端 API
  *
- * 提供給學生實作全端應用的 API 腳本，支援：
- * 1. GET 請求：撈取「Menu」菜單與「Orders」現有訂單
- * 2. POST 請求：支援新增 (create)、修改 (update)、刪除 (delete) 訂單
+ * 支援「每日日期分頁」的動態資料庫設計。
+ * 1. GET 請求：撈取「Menu」菜單與「當天日期（yyyy-MM-dd）工作表」中的訂單
+ * 2. POST 請求：自動在當天第一筆訂單進來時建立日期分頁，並支援新增 (create)、修改 (update)、刪除 (delete) 訂單
  */
 
-// 1. 處理 GET 請求：回傳菜單與現有訂單
+// 1. 處理 GET 請求：回傳菜單與「當天」的訂單
 function doGet() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
 
@@ -72,8 +76,11 @@ function doGet() {
     }
   }
 
-  // (2) 取得 Orders 工作表資料
-  const orderSheet = ss.getSheetByName("Orders");
+  // (2) 取得「當天日期命名」的訂單工作表資料
+  const timezone = Session.getScriptTimeZone();
+  const today = Utilities.formatDate(new Date(), timezone, "yyyy-MM-dd");
+  const orderSheet = ss.getSheetByName(today);
+  
   let orders = [];
   if (orderSheet) {
     const orderData = orderSheet.getDataRange().getValues();
@@ -98,27 +105,38 @@ function doGet() {
   return createJsonResponse({ menu: menu, orders: orders });
 }
 
-// 2. 處理 POST 請求：支援新增、修改、刪除訂單
+// 2. 處理 POST 請求：支援當日訂單之新增、修改、刪除
 function doPost(e) {
   try {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName("Orders");
+    const timezone = Session.getScriptTimeZone();
+    const today = Utilities.formatDate(new Date(), timezone, "yyyy-MM-dd");
     
-    if (!sheet) {
-      throw new Error("找不到名為 'Orders' 的工作表，請先建立！");
-    }
+    let sheet = ss.getSheetByName(today);
 
     const payload = JSON.parse(e.postData.contents);
     const action = payload.action; // "create", "update", "delete"
     const data = payload.data;
 
-    const orderData = sheet.getDataRange().getValues();
-
-    // ─── [新增訂單] ───
+    // ─── [新增訂單 (Create)] ───
     if (action === "create") {
+      // 如果今天的工作表不存在，則在此時自動初始化建立！
+      if (!sheet) {
+        sheet = ss.insertSheet(today, 1); // 參數 1 代表將新工作表移到第一個分頁，方便每天打開第一眼看到
+        const headers = ["訂單編號", "時間戳記", "訂購人", "飲料名稱", "甜度", "冰塊", "數量", "總金額"];
+        sheet.appendRow(headers);
+        
+        // 美化工作表：凍結首列並加粗底色
+        sheet.setFrozenRows(1);
+        sheet.getRange(1, 1, 1, headers.length)
+             .setFontWeight("bold")
+             .setBackground("#e6f7ff") // 淺藍色背景
+             .setHorizontalAlignment("center");
+      }
+
       const orderId = Utilities.getUuid(); // 產生唯一的 UUID 作為訂單編號
       
-      // 依照 Excel Orders 工作表的欄位順序寫入：
+      // 依照欄位順序寫入：
       // 1.訂單編號, 2.時間戳記, 3.訂購人, 4.飲料名稱, 5.甜度, 6.冰塊, 7.數量, 8.總金額
       const newRow = [
         orderId,
@@ -132,10 +150,18 @@ function doPost(e) {
       ];
       
       sheet.appendRow(newRow);
-      return createJsonResponse({ status: "success", message: "訂單新增成功！", orderId: orderId });
+      return createJsonResponse({ status: "success", message: "訂單已成功記錄至工作表 " + today, orderId: orderId });
     }
 
-    // ─── [修改訂單] ───
+    // ─── 對於 [修改 (Update)] 與 [刪除 (Delete)] ───
+    // 因為這兩者必須建立在「今天已有工作表」的前提下，否則無從修改/刪除
+    if (!sheet) {
+      throw new Error("今天 (" + today + ") 尚未有任何訂單，無法進行此操作。");
+    }
+    
+    const orderData = sheet.getDataRange().getValues();
+
+    // ─── [修改訂單 (Update)] ───
     if (action === "update") {
       if (!data.orderId) {
         throw new Error("修改訂單時缺少 'orderId' 參數");
@@ -144,7 +170,6 @@ function doPost(e) {
       for (let i = 1; i < orderData.length; i++) {
         if (orderData[i][0].toString().trim() === data.orderId.toString().trim()) {
           // 找到對應的訂單編號，更新第 3 欄到第 8 欄 (訂購人 到 總金額)
-          // i + 1 代表第 i + 1 列，3 代表第 3 欄 (C欄: 訂購人)
           sheet.getRange(i + 1, 3, 1, 6).setValues([[
             data.name,
             data.drink,
@@ -156,10 +181,10 @@ function doPost(e) {
           return createJsonResponse({ status: "success", message: "訂單更新成功！" });
         }
       }
-      throw new Error("找不到該筆訂單編號：" + data.orderId);
+      throw new Error("在今日 (" + today + ") 工作表中找不到該筆訂單編號：" + data.orderId);
     }
 
-    // ─── [刪除訂單] ───
+    // ─── [刪除訂單 (Delete)] ───
     if (action === "delete") {
       if (!data.orderId) {
         throw new Error("刪除訂單時缺少 'orderId' 參數");
@@ -168,10 +193,10 @@ function doPost(e) {
       for (let i = 1; i < orderData.length; i++) {
         if (orderData[i][0].toString().trim() === data.orderId.toString().trim()) {
           sheet.deleteRow(i + 1); // 刪除對應的列
-          return createJsonResponse({ status: "success", message: "訂單刪除成功！" });
+          return createJsonResponse({ status: "success", message: "訂單已從 " + today + " 刪除成功！" });
         }
       }
-      throw new Error("找不到該筆訂單編號：" + data.orderId);
+      throw new Error("在今日 (" + today + ") 工作表中找不到該筆訂單編號：" + data.orderId);
     }
 
     throw new Error("未知的操作 (action 必須為 create, update 或 delete)");
@@ -228,13 +253,13 @@ function createJsonResponse(data) {
 1. **如何測試？**
    開啟瀏覽器新分頁，將剛剛複製的 **網頁應用程式網址** 貼上並按下 Enter。
 2. **正確的結果**：
-   您應該會看到瀏覽器輸出類似下方的純 JSON 資料（會包含您在 `Menu` 建立的商品）：
+   您應該會看到瀏覽器輸出類似下方的純 JSON 資料（包含您在 `Menu` 建立的 10 個商品項目，且 `orders` 預設為空）：
    ```json
    {"menu":[{"name":"茉莉綠茶","price":35,"category":"原味茶類","description":"選用新鮮茉莉花薰製而成，清香解膩。"},...],"orders":[]}
    ```
 3. **常見問題與解決方案**：
    - ❌ **出現 Google 登入畫面或「需要授權」**：代表您在部署時，「誰可以存取」沒有設為「所有人」。請依照步驟 3 重新部署。
-   - ❌ **畫面顯示 Script 錯誤 (例如 Sheet 不存在)**：請檢查您的 Google 試算表左下角的分頁名稱，是否精確為 **`Menu`** 與 **`Orders`** (首字母大寫，結尾不可以有空格)。
+   - ❌ **畫面顯示 Script 錯誤 (例如 Sheet 不存在)**：請檢查您的 Google 試算表左下角的分頁名稱，是否精確為 **`Menu`** (首字母大寫，結尾不可以有空格)。
 
 ---
 
@@ -257,13 +282,15 @@ function createJsonResponse(data) {
 我已經建立好 Google Apps Script 的 API 後端，網址如下：
 [請填入你的 GAS 網址]
 
-此 API 規格如下：
-1. GET 請求：回傳包含菜單 (menu) 與訂單 (orders) 的 JSON 資料：
+此 API 規格與運作邏輯如下：
+1. 這個 API 支援每日分頁功能。當載入時發送 GET 請求，後端會自動定位今天日期（如 2026-05-24）的工作表，並回傳包含菜單 (menu) 與今天訂單 (orders) 的 JSON 資料：
    - menu 陣列中每個物件格式為：{ "name": "飲料名稱", "price": 35, "category": "原味茶類", "description": "選用新鮮茉莉花..." }
    - orders 陣列中每個物件格式為：{ "orderId": "uuid-string", "timestamp": "...", "name": "訂購人", "drink": "飲料名稱", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70 }
+   - 如果今天是當天第一筆訂購（試算表中尚未有今日日期的分頁），API 會自動回傳 orders 為空陣列 []。
 
 2. POST 請求：傳送 JSON 物件，且支援 3 種 action：
    - 新增：{"action": "create", "data": {"name": "王小明", "drink": "茉莉綠茶", "sugar": "半糖", "ice": "少冰", "quantity": 2, "totalPrice": 70}}
+     (當天第一筆新增時，後端會自動動態建立以今日日期命名的工作表並寫入表頭)
    - 修改：{"action": "update", "data": {"orderId": "uuid-string", "name": "王小明", "drink": "珍珠奶茶", "sugar": "微糖", "ice": "去冰", "quantity": 1, "totalPrice": 55}}
    - 刪除：{"action": "delete", "data": {"orderId": "uuid-string"}}
 
@@ -273,9 +300,9 @@ function createJsonResponse(data) {
    - 欄位包含：訂購人、選擇飲料（附帶單價與備註描述展示）、甜度（提供：正常糖、七分糖、半糖、微糖、無糖 的按鈕或下拉選單）、冰塊（提供：正常冰、少冰、微冰、去冰、溫熱 的按鈕或下拉選單）、數量（可增減按鈕）。
    - 送出時需自動計算總金額，並呼叫 POST API（新增 action: "create"；若在編輯狀態則為 action: "update"）。
 3. src/components/OrderList.tsx：精美的現有訂單列表。
-   - 顯示所有已訂購的項目、甜度冰塊、數量與總金額。
+   - 顯示今天所有已訂購的項目、甜度冰塊、數量與總金額。
    - 提供「編輯訂單」與「刪除訂單」按鈕，點擊編輯時能將資料填回 OrderForm；點擊刪除時呼叫 POST API（action: "delete"）。
-4. src/App.tsx：整合上述元件，有精緻的標題列（以大氣的漸層色與 icon 裝飾），並在頁面載入時自動 GET 獲取最新資料。
+4. src/App.tsx：整合上述元件，有精緻的標題列（以大氣的漸層色與 icon 裝飾，並副標題說明「今日點單統計」），並在頁面載入時自動 GET 獲取最新資料。
 
 請在設計上追求極簡優雅的現代風格（例如使用卡片式佈局、細緻的陰影、平滑的 transition 動畫、柔和的 HSL 漸層配色）。請直接給我這 4 個檔案的完整程式碼，並將 API 網址寫死在代碼中。
 ```
