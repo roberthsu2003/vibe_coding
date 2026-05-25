@@ -1,16 +1,27 @@
 /**
- * 庫存管理系統 - Google Apps Script 後端 API
+ * 庫存管理系統 - Google Apps Script 後端 API (密碼驗證升級版)
  *
- * 支援「Inventory list」工作表的完整 CRUD 庫存管理。
- * 1. GET 請求：撈取「Inventory list」工作表中的所有庫存商品，並以 JSON 格式回傳。
- * 2. POST 請求：支援新增 (create)、修改 (update)、刪除 (delete) 庫存商品。
+ * 支援「Inventory list」工作表的完整 CRUD 庫存管理與安全密碼驗證。
+ * 1. GET 請求：校驗密碼後，撈取「Inventory list」中的所有庫存商品並以 JSON 格式回傳。
+ * 2. POST 請求：校驗密碼後，支援新增 (create)、修改 (update)、刪除 (delete) 庫存商品。
  */
+
+// ==========================================
+// 核心設定：API 安全驗證密碼（可自由修改此值）
+// ==========================================
+const ADMIN_PASSWORD = "admin"; 
 
 const SHEET_NAME = "Inventory list";
 
-// 1. 處理 GET 請求：撈取所有庫存資料
-function doGet() {
+// 1. 處理 GET 請求：校驗密碼並撈取所有庫存資料
+function doGet(e) {
   try {
+    // 🔐 密碼驗證邏輯
+    const inputPassword = e && e.parameter && e.parameter.password;
+    if (inputPassword !== ADMIN_PASSWORD) {
+      return createJsonResponse({ status: "error", message: "密碼驗證失敗！無權讀取庫存資料。請在前端設定中輸入正確密碼。" });
+    }
+
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     let sheet = ss.getSheetByName(SHEET_NAME);
     
@@ -67,9 +78,21 @@ function doGet() {
   }
 }
 
-// 2. 處理 POST 請求：處理新增、修改與刪除庫存商品
+// 2. 處理 POST 請求：校驗密碼並處理新增、修改與刪除庫存商品
 function doPost(e) {
   try {
+    if (!e || !e.postData || !e.postData.contents) {
+      throw new Error("無效的請求資料");
+    }
+
+    const payload = JSON.parse(e.postData.contents);
+    const inputPassword = payload.password;
+
+    // 🔐 密碼驗證邏輯
+    if (inputPassword !== ADMIN_PASSWORD) {
+      return createJsonResponse({ status: "error", message: "密碼驗證失敗！無權修改資料庫，請檢查您的密碼設定。" });
+    }
+
     const ss = SpreadsheetApp.getActiveSpreadsheet();
     let sheet = ss.getSheetByName(SHEET_NAME);
 
@@ -77,10 +100,8 @@ function doPost(e) {
       throw new Error(`找不到名稱為 "${SHEET_NAME}" 的工作表，請先執行一次 GET 請求初始化。`);
     }
 
-    const payload = JSON.parse(e.postData.contents);
     const action = payload.action; // "create", "update", "delete"
     const data = payload.data;
-
     const orderData = sheet.getDataRange().getValues();
 
     // ─── [新增庫存 (Create)] ───
@@ -206,18 +227,4 @@ function getNextInventoryId(sheet) {
 function createJsonResponse(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
                        .setMimeType(ContentService.MimeType.JSON);
-}
-
-/**
- * 測試用函式 (可以直接在 GAS 編輯器中執行，以驗證下一筆 ID 計算)
- */
-function testGetNextId() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
-  if (sheet) {
-    const nextId = getNextInventoryId(sheet);
-    Logger.log("下一筆產生的庫存 ID 為: " + nextId);
-  } else {
-    Logger.log("找不到庫存工作表，請先建立或上傳試算表。");
-  }
 }
