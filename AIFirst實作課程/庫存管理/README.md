@@ -1,6 +1,6 @@
-# 雲端智慧庫存管理系統 📊 (密碼驗證安全版)
+# 雲端智慧庫存管理系統 📊
 
-本單元將帶領大家完成一個非常實用的**雲端智慧庫存管理系統**！我們將結合 **Google Sheets（Google 試算表）** 作為雲端資料庫，並使用 **Google Apps Script (GAS)** 部署一個具備自動計算、ID 遞增與安全**密碼驗證**防護的後端 API。
+本單元將帶領大家完成一個非常實用的**雲端智慧庫存管理系統**！我們將結合 **Google Sheets（Google 試算表）** 作為雲端資料庫，並使用 **Google Apps Script (GAS)** 部署一個具備自動計算、ID 遞增與完整 **CRUD（新增、查詢、修改、刪除）** 功能的後端 API。
 
 最後，我們會配合精心設計的單一網頁前端檔案 (`index.html`)，採用現代**毛玻璃美學 (Glassmorphism)** 與**暗黑/亮光主題切換**，讓您無需安裝任何軟體與環境，雙擊檔案即可在本地直接連線操作！
 
@@ -9,9 +9,9 @@
 ## 📅 課程架構與步驟流程
 
 1. **第一階段：資料庫準備**（在雲端硬碟建立並匯入庫存資料）
-2. **第二階段：部署雲端 API 後端**（複製 Apps Script 並自訂安全密碼，發布為網頁應用程式）
+2. **第二階段：部署雲端 API 後端**（複製 Apps Script 並發布為網頁應用程式）
 3. **第三階段：使用 Google AI Studio 生成前端**（複製 Prompt 並透過 AI 一鍵生成網頁）
-4. **第四階段：執行極致美感前端**（本地雙擊打開網頁，輸入網址與驗證密碼即刻啟動）
+4. **第四階段：執行極致美感前端**（本地雙擊打開網頁，輸入網址即刻啟動）
 
 ---
 
@@ -38,10 +38,7 @@
 2. 開啟瀏覽器編輯器後，將預設的 `function myFunction() {}` 全部刪除。
 3. 打開本資料夾底下的 **`gas_script.gs`** 檔案，將裡面的**所有程式碼複製**。
 4. 將程式碼貼入 Google Apps Script 編輯器中。
-5. **🔐 設定安全驗證密碼（強烈建議）**：
-   - 在程式碼的最頂部，有一行 `const ADMIN_PASSWORD = "admin";`。
-   - `admin` 是系統的預設密碼。為了防止他人取得您的 API 網址後隨意修改您的庫存，您可以將其改為您個人的專屬密碼（例如 `const ADMIN_PASSWORD = "mySecrEt99";`）。
-6. 點擊編輯器上方工具列的「**儲存**」💾 圖示（或按快捷鍵 Ctrl+S / Cmd+S），並將專案名稱命名為「**InventoryAPI**」。
+5. 點擊編輯器上方工具列的「**儲存**」💾 圖示（或按快捷鍵 Ctrl+S / Cmd+S），並將專案名稱命名為「**InventoryAPI**」。
 
 ### 步驟 3：部署並取得 API 網址 (極度重要！)
 這是讓前端網頁能夠透過網路讀寫 Google 試算表資料的關鍵步驟：
@@ -57,11 +54,11 @@
    - 若出現安全警告「Google 尚未驗證此應用程式」，請點擊左下角的「**進階**」 > 「**前往 InventoryAPI（不安全）**」。
    - 點擊「**允許**」。
 6. 部署成功後，會看到 **「網頁應用程式網址」 (Web App URL)**。
-7. **📋 請將這串網址完整複製並妥善保存**，我們在下一階段馬上會用到！
+7. **📋 請將這串網址完整複製並妥善保存**，我們在第四階段馬上會用到！
 
 > [!WARNING]
-> **⚠️ 未來修改 GAS 密碼或程式碼的大魔王注意事項：**
-> 如果您未來修改了 Google Apps Script 中的任何程式碼（例如修改了 `ADMIN_PASSWORD` 密碼常數），**僅僅點擊「儲存」是絕對不會在線上生效的！** 
+> **⚠️ 未來修改 GAS 程式碼的大魔王注意事項：**
+> 如果您未來修改了 Google Apps Script 中的任何程式碼，**僅僅點擊「儲存」是絕對不會在線上生效的！** 
 > 
 > 您必須完成以下步驟，否則線上跑的永遠是舊程式碼：
 > 1. 點擊右上角「部署」 > 「**管理部署作業**」。
@@ -69,13 +66,33 @@
 > 3. **關鍵步驟**：在「版本」下拉選單中，**一定要選擇「建立新版本」**！
 > 4. 點擊右下角的 **「部署」**。
 
+### 步驟 4：測試你的 API (排錯指南與 curl 測試)
+在請 AI 寫前端網頁之前，先確保後端 API 是正常通訊的！這也是驗證您的 GAS 後端是否正常運作的最佳方式：
+
+1. **瀏覽器測試 (GET 請求)**：
+   - **如何測試**：開啟瀏覽器新分頁，將剛剛複製的 **網頁應用程式網址** 貼上並按下 Enter。
+   - **正確的結果**：您應該會看到瀏覽器輸出類似下方的純 JSON 資料（包含您在試算表中的庫存項目，且 status 為 success）：
+     ```json
+     {"status":"success","data":[{"needReorder":false,"id":"IN0001","name":"電子天平",...}]}
+     ```
+   - **💡 意義**：如果能看到這段 JSON 內容，說明您的 **GET 請求運作完全正常**！
+
+2. **進階：使用 `curl` 測試新增 (POST 請求)**：
+   - **如何測試**：如果您熟悉終端機 (Terminal / Command Prompt)，可以複製以下指令，並將 `[請填入你的 GAS 網址]` 替換為您的網址後執行（**⚠️ 提醒：必須加上 `-L` 參數以跟隨 Google Apps Script 的重定向**）：
+     ```bash
+     curl -L -X POST "[請填入你的 GAS 網址]" \
+       -H "Content-Type: application/json" \
+       -d '{"action": "create", "data": {"name": "測試燒杯", "description": "500ml 耐高溫玻璃燒杯", "price": 150, "quantity": 30, "reorderPoint": 10, "reorderTime": 3, "reorderQty": 50, "discontinued": false}}'
+     ```
+   - **確認成功**：執行上述指令後，**直接打開您的 Google 試算表**！如果您發現試算表的最下方已經自動寫入了一筆名稱為「測試燒杯」的商品，且 ID 自動生成為 `IN0004`（或依序遞增），**那就代表您的 POST 寫入功能已經 100% 成功運行！**
+
 ---
 
 ## 🎨 第三階段：使用 Google AI Studio 免安裝快速生成前端
 
 在這個階段，我們將直接使用 Google AI Studio，透過老師分享的 Prompt，不需要在您的電腦上下載 Node.js，也不需要執行複雜的 `npm` 指令，就能獲得一個雙擊即用的 `index.html` 網頁！
 
-### 步驟 4：將 Prompt 輸入 Google AI Studio 生成代碼
+### 步驟 5：將 Prompt 輸入 Google AI Studio 生成代碼
 1. 開啟 [Google AI Studio](https://aistudio.google.com/)。
 2. 建立一個全新的對話。
 3. **複製下方備份的 Prompt**，並將裡面的 `[請填入你的 GAS 網址]` 替換為您在 **第一階段步驟 3** 複製的網頁應用程式網址。
@@ -99,7 +116,7 @@
 > 我已經建立好 Google Apps Script 的 API 後端，網址如下：
 > [請填入你的 GAS 網址]
 > 
-> 1. 當網頁加載時，發送 GET 請求，必須於網址附加密碼參數，如 ?password=YOUR_PASSWORD（為了安全與避開快取，建議也加上 timestamp 隨機參數），否則會被拒絕讀取。後端回傳格式如下：
+> 1. 當網頁加載時，發送 GET 請求，後端會自動回傳包含整個庫存清單的 JSON 資料，格式如下：
 >    {
 >      "status": "success",
 >      "data": [
@@ -119,10 +136,10 @@
 >      ]
 >    }
 > 
-> 2. POST 請求：傳送 JSON 物件，必須包含 password 欄位以完成驗證，且支援 3 種 action：
->    - 新增：{"action": "create", "password": "YOUR_PASSWORD", "data": {"name": "新商品", "description": "描述...", "price": 100, "quantity": 10, "reorderPoint": 5, "reorderTime": 3, "reorderQty": 20, "discontinued": false}}
->    - 修改：{"action": "update", "password": "YOUR_PASSWORD", "data": {"id": "IN0001", "name": "修改商品名稱", "description": "...", "price": 120, "quantity": 8, "reorderPoint": 5, "reorderTime": 3, "reorderQty": 20, "discontinued": false}}
->    - 刪除：{"action": "delete", "password": "YOUR_PASSWORD", "data": {"id": "IN0001"}}
+> 2. POST 請求：傳送 JSON 物件，且支援 3 種 action：
+>    - 新增：{"action": "create", "data": {"name": "新商品", "description": "描述...", "price": 100, "quantity": 10, "reorderPoint": 5, "reorderTime": 3, "reorderQty": 20, "discontinued": false}}
+>    - 修改：{"action": "update", "data": {"id": "IN0001", "name": "修改商品名稱", "description": "...", "price": 120, "quantity": 8, "reorderPoint": 5, "reorderTime": 3, "reorderQty": 20, "discontinued": false}}
+>    - 刪除：{"action": "delete", "data": {"id": "IN0001"}}
 > 
 > 【UI 與元件設計要求】
 > 請在設計上追求極簡優雅的現代風格（例如使用卡片式佈局、細緻的陰影、平滑的 transition 動畫、柔和的漸層配色）。請使用 Tailwind CSS 打造一個高商業質感的「暗黑模式 (Dark Mode)」或「可切換雙主題」儀表板：
@@ -149,9 +166,9 @@
 > 
 > 5. 零設定 API 面板與訊息反饋：
 >    - 提供 Toast 訊息提示元件，在 API 連線成功、新增/修改/刪除完成時滑出並在數秒後自動淡出。
->    - 右上角提供設定按鈕，點擊可開啟彈出視窗設定 GAS 的 Web App 網址與安全防護密碼（密碼也須存至 LocalStorage），讓使用者雙擊打開網頁就能透過 UI 自訂連接。
+>    - 右上角提供設定按鈕，點擊可開啟彈出視窗設定 GAS 的 Web App 網址並存至 LocalStorage，讓使用者雙擊打開網頁就能透過 UI 自訂連接。
 > 
-> 請直接給我這一個 index.html 檔案的完整程式碼，並將 API 網址與預設密碼寫死在程式碼的預設變數中。
+> 請直接給我這一個 index.html 檔案的完整程式碼，並將 API 網址寫死在程式碼的預設變數中。
 > ```
 > </details>
 
@@ -166,9 +183,9 @@
 2. **貼上並儲存**：
    用記事本或任何程式碼編輯器打開 `index.html`，將 AI 生成的**全部網頁程式碼複製並貼進去**，接著存檔儲存！
 3. **滑鼠雙擊打開**：
-   用滑鼠**雙擊打開 `index.html` 檔案**。瀏覽器會立刻載入一個極具質感的庫存管理系統前端，並自動跳出 API 與安全設定對話視窗。
+   用滑鼠**雙擊打開 `index.html` 檔案**。瀏覽器會立刻載入一個極具質感的庫存管理系統前端，並自動跳出 API 設定對話視窗。
    
-   請在此處貼上您的 **API 網頁應用程式網址**，以及您在第二階段步驟 2 中設定的 **安全驗證密碼**（若無修改則預設為 `admin`），點擊儲存，即可順利與您的 Google 試算表進行即時安全通訊！🎉
+   請貼上您的 **API 網頁應用程式網址**，點擊儲存，即可順利與您的 Google 試算表進行即時安全通訊！🎉
 
 ---
 
@@ -193,4 +210,4 @@
   - **表頭排序**：點擊表格標題（例如單價、數量、總價值），能對庫存清單進行正序或倒序排列。
 
 - 🛑 **自訂模態視窗與 Toast 提示**：
-  - 捨棄了瀏覽器難看的預設彈出視窗，全面採用毛玻璃磨砂效果的「二次刪除確認框」與右上角「自動淡出 Toast 訊息通知」，為使用者帶來極致的 UX 體驗。
+  - 捨棄了瀏覽器難端的預設彈出視窗，全面採用毛玻璃磨砂效果的「二次刪除確認框」與右上角「自動淡出 Toast 訊息通知」，為使用者帶來極致的 UX 體驗。

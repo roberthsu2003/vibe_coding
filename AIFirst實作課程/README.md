@@ -84,8 +84,4 @@
 
 
 
-<div align="center">
 
-**© AI First 實作課程 · Powered by Vercel & Google Gemini**
-
-</div>
