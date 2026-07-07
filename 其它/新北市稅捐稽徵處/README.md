@@ -14,6 +14,8 @@
 - [使用牌照稅迷宮大冒險](https://scratch.mit.edu/projects/1202943790/)
 - [娛樂稅VS納保法記憶翻牌](https://scratch.mit.edu/projects/1202413885)
 
+## [學員作品展示](./學員作品展示.md)
+
 ## 必備帳號
 - google免費帳號
 - github免費帳號
