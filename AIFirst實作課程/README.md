@@ -29,7 +29,7 @@
 | 平台 | 連結 |
 |------|------|
 | GitHub Pages | [將靜態網頁部署至 GitHub Pages](https://github.com/roberthsu2003/vibe-coding-to-pro-react/blob/main/github-docs-site/README.md) |
-| Vercel | [將靜態網頁部署至 Vercel](https://github.com/roberthsu2003/vibe-coding-to-pro-react/blob/main/static-deploy-vercel/README.md) |
+| Google Cloud Run | [透過 Google AI Studio 一鍵部署至 Google Cloud Run](./認識GoogleAIStudio/README.md#-核心概念解析share-remix-publish-deploy)（免費帳號即可直接發布對外公開網址） |
 
 ---
 
