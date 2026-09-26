@@ -1,7 +1,7 @@
 # Prompt（提示詞）
 
 - [輸入提示詞內容格式](./內容格式/README.md)
-  - 自然語言、YAML、Markdown 三種格式與實戰技巧
+  - 自然語言與 Markdown 結構化格式與實戰技巧
 
 - [系統提示詞 (System Prompt)](./系統提示詞/README.md)
   - 定義 AI 角色、風格與規則的背景指令
