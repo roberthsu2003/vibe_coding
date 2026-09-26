@@ -28,11 +28,11 @@
 
 ### 技巧
 
-- **[自然語言+迭代的開發方法](./自然語言+迭代的開發方法/README.md)**
-  - *探索開發思維的轉變：以小步迭代驅動專案成長。*
+- **[Prompt Engineering 提示詞工程](prompt/README.md)**
+  - *學習 RTCCF 結構化指令與發問技巧，快速產出高品質的原型。*
 
-- **[Prompt Engineering](prompt/README.md)**
-  - *學習如何下達精準指令，與 AI 高效溝通。*
+- **[作品迭代與修改技巧](./作品迭代與修改技巧/README.md)**
+  - *學會四大黃金法則與 Console 除錯，小步迭代把原型打磨成完整作品。*
 
 
 ### [實作範例：AI First（Google AI Studio）](./AIFirst實作課程/README.md)
