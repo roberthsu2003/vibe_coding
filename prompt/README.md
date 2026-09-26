@@ -24,7 +24,24 @@
 
 ## 二、 提示詞黃金架構：RTCCF 框架
 
-要寫出高品質的結構化 Prompt，最推薦採用 **RTCCF 框架**（五大要素）：
+要寫出高品質的結構化 Prompt，最推薦採用 **RTCCF 框架**（五大要素）。你可以將它想像成由 5 塊精密模組拼裝而成的「軟體需求規格書」：
+
+![RTCCF 提示詞工程框架圖解](./assets/rtccf-framework.jpg)
+
+```mermaid
+flowchart LR
+    R["🧑‍💻 <b>1. R - Role 角色</b><br/>專家設定 / 人設立場"] 
+    --> T["🎯 <b>2. T - Task 任務</b><br/>核心目標 / 交付成果"] 
+    --> C1["⚙️ <b>3. C - Context 背景</b><br/>技術棧 / 開發環境"] 
+    --> C2["🛡️ <b>4. C - Constraint 限制</b><br/>遊戲規則 / 邊界防呆"] 
+    --> F["🎨 <b>5. F - Format 格式</b><br/>視覺風格 / 程式碼規範"]
+
+    style R fill:#e6fbf3,stroke:#10b981,stroke-width:2px,color:#064e3b
+    style T fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
+    style C1 fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
+    style C2 fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f
+    style F fill:#ffe4e6,stroke:#e11d48,stroke-width:2px,color:#881337
+```
 
 | 要素 | 英文 | 核心重點 | Vibe Coding 實戰應用 |
 | :--- | :--- | :--- | :--- |
