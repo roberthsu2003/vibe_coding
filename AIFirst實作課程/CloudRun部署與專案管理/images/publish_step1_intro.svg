@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 700" width="460" height="700">
+  <defs>
+    <filter id="cardShadow" x="-5%" y="-3%" width="110%" height="108%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- 背景底色 -->
+  <rect width="460" height="700" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <!-- 頂部頁籤列 (Tabs) -->
+  <g transform="translate(16, 16)">
+    <circle cx="10" cy="16" r="3" fill="#94A3B8" />
+    <!-- Publish Tab (選中狀態) -->
+    <rect x="30" y="0" width="80" height="32" rx="16" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1"/>
+    <circle cx="44" cy="16" r="3.5" fill="#10B981" />
+    <text x="56" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#0F172A">Publish</text>
+
+    <!-- 其他 Tabs -->
+    <rect x="118" y="0" width="75" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="133" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#64748B">Versions</text>
+
+    <rect x="201" y="0" width="68" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="216" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#64748B">GitHub</text>
+
+    <rect x="277" y="0" width="95" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="290" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" fill="#64748B">Integrations</text>
+  </g>
+
+  <!-- 主標題區 -->
+  <text x="230" y="140" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#0F172A">What does publishing look like?</text>
+
+  <!-- 中心示意卡片 -->
+  <g transform="translate(70, 180)">
+    <!-- 卡片外框與微光 -->
+    <rect x="-10" y="-10" width="340" height="230" rx="20" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5" filter="url(#cardShadow)"/>
+    
+    <!-- 頂部視窗條 -->
+    <rect x="6" y="6" width="308" height="42" rx="8" fill="#F1F5F9" />
+    <text x="160" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#64748B">Your app</text>
+
+    <!-- 地球儀圖示與線條 -->
+    <circle cx="160" cy="110" r="28" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+    <!-- 地球經緯線模擬 -->
+    <path d="M 132 110 Q 160 90 188 110 Q 160 130 132 110 Z" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <ellipse cx="160" cy="110" rx="12" ry="28" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <line x1="132" y1="110" x2="188" y2="110" stroke="#94A3B8" stroke-width="2"/>
+
+    <!-- 骨架線條 -->
+    <rect x="110" y="155" width="100" height="12" rx="6" fill="#475569" />
+    <rect x="80" y="175" width="160" height="8" rx="4" fill="#94A3B8" />
+  </g>
+
+  <!-- 兩大說明項目 -->
+  <g transform="translate(55, 455)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <!-- 項目 1: 鎖定私密 -->
+    <g transform="translate(0, 0)">
+      <circle cx="16" cy="16" r="16" fill="#EFF6FF" />
+      <path d="M 11 15 L 11 11 C 11 8.2 13.2 6 16 6 C 18.8 6 21 8.2 21 11 L 21 15 M 9 15 L 23 15 L 23 24 L 9 24 Z" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="44" y="16" font-size="14" font-weight="700" fill="#0F172A">Chat history &amp; code will stay private</text>
+      <text x="44" y="34" font-size="12" fill="#64748B">對話提示詞與原始程式碼完全保密，訪客看不到</text>
+    </g>
+
+    <!-- 項目 2: 公開網址 -->
+    <g transform="translate(0, 65)">
+      <circle cx="16" cy="16" r="16" fill="#EFF6FF" />
+      <path d="M 12 18 L 10 20 C 8 22 5 22 3 20 C 1 18 1 15 3 13 L 6 10 C 8 8 11 8 13 10 M 18 12 L 20 10 C 22 8 25 8 27 10 C 29 12 29 15 27 17 L 24 20 C 22 22 19 22 17 20" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+      <text x="44" y="16" font-size="14" font-weight="700" fill="#0F172A">Your app will be accessible via a public URL</text>
+      <text x="44" y="34" font-size="12" fill="#64748B">產生正式公開網址，手機與電腦隨時皆可瀏覽</text>
+    </g>
+  </g>
+
+  <!-- 底部按鈕 -->
+  <g transform="translate(50, 605)">
+    <rect width="360" height="52" rx="26" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="180" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#0F172A">Get started</text>
+  </g>
+</svg>

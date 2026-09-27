@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <filter id="panelShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- 整體畫布背景 -->
+  <rect width="960" height="540" fill="#F8FAFC" />
+
+  <!-- 頂部提示橫幅 (入門級專案) -->
+  <rect x="0" y="0" width="960" height="40" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1" />
+  <circle cx="28" cy="20" r="8" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="28" y="24" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#475569">i</text>
+  <text x="46" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif" font-size="13" fill="#334155">這屬於入門級專案。升級可享更高配額，以及超過 150 項 Google Cloud 產品的完整權限。</text>
+  
+  <!-- 升級按鈕 -->
+  <rect x="880" y="8" width="65" height="25" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+  <text x="912" y="24" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563EB">升級</text>
+
+  <!-- GCP 頂部導航列 -->
+  <g transform="translate(0, 40)">
+    <rect width="960" height="48" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    <!-- 漢堡選單與 Logo -->
+    <text x="20" y="30" font-family="sans-serif" font-size="18" fill="#64748B">☰</text>
+    <text x="50" y="30" font-family="sans-serif" font-size="16" font-weight="700" fill="#1E293B">Google Cloud</text>
+    
+    <!-- 專案選單 (continual-bloom-qpnh2) -->
+    <rect x="160" y="8" width="210" height="32" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" />
+    <circle cx="178" cy="24" r="5" fill="#3B82F6" />
+    <text x="195" y="29" font-family="Courier, monospace" font-size="12" font-weight="bold" fill="#0F172A">continual-bloom-qpnh2</text>
+
+    <!-- 搜尋欄 -->
+    <rect x="390" y="8" width="380" height="32" rx="8" fill="#F1F5F9" />
+    <text x="410" y="28" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="12" fill="#94A3B8">搜尋資源、文件、產品和項目 (請按 / 鍵)</text>
+  </g>
+
+  <!-- 左側導航選單 -->
+  <g transform="translate(0, 88)">
+    <rect width="180" height="452" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1" />
+    
+    <!-- Cloud Run 標題 -->
+    <text x="20" y="32" font-family="sans-serif" font-size="18" fill="#3B82F6">❯❯</text>
+    <text x="48" y="32" font-family="sans-serif" font-size="15" font-weight="800" fill="#0F172A">Cloud Run</text>
+
+    <!-- 總覽 (目前選取) -->
+    <rect x="8" y="52" width="164" height="36" rx="6" fill="#EFF6FF" />
+    <text x="24" y="75" font-family="sans-serif" font-size="14" fill="#2563EB">🏠</text>
+    <text x="48" y="75" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="13" font-weight="700" fill="#2563EB">總覽</text>
+
+    <!-- 服務 (核心刪除位置) -->
+    <g transform="translate(8, 92)">
+      <text x="16" y="24" font-family="sans-serif" font-size="14" fill="#64748B">👥</text>
+      <text x="40" y="24" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="13" font-weight="600" fill="#475569">服務 (Services)</text>
+      <!-- 紅色箭頭指引 -->
+      <text x="140" y="23" font-size="13" fill="#EF4444">◄ 刪除</text>
+    </g>
+
+    <g transform="translate(8, 130)">
+      <text x="16" y="24" font-family="sans-serif" font-size="14" fill="#64748B">☰</text>
+      <text x="40" y="24" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="13" fill="#64748B">工作</text>
+    </g>
+
+    <g transform="translate(8, 168)">
+      <text x="16" y="24" font-family="sans-serif" font-size="14" fill="#64748B">⚙️</text>
+      <text x="40" y="24" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="13" fill="#64748B">worker 集區</text>
+    </g>
+
+    <g transform="translate(8, 206)">
+      <text x="16" y="24" font-family="sans-serif" font-size="14" fill="#64748B">🌐</text>
+      <text x="40" y="24" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="13" fill="#64748B">網域對應</text>
+    </g>
+  </g>
+
+  <!-- 主內容區 (總覽面板) -->
+  <g transform="translate(200, 105)">
+    <!-- 頁面標題 -->
+    <text x="0" y="22" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="18" font-weight="800" fill="#0F172A">總覽</text>
+    <text x="710" y="20" font-family="sans-serif" font-size="12" font-weight="600" fill="#2563EB">🔄 重新整理</text>
+
+    <!-- 卡片 1: 最常使用的資源 (左欄) -->
+    <g transform="translate(0, 40)">
+      <rect width="360" height="230" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#panelShadow)" />
+      
+      <text x="18" y="28" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="14" font-weight="700" fill="#0F172A">最常使用的資源</text>
+      <circle cx="125" cy="23" r="6" fill="#F1F5F9" />
+      <text x="125" y="27" text-anchor="middle" font-size="9" fill="#64748B">?</text>
+
+      <!-- 欄位標頭 -->
+      <g transform="translate(18, 55)" font-family="sans-serif" font-size="11" font-weight="600" fill="#64748B">
+        <text x="20" y="0">名稱</text>
+        <text x="160" y="0">區域</text>
+        <text x="230" y="0">類型</text>
+        <text x="280" y="0">上次更新</text>
+      </g>
+      <line x1="18" y1="120" x2="342" y2="120" stroke="#F1F5F9" stroke-width="1"/>
+
+      <!-- 項目 1: universal-template-filler-excel -->
+      <g transform="translate(18, 85)">
+        <circle cx="8" cy="8" r="7" fill="#10B981" />
+        <path d="M 5 8 L 7.5 10.5 L 11 5.5" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+        <text x="20" y="12" font-family="Courier, monospace" font-size="11" font-weight="bold" fill="#2563EB">universal-template-filler</text>
+        <text x="160" y="12" font-family="sans-serif" font-size="11" fill="#475569">us-west1</text>
+        <text x="230" y="12" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="11" fill="#475569">服務</text>
+        <text x="280" y="12" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="11" fill="#64748B">8 分鐘前</text>
+      </g>
+
+      <!-- 項目 2: ai -->
+      <g transform="translate(18, 125)">
+        <circle cx="8" cy="8" r="7" fill="#10B981" />
+        <path d="M 5 8 L 7.5 10.5 L 11 5.5" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+        <text x="20" y="12" font-family="Courier, monospace" font-size="11" font-weight="bold" fill="#2563EB">ai</text>
+        <text x="160" y="12" font-family="sans-serif" font-size="11" fill="#475569">us-west1</text>
+        <text x="230" y="12" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="11" fill="#475569">服務</text>
+        <text x="280" y="12" font-family="sans-serif" font-size="10" fill="#64748B">2026/07/07</text>
+      </g>
+
+      <!-- 底部醒目提示標籤 (2/2 配額已滿) -->
+      <g transform="translate(18, 175)">
+        <rect width="324" height="38" rx="6" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1" />
+        <text x="162" y="24" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="12" font-weight="bold" fill="#DC2626">⚠️ 目前已佔用 2/2 免費配額上限（滿載）</text>
+      </g>
+    </g>
+
+    <!-- 卡片 2: 資源調度 (Scale to Zero 鐵證 - 右欄) -->
+    <g transform="translate(380, 40)">
+      <rect width="360" height="230" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" filter="url(#panelShadow)" />
+      
+      <text x="18" y="28" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="14" font-weight="700" fill="#0F172A">資源調度 (Scale to Zero 監控)</text>
+      <text x="300" y="26" font-family="sans-serif" font-size="11" fill="#64748B">7 天 ▼</text>
+      <line x1="18" y1="36" x2="68" y2="36" stroke="#2563EB" stroke-width="2.5"/>
+
+      <!-- Y 軸座標 -->
+      <text x="335" y="80" font-family="sans-serif" font-size="10" fill="#94A3B8">1</text>
+      <line x1="18" y1="75" x2="330" y2="75" stroke="#F1F5F9" stroke-width="1" stroke-dasharray="3,3"/>
+      
+      <text x="335" y="165" font-family="sans-serif" font-size="10" fill="#94A3B8">0</text>
+      <line x1="18" y1="160" x2="330" y2="160" stroke="#CBD5E1" stroke-width="1"/>
+
+      <!-- 平躺在 0 的藍色折線 -->
+      <line x1="20" y1="160" x2="330" y2="160" stroke="#2563EB" stroke-width="2"/>
+      <circle cx="280" cy="160" r="4" fill="#2563EB" />
+      <text x="25" y="180" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563EB">● service: 0 (無訪問時算力歸零，完全免費)</text>
+
+      <!-- 時間標籤 -->
+      <text x="75" y="198" font-family="sans-serif" font-size="9" fill="#94A3B8">9月22日</text>
+      <text x="135" y="198" font-family="sans-serif" font-size="9" fill="#94A3B8">9月23日</text>
+      <text x="195" y="198" font-family="sans-serif" font-size="9" fill="#94A3B8">9月24日</text>
+      <text x="255" y="198" font-family="sans-serif" font-size="9" fill="#94A3B8">9月26日</text>
+    </g>
+
+    <!-- 下方快速部署指引卡片 -->
+    <g transform="translate(0, 290)">
+      <rect width="740" height="120" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+      <text x="18" y="28" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="14" font-weight="700" fill="#0F172A">部署 Web 服務與後續維護</text>
+      <text x="18" y="55" font-family="-apple-system, BlinkMacSystemFont, 'PingFang TC', sans-serif" font-size="12" fill="#64748B">若需釋放免費配額，請由左側點選「服務」，勾選不再使用的服務後點擊頂部「刪除」即可立刻空出名額！</text>
+      
+      <!-- 快捷入口按鈕 -->
+      <rect x="18" y="70" width="110" height="34" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" />
+      <text x="73" y="92" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#334155">🐙 連結存放區</text>
+
+      <rect x="138" y="70" width="110" height="34" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1" />
+      <text x="193" y="92" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#334155">🐳 部署容器</text>
+    </g>
+  </g>
+</svg>

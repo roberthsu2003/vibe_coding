@@ -63,6 +63,8 @@
 > - **零金鑰外洩風險**：所有 Gemini API Key、OAuth 授權碼與資料庫憑證均由伺服器端環境變數保護，**完全不會暴露給前端瀏覽器**，學員無須自行架設 Vercel Serverless 或外部伺服器。
 > - **一鍵雲端部署**：完成專案後，直接透過頂部 **Publish 按鈕一鍵部署至 Google Cloud Run**，立即擁有專屬的正式上線網址！
 
+![Google AI Studio 全端應用與服務整合生態圖](./images/aistudio_integrations_architecture.jpg)
+
 ### 🤖 Gemini AI 核心應用實戰（Backend Proxy 安全代理）
 
 | 專案 | 說明 | 備註 |
