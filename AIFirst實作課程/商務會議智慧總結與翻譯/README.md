@@ -45,8 +45,9 @@
 ```
 
 ### 1. 建立專案
-- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊右上角建立新 Web 專案。
-- 複製下方**「第三步」**的完整提示詞，貼入 AI Studio 對話框發送生成。
+- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
+  > 🚨 **注意**：首頁建立專案的對話框（Upload Files 按鈕）**只支援純文字檔案與圖片檔，無法直接放 docx/xlsx/pptx 檔案**！請直接複製下方**「第三步」**的完整提示詞貼入對話框發送生成專案進入工作區。
+- 複製下方**「第三步」**的完整提示詞，貼入 AI Studio 首頁對話框發送生成。
 
 ### 2. 放置素材檔案
 - 專案建立完成後，將剛才下載的 `標準商務會議素材包.zip` 解壓縮。

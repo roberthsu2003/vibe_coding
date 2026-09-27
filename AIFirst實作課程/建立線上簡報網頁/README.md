@@ -32,6 +32,10 @@
 
 你可以直接下載此檔案，在 Google AI Studio 中上傳作為參考附件；或者點開下方折疊區查看與複製完整內容：
 
+> 🚨 **格式提醒**：  
+> Google AI Studio 首頁對話框僅支援純文字（`.md`、`.txt` 等）與圖片檔，**無法直接上傳 PowerPoint (`.pptx`) 簡報檔**！  
+> 因此若手邊已有現成的 PPT，請先將文字大綱複製出來整理為 Markdown 或純文字，再提供給 AI 處理。
+
 <details>
 <summary>👉 點擊展開：檢視 presentation_outline.md 完整 Markdown 偽內容（可直接複製）</summary>
 

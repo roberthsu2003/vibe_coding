@@ -27,6 +27,10 @@
 | **2026專案會議追蹤表_範本.csv** | `CSV` | Google 試算表追蹤表範本（含任務名稱、負責人、優先級、截止日、備註、完成狀態 6 大欄位） | [📥 點我下載 CSV](./2026專案會議追蹤表_範本.csv) |
 | **meeting_transcript_sample.md** | `MD` | 完整逼真的跨部門籌備會議逐字稿（含 PM、設計、工程主管、行銷、QA 發言記錄） | [📥 點我檢視 Markdown](./meeting_transcript_sample.md) |
 
+> 🚨 **AI Studio 初始檔案格式重要提醒**：  
+> Google AI Studio 首頁建立專案的對話框（Upload Files 按鈕）**只支援純文字檔案（如 `.csv`、`.md`、`.txt`）與圖片檔案（如 `.svg`、`.png`、`.jpg`）**，**無法直接上傳 `.docx`、`.xlsx`、`.pptx` 等 Office 二進位檔案**！  
+> 因此若有 Word 會議記錄或 PPT 簡報，需先轉為 Markdown、純文字或截圖圖片，或直接複製文字貼入提示詞中。
+
 <br>
 
 <details>
@@ -54,29 +58,30 @@
 請依照以下簡單三步驟完成專案建置與 Google Cloud Run 雲端發布：
 
 ```
-【步驟 1】開啟 AI Studio 右側 Integrations ──► 啟用 Google Sheets 與 Google Calendar
+【步驟 1】複製第三步提示詞 ────────────────► 貼至 AI Studio 首頁對話框生成專案進入工作區
                                                   ▼
-【步驟 2】複製第三步提示詞 ────────────────► 貼至 AI Studio 對話框生成專案
+【步驟 2】開啟專案右側 Integrations 面板 ──► 啟用 Google Sheets 與 Google Calendar 完成授權
                                                   ▼
-【步驟 3】網頁立即測試 ──────────────────► 貼上逐字稿、一鍵同步試算表與日曆、一鍵 Publish！
+【步驟 3】網頁預覽立即測試 ────────────────► 貼上逐字稿、一鍵同步試算表與日曆、一鍵 Publish！
 ```
 
-### 1. 啟用 Google Sheets 與 Google Calendar 原生雙整合
-- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊右上角進入 **Build Mode** 建立新 Web 專案。
-- 查看右側工具列的 **`Integrations`** 面板：
-  - 找到 **`Google Sheets`** 並點擊 **`Enable（啟用）`**。
-  - 找到 **`Google Calendar`** 並點擊 **`Enable（啟用）`**。
+### 1. 貼入提示詞生成應用程式
+- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
+- （可選）點擊右上角齒輪 ⚙️ **Advanced settings**，確認模型為 Gemini 3.8 Flash、Framework 為 React，System instructions 可設定自訂繁體中文要求。
+- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入首頁對話框「Describe an app and let Gemini do the rest」，點擊發送開始生成專案並進入專案工作區（Code & Preview 介面）。
 
-### 2. 貼入提示詞生成應用程式
-- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入 AI Studio 對話框發送生成。
+### 2. 在專案中啟用 Google Sheets 與 Google Calendar 原生雙整合
+- 專案建立完成後，查看右側側邊欄的 **`Integrations`** 面板（專案建立後才會出現）：
+  - 找到 **`Google Sheets`** 並點擊 **`Enable（啟用）`** 完成授權。
+  - 找到 **`Google Calendar`** 並點擊 **`Enable（啟用）`** 完成授權。
 
 ### 3. 測試與雲端發布
-- **點擊一鍵填入範例**：點擊「📋 填入示範會議紀錄」按鈕，快速帶入 1500 字跨部門籌備會議內容。
+- **點擊一鍵填入範例**：在產出的網頁中，點擊「📋 填入示範會議紀錄」按鈕，快速帶入 1500 字跨部門籌備會議內容。
 - **AI 結構化智慧解析**：點擊「🚀 開始 AI 智慧拆解」，Gemini 秒級萃取出「核心結論」、「行動任務清單（含負責人/截止日）」與「關鍵日曆日程」。
 - **一鍵同步至 Google 試算表**：點擊「Sign in with Google」完成授權，點擊「📥 一鍵同步所有待辦至 Google Sheets」，任務批次寫入雲端追蹤表。
 - **一鍵排入 Google 日曆**：點擊「📅 全部排入日曆」，行程與 Deadline 自動排入 Google Calendar 並附帶提前 30 分鐘推播提醒。
 - **一鍵發布至 Cloud Run**：
-  - 點擊右側工具列的 **`Publish`** 按鈕。
+  - 切換至右側工具列的 **`Publish`** 面板。
   - 自訂 App URL（例如 `meeting-sheets-calendar-hub`），點擊 **`Publish your app`**，30~60 秒內由 Google Cloud Run 全託管發布上線！
 
 ---

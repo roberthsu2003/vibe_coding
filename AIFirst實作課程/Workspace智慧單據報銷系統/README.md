@@ -27,6 +27,10 @@
 | **2026公司報銷流水帳_範本.csv** | `CSV` | Google 試算表範本（含標準 7 大欄位與 4 筆預設歷史報帳紀錄，可直接匯入 Google Sheets） | [📥 點我下載 CSV](./2026公司報銷流水帳_範本.csv) |
 | **receipt_mock_data.md** | `MD` | 4 筆超詳細企業日常報帳文字明細（超商茶點、加油油資、文具耗材、高鐵車票） | [📥 點我檢視 Markdown](./receipt_mock_data.md) |
 
+> 🚨 **AI Studio 初始檔案格式重要提醒**：  
+> Google AI Studio 首頁建立專案的對話框（Upload Files 按鈕）**只支援純文字檔案（如 `.csv`、`.md`、`.txt`）與圖片檔案（如 `.svg`、`.png`、`.jpg`）**，**無法直接上傳 `.docx`、`.xlsx`、`.pptx` 等 Office 二進位檔案**！  
+> 因此本課程特別提供標準的 `SVG` 發票圖檔與 `CSV` 試算表範本，確保能直接上傳或貼入測試。
+
 <br>
 
 <details>
@@ -68,26 +72,28 @@
 請依照以下簡單三步驟完成專案建置與 Google Cloud Run 雲端發布：
 
 ```
-【步驟 1】開啟 AI Studio 右側 Integrations ──► 點擊 Google Sheets「Enable」
+【步驟 1】複製第三步提示詞 ────────────────► 貼至 AI Studio 首頁對話框生成專案進入工作區
                                                   ▼
-【步驟 2】複製第三步提示詞 ────────────────► 貼至 AI Studio 對話框生成專案
+【步驟 2】開啟專案右側 Integrations 面板 ──► 找到 Google Sheets 點擊「Enable」完成授權
                                                   ▼
-【步驟 3】網頁立即測試 ──────────────────► 上傳發票辨識、一鍵登錄 Sheets、一鍵 Publish！
+【步驟 3】網頁預覽立即測試 ────────────────► 上傳發票辨識、一鍵登錄 Sheets、一鍵 Publish！
 ```
 
-### 1. 啟用 Google Sheets 原生整合
-- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊右上角進入 **Build Mode** 建立新 Web 專案。
-- 查看右側工具列的 **`Integrations`** 面板，找到 **`Google Sheets`** 並點擊 **`Enable（啟用）`**。
+### 1. 貼入提示詞生成應用程式
+- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
+- （可選）點擊右上角齒輪 ⚙️ **Advanced settings**，確認模型為 Gemini 3.8 Flash、Framework 為 React，System instructions 可設定自訂繁體中文要求。
+- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入首頁對話框「Describe an app and let Gemini do the rest」，點擊發送開始生成專案並進入專案工作區（Code & Preview 介面）。
 
-### 2. 貼入提示詞生成應用程式
-- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入 AI Studio 對話框發送生成。
+### 2. 在專案中啟用 Google Sheets 原生整合
+- 專案建立完成後，查看右側側邊欄的 **`Integrations`** 面板（專案建立後才會出現）。
+- 找到 **`Google Sheets`** 並點擊 **`Enable（啟用）`**，依視窗引導完成 Google 帳號授權。
 
 ### 3. 測試與雲端發布
-- **發票圖片多模態辨識**：拖曳或點選上傳 `sample_receipt_invoice.svg`，點擊「⚡ 開始 AI 智慧解析」，Gemini 自動萃取店家、日期、金額與會計科目。
+- **發票圖片多模態辨識**：在產出的網頁中，拖曳或點選上傳剛才下載的 `sample_receipt_invoice.svg`，點擊「⚡ 開始 AI 智慧解析」，Gemini 自動萃取店家、日期、金額與會計科目。
 - **一鍵登錄至 Google 試算表**：點擊「Sign in with Google」登入個人 Google 帳號，填入目標試算表 ID，點擊「📥 登錄至 Google 試算表」，資料立即以新列追加至雲端試算表！
 - **離線 Excel 請款單下載**：點擊「📑 匯出本筆報銷 Excel 請款單」，瀏覽器立即下載保留排版與加總公式的正式 `.xlsx` 請款單。
 - **一鍵發布至 Cloud Run**：
-  - 點擊右側工具列的 **`Publish`** 按鈕。
+  - 切換至右側工具列的 **`Publish`** 面板。
   - 自訂 App URL（例如 `smart-expense-sheets-hub`），點擊 **`Publish your app`**，30~60 秒內由 Google Cloud Run 全託管發布上線！
 
 ---

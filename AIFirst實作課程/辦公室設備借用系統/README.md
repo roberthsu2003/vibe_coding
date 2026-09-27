@@ -85,9 +85,10 @@
 ### 📋 步驟 3：專案建立 RTCCF Prompt（複製貼入 Google AI Studio）
 
 請依照以下 3 個步驟開始建立專案：
-1. 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊右上角進入 **Build Mode**。
-2. 查看右側側邊欄的 **Integrations 面板**，找到 **Firebase Firestore & Auth** 並點擊 **Enable（啟用）**（享受免費 Spark Plan，免綁信用卡）。
-3. 直接複製下方整段 RTCCF 提示詞，貼入 AI Studio 對話框開始生成：
+1. 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
+   > 🚨 **注意**：首頁對話框僅支援純文字與圖片檔，無法直接放 docx/xlsx/pptx 檔案，請直接將下方完整提示詞複製貼入輸入框中！
+2. 複製下方整段 RTCCF 提示詞，貼入首頁對話框發送生成專案，進入 App 工作區。
+3. 進入專案工作區後，查看右側側邊欄的 **Integrations 面板**，找到 **Firebase Firestore & Auth** 並點擊 **Enable（啟用）**（享受免費 Spark Plan，免綁信用卡），即可在預覽畫面測試多人即時借還！
 
 ```markdown
 # 角色 (Role)

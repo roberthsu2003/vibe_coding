@@ -194,15 +194,19 @@
 
 ## 🎯 實戰教學：如何在 Google AI Studio 中啟用與呼叫？
 
-要在你的 Web 應用中串接這些 Workspace 整合，只需極簡 3 步驟：
+要在你的 Web 應用中串接這些 Workspace 整合，請遵循「先建專案、再至專案右側啟用 Integrations」的標準兩階段流程：
 
 ```
-【步驟 1】開啟 AI Studio 右側「Integrations」面板
+【步驟 1】在 AI Studio 首頁貼入提示詞生成專案（進入 App 工作區）
                     ▼
-【步驟 2】在想要串接的服務（如 Google Sheets、Google Calendar）點擊「Enable」
+【步驟 2】切換至專案右側「Integrations」面板，在欲串接服務點擊「Enable」完成授權
                     ▼
-【步驟 3】在 RTCCF 提示詞中明確指示：「使用已啟用的 Google Sheets Integration」
+【步驟 3】在預覽畫面測試（或於右側對話中請 AI 完善串接），最後點擊「Publish」發布！
 ```
+
+> 🚨 **極重要提醒：初始檔案格式支援限制**  
+> Google AI Studio 首頁輸入框的「Upload Files」功能**只支援純文字檔案（如 `.txt`、`.md`、`.csv`、代碼檔）與圖片檔案（如 `.jpg`、`.png`、`.webp`、`.svg`）**，**無法直接上傳 Word (`.docx`)、Excel (`.xlsx`)、PowerPoint (`.pptx`) 等 Office 二進位檔案**！  
+> 若有相關文件或報表規格，請先轉存為純文字、Markdown、CSV 或截圖圖片，或者直接寫在 Prompt 提示詞中。
 
 ### 💡 實戰 Prompt 提示詞範例（以 Sheets + Calendar 為例）：
 

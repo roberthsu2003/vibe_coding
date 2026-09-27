@@ -17,30 +17,48 @@
 ---
 ![GoogleAIStudio](./images/google-ai-studio-infographic.png)
 
-## 🛠️ 實作準備：建立 App 前的關鍵設定 (Advanced Settings)
+## 🛠️ 實作準備：認識 Google AI Studio 介面與設定
 
-在開始建立你的第一個 App 之前，請先在「進階設定」中確認以下四個關鍵欄位。理解這些設定背後的邏輯，是做出穩定 AI 應用的基礎。
+進入 [Google AI Studio (https://aistudio.google.com/)](https://aistudio.google.com/) 後，點擊左側「**+ New app**」，你會看到建立專案的首頁介面（**Build your ideas with Gemini**）。在開始建立前，有兩大極為關鍵的操作細節必須掌握：
 
-1.  **Select model for chat**：選擇使用的 AI 模型。
-    *   *👉 **備註：** 初次使用建議選擇預設模型（如 Gemini Flash），熟悉操作流程後再替換其他高性能模型。*
-2.  **System instructions**：輸入專案的整體目標、角色設定與回覆風格。
-    *   *👉 **備註：** 這是定義 AI 「人設」的核心，有效的指令能極大避免 AI 輸出內容過於發散或跑題。*
-3.  **Framework**：選擇應用程式的技術框架。
-    *   *👉 **備註：** 選擇課程指定的框架（React / Next.js / Angular），確保後續的程式碼能順利銜接。*
-4.  **Microphone source**：語音互動功能所需的來源設定。
-    *   *👉 **備註：** 僅當你專案需要語音輸入功能時才需要配置此項，否則可忽略。*
+### 1. ⚙️ 右上角進階設定 (Advanced Settings)
+
+在尚未輸入 Prompt 前，可點擊右上角的 **齒輪 ⚙️ 圖示** 開啟「Advanced settings」面板確認或自訂設定：
+*   **Select model to use in Chat**：選擇 AI 模型，預設為最新高速模型 **Default (Gemini 3.8 Flash)**。
+*   **Framework**：選擇應用程式的開發框架，建議使用 **React**。
+*   **System instructions**：輸入全域系統指令或角色風格（例如：`Custom instructions` 中設定 `所有回覆請使用繁體中文`）。
+*   **Usage**：檢視目前配額狀態（如 `Free requests` 免費版層級）。
+*   **Microphone source**：若需要語音輸入功能可設定麥克風來源。
+
+### 2. ⚠️ 重要限制：建立 App 時的檔案上傳支援規格
+
+在首頁輸入框左下角的「**`+`**」按鈕中，提供了 `Import from GitHub`、`Drive`、`Upload Files`、`Camera` 等選項。請務必注意：
+
+> 🚨 **極重要觀念**：  
+> **初始建立 App 的對話框上傳（Upload Files），目前只支援「純文字檔案」（如 `.txt`、`.md`、`.csv`、代碼檔）與「圖片檔案」（如 `.jpg`、`.png`、`.webp`、`.svg`）！**  
+> ❌ **無法直接上傳 Word (`.docx`)、Excel (`.xlsx`)、PowerPoint (`.pptx`) 等 Office 二進位檔案！**  
+> - 如果你有現成的 Word 規格書、Excel 報表或 PPT 簡報想提供給 AI 參考，**請務必先將內容轉存為 Markdown (`.md`)、CSV (`.csv`)、純文字 (`.txt`) 或截圖圖片**，再提供給 AI 讀取；或者直接複製文字內容貼入 Prompt 提示詞中。
 
 ---
 
-## 🗺️ 實作流程地圖 (The Workflow)
+## 🗺️ 實作流程地圖：專案建立與 Integrations 的正確順序
 
-我們的實作過程遵循一個清晰的迭代路徑：
+很多初學者常困惑：「*為什麼我在首頁找不到 Integrations（整合）面板？*」  
+這是因為 **Google AI Studio 的功能面板是「兩階段」的**：
 
-1.  **起點 (Initial Draft)**：使用預設模型，透過一句話需求建立應用程式的第一個基礎版本。
-2.  **迭代 (Refinement)**：進入 Prompt 調整階段，透過不斷細化需求，逐步優化 AI 的輸出品質。
-3.  **優化 (Code Tweak)**：切換到 Code 模式，進行小幅度的程式碼修補或介面調整，隨後切回 Preview 進行驗證。
-4.  **最小化產品 (MVP)**：確保你的應用程式能完成最核心的任務（例如：文字產生器），達到最小可行產品 (MVP)。
-5.  **發布決策 (Go Live)**：當你準備好讓世界看看你的作品時，再考慮使用 Share 或 Deploy 功能。
+```
+【階段一：首頁建立】                        【階段二：專案工作區】
+輸入 RTCCF 提示詞 ──► 點擊發送生成專案 ──► 進入 App 預覽與代碼工作區
+(右上角可先調齒輪設定)                      (此時右側面板才會出現 Integrations、Secrets、Publish！)
+                                                      ▼
+                                           至右側 Integrations 點擊 Enable 啟用
+                                           (如 Google Sheets, Calendar, Firebase)
+```
+
+1.  **專案生成 (Initial App Creation)**：在首頁對話框「Describe an app and let Gemini do the rest」貼入 Prompt，讓 Gemini 建立專案並進入應用程式開發工作區（Code & Preview）。
+2.  **啟用整合 (Enable Integrations)**：進入專案工作區後，**檢視右側側邊欄的 `Integrations` 標籤頁**，找到需要的服務（如 Google Sheets、Google Calendar、Firebase）點擊 **Enable** 並完成授權。
+3.  **迭代與除錯 (Refinement & Code)**：在畫面中進行即時預覽測試，或在對話框中發送修改指令調整功能。
+4.  **發布上線 (Publish)**：在右側面板切換至 **`Publish`**，一鍵將全端網頁部署至 **Google Cloud Run**！
 
 ---
 
