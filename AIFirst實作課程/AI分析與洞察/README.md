@@ -1,218 +1,201 @@
-# AI 分析與洞察
+# 📑 AI First 實戰進階：智慧商業數據分析與動態洞察儀表板（Google Cloud Run 全託管版）
 
-本單元將帶領學員使用 AI 來進行 CSV/Excel 數據資料的自動化分析與洞察。我們將打造一個工具，能讓使用者上傳或貼上表格資料，並由 AI 協助理解欄位意義、檢查缺值與異常，最終產出包含統計與趨勢的摘要報告。
-
-## 🛠 技術棧 (Tech Stack)
-
-實作此生成工具時，建議採用以下前端技術：
-- **建置工具**: Vite
-- **前端框架**: React
-- **程式語言**: TypeScript
-- **樣式框架**: Tailwind CSS
+> **30 秒專案介紹**：  
+> 這是一個結合 **Google 最新世代 Gemini 3 系列（`gemini-3.8-flash`）**、純前端資料解析（`xlsx` / `papaparse`）與 **Google Cloud Run** 的商業智慧 (BI) 應用。  
+> 網頁啟動時**自動載入 `public/` 資料夾的預設數據檔案**，AI 自動理解欄位結構並**智慧推薦 4~6 種深度分析面向**供使用者挑選。使用者選擇後，系統**即時生成動態互動圖表、關鍵 KPI 指標卡與商業策略建議**，更可**一鍵匯出包含完整分析報表與計算公式的全新 Excel 檔案（.xlsx）**！  
+> 支援**單一通用上傳區（CSV 與 XLSX 拖曳即用）**，且具備**「更新即清空」**防呆機制。透過 Google AI Studio 一鍵部署至 **Google Cloud Run**，享有 **Backend Proxy 伺服器端金鑰保護** 與 **縮容至 0 (Scale to Zero) 免費待機**！
 
 ---
 
-## 📂 測試資料：銷售業績 CSV 範例片段
+## 📥 第一步：下載課程素材檔案
 
-在開發與測試階段，請複製以下 CSV 內容，作為應用程式的測試輸入內容：
+請點擊下方按鈕**一鍵下載商業數據完整素材包**，解壓縮後稍後會放入專案中使用：
+
+> 🎁 **[👉 【推薦】點我一鍵下載「AI數據分析與洞察素材包.zip」](./AI數據分析與洞察素材包.zip)**  
+> *(內含以下所有銷售業績 Excel 範本、電商營運 CSV 數據與 Logo)*
+
+### 📂 素材清單與單獨下載
+
+| 檔案名稱 | 格式 | 說明與用途 | 單獨下載 |
+| :--- | :---: | :--- | :---: |
+| **全通路銷售與業績數據範本.xlsx** | `XLSX` | 官方預設銷售數據（含通路、業務員、品類、銷售額與毛利，**網頁啟動預設自動載入**） | [📥 下載](./全通路銷售與業績數據範本.xlsx) |
+| **電商營運分析數據.csv** | `CSV` | 官方切換範本（含會員等級、流量管道、實付金額、運費與顧客評分，**測試 CSV 檔案解析**） | [📥 下載](./電商營運分析數據.csv) |
+| **logo.svg** | `SVG` | 現代商業智慧 BI 數據分析標誌圖片（已適配響應式排版） | [🖼️ 下載](./logo.svg) |
 
 <details>
-<summary>📋 點我展開 CSV 資料</summary>
+<summary>📋 點擊展開預覽：電商營運分析數據 CSV 內容片段</summary>
 
 ```csv
-訂單編號,日期,業務員,產品類別,銷售數量,單價(NTD),總金額(NTD)
-ORD-001,2023-10-01,張小明,筆記型電腦,5,30000,150000
-ORD-002,2023-10-02,李大華,智慧型手機,12,25000,300000
-ORD-003,2023-10-03,王建國,平板電腦,,15000,
-ORD-004,2023-10-03,張小明,智慧型手機,3,25000,75000
-ORD-005,2023-10-04,陳淑芬,穿戴裝置,20,5000,100000
-ORD-006,2023-10-05,陳淑芬,筆記型電腦,1,30000,30000
-ORD-007,2023-10-06,王建國,異常測試商品,500,999999,499999500
-ORD-008,2023-10-07,李大華,穿戴裝置,8,5000,40000
+訂單編號,下單日期,會員等級,流量來源,商品品類,品名,購買件數,商品原價,實付金額,運費,優惠折扣,退貨狀態,顧客評分
+ORD-EC-801,2026-09-01,VIP白金會員,Google搜尋廣告,智慧穿戴,FitPulse Pro 智慧運動手環,2,4200,7560,0,840,正常完成,5
+ORD-EC-802,2026-09-01,一般會員,Facebook社群,行動裝置,Ultra 5G 旗艦機 256GB,1,28000,28000,100,0,正常完成,4
+ORD-EC-803,2026-09-02,黃金會員,LINE官方帳號,智慧家電,IoT 靜音抗敏空氣清淨機,1,16800,15120,0,1680,正常完成,5
+ORD-EC-804,2026-09-02,新註冊會員,KOL網紅推薦,智慧穿戴,Watch Ultra 專業潛水錶,1,16500,16500,0,0,退貨處理中,2
+ORD-EC-805,2026-09-03,VIP白金會員,EDM電子報,商務電腦,ProBook 14 旗艦商務筆電,3,38000,102600,0,11400,正常完成,5
 ```
-*(注意：此資料包含刻意留空的值與極端的異常值)*
 
 </details>
 
 ---
 
-## 🚀 實作步驟與 Prompt 範例
+## 🚀 第二步：Google AI Studio 實作 3 步驟（SOP）
 
-在這個實作中，我們將使用不同的 Prompt 來完成應用程式的開發與 AI 行為設定：
-
-### 1. 開發前端網頁的 Prompt
-
-您可以複製以下指令，交給 AI 輔助開發工具（如 Cursor、GitHub Copilot）來生成前端應用程式的基礎架構與畫面：
-
-```markdown
-請幫我開發一個「AI 數據分析與洞察工具」的網頁前端應用程式。
-具體的開發需求與規格如下：
-
-#### 1. 技術棧與框架 (Tech Stack)
-- 建置工具：Vite
-- 核心框架：React
-- 程式語言：TypeScript
-- 樣式框架：Tailwind CSS (請幫我設計美觀、現代化的介面)
-
-#### 2. 核心功能與介面
-- **介面語系**：整個應用程式（App）的 UI 介面與所有提示文字都必須使用**繁體中文**呈現。
-- **輸入區**：提供一個大型文字方塊（Textarea），讓使用者可以貼上「CSV 格式」的報表資料。
-- **操作按鈕**：包含一個「開始 AI 分析」的按鈕，點擊時必須顯示 Loading 讀取狀態，避免重複點擊。
-- **輸出顯示區**：將 AI 分析後的結果格式化顯示於畫面中（支援 Markdown 渲染為佳），並且為結果區塊提供一個「一鍵複製」的按鈕。
-
-#### 3. API 整合邏輯
-- 請在前端撰寫一個呼叫 AI 模型（例如 Google Gemini 等 API）的串接邏輯。
-- 請設計一個 `System Instructions` 常數，用來設定 AI 的行為與輸出格式，並在呼叫 API 時帶入。
-- 當使用者點擊送出按鈕時，將文字框的 CSV 內容作為 User Prompt 發送。
+請依照以下簡單三步驟完成專案建置與 Google Cloud Run 雲端發布：
 
 ```
-
-### 2. AI 模型的 System Instructions
-
-為了讓 AI 每次都能輸出結構化的數據分析報告，我們需要設定 `System Instructions`。請將以下提示詞設定到您的程式碼或是 AI 平台中：
-
-```markdown
-你是一位專業的資料分析師。
-你的任務是接收一段 CSV 或表格結構的原始數據，理解其欄位意義，並提出精確的摘要報告與洞察。
-
-請務必嚴格遵循以下 Markdown 輸出格式：
-
-### 1. 📊 資料概況與欄位理解
-簡要說明這份資料的主題是什麼，並列出關鍵欄位的意義。
-
-### 2. ⚠️ 異常與缺值檢查
-檢查資料中是否有空白（例如缺少數量或金額）、極端值（例如不合理的高價），並將發現的異常項目條列出來。若無異常，說明「未發現明顯異常」。
-
-### 3. 📈 統計與趨勢洞察
-請回答以下問題的總結：
-- **總計概況**：銷售數量或總金額的大概加總。
-- **分類表現**：哪個業務員或哪項產品表現最好？
-- **業務建議**：從數據中給出 1-2 個可以執行的商業建議。
-
-請以 Markdown 格式輸出，所有繁體中文部分必須使用**繁體中文**回覆，不要包含任何額外的問候語或結語。
+【步驟 1】複製第三步提示詞 ──► 貼至 Google AI Studio 對話框生成專案
+                                 ▼
+【步驟 2】將素材解壓縮 ─────► 放至專案的 public/ 資料夾內
+                                 ▼
+【步驟 3】網頁立即測試 ─────► 自動載入預設數據、挑選分析維度、動態圖表與匯出 Excel，一鍵發布！
 ```
 
-> **💡 範例參考**
->
-> 如果需要參考完整的實作程式碼，可以下載：[Gemini AI Studio 完成範例檔](./gemini_ai_完成的範例zip檔/data-analysis-assistant.zip)
+### 1. 建立專案
+- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊右上角建立新 Web 專案。
+- 複製下方**「第三步」**的完整提示詞，貼入 AI Studio 對話框發送生成。
+
+### 2. 放置素材檔案
+- 專案建立完成後，將剛才下載的 `AI數據分析與洞察素材包.zip` 解壓縮。
+- 將解壓後的檔案（`全通路銷售與業績數據範本.xlsx`、`電商營運分析數據.csv`、`logo.svg`）**手動放至專案根目錄的 `public/` 資料夾內**。
+
+### 3. 測試與雲端發布
+- **預設自動載入**：網頁啟動時會自動讀取並解析 `public/全通路銷售與業績數據範本.xlsx`，展示資料概覽與前 5 筆預覽。
+- **AI 智慧推薦分析維度**：AI 即時掃描資料欄位，列出 4~6 個建議分析視角（如「通路獲利貢獻」、「產品類別交叉分析」），使用者可直接點選有興趣的維度。
+- **動態網頁分析儀表板**：點選分析後，網頁即時呈現 **KPI 指標卡**、**視覺化互動圖表（長條圖/折線圖）** 與 **AI 商業策略洞察**。
+- **匯出分析結果至全新 Excel**：點擊「📥 匯出分析報告 Excel」，即可下載一份包含原始資料、AI 洞察與統計樞紐的全新 `.xlsx` 活頁簿！
+- **更新即自動清除**：點選上傳自訂的 `.csv` 或 `.xlsx` 檔案，舊的分析圖表**立即清空**，並動態重新推薦分析面向。
+- **一鍵發布至 Cloud Run**：
+  - 點擊右側工具列的 **`Publish`** 按鈕。
+  - 自訂 App URL（例如 `ai-data-insights-bi`），最終網址即為：  
+    👉 **`https://ai-data-insights-bi.ai.studio`**
+  - 點擊 **`Publish your app`**，底層自動建立 **Google Cloud Run** 全託管容器，30~60 秒內發布上線！
 
 ---
 
-## 🔒 專案升級：遷移至 Vercel Serverless 後端
+## 🤖 第三步：專案生成提示詞（點擊代碼框右上角一鍵複製）
 
-**⚠️ 資安警告**：直接在前端（React）呼叫 AI API 會導致 API Key 暴露在瀏覽器中，這是非常危險的做法！
-
-當您在本地端完成初步測試後，請務必將呼叫 AI 服務的邏輯遷移至後端。您可以將以下 Prompt 餵給 AI，請它幫您將專案改寫為 Vercel Serverless 架構：
+請將以下整段提示詞複製，貼到 **Google AI Studio**：
 
 ```markdown
-這是一個由 **Google AI Studio** 協助建立的 Vite + React + Express 全端專案，原本使用 Express 作為後端伺服器，但 Vercel 不支援 Express 長駐伺服器的部署方式，因此需要將後端架構遷移至 Vercel Serverless Functions。
+# Role（角色）
+你是一位精通 React、TypeScript、Tailwind CSS、純前端 Excel/CSV 數據處理（xlsx、papaparse）與互動圖表（Recharts）的資深商業智慧 (BI) 全端工程師，專精於 Google Gen AI SDK（@google/genai）、最新世代 Gemini 3 模型（gemini-3.8-flash）以及 Google Cloud Run 雲端全託管架構。
 
-請在現有的全端專案中，新增**多 AI 服務提供商選擇功能**，並透過 Vercel Serverless Function 呼叫 AI API，具體需求如下：
+# Context（背景情境）
+這是一個企業級「AI 商業數據分析與動態洞察儀表板（AI Data Insights & Analytics Dashboard）」。
+使用者可載入或上傳任何 CSV / Excel 表格資料，AI 自動理解欄位並提供多種分析維度建議，使用者挑選後即時產生動態圖表與文字洞察，並能一鍵將分析成果打包匯出為全新排版美觀的 Excel 檔案。
+專案直接運行於 Google AI Studio，並透過右側「Publish」面板主動部署至 Google Cloud Run。
+系統後端具備 Cloud Run Backend Proxy 自動代理機制，可透過 `process.env.GEMINI_API_KEY` 安全呼叫 Gemini 模型，API Key 絕不外洩至瀏覽器前端。
 
-0. **移除 Express 後端**：若專案中存在 `server.ts`（Express 伺服器）及相關依賴（如 `express`、`cors` 等），請一併移除，改以 Vercel Serverless Functions 取代。
+# Task（任務目標）
+請使用 `vite-react-typescript` 與 Tailwind CSS 建立單一頁面應用程式（SPA）：
 
-1. **新增 AI 服務選擇介面**：在 UI 介面中加入一個下拉選單或切換按鈕，讓使用者可以在送出前選擇要使用的 AI 服務：
-   - **Google Gemini**（模型：`gemini-2.5-flash-lite`）
-   - **NVIDIA**（模型：`nvidia/nemotron-mini-4b-instruct`）
+1. **安裝與串接最新相依套件**：
+   - 使用 `@google/genai` 調用最新世代模型：`gemini-3.8-flash`（支援 1M Token 上下文視窗、極致低延遲、`thinking_level: "low"` 秒級響應）。
+   - 使用 `xlsx`（SheetJS）解析與建構 Excel 活頁簿（支援讀取 `.xlsx` 與匯出多工作表 Excel）。
+   - 使用 `papaparse`（包含 `@types/papaparse`）解析 CSV 檔案。
+   - 使用 `recharts` 或純前端 SVG/Tailwind 圖表元件呈現長條圖、折線圖、環形佔比圖。
+   - 使用 `lucide-react` 提供現代商務圖示，`canvas-confetti` 提供分析完成微慶祝動效。
 
-2. **建立 Serverless Function**：在專案根目錄建立 `/api/analyze.ts`，在後端根據前端傳入的服務選擇，動態呼叫對應的 AI API：
-   - **Gemini API**：使用 `process.env.GEMINI_API_KEY` 讀取 API Key，模型為 `gemini-2.5-flash-lite`。
-   - **NVIDIA API**：使用 `process.env.NVIDIA_API_KEY` 讀取 API Key，Base URL 為 `https://integrate.api.nvidia.com/v1`，模型為 `nvidia/nemotron-mini-4b-instruct`。
+2. **預設自動讀取 public 素材與通用檔案上傳（更新即清除）**：
+   - **網頁初始化自動載入**：
+     - 應用程式啟動時，自動透過 `fetch('/全通路銷售與業績數據範本.xlsx')` 讀取並以 `xlsx.read()` 解析資料，展示前 5 筆預覽與欄位綱要（Schema）。
+   - **單一通用多格式上傳區**：
+     - 支援拖曳或點選上傳自訂檔案（`accept=".csv,.xlsx,.xls"`）。
+     - 上傳 `.csv` 時以 `Papa.parse` 處理；上傳 `.xlsx` 時以 `XLSX.read` 處理。
+   - **只要更新就清除（Auto-Clear on Update）**：
+     - 當使用者重新上傳新檔案或切換資料來源時，系統必須**立即清除舊有的分析建議、動態圖表與匯出按鈕**，確保畫面上呈現的資訊永遠與當前數據 100% 同步。
+   - 提供「🔄 重設為預設銷售數據範本」按鈕，隨時一鍵重新載入 `public/全通路銷售與業績數據範本.xlsx`。
 
-3. **改寫前端串接邏輯**：前端將使用者選擇的服務商與輸入內容一起傳送至 `/api/analyze`，不直接呼叫任何 AI 平台。
+3. **核心功能一：AI 智慧推薦分析面向（AI Suggested Analyses）**：
+   - 資料載入完成後，將資料前 5~10 筆樣本與欄位名稱傳給 Gemini 3.8 Flash。
+   - AI 分析資料特徵後，自動產出 4~6 個最具商業價值的分析面向標籤卡片，例如：
+     - `📈 各通路營收與毛利貢獻分析`
+     - `📊 產品類別銷售與毛利率交叉排行`
+     - `🏆 業務代表業績與銷售件數評比`
+     - `⚠️ 異常低毛利或退貨風險警示`
+     - `💡 顧客消費型態與訂單價值分群`
+   - 使用者可點擊單選或多選感興趣的分析維度，點擊「🚀 開始執行深度分析」。
 
-4. **環境變數設定**：將兩組 API Key 儲存於 Vercel 後台的環境變數中，並透過 Node.js 的 `process.env` 讀取，確保私鑰不外洩至前端：
+4. **核心功能二：動態網頁互動圖表與策略洞察（Dynamic Visual Dashboard）**：
+   - 根據使用者選取的分析面向，AI 進行深度統計計算並結構化回傳 JSON 數據與 Markdown 洞察：
+     - **關鍵 KPI 指標卡**：總銷售額、總毛利、平均客單價、訂單總筆數（含環比趨勢標記）。
+     - **動態互動圖表**：
+       - 通路/類別比較（長條圖 Bar Chart）
+       - 趨勢演變（折線圖 Line Chart）
+       - 貢獻佔比（圓餅/甜甜圈圖 Pie/Doughnut Chart）
+     - **AI 商業洞察與行動建議 (Executive Strategy Insights)**：3~4 點條列式深度建議，點出營運亮點與風險隱憂。
 
-       GEMINI_API_KEY=你的_Gemini_API_Key
-       NVIDIA_API_KEY=你的_NVIDIA_API_Key
+5. **核心功能三：一鍵產出含分析結果的 Excel 活頁簿（Export Comprehensive XLSX）**：
+   - 頂部操作列提供「📥 匯出完整分析 Excel 報告」按鈕。
+   - 點擊後，利用 `xlsx` 動態建立包含多個工作表的專業 Excel 活頁簿：
+     - **工作表 1：`原始數據明細`**：保留所有原始匯入資料列。
+     - **工作表 2：`AI 商業策略與 KPI 洞察`**：將 AI 產出的關鍵指標與文字建議整齊排版。
+     - **工作表 3：`維度彙總與統計樞紐`**：包含各通路/品類之加總額、平均值與計算公式（如 `=SUM(...)`）。
+   - 觸發瀏覽器下載（檔名：`商業數據分析與洞察報告_[日期].xlsx`）。
 
-   同時，請在專案根目錄建立 `.env.local` 檔案，內容如下（供本地開發測試使用）：
+# Constraints（限制與規格要求）
+1. 【Google Cloud Run 原生相容】：全面相容 Google AI Studio 主動部署機制，透過後端代理讀取金鑰，嚴禁在客戶端程式碼硬編碼任何 API Key。
+2. 【現代商業智慧 BI 美學】：
+   - 配色以 Slate 深灰藍（`#0F172A`、`#1E293B`）與質感淺灰（`#F8FAFC`、`#F1F5F9`）為主，搭配高雅電藍（`#2563EB`）、薄荷綠（`#10B981`）與琥珀橙（`#F59E0B`）高對比圖表色系。
+   - 數據指標卡片微陰影、圓角邊框與流暢動畫。
+3. 【全繁體中文介面】：所有 UI 標籤、欄位名稱、圖表標註與 AI 洞察回覆皆使用標準繁體中文。
+4. 【容錯防呆】：若 public 範本尚未放置，顯示友善提示引導使用者上傳自訂 CSV 或 XLSX 檔案，不可崩潰。
 
-       GEMINI_API_KEY=你的_Gemini_API_Key
-       NVIDIA_API_KEY=你的_NVIDIA_API_Key
-
-   > ⚠️ **重要**：`.env.local` 包含機密金鑰，請確認 `.gitignore` 中已有此條目，**絕對不可上傳至 GitHub**。
+# Format（交付格式）
+1. 列出相依套件安裝指令（`npm i @google/genai xlsx papaparse recharts lucide-react canvas-confetti && npm i -D @types/papaparse`）。
+2. 提供完整、具備完整 TypeScript 型別定義的單一程式碼檔案（如 `src/App.tsx`）。
+3. 簡短執行與 Google Cloud Run 發布步驟。
 ```
-
-### 💻 Vercel Serverless 本地端測試指南
-
-因為 Vite 原生的開發伺服器無法執行 Vercel 的 Node.js 函數，改寫為 Serverless 架構後，原本的 `npm run dev` 必定會出錯或遇到 404 找不到 `/api` 路由的問題。
-
-請依照以下步驟設定，才能在本地端順利測試包含 `/api` 的全端網站：
-
-1. **安裝專案套件與全域安裝 Vercel CLI**：
-   請先安裝專案所需的依賴套件，並全域安裝 Vercel CLI：
-   ```bash
-   npm install
-   npm install -g vercel
-   ```
-
-2. **登入 Vercel 帳號**：
-   （**⚠️ 帳號提醒**：由於學員可能共用電腦或擁有多個帳號，請先執行 `vercel logout` 登出前一個帳號，再以 `vercel login` 重新登入自己的帳號。）
-   ```bash
-   vercel logout
-   vercel login
-   ```
-
-3. **手動建立 `.env.local` 檔案**：
-   在專案根目錄建立 `.env.local`，填入您的 API Key（此步驟取代從雲端拉取，適合尚未部署至 Vercel 的情境）：
-   ```
-   GEMINI_API_KEY=你的_Gemini_API_Key
-   NVIDIA_API_KEY=你的_NVIDIA_API_Key
-   ```
-   > ⚠️ 請確認 `.gitignore` 中已包含 `.env.local`，**絕對不可上傳至 GitHub**。
-
-4. **連結 Vercel 專案**：
-   在專案根目錄執行以下指令，依照提示建立或連結一個 Vercel 雲端專案（本機測試必須完成此步驟，`vercel dev` 才能正常運作）：
-   ```bash
-   vercel link
-   ```
-
-5. **啟動全端測試伺服器**：
-   請停用原本的 `npm run dev`，一律改用以下指令啟動專案：
-   ```bash
-   vercel dev
-   ```
-   啟動後，前端 Vite 畫面與後端 `/api` 將會合併在同一個本地網址運行（通常是 `http://localhost:3000`），您就可以順利進行測試了！
-
-> 💡 **已部署至 Vercel 並在後台設定好環境變數的學員**：可跳過步驟 3，改在步驟 4 之後執行 `vercel env pull .env.local`，從雲端直接同步環境變數。
-
-<details>
-<summary>💡 進階說明：由 Google AI Studio 完成的專案為何需要這些設定？</summary>
-
-因為這些程式是由 **Google AI Studio** 協助完成的專案，原本通常是單純的前端架構。當我們為了安全性加入後端 API 時，就需要透過上述指令來設定 Vercel 的環境。
-
-**1. 如何確認專案架構已經符合上傳至 Vercel？**
-在上傳或測試前，請檢查您的專案目錄是否具備以下結構：
-- **`api/` 資料夾**：專案根目錄必須包含 `api/` 資料夾，並且裡面有處理 API 請求的 Serverless 函數程式碼（例如 `analyze.ts`）。
-- **不需要 `vercel.json`**：Vercel 的零配置功能會自動偵測 Vite 專案並處理 `api/` 路由，無需此檔案。若專案中已有 `vercel.json`，請直接刪除。
-- **不包含機密金鑰**：確保程式碼中已經將寫死的 API Key 移除，改為透過 `process.env` 讀取環境變數。
-
-**2. 為什麼要加入這些指令？**
-- **`npm install`**：從 Google AI Studio 或外部取得的專案原始碼，並不會包含 `node_modules` 資料夾。必須先執行此指令安裝所有必備套件，專案才能正常運作。
-- **`npm install -g vercel`**：安裝 Vercel 官方提供的 CLI 工具，讓我們可以在本地電腦上模擬完整的 Vercel 雲端環境。
-- **`vercel link`**：將您本地電腦的專案資料夾與 Vercel 雲端上已經建立的專案綁定，確保後續操作能對應到正確的雲端專案。
-- **`vercel env pull .env.local`**：為確保安全，我們將 API Key 儲存在 Vercel 雲端。透過這個指令能安全地將雲端環境變數拉取回本機的 `.env.local` 檔案，供本地測試時讀取。Vite 優先讀取 `.env.local`，因此使用此檔名最為正確。
-- **`vercel dev`**：原本 Vite 的 `npm run dev` 無法啟動 `/api` 後端程式。`vercel dev` 能夠同時啟動前端畫面與後端 API，完美模擬最終部署上線的全端伺服器環境。
-
-**3. Vercel 零配置 (Zero Configuration) 說明**
-Vercel 擁有強大的零配置功能，會自動幫你處理大部分的設定：
-- **前端自動偵測**：Vercel 會自動偵測到你的專案是使用 Vite（從 `package.json` 判斷），並自動執行 `npm run build`，且預設知道輸出目錄是 `dist`。
-- **API 自動路由**：Vercel 預設會將專案根目錄下 `api/` 資料夾裡面的檔案自動視為 Serverless Functions，並自動處理好路由（例如：打 `/api/analyze` 的請求會自動對應到 `api/analyze.ts`），完全不需要手動設定。
-
-</details>
 
 ---
 
-## 🎯 學生課後練習
+## 🏛️ 第四步：Google Cloud Run 部署架構與安全機制剖析
 
-完成基礎的「AI 數據分析與洞察工具」後，請嘗試以下兩項挑戰來擴充您的工具：
+本專案全面相容 Google AI Studio 主動發布機制，直接將容器託管於 **Google Cloud Run**：
 
-### 挑戰 1：實作真實的 Excel (XLSX) 檔案上傳
-- 整合 `xlsx` (SheetJS) 或 `papaparse` 函式庫。
-- 讓使用者可以直接點擊按鈕選擇本地端的 `.csv` 或 `.xlsx` 檔案，而非只能貼上文字。
-- 在前端將檔案轉換為 JSON 或純文字 CSV 後，再傳遞給 AI 進行分析。
+![Google Cloud Run 全託管智慧架構](./images/cloudrun_architecture.svg)
 
-### 挑戰 2：客製化不同的分析視角
-- 新增分析維度選項單，讓使用者可以勾選「行銷視角」、「財務視角」、「庫存視角」。
-- 當使用者點擊分析時，將該視角需求動態加入 Prompt，讓 AI 根據使用者的角色給出不同的洞察與建議。
+### 🔍 為什麼採用 Google Cloud Run 架構？
+
+| 比較維度 | 🚀 Google Cloud Run（本專案標準架構） | ⚠️ 傳統純前端直連 API |
+| :--- | :--- | :--- |
+| **金鑰安全性** | **極高**。由 Cloud Run 後端代理注入 `GEMINI_API_KEY`，前端完全看不到金鑰 | **極度危險**。金鑰直接暴露在瀏覽器 Network 與原始碼中，易遭盜刷 |
+| **部署門檻** | **一鍵發布**。在 AI Studio 點擊 `Publish` 即自動容器化並配發正式網址 | 需自行設定 Docker、網域名稱與伺服器伺服程式 |
+| **維運成本** | **縮容至 0 (Scale to Zero)**。無人造訪時不耗算力，每月 200 萬次請求免費 | 需持續租用虛擬主機 (VPS)，即便無人使用每月仍需付費 |
+| **即時同步** | 修改提示詞後點擊 **`Republish`**，30 秒內更新雲端，網址永不變更 | 需重新建置 Bundle 並手動上傳伺服器 |
+
+---
+
+## 🛠️ 第五步：常見問題排查：遇到 503 錯誤？如何切換為付費 API Key？
+
+當專案使用 Google 提供的預設免費額度（Free Tier）時，若適逢全球尖峰用量時段，畫面可能會跳出以下警示：
+
+```json
+數據分析處理失敗: {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+```
+
+### 💡 為什麼會出現 503 錯誤？
+- **免費層共用算力限制**：免費版 API 屬於共享資源池，當尖峰時段需求劇增時，系統會暫時進行流量限制。
+- **最佳解法：切換為 Pay-as-you-go（綁定 GCP 帳單的專屬 API Key）**：
+  在 [Google AI Studio Get API Key](https://aistudio.google.com/apikey) 建立綁定 Google Cloud 帳單帳戶的金鑰，即可享有**企業級專屬保障算力**（收費極低，分析一份完整報表通常僅需不到 $0.001 美元），徹底擺脫 503 尖峰擁擠！
+
+### 🖼️ Google AI Studio 切換 API Key 4 步驟圖解指南
+
+![Google AI Studio 切換付費 API Key 4 步驟指南](./images/secrets_change_apikey_guide.svg)
+
+### 📋 換 Key 4 步驟 SOP：
+
+1. **切換至「Secrets」頁籤**：
+   在 Google AI Studio 右側頂部導航列中，找到並點選 **`Secrets`** 標籤。
+2. **切換為已綁定帳單的 API Key**：
+   在 `Name: GEMINI_API_KEY` 右側的 `Value` 下拉選單中，點擊並選擇您已綁定 GCP 帳單的付費金鑰（或點選 `+ Add secret` 貼上新申請的 Key）。
+3. **點擊「Apply changes」儲存**：
+   點擊面板最下方的黑色大按鈕 **`[💾 Apply changes]`**，系統立即將新金鑰寫入專案環境。
+4. **回到 Publish 面板點擊「Republish」**：
+   切換回 **`Publish`** 面板，點擊 **`[🔄 Republish]`**。Google Cloud Run 容器將在 30 秒內自動代入全新金鑰重新載入，503 錯誤立即迎刃而解！

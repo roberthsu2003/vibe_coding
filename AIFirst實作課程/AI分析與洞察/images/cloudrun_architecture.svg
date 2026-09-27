@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" height="100%">
+  <defs>
+    <!-- 背景漸層 -->
+    <linearGradient id="canvasBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+
+    <!-- 卡片漸層 -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- 藍色流動線漸層 -->
+    <linearGradient id="blueStream" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#6366F1" />
+    </linearGradient>
+
+    <!-- 綠色安全漸層 -->
+    <linearGradient id="securityGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- 雲端漸層 -->
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4285F4" />
+      <stop offset="50%" stop-color="#34A853" />
+      <stop offset="100%" stop-color="#FBBC05" />
+    </linearGradient>
+
+    <!-- 柔和陰影 -->
+    <filter id="boxShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5" />
+    </filter>
+  </defs>
+
+  <!-- 主畫布底色 -->
+  <rect width="960" height="480" rx="20" fill="url(#canvasBg)" />
+  <rect width="956" height="476" x="2" y="2" rx="18" fill="none" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- 頂部標題與說明 -->
+  <g transform="translate(48, 42)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#F8FAFC">Google Cloud Run 全託管智慧架構：安全代理與零費用縮容</text>
+    <text x="0" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#94A3B8">Google AI Studio 一鍵 Publish ➔ Cloud Run 容器化安全託管 ➔ 完美隔離 API Key ➔ Gemini 3.8 結構化推論</text>
+  </g>
+
+  <!-- 區域 1：前端瀏覽器使用者 -->
+  <g transform="translate(48, 110)" filter="url(#boxShadow)">
+    <rect width="250" height="310" rx="16" fill="url(#cardGrad)" stroke="#334155" stroke-width="1.5" />
+    
+    <!-- 頂部標籤 -->
+    <rect x="18" y="18" width="36" height="36" rx="8" fill="#0284C7" fill-opacity="0.2" />
+    <path d="M26,36 L46,36 M28,26 L44,26 L44,38 L28,38 Z" stroke="#38BDF8" stroke-width="2" fill="none" stroke-linejoin="round" />
+    <text x="64" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#F1F5F9">用戶端瀏覽器</text>
+    <text x="64" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#64748B">Client Web Browser</text>
+
+    <!-- 卡片內容條目 -->
+    <g transform="translate(18, 76)">
+      <rect width="214" height="48" rx="8" fill="#0F172A" stroke="#1E293B" />
+      <text x="12" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#E2E8F0">React + Vite SPA 介面</text>
+      <text x="12" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">貼上逐字稿、即時 Markdown 預覽</text>
+
+      <rect y="58" width="214" height="48" rx="8" fill="#0F172A" stroke="#1E293B" />
+      <text x="12" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#E2E8F0">一鍵載入內建會議範本</text>
+      <text x="12" y="96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">產品進度、商業策略、客服覆盤</text>
+
+      <rect y="116" width="214" height="58" rx="8" fill="#0369A1" fill-opacity="0.15" stroke="#0284C7" stroke-width="1" />
+      <text x="12" y="136" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#38BDF8">🔒 零金鑰暴露風險</text>
+      <text x="12" y="154" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#BAE6FD">前端原始碼無任何 GEMINI_API_KEY</text>
+
+      <rect y="184" width="214" height="34" rx="6" fill="#1E293B" />
+      <text x="12" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#F8FAFC">🌐 專屬 URL: *.ai.studio</text>
+    </g>
+  </g>
+
+  <!-- 中繼連線 1 -->
+  <g transform="translate(305, 230)">
+    <path d="M0,25 L45,25" stroke="url(#blueStream)" stroke-width="3" stroke-dasharray="6,4" />
+    <polygon points="45,20 55,25 45,30" fill="#3B82F6" />
+    <rect x="-8" y="-12" width="70" height="22" rx="4" fill="#0F172A" stroke="#334155" />
+    <text x="27" y="3" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" fill="#38BDF8" text-anchor="middle">HTTPS 請求</text>
+  </g>
+
+  <!-- 區域 2：Google Cloud Run 核心託管層 -->
+  <g transform="translate(365, 95)" filter="url(#boxShadow)">
+    <rect width="290" height="340" rx="16" fill="url(#cardGrad)" stroke="#2563EB" stroke-width="2" />
+    
+    <!-- 頂部標籤 -->
+    <rect x="18" y="18" width="36" height="36" rx="8" fill="#2563EB" fill-opacity="0.25" />
+    <circle cx="36" cy="36" r="10" fill="none" stroke="#60A5FA" stroke-width="2" />
+    <path d="M36,30 L36,42 M30,36 L42,36" stroke="#60A5FA" stroke-width="2" />
+    <text x="64" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="800" fill="#60A5FA">Google Cloud Run</text>
+    <text x="64" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#93C5FD">全託管無伺服器容器叢集</text>
+
+    <!-- 核心機制 1：Backend Proxy 安全金鑰保護 -->
+    <g transform="translate(18, 76)">
+      <rect width="254" height="78" rx="10" fill="#064E3B" fill-opacity="0.25" stroke="#059669" stroke-width="1.5" />
+      <text x="14" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#34D399">🛡️ 伺服器端 Backend Proxy</text>
+      <text x="14" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#A7F3D0">由 Google Cloud Run 在後端代為注入</text>
+      <text x="14" y="62" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#6EE7B7">process.env.GEMINI_API_KEY</text>
+
+      <!-- 核心機制 2：Scale to Zero 零費用真相 -->
+      <rect y="90" width="254" height="78" rx="10" fill="#0F172A" stroke="#334155" />
+      <text x="14" y="114" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#FBBF24">⚡ 縮容至 0 (Scale to Zero)</text>
+      <text x="14" y="134" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#CBD5E1">無請求時實例自動休眠，CPU 佔用為 0</text>
+      <text x="14" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#FDE68A">每月 200 萬次請求免費額度</text>
+
+      <!-- 核心機制 3：生命週期管理 -->
+      <rect y="180" width="254" height="54" rx="8" fill="#1E293B" stroke="#475569" />
+      <text x="14" y="202" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#E2E8F0">🔄 Republish 一鍵即時更新</text>
+      <text x="14" y="222" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">🛑 Unpublish app 隨時釋出 2 個免費配額</text>
+    </g>
+  </g>
+
+  <!-- 中繼連線 2 -->
+  <g transform="translate(662, 230)">
+    <path d="M0,25 L45,25" stroke="url(#blueStream)" stroke-width="3" stroke-dasharray="6,4" />
+    <polygon points="45,20 55,25 45,30" fill="#8B5CF6" />
+    <rect x="-8" y="-12" width="70" height="22" rx="4" fill="#0F172A" stroke="#334155" />
+    <text x="27" y="3" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" fill="#A78BFA" text-anchor="middle">內部私密連線</text>
+  </g>
+
+  <!-- 區域 3：Google Gemini 3.8 智慧模型 -->
+  <g transform="translate(714, 110)" filter="url(#boxShadow)">
+    <rect width="200" height="310" rx="16" fill="url(#cardGrad)" stroke="#7C3AED" stroke-width="1.5" />
+    
+    <!-- 頂部標籤 -->
+    <rect x="18" y="18" width="36" height="36" rx="8" fill="#7C3AED" fill-opacity="0.25" />
+    <path d="M36,24 C36,30 31,36 25,36 C31,36 36,42 36,48 C36,42 41,36 47,36 C41,36 36,30 36,24 Z" fill="#C084FC" />
+    <text x="64" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#E9D5FF">Gemini 3.8</text>
+    <text x="64" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#A855F7">AI 推論核心</text>
+
+    <!-- 卡片內容條目 -->
+    <g transform="translate(18, 76)">
+      <rect width="164" height="52" rx="8" fill="#0F172A" stroke="#1E293B" />
+      <text x="10" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#C084FC">結構化會議萃取</text>
+      <text x="10" y="40" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">主題、時間、與會者</text>
+
+      <rect y="62" width="164" height="52" rx="8" fill="#0F172A" stroke="#1E293B" />
+      <text x="10" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#F472B6">行動待辦清單</text>
+      <text x="10" y="102" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">負責人、截止日規範</text>
+
+      <rect y="124" width="164" height="52" rx="8" fill="#0F172A" stroke="#1E293B" />
+      <text x="10" y="146" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#38BDF8">專業商務英文翻譯</text>
+      <text x="10" y="164" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#94A3B8">多國語系流暢切換</text>
+
+      <rect y="186" width="164" height="34" rx="6" fill="#3B0764" fill-opacity="0.4" stroke="#7C3AED" stroke-width="1" />
+      <text x="82" y="208" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#E9D5FF" text-anchor="middle">⚡ 極速秒級流式生成</text>
+    </g>
+  </g>
+</svg>
