@@ -15,7 +15,7 @@
 
 ## 🖥️ 前端網頁範例
 
-> ⚠️ 需要先申請 [GitHub 帳號](https://github.com)
+> 💡 **新手友善**：在 Google AI Studio 開發與一鍵部署至 Google Cloud Run **不需先申請 GitHub 帳號**！只有需要部署至 GitHub Pages 時才需申請。
 
 | 專案 | 說明 | 備註 |
 |------|------|------|
@@ -31,10 +31,19 @@
 
 ### ☁️ 部署教學
 
-| 平台 | 連結 |
-|------|------|
-| Google Cloud Run | [透過 Google AI Studio 一鍵部署至 Google Cloud Run](./認識GoogleAIStudio/README.md#-核心概念解析share-remix-publish-deploy)（免費帳號即可直接發布對外公開網址） |
-| GitHub Pages | [將靜態網頁部署至 GitHub Pages](https://github.com/roberthsu2003/vibe-coding-to-pro-react/blob/main/github-docs-site/README.md) |
+> 💡 **教學順序與路徑說明**：Google AI Studio 現已支援直接一鍵部署至 **Google Cloud Run（每個免費帳號提供 2 個免費專案額度）**，因此課堂會優先教學 Google Cloud Run 發布，學生**完全不需先申請 GitHub 帳號**即可立刻擁有公開網址分享成果；後續若需要將專案託管於 GitHub，才需進一步申請 GitHub 帳號。
+
+#### 1️⃣ 第一階段：Google Cloud Run 一鍵部署（首選推薦・免 GitHub 帳號）
+
+- **適用情境**：在 Google AI Studio 完成專案後，一鍵生成對外公開網址分享給主管與同事。
+- **免費額度**：每個帳號可同時擁有 **2 個免費版** 的 Cloud Run 部署。
+- **教學連結**：[透過 Google AI Studio 一鍵部署至 Google Cloud Run](./認識GoogleAIStudio/README.md#-核心概念解析share-remix-publish-deploy)
+
+#### 2️⃣ 第二階段：GitHub Pages 靜態網站部署（進階託管・需 GitHub 帳號）
+
+- **適用情境**：想進行專案版本控管、自訂網域或長期託管靜態網頁。
+- **帳號需求**：⚠️ 此階段才需要申請 [GitHub 帳號](https://github.com)。
+- **教學連結**：[將靜態網頁部署至 GitHub Pages](https://github.com/roberthsu2003/vibe-coding-to-pro-react/blob/main/github-docs-site/README.md)
 
 
 ---
