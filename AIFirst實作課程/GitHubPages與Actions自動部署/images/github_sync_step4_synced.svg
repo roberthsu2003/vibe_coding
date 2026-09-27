@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 760" width="460" height="760">
+  <defs>
+    <!-- 卡片陰影效果 -->
+    <filter id="syncedShadow" x="-5%" y="-3%" width="110%" height="108%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#059669" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- 背景面板外框 -->
+  <rect width="460" height="760" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <!-- 頂部頁籤列 (Tabs) -->
+  <g transform="translate(14, 16)">
+    <!-- Chat -->
+    <rect x="0" y="0" width="56" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="28" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Chat</text>
+
+    <!-- Share -->
+    <rect x="62" y="0" width="60" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="92" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Share</text>
+
+    <!-- Publish -->
+    <rect x="128" y="0" width="68" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="162" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Publish</text>
+
+    <!-- Versions -->
+    <rect x="202" y="0" width="74" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="239" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Versions</text>
+
+    <!-- GitHub (選中) -->
+    <rect x="282" y="0" width="80" height="32" rx="16" fill="#F1F5F9" stroke="#0F172A" stroke-width="1.5"/>
+    <circle cx="294" cy="16" r="3.5" fill="#0F172A" />
+    <text x="324" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#0F172A">GitHub</text>
+
+    <!-- 關閉按鈕 X -->
+    <path d="M 425 11 L 433 19 M 433 11 L 425 19" fill="none" stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- 面板標題 -->
+  <text x="20" y="85" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#0F172A">GitHub sync</text>
+
+  <!-- Repository 資訊卡片 -->
+  <g transform="translate(20, 115)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#64748B">Repository</text>
+
+    <g transform="translate(0, 10)">
+      <!-- 儲存庫名稱文字 -->
+      <text x="0" y="24" font-size="15" font-weight="700" fill="#0F172A">roberthsu2004/Universal_Template_Filler-</text>
+      
+      <!-- 分支標籤 (• main) -->
+      <g transform="translate(245, 6)">
+        <rect width="60" height="24" rx="12" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1"/>
+        <circle cx="12" cy="12" r="3" fill="#2563EB" />
+        <text x="22" y="16" font-size="11" font-weight="600" fill="#1E293B">main</text>
+      </g>
+
+      <!-- 解除綁定按鈕 (Link off) -->
+      <g transform="translate(325, 6)">
+        <rect width="28" height="24" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+        <path d="M 8 12 L 14 12 M 16 8 L 20 8 M 8 16 L 12 16" fill="none" stroke="#64748B" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+
+      <!-- 前往 GitHub 外部連結按鈕 (↗ 點擊前往) -->
+      <g transform="translate(362, 6)">
+        <rect width="28" height="24" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+        <path d="M 9 15 L 17 7 M 11 7 L 17 7 L 17 13" fill="none" stroke="#1D4ED8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Sync status 狀態卡片 (同步成功綠色卡片) -->
+  <g transform="translate(20, 205)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#64748B">Sync status</text>
+
+    <!-- 卡片外框 (淡綠背景) -->
+    <g transform="translate(0, 10)">
+      <rect width="420" height="65" rx="10" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5" filter="url(#syncedShadow)"/>
+      <!-- 綠色勾勾圓圈 -->
+      <circle cx="28" cy="32" r="10" fill="#10B981" />
+      <path d="M 23 32 L 27 36 L 33 29" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="46" y="38" font-size="13.5" font-weight="600" fill="#065F46">GitHub &amp; Google AI Studio are currently in sync</text>
+      <!-- 資訊小圖示 (i) -->
+      <circle cx="395" cy="32" r="8" fill="#D1FAE5" />
+      <text x="395" y="36" text-anchor="middle" font-size="11" font-weight="bold" fill="#047857">i</text>
+    </g>
+  </g>
+
+  <!-- 成功狀態詳細解說面板 -->
+  <g transform="translate(20, 310)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <rect width="420" height="230" rx="12" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+    
+    <text x="18" y="32" font-size="15" font-weight="700" fill="#0F172A">🎉 同步成功！接下來你可以做兩件事：</text>
+
+    <!-- 步驟 A: 前往 GitHub 查看 -->
+    <g transform="translate(18, 55)">
+      <circle cx="12" cy="12" r="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1"/>
+      <text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#2563EB">1</text>
+      <text x="34" y="12" font-size="13" font-weight="700" fill="#1E293B">點擊右上角的「↗」外跳按鈕</text>
+      <text x="34" y="30" font-size="12" fill="#64748B">直接在瀏覽器新分頁打開你的 GitHub 儲存庫頁面。</text>
+    </g>
+
+    <!-- 步驟 B: 設定 GitHub Pages -->
+    <g transform="translate(18, 115)">
+      <circle cx="12" cy="12" r="12" fill="#F0FDF4" stroke="#22C55E" stroke-width="1"/>
+      <text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#16A34A">2</text>
+      <text x="34" y="12" font-size="13" font-weight="700" fill="#1E293B">進入 GitHub 的 Settings ➔ Pages</text>
+      <text x="34" y="30" font-size="12" fill="#64748B">將 Build and deployment 的 Source 改選為「GitHub Actions」，</text>
+      <text x="34" y="48" font-size="12" font-weight="600" fill="#2563EB">即可正式發布全靜態網站！</text>
+    </g>
+
+    <line x1="18" y1="185" x2="402" y2="185" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="18" y="210" font-size="11.5" fill="#64748B">💡 提示：若後續專案有修改，再次回到此處點擊 Push 即可即時同步。</text>
+  </g>
+
+  <!-- 底部按鈕 -->
+  <g transform="translate(20, 660)">
+    <rect width="420" height="50" rx="25" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="210" y="31" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" fill="#0F172A">Check sync status</text>
+  </g>
+</svg>

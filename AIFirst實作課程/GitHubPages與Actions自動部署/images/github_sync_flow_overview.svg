@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="960" height="480">
+  <defs>
+    <!-- 背景漸層 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+
+    <!-- 卡片微光與陰影 -->
+    <filter id="cardGlow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
+
+    <!-- 步驟 1 漸層 -->
+    <linearGradient id="step1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    
+    <!-- 步驟 2 漸層 -->
+    <linearGradient id="step2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#4F46E5" />
+    </linearGradient>
+
+    <!-- 步驟 3 漸層 -->
+    <linearGradient id="step3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- 步驟 4 漸層 -->
+    <linearGradient id="step4Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+  </defs>
+
+  <!-- 深色沉浸式背景 -->
+  <rect width="960" height="480" rx="20" fill="url(#bgGrad)" />
+
+  <!-- 頂部裝飾光斑 -->
+  <circle cx="200" cy="40" r="140" fill="#38BDF8" opacity="0.12" filter="blur(40px)" />
+  <circle cx="760" cy="60" r="160" fill="#10B981" opacity="0.12" filter="blur(40px)" />
+
+  <!-- 標題與導言 -->
+  <g transform="translate(480, 50)" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <rect x="-140" y="-18" width="280" height="28" rx="14" fill="#334155" stroke="#475569" stroke-width="1"/>
+    <text x="0" y="0" font-size="12" font-weight="700" fill="#38BDF8" letter-spacing="1">GOOGLE AI STUDIO ➔ GITHUB SYNC</text>
+    <text x="0" y="42" font-size="24" font-weight="800" fill="#FFFFFF">專案首次建立與推送 4 步驟全景指南</text>
+    <text x="0" y="70" font-size="13" fill="#94A3B8">先有 GitHub 儲存庫取得精確名稱 ➔ 才能帶入 Prompt 自動配置 CI/CD</text>
+  </g>
+
+  <!-- 4 大核心步驟卡片容器 -->
+  <g transform="translate(40, 155)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+
+    <!-- ===== 卡片 1: 啟動同步 ===== -->
+    <g transform="translate(0, 0)">
+      <rect width="205" height="270" rx="16" fill="#1E293B" stroke="#334155" stroke-width="1.5" filter="url(#cardGlow)" />
+      
+      <!-- 步驟編號徽章 -->
+      <circle cx="32" cy="32" r="16" fill="url(#step1Grad)" />
+      <text x="32" y="37" text-anchor="middle" font-size="14" font-weight="800" fill="#FFFFFF">1</text>
+      <text x="58" y="37" font-size="15" font-weight="700" fill="#F8FAFC">啟動同步</text>
+
+      <!-- 說明與細節 -->
+      <rect x="14" y="66" width="177" height="60" rx="8" fill="#0F172A" />
+      <text x="24" y="90" font-size="11" fill="#94A3B8">選取頂部標籤列：</text>
+      <text x="24" y="112" font-size="12" font-weight="700" fill="#38BDF8">● GitHub ➔ Sync</text>
+
+      <text x="14" y="152" font-size="12" font-weight="600" fill="#E2E8F0">操作重點：</text>
+      <text x="14" y="174" font-size="11.5" fill="#94A3B8">• 授權 GitHub 帳號連接</text>
+      <text x="14" y="196" font-size="11.5" fill="#94A3B8">• 點擊底部按鈕：</text>
+      <text x="14" y="216" font-size="11" font-weight="700" fill="#60A5FA">  Create new repository</text>
+      
+      <rect x="14" y="234" width="177" height="24" rx="6" fill="#0284C7" opacity="0.2"/>
+      <text x="102" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#38BDF8">啟動建立精靈</text>
+    </g>
+
+    <!-- 箭頭 1 -> 2 -->
+    <path d="M 213 135 L 221 135" stroke="#475569" stroke-width="2" stroke-dasharray="3,3"/>
+
+    <!-- ===== 卡片 2: 命名與可見度 ===== -->
+    <g transform="translate(225, 0)">
+      <rect width="205" height="270" rx="16" fill="#1E293B" stroke="#4F46E5" stroke-width="1.8" filter="url(#cardGlow)" />
+      
+      <circle cx="32" cy="32" r="16" fill="url(#step2Grad)" />
+      <text x="32" y="37" text-anchor="middle" font-size="14" font-weight="800" fill="#FFFFFF">2</text>
+      <text x="58" y="37" font-size="15" font-weight="700" fill="#F8FAFC">命名與權限</text>
+
+      <!-- 說明與細節 -->
+      <rect x="14" y="66" width="177" height="60" rx="8" fill="#0F172A" />
+      <text x="24" y="90" font-size="11" fill="#94A3B8">設定倉庫名稱 (Repo)：</text>
+      <text x="24" y="112" font-size="11.5" font-weight="700" fill="#A5B4FC">Universal_Template_Filler</text>
+
+      <text x="14" y="152" font-size="12" font-weight="600" fill="#E2E8F0">操作重點：</text>
+      <text x="14" y="174" font-size="11.5" fill="#FCD34D">⚠️ 複製並記下 Repo 名稱</text>
+      <text x="14" y="196" font-size="11.5" fill="#94A3B8">• Visibility 選擇「Public」</text>
+      <text x="14" y="216" font-size="11.5" fill="#94A3B8">• 點 Create repository</text>
+      
+      <rect x="14" y="234" width="177" height="24" rx="6" fill="#4338CA" opacity="0.3"/>
+      <text x="102" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#A5B4FC">★ 取得關鍵倉庫名稱</text>
+    </g>
+
+    <!-- 箭頭 2 -> 3 -->
+    <path d="M 438 135 L 446 135" stroke="#475569" stroke-width="2" stroke-dasharray="3,3"/>
+
+    <!-- ===== 卡片 3: 推送原始碼 ===== -->
+    <g transform="translate(450, 0)">
+      <rect width="205" height="270" rx="16" fill="#1E293B" stroke="#334155" stroke-width="1.5" filter="url(#cardGlow)" />
+      
+      <circle cx="32" cy="32" r="16" fill="url(#step3Grad)" />
+      <text x="32" y="37" text-anchor="middle" font-size="14" font-weight="800" fill="#FFFFFF">3</text>
+      <text x="58" y="37" font-size="15" font-weight="700" fill="#F8FAFC">首次推送</text>
+
+      <!-- 說明與細節 -->
+      <rect x="14" y="66" width="177" height="60" rx="8" fill="#0F172A" />
+      <text x="24" y="90" font-size="11" fill="#94A3B8">檢查待推送狀態：</text>
+      <text x="24" y="112" font-size="11.5" font-weight="700" fill="#FBBF24">Ready to be pushed</text>
+
+      <text x="14" y="152" font-size="12" font-weight="600" fill="#E2E8F0">操作重點：</text>
+      <text x="14" y="174" font-size="11.5" fill="#94A3B8">• 確認檔案數量（如 24 files）</text>
+      <text x="14" y="196" font-size="11.5" fill="#94A3B8">• 點擊底部按鈕：</text>
+      <text x="14" y="216" font-size="11" font-weight="700" fill="#F59E0B">  Push changes to GitHub</text>
+      
+      <rect x="14" y="234" width="177" height="24" rx="6" fill="#B45309" opacity="0.3"/>
+      <text x="102" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#FCD34D">將專案推上 GitHub</text>
+    </g>
+
+    <!-- 箭頭 3 -> 4 -->
+    <path d="M 663 135 L 671 135" stroke="#475569" stroke-width="2" stroke-dasharray="3,3"/>
+
+    <!-- ===== 卡片 4: 取得成果與配置 CI/CD ===== -->
+    <g transform="translate(675, 0)">
+      <rect width="205" height="270" rx="16" fill="#1E293B" stroke="#059669" stroke-width="1.8" filter="url(#cardGlow)" />
+      
+      <circle cx="32" cy="32" r="16" fill="url(#step4Grad)" />
+      <text x="32" y="37" text-anchor="middle" font-size="14" font-weight="800" fill="#FFFFFF">4</text>
+      <text x="58" y="37" font-size="15" font-weight="700" fill="#F8FAFC">配置 CI/CD</text>
+
+      <!-- 說明與細節 -->
+      <rect x="14" y="66" width="177" height="60" rx="8" fill="#0F172A" />
+      <text x="24" y="90" font-size="11" fill="#94A3B8">同步成功狀態：</text>
+      <text x="24" y="112" font-size="12" font-weight="700" fill="#34D399">✔ currently in sync</text>
+
+      <text x="14" y="152" font-size="12" font-weight="600" fill="#E2E8F0">後續動作：</text>
+      <text x="14" y="174" font-size="11.5" fill="#34D399">1. 將 Repo 名稱貼入 Prompt</text>
+      <text x="14" y="196" font-size="11.5" fill="#94A3B8">2. 讓 AI 生成 deploy.yml</text>
+      <text x="14" y="216" font-size="11.5" fill="#94A3B8">3. 再次 Push 並啟動 Pages！</text>
+      
+      <rect x="14" y="234" width="177" height="24" rx="6" fill="#047857" opacity="0.3"/>
+      <text x="102" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6EE7B7">無縫銜接 Actions 發布</text>
+    </g>
+
+  </g>
+</svg>

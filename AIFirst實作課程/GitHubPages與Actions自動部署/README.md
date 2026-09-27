@@ -19,17 +19,60 @@
 
 ---
 
-## 🤖 二、 核心秘訣：在 Google AI Studio 中下 Prompt 自動配置
+## 🤖 二、 核心操作流程：先 Push 建立倉庫 ➔ 取得名稱 ➔ 下 Prompt 自動配置
 
-在 Google AI Studio 已經寫好專案後，**不用自己手動建目錄打指令**，只要複製下方這段**特別經過防錯加固（強制最新版 Actions ＋ 帶入個人倉庫網址）**的提示詞：
+⚠️ **重要先後順序提醒**：  
+很多新手會直接把 Prompt 複製給 AI Studio，卻不知道 `[倉庫名稱]` 該填什麼！  
+👉 **正確順序是：必須「先將專案首次 Push 到 GitHub 建立儲存庫」，有了具體的倉庫名稱後，再把名稱填入 Prompt 讓 AI Studio 精準配置！**
 
-### 📋 轉換為 GitHub Actions 專用 Prompt（請替換括號內容後貼給 AI Studio）
+### 📍 前置步驟：在 Google AI Studio 首次 Push 建立儲存庫（圖解 4 步驟）
+
+![Google AI Studio ➔ GitHub 同步實戰全景指南](./images/github_sync_flow_overview.svg)
+
+#### 步驟 1：在 AI Studio 點選 GitHub 標籤啟動同步
+- 在 Google AI Studio 頂部工具列，點選 **`GitHub`** 頁籤。
+- 畫面會顯示 `Sync to GitHub` 說明（將自動建立儲存庫並雙向同步）。
+- 點擊底部的 **`Create new repository`** 按鈕啟動儲存庫精靈。
+- *(💡 初次使用需先授權 GitHub 帳號連接 Google AI Studio)*。
+
+![步驟 1：啟動 GitHub 同步](./images/github_sync_step1_intro.svg)
+
+#### 步驟 2：輸入倉庫名稱（Repo Name）與選擇 Public 公開
+- **New repository name**：輸入你的專案名稱（例如 `Universal_Template_Filler`）。
+  - ⚠️ **極度重要**：請精確記下此名稱（包含大小寫與底線）！稍後的 Prompt 提示詞必須完全一致地填入。
+- **New repository description**：輸入專案摘要（例如「報價單和付款單」）。
+- **Visibility**：請務必勾選 **`Public`**（公開）。
+  - 💡 **避坑原因**：GitHub Pages 對免費用戶的 Public 倉庫提供最完整的 Actions 自動部署支援，設定最單純且零阻礙。
+- 點擊底部的 **`Create GitHub repository`** 按鈕。
+
+![步驟 2：輸入倉庫名稱與設定權限](./images/github_sync_step2_create_repo.svg)
+
+#### 步驟 3：點擊 Push 按鈕將專案代碼推上 GitHub
+- 儲存庫建立成功後，Sync status 狀態會提示 `Changes in Google AI Studio are ready to be pushed`。
+- 確認待推送的檔案數量（例如 24 changed files），點擊底部的 **`↑ Push changes to GitHub`** 按鈕開始推送！
+
+![步驟 3：推送專案檔案至 GitHub](./images/github_sync_step3_push.svg)
+
+#### 步驟 4：確認同步成功（in sync）並取得儲存庫資訊
+- 數秒後，Sync status 會轉為綠色卡片：`GitHub & Google AI Studio are currently in sync`，代表專案已 100% 成功推上 GitHub！
+- 點擊右上角的 **`↗`** 按鈕，可以直接在新分頁開啟你的 GitHub 倉庫首頁。
+- 此時你已正式擁有專案的專屬儲存庫資訊：
+  - **GitHub 儲存庫網址**：`https://github.com/<你的 GitHub 帳號>/<你的倉庫名稱>`
+  - **倉庫專案名稱 (Repo Name)**：`<你的倉庫名稱>`（即網址最後面的這段名稱）
+
+![步驟 4：確認同步成功與取得倉庫資訊](./images/github_sync_step4_synced.svg)
+
+---
+
+### 📋 轉換為 GitHub Actions 專用 Prompt（請帶入剛建立的倉庫名稱）
+
+現在你已經有了確切的倉庫名稱，複製下方這段**特別經過防錯加固（強制最新版 Actions ＋ 動態雙棲 base ＋ 帶入真實倉庫名稱）**的提示詞貼給 AI Studio：
 
 ```text
 這份專案非常棒！現在我想將此專案部署到「GitHub Pages」作為永久全靜態網站。
-我的 GitHub 儲存庫（Repository）資訊如下：
-- GitHub 儲存庫網址：https://github.com/[請替換為你的GitHub帳號]/[請替換為你的倉庫名稱]
-- 倉庫專案名稱 (Repo Name)：[請替換為你的倉庫名稱]
+我剛才已經在 GitHub 建立了此專案的儲存庫（Repository），資訊如下：
+- GitHub 儲存庫網址：https://github.com/[請填入你的GitHub帳號]/[請填入剛建立的倉庫名稱]
+- 倉庫專案名稱 (Repo Name)：[請填入剛建立的倉庫名稱]
 
 請幫我在目前的專案架構中加入 GitHub Actions 自動化 CI/CD 發布設定，請嚴格遵守以下 3 點要求：
 
@@ -46,7 +89,7 @@
 
 2. 修改 vite.config.ts（防 404 兼雙棲相容關鍵）：
    - 請將 base 路徑設定為動態環境變數判斷：
-     base: process.env.GITHUB_ACTIONS ? '/[請替換為你的倉庫名稱]/' : '/'
+     base: process.env.GITHUB_ACTIONS ? '/[請填入剛建立的倉庫名稱]/' : '/'
    - 目的：確保在 GitHub Actions 編譯時自動套用倉庫子路徑（徹底防範 GitHub Pages 404）；同時在 Google AI Studio 介面重新發布 (Republish / Cloud Run) 或本機開發時維持根路徑 '/'，讓兩者完美共存不衝突。
 
 3. 檢查 package.json：
@@ -136,21 +179,29 @@ export default defineConfig({
 
 ---
 
-## 🚀 四、 實戰發布：從 AI Studio 到 GitHub Pages（3 步驟完成）
+## 🚀 四、 實戰發布：從 AI Studio 到 GitHub Pages（完整 4 步驟）
 
 ```
-【步驟 1】在 AI Studio 透過 GitHub 按鈕 ──► 一鍵 Push 程式碼到自己的 GitHub 帳號
-                                              ▼
-【步驟 2】在 GitHub 倉庫的 Settings ─────────► 將 Pages 來源改為「GitHub Actions」
-                                              ▼
-【步驟 3】靜待 1 分鐘自動建置 ──────────────► 取得全靜態公開網址！
+【步驟 1】在 AI Studio 首次 Push ──► 建立 GitHub 倉庫並取得 Repo 名稱
+                                          ▼
+【步驟 2】在 AI Studio 下 Prompt  ──► 自動生成 deploy.yml 與雙棲 vite.config.ts
+                                          ▼
+【步驟 3】再次點擊 GitHub Push   ──► 將 CI/CD 配置同步推送到 GitHub 倉庫
+                                          ▼
+【步驟 4】在 GitHub 倉庫 Settings ──► 將 Pages 來源改為「GitHub Actions」並上線！
 ```
 
-### 步驟 1：將程式碼推送至 GitHub
+### 步驟 1：首次推送程式碼至 GitHub（建立倉庫並取得名稱）
 1. 在 Google AI Studio 頂部工具列，點擊 **GitHub** 圖示按鈕。
 2. 授權並選取將目前專案建立為你的 GitHub 新儲存庫（Repository，例如命名為 `my-universal-template`），點擊 Push。
+3. 前往 GitHub 確認倉庫已建立，並記下倉庫名稱（即 `my-universal-template`）。
 
-### 步驟 2：開啟 GitHub 倉庫設定（最關鍵的一步！）
+### 步驟 2：下 Prompt 產生 CI/CD 設定並再次 Push
+1. 回到 Google AI Studio，將帶有剛才倉庫名稱的「專用 Prompt」貼入對話框。
+2. AI Studio 自動生成 `.github/workflows/deploy.yml` 並更新 `vite.config.ts`。
+3. 產生完畢後，**再次點擊頂部的 GitHub 圖示進行 Push**，將剛產生的 CI/CD 檔案同步推送至 GitHub 倉庫！
+
+### 步驟 3：開啟 GitHub 倉庫設定（最關鍵的一步！）
 1. 前往你的 GitHub 該專案頁面。
 2. 點擊頂部的 **⚙️ Settings（設定）**。
 3. 在左側側邊選單中，點選 **Pages**。
@@ -165,7 +216,7 @@ Source:
 └──────────────────────────────┘
 ```
 
-### 步驟 3：查看部署進度與取得網址
+### 步驟 4：查看部署進度與取得網址
 1. 點擊頂部的 **Actions** 分頁，你會看到名為 `Deploy to GitHub Pages` 的工作流正在旋轉建置。
 2. 約 40~60 秒後，出現**綠色勾勾（Success）**。
 3. 點進該工作流，即可在右側看見正式的公開靜態網址：  

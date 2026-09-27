@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 760" width="460" height="760">
+  <defs>
+    <!-- 卡片陰影效果 -->
+    <filter id="boxShadow" x="-5%" y="-3%" width="110%" height="108%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.06" />
+    </filter>
+  </defs>
+
+  <!-- 背景面板外框 -->
+  <rect width="460" height="760" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <!-- 頂部頁籤列 (Tabs) -->
+  <g transform="translate(14, 16)">
+    <!-- Chat -->
+    <rect x="0" y="0" width="56" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="28" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Chat</text>
+
+    <!-- Share -->
+    <rect x="62" y="0" width="60" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="92" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Share</text>
+
+    <!-- Publish -->
+    <rect x="128" y="0" width="68" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="162" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Publish</text>
+
+    <!-- Versions -->
+    <rect x="202" y="0" width="74" height="32" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="239" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#475569">Versions</text>
+
+    <!-- GitHub (選中) -->
+    <rect x="282" y="0" width="80" height="32" rx="16" fill="#F1F5F9" stroke="#0F172A" stroke-width="1.5"/>
+    <circle cx="294" cy="16" r="3.5" fill="#0F172A" />
+    <text x="324" y="20" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#0F172A">GitHub</text>
+
+    <!-- 關閉按鈕 X -->
+    <path d="M 425 11 L 433 19 M 433 11 L 425 19" fill="none" stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>
+  </g>
+
+  <!-- 頂部返回與標題 -->
+  <g transform="translate(20, 80)">
+    <!-- 返回箭頭 -->
+    <path d="M 8 10 L 0 10 M 0 10 L 4 6 M 0 10 L 4 14" fill="none" stroke="#0F172A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="24" y="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700" fill="#0F172A">GitHub sync</text>
+  </g>
+
+  <!-- 欄位 1: New repository name (高亮重點) -->
+  <g transform="translate(20, 125)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#334155">New repository name</text>
+    
+    <!-- 輸入框外框與陰影（加上藍色高亮） -->
+    <rect x="0" y="8" width="420" height="44" rx="8" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" />
+    <text x="14" y="36" font-size="14" font-weight="600" fill="#0F172A">Universal_Template_Filler</text>
+
+    <!-- 醒目標籤提示 -->
+    <g transform="translate(0, 58)">
+      <rect width="420" height="34" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" />
+      <text x="10" y="22" font-size="12" font-weight="700" fill="#1D4ED8">⚠️ 關鍵名稱！這就是 Repo Name，請記下後續要填入 Prompt</text>
+    </g>
+  </g>
+
+  <!-- 欄位 2: New repository description -->
+  <g transform="translate(20, 245)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#334155">New repository description</text>
+    
+    <!-- 輸入框 -->
+    <rect x="0" y="8" width="420" height="44" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" />
+    <text x="14" y="36" font-size="14" fill="#475569">報價單和付款單</text>
+  </g>
+
+  <!-- 欄位 3: Visibility -->
+  <g transform="translate(20, 325)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <text x="0" y="0" font-size="13" font-weight="600" fill="#334155">Visibility</text>
+
+    <!-- Radio 1: Private -->
+    <g transform="translate(0, 18)">
+      <!-- 單選圓圈未勾選 -->
+      <circle cx="16" cy="16" r="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.8" />
+      <text x="38" y="14" font-size="14" font-weight="600" fill="#64748B">Private</text>
+      <text x="38" y="32" font-size="12" fill="#94A3B8">Only you can access this repo on GitHub.com</text>
+    </g>
+
+    <!-- Radio 2: Public (選中，帶高亮底色) -->
+    <g transform="translate(0, 68)">
+      <rect x="-6" y="-6" width="432" height="60" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.2" />
+      <!-- 單選圓圈選中 -->
+      <circle cx="16" cy="16" r="10" fill="#FFFFFF" stroke="#0F172A" stroke-width="2" />
+      <circle cx="16" cy="16" r="5" fill="#0F172A" />
+      
+      <text x="38" y="14" font-size="14" font-weight="700" fill="#0F172A">Public</text>
+      <text x="90" y="14" font-size="11" font-weight="700" fill="#15803D">(推薦首選 ✅)</text>
+      <text x="38" y="32" font-size="12" fill="#64748B">This repo will be discoverable by everyone on GitHub.com</text>
+    </g>
+
+    <text x="38" y="146" font-size="11" fill="#64748B">💡 說明：GitHub Pages 在免費帳號下對 Public 倉庫支援度最高且完全免費。</text>
+  </g>
+
+  <!-- 底部操作按鈕 -->
+  <g transform="translate(20, 660)">
+    <!-- 虛線引導框 -->
+    <rect x="-6" y="-6" width="432" height="62" rx="28" fill="none" stroke="#2563EB" stroke-width="2" stroke-dasharray="6,4" />
+    <text x="210" y="-12" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif" font-size="12" font-weight="700" fill="#2563EB">👉 第二步：點擊建立 GitHub 儲存庫</text>
+
+    <!-- 按鈕本體 -->
+    <rect width="420" height="50" rx="25" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="210" y="31" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="600" fill="#0F172A">Create GitHub repository</text>
+  </g>
+</svg>
