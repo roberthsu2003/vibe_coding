@@ -1,7 +1,7 @@
 # 📑 AI First 實戰進階：智慧會議總結與多國語言翻譯助理（Google Cloud Run 全託管版）
 
 > **30 秒專案介紹**：  
-> 這是一個結合 **Google Gemini 2.5** 與 **Google Cloud Run** 的企業級智慧辦公應用。只要貼上會議逐字稿或重點筆記，AI 便能自動萃取會議主題、與會人員、核心討論摘要，並產出**責任人明確的待辦清單（Action Items）**與**高階商務英文翻譯**！  
+> 這是一個結合 **Google 最新世代 Gemini 3 系列（首選 `gemini-3.8-flash`）** 與 **Google Cloud Run** 的企業級智慧辦公應用。只要貼上長篇會議逐字稿、上傳簽到簿照片或會議錄音，AI 便能依託 **1M Token 超大上下文視窗** 與 **Controlled Thinking 智慧推理**，秒級萃取會議主題、與會人員、核心討論摘要，並產出**責任人明確的待辦清單（Action Items）**與**高階商務英文翻譯**！  
 > 專案原生適配 **Google Cloud Run** 主動部署架構，享有 **Backend Proxy 伺服器端金鑰安全隔離** 與 **縮容至 0 (Scale to Zero) 免費待機**，完全不需要繁瑣的外部伺服器配置，一鍵即可公開發布！
 
 ---
@@ -55,7 +55,7 @@
    - 在專案目錄的 `public/` 資料夾內，放入剛才下載的 `logo.svg`、`會議出席簽到簿.jpg`、`產品開發進度會議錄音.m4a` 與各項 `.txt` 範本。
    - 介面已內建快速按鈕，點擊即可直接載入三組代表性測試文件。
 4. **測試即時生成（文字、簽到簿圖片與會議音訊全支援）**：
-   - 貼上逐字稿，或上傳「會議出席簽到簿」照片，AI 會透過 Gemini 2.5 多模態視覺自動萃取名單與簽名時間！
+   - 貼上逐字稿，或上傳「會議出席簽到簿」照片，AI 會透過最新 **Gemini 3.8 Flash** 強大多模態視覺自動萃取名單與簽名時間！
    - 點擊「✨ 生成會議總結與翻譯」，AI 會在數秒內整理出清晰的 Markdown 會議報告。
    - 支援勾選待辦清單、一鍵複製與下載 `.md` 報告。
 5. **一鍵發布至 Google Cloud Run**：
@@ -72,7 +72,7 @@
 
 ```markdown
 # Role（角色）
-你是一位精通 React、TypeScript、Tailwind CSS 與現代 UI/UX 設計的資深全端工程師，專精於 Google Gen AI SDK（@google/genai）、提示詞工程（Prompt Engineering）以及 Google Cloud Run 雲端無伺服器架構。
+你是一位精通 React、TypeScript、Tailwind CSS 與現代 UI/UX 設計的資深全端工程師，專精於 Google Gen AI SDK（@google/genai）、最新世代 Gemini 3 模型調度（gemini-3.8-flash）、提示詞工程（Prompt Engineering）以及 Google Cloud Run 雲端無伺服器架構。
 
 # Context（背景情境）
 這是一個針對企業會議場景打造的「智慧會議總結與多國語言翻譯助理（Smart Meeting Minutes & Translator）」。
@@ -82,8 +82,11 @@
 # Task（任務目標）
 請使用 `vite-react-typescript` 與 Tailwind CSS 建立單一頁面應用程式（SPA）：
 
-1. **安裝與串接相依套件**：
-   - 使用 `@google/genai` 進行模型調用（預設模型：`gemini-2.5-flash` 或 `gemini-2.5-pro`）。
+1. **安裝與串接最新相依套件**：
+   - 使用 `@google/genai` 調用最新世代模型：
+     - **預設首選速度模型**：`gemini-3.8-flash`（支援 1M Token 上下文視窗、極致低延遲、Controlled Thinking）。
+     - **進階深度推理模型**：`gemini-3.1-pro`（適合複雜企業架構決策與長篇法規審查）。
+   - 調用時可配置 `thinking_level: "low"` 以兼顧推理質量與極致秒級反應速度。
    - 使用 `lucide-react` 提供商務風格圖示。
    - 使用 `canvas-confetti` 提供完成時的微慶祝動效。
 

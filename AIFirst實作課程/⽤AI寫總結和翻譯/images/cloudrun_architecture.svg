@@ -45,7 +45,7 @@
   <!-- 頂部標題與說明 -->
   <g transform="translate(48, 42)">
     <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#F8FAFC">Google Cloud Run 全託管智慧架構：安全代理與零費用縮容</text>
-    <text x="0" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#94A3B8">Google AI Studio 一鍵 Publish ➔ Cloud Run 容器化安全託管 ➔ 完美隔離 API Key ➔ Gemini 2.5 結構化推論</text>
+    <text x="0" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#94A3B8">Google AI Studio 一鍵 Publish ➔ Cloud Run 容器化安全託管 ➔ 完美隔離 API Key ➔ Gemini 3.8 結構化推論</text>
   </g>
 
   <!-- 區域 1：前端瀏覽器使用者 -->
@@ -124,14 +124,14 @@
     <text x="27" y="3" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="600" fill="#A78BFA" text-anchor="middle">內部私密連線</text>
   </g>
 
-  <!-- 區域 3：Google Gemini 2.5 智慧模型 -->
+  <!-- 區域 3：Google Gemini 3.8 智慧模型 -->
   <g transform="translate(714, 110)" filter="url(#boxShadow)">
     <rect width="200" height="310" rx="16" fill="url(#cardGrad)" stroke="#7C3AED" stroke-width="1.5" />
     
     <!-- 頂部標籤 -->
     <rect x="18" y="18" width="36" height="36" rx="8" fill="#7C3AED" fill-opacity="0.25" />
     <path d="M36,24 C36,30 31,36 25,36 C31,36 36,42 36,48 C36,42 41,36 47,36 C41,36 36,30 36,24 Z" fill="#C084FC" />
-    <text x="64" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#E9D5FF">Gemini 2.5</text>
+    <text x="64" y="34" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="700" fill="#E9D5FF">Gemini 3.8</text>
     <text x="64" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="500" fill="#A855F7">AI 推論核心</text>
 
     <!-- 卡片內容條目 -->
