@@ -1,111 +1,122 @@
-# 🚀 Google Cloud Run 部署與專案管理完全指南
+# 🚀 Google AI Studio 主動部署完全指南（發布、自訂網址、更新與一鍵下架）
 
 > **30 秒核心導讀**：  
 > 在 Google AI Studio 開發完網頁後，最令人興奮的時刻就是**「一鍵公開發布給主管或客戶看」**！  
-> 本單元將帶你徹底搞懂：  
-> 1. **主動部署（一鍵自動發布）**：Google AI Studio 如何在背景為你自動打包全端容器。  
-> 2. **什麼是手動部署？**：進階開發者如何透過 GCP 控制台精細調整伺服器效能與自訂網域。  
-> 3. **如何手動刪除專案內容？**：每個免費帳號最多同時保留 **2 個免費應用程式**，學會如何至 Google Cloud Console 刪除舊專案、釋放寶貴額度！
+> 本單元依據 Google AI Studio 最新真實介面，帶你徹底掌握：  
+> 1. **主動部署 2 步流程**：從「隱私確認」到「自訂專屬 `.ai.studio` 網址」。  
+> 2. **發布後的控制面板**：如何一鍵造訪（Visit）、更新程式碼後重新發布（Republish）。  
+> 3. **一鍵下架釋放額度（Unpublish app）**：每個免費帳號最多同時保留 **2 個免費上線專案**，學會如何在面板上一秒取消發布，立即釋放配額！  
+> 4. **進階維運與手動刪除**：認識 Google Cloud Run 背後機制，以及 GCP 控制台手動管理備援方案。
 
 ---
 
 ## 🗺️ 一、 主動部署 vs. 手動部署：有何不同？
 
-許多初學者常困惑：「為什麼我在 AI Studio 按一個按鈕就能上線？背後到底發生了什麼事？」
-
-| 比較維度 | 🚀 Google AI Studio 主動部署（自動） | 🛠️ Google Cloud 手動部署（進階控制） |
+| 比較維度 | 🚀 Google AI Studio 主動部署（推薦首選） | 🛠️ Google Cloud 手動部署（進階維運） |
 | :--- | :--- | :--- |
-| **操作方式** | 在 AI Studio 頂部點擊 **Publish（火箭圖示）** | 透過 [Google Cloud Console](https://console.cloud.google.com/) 或 `gcloud` 指令列操作 |
-| **技術門檻** | 零門檻，完全不需懂 Docker 或伺服器配置 | 需理解容器映像檔、環境變數、連接埠 (Port) 與 IAM 權限 |
-| **底層原理** | Google 在雲端自動將 React + Node.js 程式碼打包為 Docker 映像檔，並自動派送至 Cloud Run | 開發者自行撰寫 `Dockerfile`，編譯映像檔後推送到 Artifact Registry，再發布至 Cloud Run |
-| **自訂網域** | 預設提供 `*.run.app` 隨機公開網址 | 支援綁定個人或公司專屬網域（如 `app.mycompany.com`） |
-| **資源配置** | 預設採用 Google 最佳化微型規格（省資源、低延遲） | 可自由調配 CPU（1~8 核）、記憶體（512MB~32GB）、自動縮放上限 |
-| **適合對象** | **辦公室同仁、課程學員、快速驗證原型的 PM 與業務** | **資深全端工程師、企業正式營運系統、高並發大型產品** |
+| **操作介面** | 直接在 AI Studio 右側點擊 **Publish** 面板 | 前往 [Google Cloud Console](https://console.cloud.google.com/) 或透過 `gcloud` 指令 |
+| **操作門檻** | **零門檻**，完全不需懂 Docker 或伺服器配置 | 需理解容器映像檔、環境變數、連接埠 (Port) 與 IAM 權限 |
+| **網址格式** | 享專屬頂級網域：`https://[你自訂的名稱].ai.studio` | 預設為隨機 `*.run.app`，需手動設定 DNS 綁定自訂網域 |
+| **金鑰安全** | 系統自動啟用 **Backend Proxy**，API Key 自動由伺服器隔離保護 | 開發者需自行在 GCP Secret Manager 或環境變數配置金鑰 |
+| **下架刪除** | 面板內一鍵點擊 **`Unpublish app`**，立即釋出配額 | 需手動登入 GCP Console 勾選 Cloud Run 服務進行刪除 |
+| **適合對象** | **辦公室同仁、課程學員、快速展示成果的 PM 與主管** | **企業正式營運系統、需自訂 VPC 私有網路的架構師** |
 
 ---
 
-## ⚡ 二、 主動部署實戰步驟（Google AI Studio 30 秒上線）
+## ⚡ 二、 主動部署實戰 2 步驟（依據官方最新介面）
 
-當你在 Google AI Studio 完成專案（例如：簡報、單據產生器、報銷系統）：
+在 Google AI Studio 右側工具列點擊 **`Publish`** 按鈕，即可進入發布流程：
 
 ```
-【步驟 1】點擊右上角「Publish」火箭圖示
-                  ▼
-【步驟 2】確認專案名稱與公開發布資訊 ──► 點擊「Deploy to Cloud Run」
-                  ▼
-【步驟 3】等待 1~2 分鐘（背景編譯與配置 SSL 憑證）
-                  ▼
-【步驟 4】取得正式公開網址（https://xxxx-uc.a.run.app）！
+【步驟 1】啟動引導 (What does publishing look like?) ──► 點擊「Get started」
+                                                           ▼
+【步驟 2】最終設定 (Final touches) ──────────────────► 自訂 App URL ➜ 點擊「Publish your app」
+                                                           ▼
+【步驟 3】發布成功面板 (is published!) ──────────────► 點擊「Visit」立即造訪專屬網站！
 ```
 
-> 💡 **安全提示**：若專案中使用了 Gemini API，主動部署會自動啟用 **Backend Proxy 技術**，你的 API Key 會被妥善存放在伺服器環境變數，外部訪客按 `F12` 絕對看不到金鑰！
+---
+
+### 步驟 1：啟動引導頁（What does publishing look like?）
+
+點擊頂部的 `Publish` 後，首先會看見系統的安全與隱私說明：
+
+- 🔒 **Chat history & code will stay private（對話紀錄與程式碼絕對私密）**：
+  外部訪客只能操作編譯後的最終網頁，**完全看不到你在 AI Studio 中的提示詞（Prompts）、對話過程與原始程式碼**。
+- 🔗 **Your app will be accessible via a public URL（產生正式公開網址）**：
+  產生一個任何人用手機、平板或電腦皆可隨時造訪的獨立網址。
+- 👉 **操作動作**：確認無誤後，點擊下方的 **`Get started`** 按鈕進入下一步。
 
 ---
 
-## 🗄️ 三、 什麼是「手動部署」？進階維運核心
+### 步驟 2：最終設定頁（Step 2 Final touches）
 
-如果你未來任職的公司要求**「程式碼必須託管在公司自己的 GCP 帳號」**或**「必須綁定公司官方網址」**，這時就需要手動部署：
+在此頁面中，你可以預覽應用程式卡片，並自訂最重要的上線資訊：
 
-### 手動部署的核心三步驟：
-1. **建立容器映像檔 (Docker Build)**：
-   在本地或 GitHub Actions 透過 Dockerfile 將前端與後端打包為輕量映像檔。
-2. **推送到雲端倉庫 (Push to Artifact Registry)**：
-   將映像檔上傳到 Google Cloud 的私有倉庫儲存。
-3. **手動配置 Cloud Run 服務**：
-   - 前往 [Cloud Run 控制台](https://console.cloud.google.com/run)。
-   - 點擊「建立服務」，選取剛剛上傳的映像檔。
-   - 手動設定環境變數（如 `DATABASE_URL`、`API_KEY`）。
-   - 設定允許外部非驗證存取（Public Ingress）。
+1. **Description（專案描述）**：
+   - 系統會根據專案自動產生摘要，你也可以手動修改，這段文字會作為該網頁的預設介紹。
+2. **App URL（自訂專屬網址）**：
+   - 預設網址後綴為 **`.ai.studio`**。
+   - 你可以在輸入框自訂網址前綴，例如輸入 `universal-template-filler-excel`，最終網址即為：  
+     👉 **`https://universal-template-filler-excel.ai.studio`**
+   - ⚠️ **系統會即時檢核 5 大命名規則（全部呈現綠色打勾才可發布）**：
+     - ✅ **6–63 characters**（長度需介於 6 到 63 個字元）
+     - ✅ **Only uses lowercase letters, numbers or hyphens**（只能使用小寫英文字母、數字或破折號 `-`）
+     - ✅ **Starts and ends with a letter or number**（必須以英文字母或數字開頭及結尾）
+     - ✅ **No consecutive hyphens**（不可有連續的破折號如 `--`）
+     - ✅ **No reserved or prohibited terms**（不可使用系統保留字或違規字詞）
+3. 👉 **操作動作**：設定完成後，點擊底部的 **`Publish your app`** 按鈕！系統會在背景自動配置容器與安全憑證，約 30~60 秒內即可完成部署。
 
 ---
 
-## 🗑️ 四、 極重要！如何手動刪除舊專案（釋出 2 個免費額度）
+## 🎛️ 三、 發布成功控制台：如何管理、更新與一鍵下架？
+
+發布成功後，右側的 Publish 面板會常駐顯示 **發布狀態控制台 (App is published!)**：
+
+### 1. 核心操作按鈕
+- 🌐 **`Visit`**：一鍵開啟新分頁，直接瀏覽正式上線的網頁成果，方便立刻複製網址分享到 LINE/Slack 群組給主管或同事。
+- 🔄 **`Republish`**：當你在 AI Studio 裡微調了文字、修改了功能或更新了樣式，**只要點擊 Republish，系統就會一鍵將最新程式碼同步更新至雲端，網址完全不變**！
+
+### 2. 狀態與安全資訊
+- **Status**：顯示 🟢 **`Ready`**，代表雲端容器運作正常。
+- **App URL**：顯示目前對外服務的專屬網址（點擊右側箭頭可展開或複製）。
+- **Gemini API**：顯示遮罩後的 API Key（如 `API Key ...c8gA`），由 Backend Proxy 在伺服器端妥善保護，外部無法竊取。
+
+---
+
+## 🛑 四、 極重要！如何「一鍵下架」釋出 2 個免費額度？
 
 > ⚠️ **新手最常碰到的卡關情境**：  
-> Google AI Studio 的 **Starter Tier（初學者免信用卡方案）** 規定每個 Google 帳號最多**只能同時保持 2 個免費上線專案**！  
-> 當你做到第 3 個專案按下 Publish 時，系統會跳出 `Quota Exceeded（配額已滿）`。此時你必須**手動刪除不再使用的舊專案**，才能將寶貴的免費名額釋放出來！
+> Google AI Studio 的免費初學方案（Starter Tier）規定每個帳號最多**只能同時保持 2 個免費上線專案**！  
+> 當你發布第 3 個作品時，系統會提示額度已滿。此時只要利用面板上的下架功能，就能一秒釋放名額！
 
-### 📋 手動刪除 Cloud Run 專案 SOP（圖解步驟）
-
-#### 步驟 1：登入 Google Cloud 控制台
-打開瀏覽器，前往 [Google Cloud Console - Cloud Run 服務頁面](https://console.cloud.google.com/run)。
-
-#### 步驟 2：確認並切換至正確的 GCP 專案
-- 點擊頁面頂部導航列的 **專案下拉選單**。
-- 找到由 Google AI Studio 自動建立的專案（名稱通常類似 `gen-lang-client-xxxx` 或你自訂的專案名稱）。
-
-#### 步驟 3：勾選想要下架的舊服務
-- 在服務清單（Services）中，會看到你之前從 AI Studio 發布的應用程式名稱。
-- 在該專案名稱的**左側核取方塊（Checkbox）打勾**。
-
-#### 步驟 4：點擊「刪除 (Delete)」並確認
-- 點擊清單上方工具列的 **「🗑️ 刪除 (Delete)」** 按鈕。
-- 畫面會彈出確認視窗，要求輸入服務名稱以防誤刪。
-- 輸入完成後點擊「確認刪除」。
-
-```
-[Cloud Run 服務清單]
- ☑️  my-old-deck-presentation   🟢 運作中   [🗑️ 刪除] ◄── 點擊此處
- ☐   smart-invoice-logger       🟢 運作中
-```
-
-#### 步驟 5：完成釋放！
-- 約 10 秒後，該舊服務即徹底從雲端移除，舊網址立即失效。
-- **免費 2 個專案的配額立即空出 1 個！**
-- 現在你可以回到 Google AI Studio，開心地發布你的全新作品了！
+### 方式 A：AI Studio 面板一鍵下架（最快！最推薦 ⭐）
+1. 打開先前已發布的舊專案，點擊右側工具列的 **`Publish`**。
+2. 看到控制面板後，直接點擊底部的 **`Unpublish app`** 按鈕！
+3. 系統會彈出確認提示，點擊確認後：
+   - 該應用程式立刻停止對外公開服務。
+   - **免費 2 個專案的配額瞬間釋放出 1 個名額！**
+   - 你可以立即回到新專案中進行發布！
 
 ---
 
-## 💰 五、 費用與風險管理常識 (Cost & Safety)
+### 方式 B：Google Cloud Console 後台手動刪除（備援方案）
+如果舊專案在 AI Studio 裡已經被你不小心刪除，但雲端仍佔用名額，你可以到 GCP 後台手動移除：
 
-### 1. 沒人訪問時會扣錢嗎？
-- **完全不會！** Google Cloud Run 具備業界著名的 **「縮容至 0 (Scale to Zero)」** 特性。
-- 當沒有訪客開啟你的網址時，伺服器實例會完全休眠、CPU 與記憶體佔用歸零，完全不會產生伺服器運算費用。
+1. 前往 [Google Cloud Console - Cloud Run 服務頁面](https://console.cloud.google.com/run)。
+2. 在頂部專案選單中，切換到該 AI Studio 所關聯的 GCP 專案（通常名為 `gen-lang-client-xxxx`）。
+3. 在服務清單中，找到對應的應用程式名稱，**在左側核取方塊打勾**。
+4. 點擊頂部的 **「🗑️ 刪除 (Delete)」** 按鈕並輸入名稱確認。
+5. 約 10 秒後服務徹底清除，配額同樣順利釋放！
 
-### 2. 免費額度有多少？
-- Google Cloud Run 每個月提供 **200 萬次請求（2 Million Requests）** 的永久免費配額。
-- 對於個人作業展示、求職作品集、公司內部小組使用，基本上極難超出免費上限。
+---
 
-### 3. 如果帳號有綁信用卡，如何做到「100% 絕對零扣款」？
-- 專案展示完畢後，依照上述第四步的步驟**將 Cloud Run 服務刪除**。
-- 或者直接在 GCP「IAM 與管理」->「管理資源」將整個練習用的 GCP 專案**關閉 (Shut down project)**，雲端將會在 30 天後徹底抹除該專案的所有資料與資源，確保帳單永遠為零！
+## 💰 五、 費用安全與運作常識 (Cost & Safety)
+
+### 1. 網頁沒人造訪時會扣錢嗎？
+- **完全不會！** Google Cloud Run 原生支援 **「縮容至 0 (Scale to Zero)」** 技術。
+- 當沒有人開啟網頁時，伺服器實例會自動進入休眠狀態，CPU 與記憶體佔用降為 0，完全不計運算費。
+
+### 2. 每月免費額度有多少？
+- Cloud Run 每月提供高達 **200 萬次請求（2 Million Requests）** 的永久免費層。
+- 對於日常辦公室內部工具、課堂展示與求職作品集，幾乎不可能超出免費額度，請安心使用！
