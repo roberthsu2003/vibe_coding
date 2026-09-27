@@ -41,18 +41,35 @@
 
 #### 2️⃣ 第二階段：GitHub Pages 靜態網站部署（進階託管・需 GitHub 帳號）
 
-- **適用情境**：想進行專案版本控管、自訂網域或長期託管靜態網頁。
+- **適用情境**：僅適用於無 API Key 的純靜態網頁（如：簡報、多媒體、Excel 佔位符單據產生器）。
 - **帳號需求**：⚠️ 此階段才需要申請 [GitHub 帳號](https://github.com)。
 - **教學連結**：[將靜態網頁部署至 GitHub Pages](https://github.com/roberthsu2003/vibe-coding-to-pro-react/blob/main/github-docs-site/README.md)
 
+---
+
+### 🛡️ 資安關鍵防線：API Key 洩漏風險與安全邊界（必讀 ⚠️）
+
+> 🚨 **極重要紅線警示：靜態網頁（GitHub Pages）絕對嚴禁存放 API Key！**  
+> - **為什麼會洩漏？** 靜態網頁的所有 JavaScript 在瀏覽器中都是完全公開的，任何訪客按 `F12` 就能複製你的 API Key；若上傳至 GitHub 公開儲存庫，30 秒內就會被全球掃描爬蟲機器人盜用刷爆。  
+> - **安全唯一解**：凡是涉及 Gemini API Key、Google 服務授權或資料庫的應用，**一律嚴禁部署至 GitHub Pages**，必須全面採用 **Google AI Studio 的 Backend Proxy（伺服器代理）技術**，一鍵部署至 **Google Cloud Run** 安全運行！  
+> 
+> 👉 深入閱讀：[為什麼靜態網頁會洩露 API Key 實例解析](./為什麼靜態網頁會洩露api_key/README.md)
 
 ---
 
-## 🚀 全端網頁應用實戰（Google AI Studio Backend Proxy & 雲端整合）
+## 🚀 全端網頁應用實戰（Google AI Studio Backend Proxy 安全架構）
 
 > 🛡️ **安全無憂・全新全端架構**：本系列專案全面採用 **Google AI Studio 原生的 Backend Proxy（伺服器代理）技術**！
 > - **零金鑰外洩風險**：所有 Gemini API Key、OAuth 授權碼與資料庫憑證均由伺服器端環境變數保護，**完全不會暴露給前端瀏覽器**，學員無須自行架設 Vercel Serverless 或外部伺服器。
 > - **一鍵雲端部署**：完成專案後，直接透過頂部 **Publish 按鈕一鍵部署至 Google Cloud Run**，立即擁有專屬的正式上線網址！
+
+### 🤖 Gemini AI 核心應用實戰（Backend Proxy 安全代理）
+
+| 專案 | 說明 | 備註 |
+|------|------|------|
+| [✍️ 用 AI 寫總結和翻譯](./⽤AI寫總結和翻譯/README.md) | 讓 AI 自動摘要並翻譯文章 | 核心文字模型 ✍️ |
+| [📊 AI 分析與洞察](./AI分析與洞察/README.md) | 利用 AI 解讀資料趨勢與圖表洞察 | 數據分析模組 📊 |
+| [💬 Chatbot 建立](./Chatbot建立/) | 打造具備對話記憶的專屬客服機器人 | 對話狀態管理 💬 |
 
 ### ⚡ Google Workspace 原生整合（試算表與日曆自動化）
 
@@ -72,24 +89,11 @@
 
 ---
 
-## 🔑 整合 Gemini API Key & 前端網頁（傳統外部部署方案）
+## 🌐 傳統外部部署進階參考（Vercel Serverless 方案）
 
-> 🛡️ **安全提醒：** 若不透過 Google AI Studio 原生部署，為了保護 Gemini API Key，避免直接暴露在前端程式碼中，必須透過 **Vercel Serverless Functions** 進行後端 API 呼叫。 
-
-> [為什麼靜態網頁會洩露api key](./為什麼靜態網頁會洩露api_key/README.md)
-
-### 📖 Vercel 簡介
-
-- [Vercel 簡介完整說明](https://github.com/roberthsu2003/vibe-coding-to-pro-react/tree/main/00-Vercel%E7%B0%A1%E4%BB%8B/README.md)
-- [路徑二：Vercel Serverless Functions（部署至 Vercel）](https://github.com/roberthsu2003/vibe-coding-to-pro-react)
-
-### 🧪 整合範例
-
-| 專案 | 說明 | 備註 |
-|------|------|------|
-| [✍️ 用 AI 寫總結和翻譯](./⽤AI寫總結和翻譯/README.md) | 讓 AI 自動摘要並翻譯文章 | |
-| [📊 AI 分析與洞察](./AI分析與洞察/README.md) | 利用 AI 解讀資料趨勢 | |
-| [💬 Chatbot 建立](./Chatbot建立/) | 打造自己的 AI 聊天機器人 | |
+> 💡 **進階選讀**：若您未來在 Google AI Studio 之外手動建構獨立全端網站，並打算將後端託管於 Vercel，可參考以下外部部署架構：
+> - [Vercel 簡介完整說明](https://github.com/roberthsu2003/vibe-coding-to-pro-react/tree/main/00-Vercel%E7%B0%A1%E4%BB%8B/README.md)
+> - [透過 Vercel Serverless Functions 保護 API Key](https://github.com/roberthsu2003/vibe-coding-to-pro-react)
 
 ---
 
