@@ -1,224 +1,168 @@
-# 實作：用 AI 開發會議總結與翻譯工具
+# 📑 AI First 實戰進階：智慧會議總結與多國語言翻譯助理（Google Cloud Run 全託管版）
 
-本單元將帶領學員使用 AI 開發一款「會議紀錄總結與多國語言翻譯」工具。我們將學習如何撰寫精準的 Prompt 來約束 AI 的輸出格式，並透過 Vercel Serverless Functions 確保 API Key 的安全性。
-
-## 🛠 技術棧 (Tech Stack)
-
-實作此專案時，建議採用以下前端技術：
-- **建置工具**: Vite
-- **前端框架**: React
-- **程式語言**: TypeScript
-- **樣式框架**: Tailwind CSS
+> **30 秒專案介紹**：  
+> 這是一個結合 **Google Gemini 2.5** 與 **Google Cloud Run** 的企業級智慧辦公應用。只要貼上會議逐字稿或重點筆記，AI 便能自動萃取會議主題、與會人員、核心討論摘要，並產出**責任人明確的待辦清單（Action Items）**與**高階商務英文翻譯**！  
+> 專案原生適配 **Google Cloud Run** 主動部署架構，享有 **Backend Proxy 伺服器端金鑰安全隔離** 與 **縮容至 0 (Scale to Zero) 免費待機**，完全不需要繁瑣的外部伺服器配置，一鍵即可公開發布！
 
 ---
 
-## 📂 測試資料：會議紀錄逐字稿
+## 📥 第一步：下載課程素材檔案
 
-在開發與測試階段，請複製以下會議紀錄逐字稿，作為應用程式的測試輸入內容：
+本單元規劃了 **2 個完整的實戰範例包**（皆已分別打包為 ZIP，點擊即可一鍵下載解壓縮使用）：
 
-<details>
-<summary>📋 點我展開會議紀錄</summary>
+### 📦 範例一：產品開發進度會議（官方預設範本・多模態全套）
+> 🎁 **[👉 點我一鍵下載「範例一_產品開發進度會議素材包.zip」](./範例一_產品開發進度會議素材包.zip)**
 
-```text
-會議主題：Q3 產品開發進度同步與行銷策略討論
-會議時間：2023年9月15日 10:00 - 11:00
-與會者：
-- Alex (產品經理)
-- Ben (前端工程師)
-- Cathy (後端工程師)
-- David (行銷總監)
+| 檔案名稱 | 說明 | 點擊單獨下載 |
+| :--- | :--- | :---: |
+| **產品開發進度會議逐字稿.txt** | 官方預設逐字稿（含跨職能對話、前端優化、後端逾時排查與時程 Action Items） | [📥 點我下載](./產品開發進度會議逐字稿.txt) |
+| **會議出席簽到簿.jpg** | 實體紙本簽名出席簿照片（含部門、與會者真實手寫簽名，**測試 Gemini 圖片 OCR**） | [🖼️ 點我下載](./會議出席簽到簿.jpg) |
+| **產品開發進度會議錄音.m4a** | 真人多角色會議開場錄音檔（含 PM、前端、後端、行銷對話，**測試 Gemini 音訊直接摘要**） | [🎙️ 點我下載](./產品開發進度會議錄音.m4a) |
+| **logo.svg** | 現代商務科技風格企業會議助理標誌圖片（已適配響應式排版與向量縮放） | [🖼️ 點我下載](./logo.svg) |
 
-會議紀錄：
-Alex：大家好，今天主要是想同步一下我們 Q3 新功能「AI 智慧推薦系統」的開發進度。Ben，前端那邊目前狀況如何？
-Ben：目前首頁的推薦區塊 UI 已經切版完成，並且串接了 Mock API，不過效能在資料量大的時候會卡頓，這週我會加入虛擬滾動 (Virtual Rendering) 來優化。預計週五前可以完成。
-Alex：OK，效能優化很重要。Cathy，後端 API 的部分呢？
-Cathy：推薦演算法的模型已經部署到測試環境了，目前 API 的回應時間平均在 200ms 左右。不過有些極端情況下會有 Timeout 的問題，我正在跟 DevOps 團隊一起排查，可能需要增加機器的規格。
-Alex：好，有問題隨時提出。David，行銷那邊針對這次上線有什麼規劃嗎？
-David：我們預計在功能上線前一週發送 EDM 給既有客戶，強調「個人化體驗升級」。另外，我希望產品團隊能提供一些實際的應用案例 (Use Case)，讓我們可以在社群媒體上做預熱宣傳。
-Alex：沒問題，我明天下班前整理三個 Use Case 給你。總結一下接下來的 Action Items：第一，Ben 負責前端效能優化，週五前完成；第二，Cathy 解決後端 API Timeout 問題；第三，我明天提供三個 Use Case 給 David。大家還有問題嗎？
-Cathy：沒有。
-Ben：沒問題。
-David：收到，期待上線！
-Alex：好，那今天會議就先到這邊，謝謝大家。
-```
-
-</details>
-
----
-
-## 🚀 實作步驟與 Prompt 範例
-
-在這個實作中，我們將需要使用不同的 Prompt 來完成應用程式的開發與 AI 行為設定：
-
-### 1. 開發前端網頁的 Prompt
-
-您可以複製以下指令，交給 AI 輔助開發工具（如 Cursor、GitHub Copilot）來生成前端應用程式的基礎架構與畫面：
-
-```markdown
-請幫我開發一個「AI 會議記錄生成與翻譯工具」的網頁前端應用程式。
-具體的開發需求與規格如下：
-
-#### 1. 技術棧與框架
-- 建置工具：Vite
-- 核心框架：React
-- 程式語言：TypeScript
-- 樣式框架：Tailwind CSS (請幫我設計美觀、現代化的介面)
-
-#### 2. 核心功能與介面
-- **介面語系**：整個應用程式（App）的 UI 介面與所有提示文字都必須使用**繁體中文**呈現。
-- **輸入區**：提供一個大型文字方塊（Textarea），讓使用者可以貼上「會議逐字稿」或「重點筆記」。
-- **操作按鈕**：包含一個「生成總結與翻譯」的按鈕，點擊時必須顯示 Loading 讀取狀態，避免重複點擊。
-- **輸出顯示區**：將 AI 處理後的結果格式化顯示於畫面中（支援 Markdown 渲染為佳），並且為結果區塊提供一個「一鍵複製」的按鈕。
-
-#### 3. API 整合邏輯
-- 請在前端撰寫一個呼叫 AI 模型（例如 Google Gemini 等 API）的串接邏輯。
-- 請設計一個 `System Instructions` 常數，用來設定 AI 的行為與輸出格式，並在呼叫 API 時帶入。
-- 當使用者點擊送出按鈕時，將文字框的內容作為 User Prompt 發送。
-
-```
-
-### 2. AI 模型的 System Instructions
-
-為了讓 AI 每次都能輸出結構化的會議總結，我們需要設定 `System Instructions`。請將以下提示詞設定到您的程式碼或是 AI 平台中：
-
-```markdown
-你是一位專業的會議記錄助理。請根據使用者提供的會議逐字稿，整理出結構化的會議紀錄。
-請務必遵守以下輸出格式要求：
-
-1. **會議主題與時間**：擷取會議的主題與時間。
-2. **與會者**：列出參與會議的人員。
-3. **會議重點總結**：用 3 到 5 個重點總結會議內容。
-4. **Action Items (待辦事項)**：明確列出接下來的待辦事項與負責人。
-5. **英文翻譯版**：將上述 1~4 點的內容完整翻譯成專業的英文。
-
-請以 Markdown 格式輸出，所有繁體中文部分必須使用**繁體中文**回覆，不要包含任何額外的問候語或結語。
-```
-
-> **💡 範例參考**
+> 📷 **範例一偽圖片預覽：會議出席簽到簿**
 > 
-> 如果需要參考完整的實作程式碼，可以下載：[Gemini AI Studio 完成範例檔](./gemini_ai_完成的範例zip檔/meeting-minutes-assistant.zip)
+> ![會議出席簽到簿](./會議出席簽到簿.jpg)
 
 ---
 
-## 🔒 專案升級：遷移至 Vercel Serverless 後端
+### 📦 範例二：跨國商務與客訴覆盤會議（進階切換範本・商業決策與客服）
+> 🎁 **[👉 點我一鍵下載「範例二_跨國商務與客訴覆盤素材包.zip」](./範例二_跨國商務與客訴覆盤素材包.zip)**
 
-**⚠️ 資安警告**：直接在前端（React）呼叫 AI API 會導致 API Key 暴露在瀏覽器中，這是非常危險的做法！
+| 檔案名稱 | 說明 | 點擊單獨下載 |
+| :--- | :--- | :---: |
+| **跨國商務策略會議紀錄.txt** | 策略與多語言範本（含亞太擴展、階梯式 SaaS 訂閱定價決策與合規審計） | [📥 點我下載](./跨國商務策略會議紀錄.txt) |
+| **客戶技術支援與客訴覆盤.txt** | 客服與事故覆盤範本（含系統中斷事實、顧客情緒分析、退款補償與公關道歉草稿） | [📥 點我下載](./客戶技術支援與客訴覆盤.txt) |
+| **logo.svg** | 現代商務科技風格企業會議助理標誌圖片（已適配響應式排版與向量縮放） | [🖼️ 點我下載](./logo.svg) |
 
-當您在本地端完成初步測試後，請務必將呼叫 AI 服務的邏輯遷移至後端。您可以將以下 Prompt 餵給 AI，請它幫您將專案改寫為 Vercel Serverless 架構：
+---
 
-```markdown
-這是一個由 **Google AI Studio** 協助建立的 Vite + React + Express 全端專案，原本使用 Express 作為後端伺服器，但 Vercel 不支援 Express 長駐伺服器的部署方式，因此需要將後端架構遷移至 Vercel Serverless Functions。
+## 🚀 第二步：Google AI Studio 實作步驟（SOP）
 
-請在現有的全端專案中，新增**多 AI 服務提供商選擇功能**，並透過 Vercel Serverless Function 呼叫 AI API，具體需求如下：
-
-0. **移除 Express 後端**：若專案中存在 `server.ts`（Express 伺服器）及相關依賴（如 `express`、`cors` 等），請一併移除，改以 Vercel Serverless Functions 取代。
-
-1. **新增 AI 服務選擇介面**：在 UI 介面中加入一個下拉選單或切換按鈕，讓使用者可以在送出前選擇要使用的 AI 服務：
-   - **Google Gemini**（模型：`gemini-2.5-flash-lite`）
-   - **NVIDIA**（模型：`nvidia/nemotron-mini-4b-instruct`）
-
-2. **建立 Serverless Function**：在專案根目錄建立 `/api/generate.ts`，在後端根據前端傳入的服務選擇，動態呼叫對應的 AI API：
-   - **Gemini API**：使用 `process.env.GEMINI_API_KEY` 讀取 API Key，模型為 `gemini-2.5-flash-lite`。
-   - **NVIDIA API**：使用 `process.env.NVIDIA_API_KEY` 讀取 API Key，Base URL 為 `https://integrate.api.nvidia.com/v1`，模型為 `nvidia/nemotron-mini-4b-instruct`。
-
-3. **改寫前端串接邏輯**：前端將使用者選擇的服務商與輸入內容一起傳送至 `/api/generate`，不直接呼叫任何 AI 平台。
-
-4. **環境變數設定**：將兩組 API Key 儲存於 Vercel 後台的環境變數中，並透過 Node.js 的 `process.env` 讀取，確保私鑰不外洩至前端：
-
-       GEMINI_API_KEY=你的_Gemini_API_Key
-       NVIDIA_API_KEY=你的_NVIDIA_API_Key
-
-   同時，請在專案根目錄建立 `.env.local` 檔案，內容如下（供本地開發測試使用）：
-
-       GEMINI_API_KEY=你的_Gemini_API_Key
-       NVIDIA_API_KEY=你的_NVIDIA_API_Key
-
-   > ⚠️ **重要**：`.env.local` 包含機密金鑰，請確認 `.gitignore` 中已有此條目，**絕對不可上傳至 GitHub**。
+請依照以下簡單三步驟完成專案建置與 Google Cloud Run 發布：
 
 ```
+【步驟 1】複製下方提示詞 ──► 貼至 Google AI Studio 建立新專案
+                               ▼
+【步驟 2】將素材放至 public/ ──► 測試一鍵填入範本、多模態圖片/音訊或逐字稿生成
+                               ▼
+【步驟 3】點擊右側「Publish」 ──► 一鍵主動部署至 Google Cloud Run（享專屬網址與金鑰保護）
+```
 
-### 💻 Vercel Serverless 本地端測試指南
-
-因為 Vite 原生的開發伺服器無法執行 Vercel 的 Node.js 函數，改寫為 Serverless 架構後，原本的 `npm run dev` 必定會出錯或遇到 404 找不到 `/api` 路由的問題。
-
-請依照以下步驟設定，才能在本地端順利測試包含 `/api` 的全端網站：
-
-1. **安裝專案套件與全域安裝 Vercel CLI**：
-   請先安裝專案所需的依賴套件，並全域安裝 Vercel CLI：
-   ```bash
-   npm install
-   npm install -g vercel
-   ```
-
-2. **登入 Vercel 帳號**：
-   （**⚠️ 帳號提醒**：由於學員可能共用電腦或擁有多個帳號，請先執行 `vercel logout` 登出前一個帳號，再以 `vercel login` 重新登入自己的帳號。）
-   ```bash
-   vercel logout
-   vercel login
-   ```
-
-3. **手動建立 `.env.local` 檔案**：
-   在專案根目錄建立 `.env.local`，填入您的 API Key（此步驟取代從雲端拉取，適合尚未部署至 Vercel 的情境）：
-   ```
-   GEMINI_API_KEY=你的_Gemini_API_Key
-   NVIDIA_API_KEY=你的_NVIDIA_API_Key
-   ```
-   > ⚠️ 請確認 `.gitignore` 中已包含 `.env.local`，**絕對不可上傳至 GitHub**。
-
-4. **連結 Vercel 專案**：
-   在專案根目錄執行以下指令，依照提示建立或連結一個 Vercel 雲端專案（本機測試必須完成此步驟，`vercel dev` 才能正常運作）：
-   ```bash
-   vercel link
-   ```
-
-5. **啟動全端測試伺服器**：
-   請停用原本的 `npm run dev`，一律改用以下指令啟動專案：
-   ```bash
-   vercel dev
-   ```
-   啟動後，前端 Vite 畫面與後端 `/api` 將會合併在同一個本地網址運行（通常是 `http://localhost:3000`），您就可以順利進行測試了！
-
-> 💡 **已部署至 Vercel 並在後台設定好環境變數的學員**：可跳過步驟 3，改在步驟 4 之後執行 `vercel env pull .env.local`，從雲端直接同步環境變數。
-
-<details>
-<summary>💡 進階說明：由 Google AI Studio 完成的專案為何需要這些設定？</summary>
-
-因為這些程式是由 **Google AI Studio** 協助完成的專案，原本通常是單純的前端架構。當我們為了安全性加入後端 API 時，就需要透過上述指令來設定 Vercel 的環境。
-
-**1. 如何確認專案架構已經符合上傳至 Vercel？**
-在上傳或測試前，請檢查您的專案目錄是否具備以下結構：
-- **`api/` 資料夾**：專案根目錄必須包含 `api/` 資料夾，並且裡面有處理 API 請求的 Serverless 函數程式碼（例如 `generate.ts`）。
-- **不需要 `vercel.json`**：Vercel 的零配置功能會自動偵測 Vite 專案並處理 `api/` 路由，無需此檔案。若專案中已有 `vercel.json`，請直接刪除。
-- **不包含機密金鑰**：確保程式碼中已經將寫死的 API Key 移除，改為透過 `process.env` 讀取環境變數。
-
-**2. 為什麼要加入這些指令？**
-- **`npm install`**：從 Google AI Studio 或外部取得的專案原始碼，並不會包含 `node_modules` 資料夾。必須先執行此指令安裝所有必備套件，專案才能正常運作。
-- **`npm install -g vercel`**：安裝 Vercel 官方提供的 CLI 工具，讓我們可以在本地電腦上模擬完整的 Vercel 雲端環境。
-- **`vercel link`**：將您本地電腦的專案資料夾與 Vercel 雲端上已經建立的專案綁定，確保後續操作能對應到正確的雲端專案。
-- **`vercel env pull .env.local`**：為確保安全，我們將 API Key 儲存在 Vercel 雲端。透過這個指令能安全地將雲端環境變數拉取回本機的 `.env.local` 檔案，供本地測試時讀取。Vite 優先讀取 `.env.local`，因此使用此檔名最為正確。
-- **`vercel dev`**：原本 Vite 的 `npm run dev` 無法啟動 `/api` 後端程式。`vercel dev` 能夠同時啟動前端畫面與後端 API，完美模擬最終部署上線的全端伺服器環境。
-
-**3. Vercel 零配置 (Zero Configuration) 說明**
-Vercel 擁有強大的零配置功能，會自動幫你處理大部分的設定：
-- **前端自動偵測**：Vercel 會自動偵測到你的專案是使用 Vite（從 `package.json` 判斷），並自動執行 `npm run build`，且預設知道輸出目錄是 `dist`。
-- **API 自動路由**：Vercel 預設會將專案根目錄下 `api/` 資料夾裡面的檔案自動視為 Serverless Functions，並自動處理好路由（例如：打 `/api/generate` 的請求會自動對應到 `api/generate.ts`），完全不需要手動設定。
-
-</details>
+1. **開啟 [Google AI Studio](https://aistudio.google.com/)**，點擊建立新 Web 專案。
+2. **複製下方「第三步」的完整提示詞**，直接貼至 AI Studio 對話框進行生成。
+3. **專案建立完成後**：
+   - 在專案目錄的 `public/` 資料夾內，放入剛才下載的 `logo.svg`、`會議出席簽到簿.jpg`、`產品開發進度會議錄音.m4a` 與各項 `.txt` 範本。
+   - 介面已內建快速按鈕，點擊即可直接載入三組代表性測試文件。
+4. **測試即時生成（文字、簽到簿圖片與會議音訊全支援）**：
+   - 貼上逐字稿，或上傳「會議出席簽到簿」照片，AI 會透過 Gemini 2.5 多模態視覺自動萃取名單與簽名時間！
+   - 點擊「✨ 生成會議總結與翻譯」，AI 會在數秒內整理出清晰的 Markdown 會議報告。
+   - 支援勾選待辦清單、一鍵複製與下載 `.md` 報告。
+5. **一鍵發布至 Google Cloud Run**：
+   - 點擊 Google AI Studio 右側工具列的 **`Publish`** 按鈕。
+   - 自訂 App URL（例如 `smart-meeting-minutes-assistant`），最終網址即為：  
+     👉 **`https://smart-meeting-minutes-assistant.ai.studio`**
+   - 點擊 **`Publish your app`**，底層自動建立 **Google Cloud Run** 容器服務，30~60 秒內發布上線！
 
 ---
 
-## 🎯 學生課後練習
+## 🤖 第三步：專案生成提示詞（點擊代碼框右上角一鍵複製）
 
-完成基礎的「會議紀錄生成工具」後，請嘗試以下兩項挑戰來擴充您的工具：
+請將以下整段提示詞複製，貼到 **Google AI Studio**：
 
-### 挑戰 1：新增多國語言切換功能
-- 在 UI 介面上新增一個下拉選單（例如選項包含：英文、日文、韓文、法文）。
-- 當使用者點擊送出時，將該語言選項動態帶入 Prompt 之中，讓最後產出的「翻譯版本」能依據使用者的選擇改變目標語言。
+```markdown
+# Role（角色）
+你是一位精通 React、TypeScript、Tailwind CSS 與現代 UI/UX 設計的資深全端工程師，專精於 Google Gen AI SDK（@google/genai）、提示詞工程（Prompt Engineering）以及 Google Cloud Run 雲端無伺服器架構。
 
-### 挑戰 2：情境切換，變身「客服信件草稿產生器」
-- 嘗試修改 `System Instructions`，將 AI 的角色從「會議紀錄助理」改為「資深客服人員」。
-- 當使用者貼上一段「客戶抱怨對話」時，讓 AI 自動產出：
-  1. 客戶的情緒狀態與問題核心總結。
-  2. 一封得體的致歉與補償 Email 草稿（請包含中文與英文雙語版本）。
+# Context（背景情境）
+這是一個針對企業會議場景打造的「智慧會議總結與多國語言翻譯助理（Smart Meeting Minutes & Translator）」。
+專案直接運行於 Google AI Studio，並透過右側「Publish」面板主動部署至 Google Cloud Run。
+系統後端具備 Cloud Run Backend Proxy 自動代理機制，可透過 `process.env.GEMINI_API_KEY` 安全呼叫 Gemini 模型，API Key 絕不外洩至瀏覽器前端。
+
+# Task（任務目標）
+請使用 `vite-react-typescript` 與 Tailwind CSS 建立單一頁面應用程式（SPA）：
+
+1. **安裝與串接相依套件**：
+   - 使用 `@google/genai` 進行模型調用（預設模型：`gemini-2.5-flash` 或 `gemini-2.5-pro`）。
+   - 使用 `lucide-react` 提供商務風格圖示。
+   - 使用 `canvas-confetti` 提供完成時的微慶祝動效。
+
+2. **多模態輸入與多範本快速載入介面**：
+   - 頂部導航欄展示 `public/logo.svg` 標誌與應用程式名稱。
+   - 頂部提供三組快速範本載入按鈕：
+     - `[📋 產品開發進度會議]`：載入前端優化、後端 Timeout 排查與衝刺排程範例。
+     - `[💼 跨國商務策略會議]`：載入亞太 SaaS 訂閱定價、法規合規與市場開拓範例。
+     - `[🛠️ 客戶支援與事故覆盤]`：載入系統異常客訴、情緒分析、賠償方針與覆盤範例。
+   - 核心輸入區：大型自適應高度文字方塊（Textarea），支援使用者貼上任何會議逐字稿。
+   - **多模態上傳支援（Multimodal Support）**：
+     - 支援上傳或拖曳「會議簽到簿照片」（`.jpg` / `.png`）：透過 Gemini 視覺能力自動提取「與會人員名單」、「部門」與「簽到時間」。
+     - 支援上傳「會議錄音檔」（`.m4a` / `.wav` / `.mp3`）：透過 Gemini 原生多模態音訊能力直接進行逐字轉錄與核心會議總結。
+   - 附屬功能：即時字數統計、拖曳上傳 `.txt` / `.md` 檔案讀取、一鍵清空輸入。
+
+3. **模型設定與結構化 System Instructions**：
+   在呼叫 Gemini API 時，帶入嚴謹的系統指令，要求 AI 嚴格依照以下 Markdown 規格輸出：
+   - **### 1. 會議摘要 (Executive Summary)**：3~5 句話提煉會議核心目的與關鍵決策。
+   - **### 2. 重點討論事項 (Key Discussions)**：條列各部門或與會者的討論核心與論點。
+   - **### 3. 待辦事項清單 (Action Items)**：嚴格使用 Markdown 核取方塊（`- [ ]`），格式為 `- [ ] 任務內容 - 負責人: [姓名], 截止時間: [日期]`。
+   - **### 4. 專業翻譯 (Translation)**：將會議摘要與 Action Items 翻譯為指定目標語言（預設為專業商務英文）。
+
+4. **動態選項與語系自訂控制**：
+   - **目標語言下拉選單**：支援「商務英文」、「日文」、「韓文」、「德文」、「西班牙文」。
+   - **會議情境模式切換**：
+     - `標準會議模式`：產出標準摘要與 Action Items。
+     - `客戶服務模式`：萃取客戶痛點、情緒指數並草擬雙語致歉/補償信。
+     - `技術評審模式`：專注於架構架構決策紀錄 (ADR) 與潛在技術風險評估。
+
+5. **精美輸出檢視與一鍵操作**：
+   - 右側或下方採用獨立卡片展示 AI 成果，支援即時 Markdown 結構化排版（標題、加粗、待辦勾選框）。
+   - 頂部操作列提供：
+     - `[📋 一鍵複製全文]`：複製乾淨的 Markdown 格式，並跳出 Toast 成功提示。
+     - `[📥 匯出 Markdown 檔案]`：觸發瀏覽器下載 `會議紀錄總結_[日期].md`。
+     - `[🔄 重新生成]`：以微調參數重新請求。
+   - 生成中顯示精美 Loading 骨架屏動畫與進度狀態文字。
+
+# Constraints（限制與規格要求）
+1. 【Google Cloud Run 原生相容】：全面相容 Google AI Studio 主動部署機制，透過後端代理讀取金鑰，嚴禁在客戶端程式碼硬編碼任何 API Key。
+2. 【現代商務美學】：
+   - 配色以 Slate 深灰藍（`#0F172A`、`#1E293B`）與質感淺灰（`#F8FAFC`、`#F1F5F9`）為主，搭配高雅電藍（`#2563EB`）與紫羅蘭（`#7C3AED`）微光強調色。
+   - 圓角卡片設計、柔和陰影、流暢按鈕懸停動畫與清楚的邊框層級。
+3. 【全繁體中文介面】：所有 UI 標籤、按鈕、提示訊息與錯誤回饋皆使用標準繁體中文。
+4. 【容錯與異常處理】：
+   - 輸入為空時禁用發送按鈕並提示警示。
+   - API 網路異常或配額超限時，提供友好錯誤訊息與重試建議。
+
+# Format（交付格式）
+1. 列出相依套件安裝指令（`npm i @google/genai lucide-react canvas-confetti && npm i -D @types/canvas-confetti`）。
+2. 提供完整、具備完整 TypeScript 型別定義的程式碼（包含服務層與主介面）。
+3. 簡短執行與 Google Cloud Run 發布步驟。
+```
 
 ---
+
+## 🏛️ 第四步：Google Cloud Run 部署架構與安全機制剖析
+
+本專案全面捨棄複雜的傳統外部伺服器設定，直接透過 Google AI Studio 一鍵將容器託管於 **Google Cloud Run**。
+
+![Google Cloud Run 全託管智慧架構](./images/cloudrun_architecture.svg)
+
+### 🔍 為什麼採用 Google Cloud Run 架構？
+
+| 比較維度 | 🚀 Google Cloud Run（本專案標準架構） | ⚠️ 傳統純前端直連 API |
+| :--- | :--- | :--- |
+| **金鑰安全性** | **極高**。由 Cloud Run 後端代理注入 `GEMINI_API_KEY`，前端完全看不到金鑰 | **極度危險**。金鑰直接暴露在瀏覽器 Network 與原始碼中，易遭盜刷 |
+| **部署門檻** | **一鍵發布**。在 AI Studio 點擊 `Publish` 即自動容器化並配發正式網址 | 需自行設定 Docker、網域名稱與伺服器伺服程式 |
+| **維運成本** | **縮容至 0 (Scale to Zero)**。無人造訪時不耗算力，每月 200 萬次請求免費 | 需持續租用虛擬主機 (VPS)，即便無人使用每月仍需付費 |
+| **即時同步** | 修改提示詞後點擊 **`Republish`**，30 秒內更新雲端，網址永不變更 | 需重新建置 Bundle 並手動上傳伺服器 |
+
+---
+
+## 💡 第五步：自訂 System Instructions 與情境擴充（只需 1 分鐘了解）
+
+若您想根據不同部門需求微調 AI 的總結邏輯，只要在程式碼或提示詞中替換 `System Instructions` 即可：
+
+- **情境 A：高管 1 分鐘極簡彙報模式**：
+  > *「請扮演幕僚長，將以下逐字稿精煉為 300 字以內的高管週報。只保留：核心結論、關鍵數字（營收/併發/成本）與重大風險警示，其餘細節一概省略。」*
+- **情境 B：客服客訴處理與道歉信模式**：
+  > *「請扮演資深客戶成功總監，分析以下客訴紀錄中顧客的焦慮核心與抱怨等級（1~5 星），並產出一封言詞誠懇、具體交代補償方案與解決期限的雙語（繁中/英文）官方致歉信。」*
+- **情境 C：軟體工程架構評審 (ADR) 模式**：
+  > *「請扮演首席架構師，將會議記錄轉換為標準架構決策紀錄 (ADR)。包含：背景脈絡 (Context)、決策選項比較 (Options)、最終決策 (Decision) 與後續架構後果 (Consequences)。」*

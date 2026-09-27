@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+  <defs>
+    <!-- 背景漸層 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- 主體圓環光暈漸層 -->
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+
+    <!-- 雙向翻譯微光漸層 -->
+    <linearGradient id="glowGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+
+    <!-- 柔和陰影濾鏡 -->
+    <filter id="shadowFilter" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0284C7" flood-opacity="0.35" />
+    </filter>
+
+    <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- 背景外卡 -->
+  <rect width="240" height="240" rx="48" fill="url(#bgGrad)" />
+  <rect width="236" height="236" x="2" y="2" rx="46" fill="none" stroke="url(#ringGrad)" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- 科技光點星雲裝飾 -->
+  <circle cx="50" cy="50" r="1.5" fill="#38BDF8" opacity="0.6" />
+  <circle cx="190" cy="60" r="2" fill="#818CF8" opacity="0.7" />
+  <circle cx="45" cy="185" r="1.5" fill="#34D399" opacity="0.5" />
+  <circle cx="195" cy="180" r="2" fill="#38BDF8" opacity="0.6" />
+
+  <!-- 核心主圖形：對話與音波會議紀錄卡片 -->
+  <g transform="translate(40, 36)" filter="url(#shadowFilter)">
+    <!-- 底層主氣泡卡片 -->
+    <rect x="0" y="0" width="160" height="120" rx="28" fill="#1E293B" stroke="url(#ringGrad)" stroke-width="2.5" />
+
+    <!-- 頂端微裝飾條（會議與筆記標題列） -->
+    <rect x="24" y="22" width="45" height="6" rx="3" fill="#38BDF8" />
+    <circle cx="134" cy="25" r="3" fill="#10B981" />
+    <circle cx="122" cy="25" r="3" fill="#38BDF8" />
+
+    <!-- 會議音波與文本筆記流動線 -->
+    <rect x="24" y="42" width="112" height="4" rx="2" fill="#475569" opacity="0.6" />
+    <rect x="24" y="54" width="85" height="4" rx="2" fill="#475569" opacity="0.4" />
+
+    <!-- 音訊波形圖案 (會議逐字稿即時萃取) -->
+    <g transform="translate(24, 72)">
+      <rect x="0" y="8" width="4" height="12" rx="2" fill="#38BDF8" />
+      <rect x="8" y="2" width="4" height="24" rx="2" fill="#60A5FA" />
+      <rect x="16" y="6" width="4" height="16" rx="2" fill="#818CF8" />
+      <rect x="24" y="0" width="4" height="28" rx="2" fill="#A78BFA" />
+      <rect x="32" y="7" width="4" height="14" rx="2" fill="#38BDF8" />
+      <rect x="40" y="4" width="4" height="20" rx="2" fill="#34D399" />
+      <rect x="48" y="10" width="4" height="8" rx="2" fill="#6EE7B7" />
+    </g>
+
+    <!-- AI 智慧四角星 (Sparkle) -->
+    <path d="M125,72 C125,78 120,83 114,83 C120,83 125,88 125,94 C125,88 130,83 136,83 C130,83 125,78 125,72 Z" fill="url(#ringGrad)" />
+    <path d="M142,62 C142,65 139.5,67.5 136.5,67.5 C139.5,67.5 142,70 142,73 C142,70 144.5,67.5 147.5,67.5 C144.5,67.5 142,65 142,62 Z" fill="#38BDF8" />
+  </g>
+
+  <!-- 浮動多語言翻譯徽章 (Translate Badge) -->
+  <g transform="translate(132, 134)" filter="url(#badgeShadow)">
+    <rect x="0" y="0" width="76" height="42" rx="14" fill="#0F172A" stroke="url(#glowGrad)" stroke-width="2" />
+    <!-- 中文「文」與英文「A」雙向交會圖標 -->
+    <text x="18" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="bold" fill="#34D399" text-anchor="middle">文</text>
+    <path d="M34,21 L42,21 M38,17 L42,21 L38,25" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+    <text x="58" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="800" fill="#38BDF8" text-anchor="middle">A</text>
+  </g>
+
+  <!-- 底部品牌標籤文字 -->
+  <text x="120" y="212" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" letter-spacing="2.5" fill="#94A3B8" text-anchor="middle">AI MEETING &amp; TRANSLATE</text>
+</svg>
