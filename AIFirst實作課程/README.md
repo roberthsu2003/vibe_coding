@@ -75,8 +75,12 @@
 
 ### ⚡ Google Workspace 原生整合（試算表與日曆自動化）
 
+> 💡 **官方最新功能推薦**：Google AI Studio 現已推出強大的 **「Integrations 原生整合面板」**，免去繁瑣的 GCP OAuth 設定，一鍵即可安全串接 14 款 Google Workspace 辦公套件與雲端資料庫！  
+> 👉 **[【專題推薦】點我查看：Google Workspace 原生整合清單與 14 大服務最新 AI 應用指南](./GoogleWorkspace原生整合說明/README.md)**
+
 | 專案 | 說明 | 備註 |
 |------|------|------|
+| [🌐 Google Workspace 原生整合全景指南](./GoogleWorkspace原生整合說明/README.md) | 深入解析 Google AI Studio 支援的 14 款 Workspace 服務（Drive、Sheets、Gmail、Calendar 等）及 2026 最新 AI 落地應用 | 必讀全景指南 🌐 |
 | [⚡ Workspace 智慧單據報銷系統](./Workspace智慧單據報銷系統/README.md) | 發票收據照片辨識、動態解析明細，一鍵寫入雲端 Google Sheets 試算表並生成請款單 | Google Workspace 整合 ⚡ |
 | [📅 AI 會議紀錄與行事曆整合](./AI會議紀錄與行事曆整合/README.md) | 貼上雜亂會議紀錄，AI 自動萃取待辦寫入試算表，並將關鍵 Deadline 同步排入 Google 日曆 | Sheets + Calendar 雙整合 🗓️ |
 
