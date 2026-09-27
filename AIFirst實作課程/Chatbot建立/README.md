@@ -43,6 +43,56 @@
 
 </details>
 
+<details>
+<summary>💡 知識庫檢索技術解析：Google AI Studio 可以做 RAG 嗎？為什麼本專案推薦「In-Context RAG」？</summary>
+
+### 🗺️ Google AI Studio 實現 RAG 的兩大途徑
+
+很多同學會問：「一般做企業客服知識庫不是都要切塊（Chunking）、算向量（Embedding）並架設向量資料庫（Vector Database，如 Pinecone、Chroma）做 RAG 嗎？Google AI Studio 可以做 RAG 嗎？」
+
+答案是：**完全可以！而且 Google AI Studio 與 Gemini 的長上下文架構比傳統向量 RAG 更優雅、更精準！**
+
+---
+
+#### 途徑一：In-Context RAG（長上下文原生檢索，🌟 本專案採用最佳實踐）
+
+傳統 RAG 出現的原因是早期大語言模型（如 GPT-3.5/4）的上下文視窗只有 4K ~ 32K Token，裝不下一整份手冊，所以被迫將文件「切成碎片」，搜尋時再撈出前 3~5 篇片段拼湊回答。這常導致**前後文被截斷、跨章節無法比對、檢索命中率差**等痛點。
+
+Gemini 3 系列（如 `gemini-3.8-flash`）具備 **1,000,000 (1M) Token** 的超巨大上下文視窗：
+- **容量對比**：本專案整份《信用卡權益說明.txt》約 2.7 萬字（僅約 1.5 萬 Token），**只佔用 Gemini 1M 容量的 1.5%**！
+- **免資料庫、零維運**：不需要額外建置 Vector DB、不用寫 Embedding 程式碼、不用調優 Chunking 參數。
+- **條款無損完整理解**：Gemini 在大海撈針測試（Needle In A Haystack）中達到 **99.8% 以上的極致召回率**，跨章節比對（例如：海外刷卡回饋 + 國外手續費 + 旅平險）綜合分析能力遠勝傳統 RAG。
+- **Context Caching（上下文快取）**：若企業知識庫達到幾十萬字，在 Google AI Studio 中開啟 Context Caching，快取部分的 Token 費用**直接省下 75%**，並大幅降低首字回應時間（TTFT）。
+
+---
+
+#### 途徑二：Native Grounding（原生聯網搜尋 RAG）
+
+若客服需要回答「即時波動資訊」（例如：今天日圓即期匯率多少？當季最新聯名卡促銷是哪家？）：
+- 在 Google AI Studio 介面中，直接勾選工具列的 **`Grounding with Google Search`**。
+- SDK 程式碼中只需加入一行設定：
+  ```typescript
+  tools: [{ googleSearch: {} }]
+  ```
+- Gemini 會在回答時自動執行 Google 搜尋檢索最即時的公開資訊，並自動附帶原始來源連結（Grounding Metadata）。
+
+---
+
+### 📊 傳統向量 RAG vs. Gemini In-Context RAG 完整對比表
+
+| 評比維度 | 傳統向量 RAG (Pinecone / Chroma / LangChain) | 🌟 Gemini In-Context RAG (本專案採用) |
+| :--- | :--- | :--- |
+| **建置架構** | 需額外維運向量資料庫與 Embedding API | **零外部依賴**，只需純文字 txt 檔 |
+| **文本處理** | 需手動切塊 (Chunking)，常切斷法律/條款語意 | **完整吞吐**，全篇 2.7 萬字一次讀完，不失真 |
+| **回答精準度** | 取決於向量相似度檢索（Top-K 常撈錯片段） | **大海撈針準確率 > 99.8%**，語意理解完整 |
+| **跨章節比對** | 差（難以把第 1 章與第 5 章關聯碎片拼在一起） | **極佳**（模型全域視野，精確計算多重優惠） |
+| **實施難度** | 高（需資料工程師或後端工程師撰寫 ETL 流程） | **低（任何小白與學生 3 分鐘即可上手）** |
+| **維護成本** | 每月需支付向量資料庫租金與維運精力 | **極低/免費**（可搭配 Context Caching 省 75%） |
+
+> 💡 **教學總結**：在 Gemini 1M/2M Token 的時代，中小型知識庫（數萬到數十萬字，如企業員工手冊、產品規格書、金融信用卡權益規章）使用 **In-Context RAG 是業界公認最穩定、最精準且成本最低的落地方式**！
+
+</details>
+
 ---
 
 ## 🚀 第二步：Google AI Studio 實作 3 步驟（SOP）
