@@ -96,10 +96,7 @@
 > 🚀 **全鏈條現代軟體工程體系（End-to-End Modern Engineering Pipeline）**：  
 > 本階段是為深度實戰規劃的專業升級路線！學員將脫離純自然語言原型的玩具階段，掌握業界頂尖的標準全端軟體交付流程：  
 > 
-> ```
-> 1️⃣ Google AI Studio ──► 2️⃣ GitHub 儲存庫 ──► 3️⃣ Google Antigravity ──► 4️⃣ Supabase 資料庫 ──► 5️⃣ Vercel 工業級部署
->   (快速生成全端原型)        (版本控制與團隊協作)     (Agentic AI 深度重構解耦)    (PostgreSQL+RLS 資安防護)    (Git CI/CD 自動化上線)
-> ```
+![專業五步全鏈交付流水線 (The 5-Step Pipeline)](./images/enterprise_5step_pipeline.svg)
 
 ### 🛠️ 專業五步全鏈交付流水線 (The 5-Step Pipeline)
 

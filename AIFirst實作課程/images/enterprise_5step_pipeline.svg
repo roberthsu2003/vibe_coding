@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="100%">
+  <defs>
+    <!-- 背景深邃畫布漸層 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090D16" />
+      <stop offset="50%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#0A0E17" />
+    </linearGradient>
+
+    <!-- 卡片共用底色漸層 -->
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- 卡片 1 高光 (Google 藍/彩) -->
+    <linearGradient id="step1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+
+    <!-- 卡片 2 高光 (GitHub 橘/紫) -->
+    <linearGradient id="step2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB7185" />
+      <stop offset="100%" stop-color="#E11D48" />
+    </linearGradient>
+
+    <!-- 卡片 3 高光 (Antigravity 科技紫) -->
+    <linearGradient id="step3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+
+    <!-- 卡片 4 高光 (Supabase 翡翠綠) -->
+    <linearGradient id="step4Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- 卡片 5 高光 (Vercel 極致藍白) -->
+    <linearGradient id="step5Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+
+    <!-- 發光箭頭漸層 -->
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="50%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+
+    <!-- 柔和陰影 -->
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.55" />
+    </filter>
+
+    <!-- 發光濾鏡 -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- 背景主圖 -->
+  <rect width="1200" height="400" rx="20" fill="url(#bgGrad)" />
+  <rect width="1196" height="396" x="2" y="2" rx="18" fill="none" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- 頂部標題區域 -->
+  <g transform="translate(40, 42)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="800" fill="#F8FAFC">🏆 從 AI 原型邁向生產級全端架構：專業五步全鏈交付流水線 (The 5-Step Pipeline)</text>
+    <text x="0" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#94A3B8">從自然語言極速生成 ➔ 程式碼託管協作 ➔ 代理人解耦重構 ➔ PostgreSQL 企業資料庫 ➔ Vercel 工業級 CI/CD 自動化</text>
+  </g>
+
+  <!-- 連接箭頭 1 (Card 1 -> Card 2) -->
+  <g transform="translate(240, 220)">
+    <line x1="4" y1="0" x2="22" y2="0" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="3,3" />
+    <polygon points="26,0 18,-4 20,0 18,4" fill="#38BDF8" filter="url(#glow)" />
+  </g>
+
+  <!-- 連接箭頭 2 (Card 2 -> Card 3) -->
+  <g transform="translate(470, 220)">
+    <line x1="4" y1="0" x2="22" y2="0" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="3,3" />
+    <polygon points="26,0 18,-4 20,0 18,4" fill="#818CF8" filter="url(#glow)" />
+  </g>
+
+  <!-- 連接箭頭 3 (Card 3 -> Card 4) -->
+  <g transform="translate(700, 220)">
+    <line x1="4" y1="0" x2="22" y2="0" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="3,3" />
+    <polygon points="26,0 18,-4 20,0 18,4" fill="#C084FC" filter="url(#glow)" />
+  </g>
+
+  <!-- 連接箭頭 4 (Card 4 -> Card 5) -->
+  <g transform="translate(930, 220)">
+    <line x1="4" y1="0" x2="22" y2="0" stroke="url(#arrowGrad)" stroke-width="2.5" stroke-dasharray="3,3" />
+    <polygon points="26,0 18,-4 20,0 18,4" fill="#34D399" filter="url(#glow)" />
+  </g>
+
+  <!-- ==================== 卡片 1：Google AI Studio ==================== -->
+  <g transform="translate(40, 95)" filter="url(#cardShadow)">
+    <rect width="200" height="270" rx="16" fill="url(#cardBg)" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.6" />
+    
+    <!-- 頂部步數徽章 -->
+    <rect x="16" y="16" width="68" height="24" rx="12" fill="#38BDF8" fill-opacity="0.15" stroke="#38BDF8" stroke-width="1" />
+    <text x="50" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#38BDF8" text-anchor="middle">STEP 01</text>
+    
+    <!-- 圖示 (Sparkles) -->
+    <circle cx="164" cy="28" r="14" fill="#0284C7" fill-opacity="0.2" />
+    <text x="164" y="33" font-size="13" text-anchor="middle">✨</text>
+
+    <!-- 標題 -->
+    <text x="16" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="800" fill="#F8FAFC">Google AI Studio</text>
+    <text x="16" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#38BDF8">極速全端原型</text>
+
+    <!-- 分隔線 -->
+    <line x1="16" y1="104" x2="184" y2="104" stroke="#334155" stroke-width="1" />
+
+    <!-- 條列重點 -->
+    <text x="16" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 多模態自然語言 Prompt</text>
+    <text x="16" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 5 分鐘產出互動原型</text>
+    <text x="16" y="176" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 快速驗證核心商業邏輯</text>
+    <text x="16" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 內建 Backend Proxy 安全</text>
+
+    <!-- 底部膠囊標籤 -->
+    <rect x="16" y="226" width="168" height="26" rx="6" fill="#0369A1" fill-opacity="0.3" stroke="#0284C7" stroke-width="1" stroke-opacity="0.5" />
+    <text x="100" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#7DD3FC" text-anchor="middle">⚡ 零代碼極速原型驗證</text>
+  </g>
+
+  <!-- ==================== 卡片 2：GitHub 儲存庫 ==================== -->
+  <g transform="translate(270, 95)" filter="url(#cardShadow)">
+    <rect width="200" height="270" rx="16" fill="url(#cardBg)" stroke="#FB7185" stroke-width="1.5" stroke-opacity="0.6" />
+    
+    <!-- 頂部步數徽章 -->
+    <rect x="16" y="16" width="68" height="24" rx="12" fill="#FB7185" fill-opacity="0.15" stroke="#FB7185" stroke-width="1" />
+    <text x="50" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#FB7185" text-anchor="middle">STEP 02</text>
+    
+    <!-- 圖示 (Git Branch) -->
+    <circle cx="164" cy="28" r="14" fill="#BE123C" fill-opacity="0.2" />
+    <text x="164" y="33" font-size="13" text-anchor="middle">🌿</text>
+
+    <!-- 標題 -->
+    <text x="16" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="800" fill="#F8FAFC">GitHub 儲存庫</text>
+    <text x="16" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#FB7185">版本控管與協作</text>
+
+    <!-- 分隔線 -->
+    <line x1="16" y1="104" x2="184" y2="104" stroke="#334155" stroke-width="1" />
+
+    <!-- 條列重點 -->
+    <text x="16" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 建立乾淨 Commit 歷程</text>
+    <text x="16" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 分支（Branch）管理策略</text>
+    <text x="16" y="176" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 團隊協作與 Code Review</text>
+    <text x="16" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 程式碼版本永久存檔</text>
+
+    <!-- 底部膠囊標籤 -->
+    <rect x="16" y="226" width="168" height="26" rx="6" fill="#881337" fill-opacity="0.3" stroke="#BE123C" stroke-width="1" stroke-opacity="0.5" />
+    <text x="100" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#FDA4AF" text-anchor="middle">📦 標準工程化版本庫</text>
+  </g>
+
+  <!-- ==================== 卡片 3：Google Antigravity ==================== -->
+  <g transform="translate(500, 95)" filter="url(#cardShadow)">
+    <rect width="200" height="270" rx="16" fill="url(#cardBg)" stroke="#C084FC" stroke-width="1.5" stroke-opacity="0.8" />
+    
+    <!-- 頂部步數徽章 -->
+    <rect x="16" y="16" width="68" height="24" rx="12" fill="#C084FC" fill-opacity="0.15" stroke="#C084FC" stroke-width="1" />
+    <text x="50" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#C084FC" text-anchor="middle">STEP 03</text>
+    
+    <!-- 圖示 (Agentic AI) -->
+    <circle cx="164" cy="28" r="14" fill="#6B21A8" fill-opacity="0.25" />
+    <text x="164" y="33" font-size="13" text-anchor="middle">🤖</text>
+
+    <!-- 標題 -->
+    <text x="16" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="800" fill="#F8FAFC">Google Antigravity</text>
+    <text x="16" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#C084FC">Agentic AI 重構解耦</text>
+
+    <!-- 分隔線 -->
+    <line x1="16" y1="104" x2="184" y2="104" stroke="#334155" stroke-width="1" />
+
+    <!-- 條列重點 -->
+    <text x="16" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 單一檔案解耦為模組化</text>
+    <text x="16" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 嚴格 TypeScript 型別防護</text>
+    <text x="16" y="176" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 目錄正規化與架構加固</text>
+    <text x="16" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 多代理人自主審查修復</text>
+
+    <!-- 底部膠囊標籤 -->
+    <rect x="16" y="226" width="168" height="26" rx="6" fill="#581C87" fill-opacity="0.3" stroke="#7E22CE" stroke-width="1" stroke-opacity="0.5" />
+    <text x="100" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#E9D5FF" text-anchor="middle">🧠 智慧代理人生產級重構</text>
+  </g>
+
+  <!-- ==================== 卡片 4：Supabase 企業資料庫 ==================== -->
+  <g transform="translate(730, 95)" filter="url(#cardShadow)">
+    <rect width="200" height="270" rx="16" fill="url(#cardBg)" stroke="#34D399" stroke-width="1.5" stroke-opacity="0.6" />
+    
+    <!-- 頂部步數徽章 -->
+    <rect x="16" y="16" width="68" height="24" rx="12" fill="#34D399" fill-opacity="0.15" stroke="#34D399" stroke-width="1" />
+    <text x="50" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#34D399" text-anchor="middle">STEP 04</text>
+    
+    <!-- 圖示 (Database) -->
+    <circle cx="164" cy="28" r="14" fill="#047857" fill-opacity="0.2" />
+    <text x="164" y="33" font-size="13" text-anchor="middle">🗄️</text>
+
+    <!-- 標題 -->
+    <text x="16" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="800" fill="#F8FAFC">Supabase 資料庫</text>
+    <text x="16" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#34D399">PostgreSQL + RLS</text>
+
+    <!-- 分隔線 -->
+    <line x1="16" y1="104" x2="184" y2="104" stroke="#334155" stroke-width="1" />
+
+    <!-- 條列重點 -->
+    <text x="16" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 升級關聯式 PostgreSQL</text>
+    <text x="16" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• ACID 交易安全（防超賣）</text>
+    <text x="16" y="176" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• Supabase Auth 會員認證</text>
+    <text x="16" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• RLS 行級多租戶資安防護</text>
+
+    <!-- 底部膠囊標籤 -->
+    <rect x="16" y="226" width="168" height="26" rx="6" fill="#064E3B" fill-opacity="0.3" stroke="#047857" stroke-width="1" stroke-opacity="0.5" />
+    <text x="100" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#A7F3D0" text-anchor="middle">🛡️ 企業關聯資料庫與 RLS</text>
+  </g>
+
+  <!-- ==================== 卡片 5：Vercel 工業級部署 ==================== -->
+  <g transform="translate(960, 95)" filter="url(#cardShadow)">
+    <rect width="200" height="270" rx="16" fill="url(#cardBg)" stroke="#60A5FA" stroke-width="1.5" stroke-opacity="0.6" />
+    
+    <!-- 頂部步數徽章 -->
+    <rect x="16" y="16" width="68" height="24" rx="12" fill="#60A5FA" fill-opacity="0.15" stroke="#60A5FA" stroke-width="1" />
+    <text x="50" y="32" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#60A5FA" text-anchor="middle">STEP 05</text>
+    
+    <!-- 圖示 (Vercel Rocket) -->
+    <circle cx="164" cy="28" r="14" fill="#1D4ED8" fill-opacity="0.2" />
+    <text x="164" y="33" font-size="13" text-anchor="middle">🚀</text>
+
+    <!-- 標題 -->
+    <text x="16" y="72" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="800" fill="#F8FAFC">Vercel 生產部署</text>
+    <text x="16" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#60A5FA">自動化 CI/CD 上線</text>
+
+    <!-- 分隔線 -->
+    <line x1="16" y1="104" x2="184" y2="104" stroke="#334155" stroke-width="1" />
+
+    <!-- 條列重點 -->
+    <text x="16" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 標準 Next.js / Serverless</text>
+    <text x="16" y="152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 生產環境變數安全隔離</text>
+    <text x="16" y="176" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• Git Push 即觸發自動發布</text>
+    <text x="16" y="200" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#94A3B8">• 全球 Edge CDN 極速響應</text>
+
+    <!-- 底部膠囊標籤 -->
+    <rect x="16" y="226" width="168" height="26" rx="6" fill="#1E3A8A" fill-opacity="0.3" stroke="#1D4ED8" stroke-width="1" stroke-opacity="0.5" />
+    <text x="100" y="243" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" fill="#BFDBFE" text-anchor="middle">🌐 全球 CDN 自動部署上線</text>
+  </g>
+</svg>
