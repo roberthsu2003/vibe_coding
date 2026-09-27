@@ -12,11 +12,13 @@
 3. **過關與失敗條件**：共有 15 次翻牌機會，必須在時間歸零與機會耗盡前完成全部 8 對配對！
 4. **專屬直式設計**：支援桌機與手機直式遊玩，橫式手機將自動顯示旋轉提示遮罩。
 
-### 📦 專案資源與範例
+### 📦 專案資源與素材下載
 - 🌐 [線上立即試玩 Demo](https://roberthsu2003.github.io/__Memory_Challenge__/)
 - 💾 [Google AI Studio 完成範例 ZIP 下載](./google_ai_studio_完成範例/娛樂稅-vs-納保法-記憶翻牌遊戲.zip)
 - 📂 [GitHub 原始碼庫](https://github.com/roberthsu2003/__Memory_Challenge__)
-- 🎵 [背景音樂資源下載 (bgm.mp3)](./assets/bgm.mp3)
+- 🎁 **[專屬圖片與音效素材包下載 (assets.zip)](./assets/assets.zip)**（解壓後請放入專案 `public/assets/`）：
+  - 🖼️ **圖片**：`card-back.png`（專屬卡背）、`swimming.png`（游泳）、`golf.png`（高爾夫）、`ticket.png`（電影票）、`claw-machine.png`（娃娃機）、`karaoke.png`（卡拉OK）、`pinball.png`（彈珠台）、`cinema.png`（電影院）、`tax-officer.png`（納保官）
+  - 🎵 **音效**：`flip.wav`（翻牌卡嗒音）、`match.wav`（配對成功音）、`mismatch.wav`（失敗提示音）、`win.wav`（通關勝利音）、`bgm.mp3`（輕快背景音樂）
 
 ---
 
@@ -86,14 +88,14 @@
 
 ## 二、 作品迭代階段：自然語言多輪進化
 
-原型成功運行後，請依循 **[作品迭代與修改技巧](../../作品迭代與修改技巧/README.md)**，在 Google AI Studio 中使用**自然語言對話**循序精修：
+原型成功運行後，請先下載 **[assets.zip](./assets/assets.zip)** 並將解壓後的檔案放入專案 `public/assets/` 目錄中，接著依循 **[作品迭代與修改技巧](../../作品迭代與修改技巧/README.md)**，在 Google AI Studio 中使用**自然語言對話**循序精修：
 
 ```mermaid
 flowchart LR
     V0["🌱 V0 原型<br/>(RTCCF 建立)"] 
-    --> V1["🎨 第 1 輪：3D 翻轉動效<br/>Perspective + 翻牌平滑過渡"]
-    --> V2["⚙️ 第 2 輪：連續 Combo<br/>連擊浮動字 + 額外獎勵"]
-    --> V3["📊 第 3 輪：音效與配樂<br/>翻牌聲 + BGM + 靜音開關"]
+    --> V1["🖼️ 第 1 輪：融入專屬卡牌<br/>8款項目圖標 + 3D 翻轉動效"]
+    --> V2["⚙️ 第 2 輪：連續 Combo<br/>連擊浮動字 + 額外時間獎勵"]
+    --> V3["🎵 第 3 輪：融入專屬音效<br/>翻牌聲 + 配對成功音 + BGM"]
     --> V4["🛡️ 第 4 輪：防狂按防呆<br/>翻牌冷卻鎖 + 橫屏遮罩檢測"]
 
     style V0 fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#0f172a
@@ -103,14 +105,26 @@ flowchart LR
     style V4 fill:#e6fbf3,stroke:#10b981,stroke-width:2px,color:#064e3b
 ```
 
-### 🔹 第 1 輪迭代：CSS 3D 翻牌物理動態與配對光芒
-- **改動重點**：告別突兀的直接換面，打造真實卡牌翻轉體驗。
+### 🔹 第 1 輪迭代：替換專屬小圖片與 3D 翻牌物理動態
+- **改動重點**：將卡牌文字替換為精緻的專屬圖標，並打造流暢的 3D 翻面。
 - 💬 **自然語言 Prompt（直接複製貼給 Google AI Studio）**：
   ```text
   目前記憶翻牌的基本邏輯運作非常正常！
-  現在我想將卡牌的翻轉效果升級為具有物理立體感的「CSS 3D 翻轉動畫」：
-  1. 使用 CSS `perspective: 1000px` 與 `transform: rotateY(180deg)`，讓卡牌在點擊時具有流暢的 0.4 秒水平 3D 翻面動效。
-  2. 當兩張卡牌配對成功時，讓這兩張卡牌短暫閃爍金色發光邊框，並伴隨輕微的向上浮起放大效果。
+  我已經把 8 款租稅圖標放入 public/assets/ 資料夾中了。
+  現在我想升級為精緻的卡牌視覺與立體翻牌效果：
+  1. 請將卡牌正面與背面替換為圖片：
+     - 卡牌背面使用 `/assets/card-back.png`
+     - 正面各項目對應：
+       - 游泳競賽：`/assets/swimming.png`
+       - 高爾夫球賽：`/assets/golf.png`
+       - 電影票：`/assets/ticket.png`
+       - 娃娃機：`/assets/claw-machine.png`
+       - 卡拉OK：`/assets/karaoke.png`
+       - 電動彈珠台：`/assets/pinball.png`
+       - 電影院：`/assets/cinema.png`
+       - 納保官：`/assets/tax-officer.png`
+  2. 使用 CSS `perspective: 1000px` 與 `transform: rotateY(180deg)`，讓卡牌在點擊時具有流暢的 0.4 秒水平 3D 翻面動效。
+  3. 配對成功時，卡牌閃爍金色發光邊框。
   請保持既有配對判定邏輯，並提供修改後的完整程式碼。
   ```
 
@@ -120,7 +134,7 @@ flowchart LR
 - **改動重點**：增加遊戲爽快感與動態反饋。
 - 💬 **自然語言 Prompt（直接複製貼給 Google AI Studio）**：
   ```text
-  3D 翻轉非常滑順！接下來我想強化遊玩的成就感：
+  卡片換上圖片與 3D 翻轉後質感大增！接下來我想強化遊玩的成就感：
   1. 加入連擊 (Combo) 機制：如果玩家連續兩次配對成功，時間除了原本的 +15 秒外，額外再加贈 5 秒。
   2. 每次配對成功時，在卡牌上方浮現綠色向上淡出的「+15s」飄字動畫；若為 Combo，則顯示亮黃色的「COMBO! +20s」特效。
   請提供更新後的完整程式碼。
@@ -128,13 +142,16 @@ flowchart LR
 
 ---
 
-### 🔹 第 3 輪迭代：背景音樂與音效控制
-- **改動重點**：結合音效素材，提升整體完成度。
+### 🔹 第 3 輪迭代：融入專屬翻牌音效與背景音樂
+- **改動重點**：加入聽覺反饋，串接 `public/assets/` 內的音效。
 - 💬 **自然語言 Prompt（直接複製貼給 Google AI Studio）**：
   ```text
-  遊戲體驗很棒！現在我想加入音效與音樂：
-  1. 引入音效支援：加入翻牌的刷刷聲、配對成功的清脆叮咚聲、配對失敗的低沉提示聲，以及首頁與遊戲中的輕快背景音樂。
-  2. 在頂部狀態列加入「靜音切換按鈕」，玩家可隨時開啟或關閉聲音。
+  遊戲體驗很棒！我已經在 public/assets/ 準備好了音效檔案，現在請幫我加入聲音支援：
+  1. 背景音樂：循環播放 `/assets/bgm.mp3`（音量 0.35），右上角提供靜音開關。
+  2. 點擊翻牌時：播放卡嗒音效 `/assets/flip.wav`。
+  3. 配對成功時：播放清脆叮咚音效 `/assets/match.wav`。
+  4. 配對失敗翻回時：播放低沉提示音 `/assets/mismatch.wav`。
+  5. 8 對全部完成通關時：播放通關勝利音效 `/assets/win.wav`。
   請提供修改後的完整程式碼。
   ```
 
