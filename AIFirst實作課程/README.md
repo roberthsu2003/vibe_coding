@@ -28,8 +28,6 @@
 | 專案 | 說明 | 備註 |
 |------|------|------|
 | [📑 Excel 佔位符單據產生器](./Excel佔位符單據產生器/README.md) | 通用型單據產生器：動態解析 `{{變數 \| 預設值}}` 佔位符、支援上傳自訂範本與純前端保留樣式下載 | 純前端 ExcelJS 模板引擎 |
-| [⚡ Workspace 智慧單據報銷系統](./Workspace智慧單據報銷系統/README.md) | 發票收據照片辨識、動態解析明細，一鍵寫入雲端 Google Sheets 試算表並生成請款單 | Google Workspace 整合 ⚡ |
-| [📅 AI 會議紀錄與行事曆整合](./AI會議紀錄與行事曆整合/README.md) | 貼上雜亂會議紀錄，AI 自動萃取待辦寫入試算表，並將關鍵 Deadline 同步排入 Google 日曆 | Sheets + Calendar 雙整合 🗓️ |
 
 ### ☁️ 部署教學
 
@@ -50,9 +48,33 @@
 
 ---
 
-## 🔑 整合 Gemini API Key & 前端網頁
+## 🚀 全端網頁應用實戰（Google AI Studio Backend Proxy & 雲端整合）
 
-> 🛡️ **安全提醒：** 為了保護 Gemini API Key，避免直接暴露在前端程式碼中，必須透過 **Vercel Serverless Functions** 進行後端 API 呼叫。 
+> 🛡️ **安全無憂・全新全端架構**：本系列專案全面採用 **Google AI Studio 原生的 Backend Proxy（伺服器代理）技術**！
+> - **零金鑰外洩風險**：所有 Gemini API Key、OAuth 授權碼與資料庫憑證均由伺服器端環境變數保護，**完全不會暴露給前端瀏覽器**，學員無須自行架設 Vercel Serverless 或外部伺服器。
+> - **一鍵雲端部署**：完成專案後，直接透過頂部 **Publish 按鈕一鍵部署至 Google Cloud Run**，立即擁有專屬的正式上線網址！
+
+### ⚡ Google Workspace 原生整合（試算表與日曆自動化）
+
+| 專案 | 說明 | 備註 |
+|------|------|------|
+| [⚡ Workspace 智慧單據報銷系統](./Workspace智慧單據報銷系統/README.md) | 發票收據照片辨識、動態解析明細，一鍵寫入雲端 Google Sheets 試算表並生成請款單 | Google Workspace 整合 ⚡ |
+| [📅 AI 會議紀錄與行事曆整合](./AI會議紀錄與行事曆整合/README.md) | 貼上雜亂會議紀錄，AI 自動萃取待辦寫入試算表，並將關鍵 Deadline 同步排入 Google 日曆 | Sheets + Calendar 雙整合 🗓️ |
+
+### 🔥 整合 Firebase — 即時雲端資料庫與使用者認證（免綁卡・免費首選）
+
+> 💡 **初學者友善**：採用 Firebase Spark 免費方案，**完全不需要輸入信用卡**，即可享有每日 5 萬次免費資料庫讀寫配額，安全無扣款風險！
+
+| 專案 | 說明 | 備註 |
+|------|------|------|
+| [🏢 辦公室設備借用系統](./辦公室設備借用系統/README.md) | 投影機、展示筆電等公用資產登記，支援即時借用狀態更新與借用人追蹤 | Firebase Auth + Firestore 🏢 |
+| [📋 部門專案即時協作看板](./部門專案即時協作看板/README.md) | 跨部門任務看板（Kanban），支援多人即時同步拖曳狀態與逾期提醒 | Firebase Auth + Firestore 📋 |
+
+---
+
+## 🔑 整合 Gemini API Key & 前端網頁（傳統外部部署方案）
+
+> 🛡️ **安全提醒：** 若不透過 Google AI Studio 原生部署，為了保護 Gemini API Key，避免直接暴露在前端程式碼中，必須透過 **Vercel Serverless Functions** 進行後端 API 呼叫。 
 
 > [為什麼靜態網頁會洩露api key](./為什麼靜態網頁會洩露api_key/README.md)
 
@@ -71,7 +93,7 @@
 
 ---
 
-## 📊 整合 Google Sheets
+## 📊 整合 Google Sheets（傳統 GAS 方案）
 
 | 專案 | 說明 | 備註 |
 |------|------|------|
@@ -86,10 +108,6 @@
 |------|------|
 | 🤖 Telegram Bot 的建立與應用 | 即將推出 |
 | 🟢 Line Bot 的建立與應用 | 即將推出 |
-
----
-
-## 整合 Firebase — 認證與資料庫
 
 ## 🗄️ 整合 Supabase — 認證與資料庫
 
