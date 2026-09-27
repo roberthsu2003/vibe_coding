@@ -1,0 +1,217 @@
+# 🐙 Google AI Studio 轉 GitHub Pages 靜態網頁部署指南（GitHub Actions 自動化 CI/CD）
+
+> **30 秒核心導讀**：  
+> 在 Google AI Studio 產出的專案通常是基於 **Vite + React + TypeScript** 的現代前端專案。  
+> ⚠️ **新手最常踩的大坑**：直接把原始碼 Push 到 GitHub 後開啟 GitHub Pages，打開網址往往**只看到空白畫面或 404 錯誤**！  
+> 因為現代專案必須經過 `npm run build` 編譯打包為純靜態檔案（HTML/CSS/JS）。本單元教你**如何直接在 Google AI Studio 中下精準提示詞（避免舊版 Actions 報錯，並帶入自己的 GitHub 網址）**，一鍵生成最新的 CI/CD 工作流；更教你**萬一建置失敗時，如何把錯誤日誌精準回傳給 Google AI Studio 自動修復**！
+
+---
+
+## 🧭 一、 為什麼不能直接發布？（原理速懂）
+
+傳統 GitHub Pages 只懂得直接讀取純 HTML 檔案；但現代 React 專案需要經過編譯工具（Vite）打包成 `dist` 資料夾。
+
+```
+【傳統錯誤方式】直接 Push 原始碼 ──► GitHub Pages 看不懂 TypeScript/JSX ──► 💥 網頁空白或報錯
+                                      VS
+【現代自動化】原始碼 Push ──► GitHub Actions 自動執行 npm run build ──► 🚀 發布全靜態網頁！
+```
+
+---
+
+## 🤖 二、 核心秘訣：在 Google AI Studio 中下 Prompt 自動配置
+
+在 Google AI Studio 已經寫好專案後，**不用自己手動建目錄打指令**，只要複製下方這段**特別經過防錯加固（強制最新版 Actions ＋ 帶入個人倉庫網址）**的提示詞：
+
+### 📋 轉換為 GitHub Actions 專用 Prompt（請替換括號內容後貼給 AI Studio）
+
+```text
+這份專案非常棒！現在我想將此專案部署到「GitHub Pages」作為永久全靜態網站。
+我的 GitHub 儲存庫（Repository）資訊如下：
+- GitHub 儲存庫網址：https://github.com/[請替換為你的GitHub帳號]/[請替換為你的倉庫名稱]
+- 倉庫專案名稱 (Repo Name)：[請替換為你的倉庫名稱]
+
+請幫我在目前的專案架構中加入 GitHub Actions 自動化 CI/CD 發布設定，請嚴格遵守以下 3 點要求：
+
+1. 新增 GitHub Actions 工作流設定檔 (.github/workflows/deploy.yml)：
+   - ⚠️【嚴禁使用舊版】：GitHub 已廢棄舊版 runner，請務必採用 2026 最新官方 Action 版本：
+     * actions/checkout@v4（嚴禁使用 v2/v3）
+     * actions/setup-node@v4，並指定 node-version: 20（嚴禁使用已廢棄的 Node 16/18）
+     * actions/configure-pages@v5
+     * actions/upload-pages-artifact@v3
+     * actions/deploy-pages@v4
+   - 觸發條件：當 main 分支有 git push 時自動觸發。
+   - 執行流程：安裝套件 (npm ci)、執行編譯 (npm run build)、將 dist 作為 Artifact 上傳並自動發布到 GitHub Pages。
+   - 設定必要的 GITHUB_TOKEN 權限 (permissions: contents: read, pages: write, id-token: write)。
+
+2. 修改 vite.config.ts（防 404 關鍵）：
+   - 請根據我上方提供的倉庫專案名稱，將 base 路徑精確設定為 base: '/[請替換為你的倉庫名稱]/'，確保部署到 GitHub Pages 後所有 CSS、JS 與圖片資源路徑 100% 正確載入。
+
+3. 檢查 package.json：
+   - 確保 scripts 中的 "build" 指令為 "tsc && vite build"，能正確輸出靜態檔案至 dist 目錄。
+
+請提供新增與修改後的完整程式碼與檔案放置說明。
+```
+
+---
+
+## 🛠️ 三、 產生的關鍵設定檔解析（AI 會為你產出什麼？）
+
+### 1. `.github/workflows/deploy.yml`（鎖定 2026 最新官方版本）
+AI 會在你的專案建立這個工作流檔案，這是 GitHub Actions 的核心大腦：
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"] # 當 main 分支更新時自動執行
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # ⚠️ 必須使用 @v4 最新版，避免 Node 廢棄錯誤
+      - name: Checkout 程式碼
+        uses: actions/checkout@v4
+
+      # ⚠️ 必須指定 Node.js 20+ 與 @v4
+      - name: 設定 Node.js 環境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 安裝相依套件
+        run: npm ci
+
+      - name: 編譯打包專案
+        run: npm run build
+
+      - name: 設定 GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 上傳打包成果 (dist 資料夾)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: 部署至 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+### 2. `vite.config.ts` 中的 `base` 設定（精準對齊倉庫名稱）
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  // 關鍵：精確設定為你的倉庫名稱，前後皆需斜線，徹底根絕 404
+  base: '/my-universal-template/', 
+})
+```
+
+---
+
+## 🚀 四、 實戰發布：從 AI Studio 到 GitHub Pages（3 步驟完成）
+
+```
+【步驟 1】在 AI Studio 透過 GitHub 按鈕 ──► 一鍵 Push 程式碼到自己的 GitHub 帳號
+                                              ▼
+【步驟 2】在 GitHub 倉庫的 Settings ─────────► 將 Pages 來源改為「GitHub Actions」
+                                              ▼
+【步驟 3】靜待 1 分鐘自動建置 ──────────────► 取得全靜態公開網址！
+```
+
+### 步驟 1：將程式碼推送至 GitHub
+1. 在 Google AI Studio 頂部工具列，點擊 **GitHub** 圖示按鈕。
+2. 授權並選取將目前專案建立為你的 GitHub 新儲存庫（Repository，例如命名為 `my-universal-template`），點擊 Push。
+
+### 步驟 2：開啟 GitHub 倉庫設定（最關鍵的一步！）
+1. 前往你的 GitHub 該專案頁面。
+2. 點擊頂部的 **⚙️ Settings（設定）**。
+3. 在左側側邊選單中，點選 **Pages**。
+4. 在 **Build and deployment** 下方的 **Source** 下拉選單中：
+   - ⚠️ 將原本的 `Deploy from a branch` **改選為 `GitHub Actions`**！
+
+```
+[Build and deployment]
+Source:
+┌──────────────────────────────┐
+│  GitHub Actions (選這個！🚀) │
+└──────────────────────────────┘
+```
+
+### 步驟 3：查看部署進度與取得網址
+1. 點擊頂部的 **Actions** 分頁，你會看到名為 `Deploy to GitHub Pages` 的工作流正在旋轉建置。
+2. 約 40~60 秒後，出現**綠色勾勾（Success）**。
+3. 點進該工作流，即可在右側看見正式的公開靜態網址：  
+   👉 `https://<你的 GitHub 帳號>.github.io/<你的儲存庫名稱>/`！
+
+---
+
+## 🚨 五、 出錯了怎麼辦？如何把錯誤日誌回傳給 Google AI Studio 自動修復
+
+在執行 GitHub Actions 時，如果看見**紅色叉叉 ❌（Failed）**，完全不要慌張！請依照以下 3 個步驟，讓 Google AI Studio 幫你一秒抓出錯誤並修復：
+
+### 步驟 1：在 GitHub 找到真正的「出錯日誌 (Error Log)」
+1. 在 GitHub 倉庫中，點擊頂部的 **Actions** 分頁。
+2. 點進那筆失敗的工作流（顯示紅色 ❌ 的那筆記錄）。
+3. 點擊左側紅色的 Job 名稱（例如 `build-and-deploy`）。
+4. 展開**紅色打叉的步驟**（90% 的情況發生在 `Run npm run build`）。
+5. 找到以紅色文字標示的具體報錯訊息，例如：
+   ```text
+   src/App.tsx:42:15 - error TS2322: Type 'string' is not assignable to type 'number'.
+   npm ERR! code ELIFECYCLE
+   npm ERR! failed at the build script.
+   ```
+6. 用滑鼠將這整段錯誤文字**完整複製**下來！
+
+### 步驟 2：切回 Google AI Studio，貼上「錯誤修復專用 Prompt」
+回到 Google AI Studio 對話視窗，直接貼上下方的除錯提示詞：
+
+```text
+我在 GitHub Actions 執行自動化建置 (npm run build) 時失敗了，出現了以下錯誤日誌：
+
+----------------------------------------
+[在此處貼上你剛才從 GitHub 複製的紅色錯誤日誌]
+----------------------------------------
+
+請幫我：
+1. 深入分析導致這個錯誤的根本原因。
+2. 修正相關的程式碼（例如修復 TypeScript 型別錯誤、缺少相依套件或路徑問題）。
+3. 提供修正後的完整程式碼檔案，確保我重新 Push 後 GitHub Actions 能順利編譯通過！
+```
+
+### 步驟 3：讓 AI Studio 自動修復並重新 Push
+- Google AI Studio 會立刻理解報錯原因（例如：TypeScript 嚴格檢查未過、漏了 import 圖示），並直接幫你修改程式碼。
+- 修改完成後，再次點擊頂部的 **GitHub 圖示重新 Push**，GitHub Actions 就會自動重新跑一次，紅叉叉瞬間變綠色勾勾！
+
+---
+
+## 💡 六、 常見問題與避坑指南 (FAQ)
+
+### Q1：開啟網址後畫面一片空白，按 F12 發現所有 `.js` 與 `.css` 都報 404？
+- **原因**：`vite.config.ts` 中的 `base` 路徑沒有設定正確。
+- **解法**：請確保 `vite.config.ts` 內有加上你的倉庫名稱（例如 `base: '/my-repo-name/'`，前後都要有斜線），再次 Commit Push，GitHub Actions 就會自動重新建置並恢復正常！
+
+### Q2：GitHub Actions 執行失敗，提示「Permission to ... denied」？
+- **原因**：GitHub 倉庫預設的工作流權限被鎖定。
+- **解法**：進入倉庫的 **Settings ➔ Actions ➔ General**，向下滑動至 **Workflow permissions**，切換為 **Read and write permissions**，勾選並點擊 Save。
+
+### Q3：這個全靜態網頁能放 Gemini API Key 嗎？
+- 🚨 **絕對不行！** 請牢記上一節的資安防線：全靜態網頁（GitHub Pages）的程式碼會被訪客看光。若專案包含 Gemini API 或資料庫，**必須採用 Google AI Studio 的 Backend Proxy 一鍵發布至 Cloud Run**，切勿部署在 GitHub Pages！

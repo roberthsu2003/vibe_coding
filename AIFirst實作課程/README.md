@@ -37,13 +37,13 @@
 
 - **適用情境**：在 Google AI Studio 完成專案後，一鍵生成對外公開網址分享給主管與同事。
 - **免費額度**：每個帳號可同時擁有 **2 個免費版** 的 Cloud Run 部署。
-- **教學連結**：[透過 Google AI Studio 一鍵部署至 Google Cloud Run](./認識GoogleAIStudio/README.md#-核心概念解析share-remix-publish-deploy)
+- **教學連結**：[Google Cloud Run 部署與專案管理完全指南（主動部署／手動部署／刪除專案釋放額度）](./CloudRun部署與專案管理/README.md)
 
 #### 2️⃣ 第二階段：GitHub Pages 靜態網站部署（進階託管・需 GitHub 帳號）
 
 - **適用情境**：僅適用於無 API Key 的純靜態網頁（如：簡報、多媒體、Excel 佔位符單據產生器）。
 - **帳號需求**：⚠️ 此階段才需要申請 [GitHub 帳號](https://github.com)。
-- **教學連結**：[將靜態網頁部署至 GitHub Pages](https://github.com/roberthsu2003/vibe-coding-to-pro-react/blob/main/github-docs-site/README.md)
+- **教學連結**：[Google AI Studio 轉 GitHub Pages 靜態網頁部署指南（Prompt 轉換 GitHub Actions CI/CD）](./GitHubPages與Actions自動部署/README.md)
 
 ---
 
