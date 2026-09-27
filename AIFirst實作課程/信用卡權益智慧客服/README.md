@@ -128,30 +128,12 @@ Gemini 3 系列（如 `gemini-3.8-flash`）具備 **1,000,000 (1M) Token** 的�
 
 ---
 
-## 💡 如何用別的 AI 將「你自己的簡報大綱」轉成 RTCCF？
+## 💡 如何用別的 AI 將「你自訂的企業規章與客服問答」轉成 RTCCF？
 
-如果你未來想製作自己的專案簡報（或自訂金融與企業客服 Chatbot），只要把你的 Word/Notion 大綱或規章 FAQ 需求整理好，貼上下方折疊區內的指令，讓其他 AI（如 ChatGPT、Claude 或 Gemini）協助你轉換成標準 RTCCF 規格書：
-
-<details>
-<summary>👉 點擊展開：請其他 AI 協助將「簡報大綱」轉成 RTCCF 的自然語言指令（可直接複製）</summary>
-
-```text
-我已經完成了一份簡報文字大綱 Markdown 檔案（包含 6 頁投影片的標題、重點條列、數據與版型規劃）。
-我想在 Google AI Studio 開發一個專為上班族設計的「現代科技感線上簡報單頁系統 (Interactive Web Presentation Deck SPA)」，技術棧使用 Vite + React + TypeScript + Tailwind CSS。
-功能需求：
-1. 支援鍵盤左右箭頭/空白鍵翻頁、全螢幕簡報模式、底部進度條、投影片大綱目錄抽屜。
-2. 簡報內容與版型必須抽離至 slidesData.ts。
-請扮演資深前端架構師與 Keynote 簡報設計專家，使用標準 RTCCF 框架（包含：# 角色 Role、## 任務目標 Task、## 背景情境 Context、## 核心規則與限制 Constraints、## 輸出規格與風格 Format），將我下方的大綱完整融入規格書中，讓我可以直接複製貼入 Google AI Studio 生成可運行的程式碼：
-
-[在此處貼上你自己的簡報大綱 Markdown 內容]
-```
-
-</details>
-
-<br>
+如果你未來想客製化自己公司的專屬智慧客服（例如：員工差旅規章問答、SaaS 軟體產品操作手冊、售後保固條款），只要把你的規章大綱或 FAQ 文件整理好，貼入下方指令，讓其他 AI（如 ChatGPT、Claude 或 Gemini）協助你轉換成標準 RTCCF 規格書：
 
 <details>
-<summary>👉 點擊展開：請其他 AI 協助將「自訂企業規章與客服問答需求」轉成 RTCCF 的自然語言指令（客服機器人專用）</summary>
+<summary>👉 點擊展開：請其他 AI 協助客製企業規章客服機器人的自然語言指令（可直接複製）</summary>
 
 ```text
 我已經完成了一份我們公司內部/機構專屬的業務規章與客戶常見問答 (FAQ) 文件。

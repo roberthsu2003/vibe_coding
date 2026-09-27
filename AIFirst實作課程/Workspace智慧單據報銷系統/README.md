@@ -92,30 +92,12 @@
 
 ---
 
-## 💡 如何用別的 AI 將「你自己的簡報大綱」轉成 RTCCF？
+## 💡 如何用別的 AI 將「你公司自訂的報銷單欄位」轉成 RTCCF？
 
-如果你未來想製作自己的專案簡報（或客製化專屬的企業報銷系統），只要把你的 Word/Notion 大綱或欄位需求整理好，貼上下方折疊區內的指令，讓其他 AI（如 ChatGPT、Claude 或 Gemini）協助你轉換成標準 RTCCF 規格書：
-
-<details>
-<summary>👉 點擊展開：請其他 AI 協助將「簡報大綱」轉成 RTCCF 的自然語言指令（可直接複製）</summary>
-
-```text
-我已經完成了一份簡報文字大綱 Markdown 檔案（包含 6 頁投影片的標題、重點條列、數據與版型規劃）。
-我想在 Google AI Studio 開發一個專為上班族設計的「現代科技感線上簡報單頁系統 (Interactive Web Presentation Deck SPA)」，技術棧使用 Vite + React + TypeScript + Tailwind CSS。
-功能需求：
-1. 支援鍵盤左右箭頭/空白鍵翻頁、全螢幕簡報模式、底部進度條、投影片大綱目錄抽屜。
-2. 簡報內容與版型必須抽離至 slidesData.ts。
-請扮演資深前端架構師與 Keynote 簡報設計專家，使用標準 RTCCF 框架（包含：# 角色 Role、## 任務目標 Task、## 背景情境 Context、## 核心規則與限制 Constraints、## 輸出規格與風格 Format），將我下方的大綱完整融入規格書中，讓我可以直接複製貼入 Google AI Studio 生成可運行的程式碼：
-
-[在此處貼上你自己的簡報大綱 Markdown 內容]
-```
-
-</details>
-
-<br>
+如果你未來想客製化自己公司的報銷系統（例如：新增「專案代碼 (Project Code)」、「成本中心 (Cost Center)」或「主管審批人工號」），只要把你的欄位名稱與規格整理好，貼入下方指令，讓其他 AI（如 ChatGPT、Claude 或 Gemini）協助你轉換成標準 RTCCF 規格書：
 
 <details>
-<summary>👉 點擊展開：請其他 AI 協助將「自訂企業報銷單欄位與會計科目」轉成 RTCCF 的自然語言指令（報銷系統專用）</summary>
+<summary>👉 點擊展開：請其他 AI 協助客製報銷欄位的自然語言指令（可直接複製）</summary>
 
 ```text
 我已經完成了一份公司內部的報銷欄位規格與會計科目清單。
