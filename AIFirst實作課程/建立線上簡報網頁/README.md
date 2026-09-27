@@ -12,38 +12,14 @@
 
 為了讓教學流程流暢，本單元先替大家準備了一份精緻的**示範大綱（偽資料）**。這份大綱不是隨便編寫的，而是**精準為後續每一輪的動態技術迭代預留了絕佳的展示位置**：
 
-```mermaid
-flowchart TD
-    subgraph OUTLINE["📋 事先完成的簡報大綱 (示範偽資料)"]
-        S1["Slide 1: 專案封面 (Cover)"]
-        S2["Slide 2: 痛點與解方 (Split Columns)"]
-        S3["Slide 3: 4 階段業務架構流程 (Workflow)"]
-        S4["Slide 4: 營運效益與關鍵指標 (Metrics)"]
-        S5["Slide 5: 智慧核心產品亮點 (Product Showcase)"]
-        S6["Slide 6: 結尾感謝與問答 (Closing / Q&A)"]
-    end
-
-    subgraph ITERATIONS["🚀 循序漸進的技術升級路徑"]
-        V0["🌱 V0 原型：大綱轉化為單頁簡報 SPA<br/>(鍵盤翻頁 + 全螢幕 + 進度條)"]
-        V1["✨ 第 1 輪迭代：針對 Slide 3<br/>升級為【SVG 動態流程圖】(路徑流動與發光脈衝)"]
-        V2["📊 第 2 輪迭代：針對 Slide 4<br/>升級為【Chart 動態圖表與切換表單】(年度趨勢/季度切換)"]
-        V3["🪐 第 3 輪迭代：針對 Slide 5<br/>升級為【Three.js 3D 立體互動模型】(滑鼠 360 度旋轉)"]
-        V4["🎙️ 第 4 輪迭代：演講實戰必備<br/>【講者備忘錄抽屜 + 計時器 + 一鍵列印 PDF】"]
-    end
-
-    OUTLINE --> V0
-    V0 --> V1
-    V1 --> V2
-    V2 --> V3
-    V3 --> V4
-
-    style OUTLINE fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,color:#0f172a
-    style V0 fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#0f172a
-    style V1 fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e
-    style V2 fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87
-    style V3 fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f
-    style V4 fill:#e6fbf3,stroke:#10b981,stroke-width:2px,color:#064e3b
-```
+| 投影片 (Slide) | 示範大綱主題 (大綱偽內容) | 初始 V0 版型 | 後續迭代技術升級 (Iteration Focus) |
+| :--- | :--- | :--- | :--- |
+| **Slide 1** | 專案封面：NexFlow 次世代智慧辦公自動化平台 | `cover` (封面版型) | **🌱 V0 原型**：單頁簡報核心架構、鍵盤翻頁 (`←`/`→`/`Space`)、全螢幕 (`F`)、進度條 |
+| **Slide 2** | 現況診斷：營運三大瓶頸痛點 vs. 改善解方 | `split-columns` (雙欄對比) | **🌱 V0 原型**：左右雙欄自適應排版、卡片微光與懸浮陰影效果 |
+| **Slide 3** | 系統架構：4 階段端到端自動化工作流 | `workflow` (流程版型) | **✨ 第 1 輪迭代**：升級為 **SVG 動態流程圖**（路徑虛線流動動效、節點發光脈衝） |
+| **Slide 4** | 商業效益：工時節省 45%、ROI 320% 等關鍵指標 | `metrics` (數據指標) | **📊 第 2 輪迭代**：升級為 **Chart 動態圖表**（季度切換表單、趨勢圖與數字累加動效） |
+| **Slide 5** | 技術亮點：NexFlow Edge 邊緣智慧運算核心展示 | `showcase` (產品展示) | **🪐 第 3 輪迭代**：升級為 **Three.js 3D 立體互動模型**（滑鼠 360 度拖曳旋轉探索） |
+| **Slide 6** | 結尾展望：推廣時程里程碑與專案窗口 Q&A | `closing` (問答結尾) | **🎙️ 第 4 輪迭代**：升級為 **專業講者模式**（演講計時器、講者備忘錄抽屜、一鍵列印 PDF） |
 
 ---
 
