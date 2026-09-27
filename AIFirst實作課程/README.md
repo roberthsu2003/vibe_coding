@@ -76,7 +76,6 @@
 ### ⚡ Google Workspace 原生整合（試算表與日曆自動化）
 
 > 💡 **官方最新功能推薦**：Google AI Studio 現已推出強大的 **「Integrations 原生整合面板」**，免去繁瑣的 GCP OAuth 設定，一鍵即可安全串接 14 款 Google Workspace 辦公套件與雲端資料庫！  
-> 👉 **[【專題推薦】點我查看：Google Workspace 原生整合清單與 14 大服務最新 AI 應用指南](./GoogleWorkspace原生整合說明/README.md)**
 
 | 專案 | 說明 | 備註 |
 |------|------|------|
