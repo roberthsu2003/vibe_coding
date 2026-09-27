@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420">
+  <defs>
+    <filter id="shadowRerun" x="-5%" y="-3%" width="110%" height="108%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.1" />
+    </filter>
+  </defs>
+
+  <rect width="960" height="420" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5" />
+
+  <!-- 頂部標題列 -->
+  <g transform="translate(30, 24)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    <rect width="320" height="26" rx="13" fill="#FEE2E2" />
+    <text x="14" y="18" font-size="12" font-weight="700" fill="#DC2626">🚨 常見報錯與 1 秒解決流程</text>
+    <text x="0" y="55" font-size="20" font-weight="800" fill="#0F172A">Configure GitHub Pages 報錯 404 (Get Pages site failed)</text>
+    <text x="0" y="78" font-size="13" fill="#64748B">專案首次 Push 時，Actions 自動觸發但 Pages 來源尚未切換，只需「設定 ➔ 重新執行」即可！</text>
+  </g>
+
+  <!-- 左右對照卡片 -->
+  <g transform="translate(30, 120)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">
+    
+    <!-- 左卡片：出錯畫面 (紅字) -->
+    <g transform="translate(0, 0)">
+      <rect width="430" height="260" rx="12" fill="#0D1117" stroke="#30363D" stroke-width="1" filter="url(#shadowRerun)" />
+      
+      <!-- 步驟頂部列 -->
+      <rect width="430" height="38" rx="12" fill="#161B22" />
+      <circle cx="20" cy="19" r="7" fill="#F85149" />
+      <path d="M 17 16 L 23 22 M 23 16 L 17 22" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+      <text x="36" y="23" font-size="13" font-weight="700" fill="#F0F6FC">Configure GitHub Pages (失敗)</text>
+
+      <!-- 錯誤日誌模擬 -->
+      <g transform="translate(18, 55)" font-family="SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace" font-size="11.5">
+        <text x="0" y="16" fill="#8B949E">&gt; Run actions/configure-pages@v5</text>
+        <rect x="-4" y="28" width="398" height="64" rx="4" fill="#FFEBE9" opacity="0.15" />
+        <text x="0" y="44" fill="#FF7B72" font-weight="bold">Error: Get Pages site failed. Please verify</text>
+        <text x="0" y="62" fill="#FF7B72">that the repository has Pages enabled</text>
+        <text x="0" y="80" fill="#FF7B72">and configured to build using GitHub Actions...</text>
+        
+        <text x="0" y="112" fill="#FF7B72" font-weight="bold">Error: HttpError: Not Found (404)</text>
+
+        <rect x="-4" y="132" width="398" height="52" rx="6" fill="#21262D" />
+        <text x="10" y="152" fill="#79C0FF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">💡 原因：倉庫尚未開啟 GitHub Actions 發布</text>
+        <text x="10" y="170" fill="#8B949E" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', sans-serif">（別慌！這在第一次 Push 時 100% 會發生）</text>
+      </g>
+    </g>
+
+    <!-- 中間大箭頭 -->
+    <g transform="translate(438, 110)">
+      <circle cx="16" cy="16" r="16" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5"/>
+      <path d="M 12 16 L 20 16 M 17 12 L 21 16 L 17 20" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- 右卡片：修復與重新執行 (綠勾) -->
+    <g transform="translate(470, 0)">
+      <rect width="430" height="260" rx="12" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" filter="url(#shadowRerun)" />
+      
+      <!-- 步驟頂部列 -->
+      <rect width="430" height="38" rx="12" fill="#DCFCE7" />
+      <circle cx="20" cy="19" r="8" fill="#16A34A" />
+      <path d="M 16 19 L 19 22 L 24 16" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="36" y="23" font-size="13" font-weight="700" fill="#15803D">2 步迅速修復流程</text>
+
+      <g transform="translate(18, 55)">
+        <!-- 步驟 1 -->
+        <g transform="translate(0, 0)">
+          <circle cx="12" cy="12" r="12" fill="#2563EB" />
+          <text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">1</text>
+          <text x="32" y="12" font-size="13" font-weight="700" fill="#0F172A">前往 Settings ➔ Pages</text>
+          <text x="32" y="30" font-size="12" fill="#475569">將 Source 下拉選單改選為「<tspan font-weight="bold" fill="#2563EB">GitHub Actions</tspan>」</text>
+        </g>
+
+        <!-- 步驟 2 -->
+        <g transform="translate(0, 60)">
+          <circle cx="12" cy="12" r="12" fill="#16A34A" />
+          <text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFFFFF">2</text>
+          <text x="32" y="12" font-size="13" font-weight="700" fill="#0F172A">回到 Actions 分頁點擊 Re-run</text>
+          <text x="32" y="30" font-size="12" fill="#475569">點擊右上角的 <tspan font-weight="bold" fill="#0F172A">Re-run jobs ➔ Re-run all jobs</tspan></text>
+        </g>
+
+        <!-- 重新執行按鈕示意圖 -->
+        <g transform="translate(32, 105)">
+          <rect width="180" height="34" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.2" />
+          <path d="M 18 17 A 6 6 0 1 1 20 22 M 20 22 L 23 20 M 20 22 L 23 24" fill="none" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="36" y="21" font-size="12" font-weight="600" fill="#0F172A">Re-run all jobs</text>
+        </g>
+
+        <!-- 成功標語 -->
+        <g transform="translate(0, 160)">
+          <rect width="394" height="32" rx="6" fill="#15803D" />
+          <text x="197" y="21" text-anchor="middle" font-size="12.5" font-weight="700" fill="#FFFFFF">🎉 重新執行後約 40 秒即刻轉為綠色勾勾，網站正式上線！</text>
+        </g>
+      </g>
+    </g>
+
+  </g>
+</svg>

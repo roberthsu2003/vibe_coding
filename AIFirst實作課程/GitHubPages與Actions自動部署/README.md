@@ -79,12 +79,12 @@
 1. 新增 GitHub Actions 工作流設定檔 (.github/workflows/deploy.yml)：
    - ⚠️【嚴禁使用舊版】：GitHub 已廢棄舊版 runner，請務必採用 2026 最新官方 Action 版本：
      * actions/checkout@v4（嚴禁使用 v2/v3）
-     * actions/setup-node@v4，並指定 node-version: 20（嚴禁使用已廢棄的 Node 16/18）
+     * actions/setup-node@v4，並指定 node-version: 20（⚠️ 請勿設定 cache: 'npm'，因專案未包含 package-lock.json）
      * actions/configure-pages@v5
      * actions/upload-pages-artifact@v3
      * actions/deploy-pages@v4
    - 觸發條件：當 main 分支有 git push 時自動觸發。
-   - 執行流程：安裝套件 (npm ci)、執行編譯 (npm run build)、將 dist 作為 Artifact 上傳並自動發布到 GitHub Pages。
+   - 執行流程：安裝套件（使用 npm install，請勿使用 npm ci，因專案無 package-lock.json）、執行編譯 (npm run build)、將 dist 作為 Artifact 上傳並自動發布到 GitHub Pages。
    - 設定必要的 GITHUB_TOKEN 權限 (permissions: contents: read, pages: write, id-token: write)。
 
 2. 修改 vite.config.ts（防 404 兼雙棲相容關鍵）：
@@ -132,15 +132,15 @@ jobs:
       - name: Checkout 程式碼
         uses: actions/checkout@v4
 
-      # ⚠️ 必須指定 Node.js 20+ 與 @v4
+      # ⚠️ 必須指定 Node.js 20+ 與 @v4（專案無 package-lock.json，請勿啟用 cache: 'npm'）
       - name: 設定 Node.js 環境
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
+      # ⚠️ 必須使用 npm install（不可使用 npm ci，因 AI Studio 專案尚未生成 package-lock.json）
       - name: 安裝相依套件
-        run: npm ci
+        run: npm install
 
       - name: 編譯打包專案
         run: npm run build
@@ -207,14 +207,9 @@ export default defineConfig({
 3. 在左側側邊選單中，點選 **Pages**。
 4. 在 **Build and deployment** 下方的 **Source** 下拉選單中：
    - ⚠️ 將原本的 `Deploy from a branch` **改選為 `GitHub Actions`**！
+   - 選取後系統會自動儲存，頂部會彈出淡藍色橫幅提示：`GitHub Pages source saved.`。
 
-```
-[Build and deployment]
-Source:
-┌──────────────────────────────┐
-│  GitHub Actions (選這個！🚀) │
-└──────────────────────────────┘
-```
+![GitHub Pages 設定 Source 為 GitHub Actions](./images/github_pages_settings_actions.svg)
 
 ### 步驟 4：查看部署進度與取得網址
 1. 點擊頂部的 **Actions** 分頁，你會看到名為 `Deploy to GitHub Pages` 的工作流正在旋轉建置。
@@ -222,11 +217,36 @@ Source:
 3. 點進該工作流，即可在右側看見正式的公開靜態網址：  
    👉 `https://<你的 GitHub 帳號>.github.io/<你的儲存庫名稱>/`！
 
+> 💡 **小撇步**：  
+> 若在你去 Settings 設定之前，GitHub Actions 已經先跑完了並顯示**紅色 ❌**（報錯 `Get Pages site failed 404`），**完全正常不用慌**！  
+> 只要在 Settings 切換好 `GitHub Actions` 後，回到 Actions 點進失敗記錄，點擊右上角 **`Re-run jobs` ➔ `Re-run all jobs`**，就會立刻轉為綠色勾勾順利上線！
+
 ---
 
-## 🚨 五、 出錯了怎麼辦？如何把錯誤日誌回傳給 Google AI Studio 自動修復
+## 🚨 五、 出錯了怎麼辦？常見錯誤秒解與 AI Studio 修復流程
 
-在執行 GitHub Actions 時，如果看見**紅色叉叉 ❌（Failed）**，完全不要慌張！請依照以下 3 個步驟，讓 Google AI Studio 幫你一秒抓出錯誤並修復：
+### ⚠️ 第一次 Push 最常遇到的紅叉叉：Configure GitHub Pages 報錯 404 (Get Pages site failed)
+
+在剛推送程式碼時，幾乎所有新手在 Actions 第一次跑時都會遇到這個紅色叉叉：
+
+```text
+Error: Get Pages site failed. Please verify that the repository has Pages enabled and configured to build using GitHub Actions, or consider exploring the `enablement` parameter for this action. Error: Not Found - https://docs.github.com/rest/pages/pages#get-a-apiname-pages-site
+Error: HttpError: Not Found - https://docs.github.com/rest/pages/pages#get-a-apiname-pages-site
+```
+
+![Configure GitHub Pages 404 報錯與修復流程](./images/github_actions_rerun_guide.svg)
+
+- **為什麼會出錯？**  
+  當你從 Google AI Studio 點擊 Push 時，GitHub Actions 會「立刻自動觸發」；但此時你還沒前往 Settings 切換 Pages 來源，所以流程執行到 `Configure GitHub Pages` 步驟時找不到 Pages 站點設定，GitHub API 就回傳了 `404 Not Found`。
+- **2 步迅速修復流程**：
+  1. 前往倉庫 **Settings ➔ Pages**，將 **Source** 改為 **`GitHub Actions`**（頂部顯示 `GitHub Pages source saved.`）。
+  2. 回到 **Actions** 分頁點進失敗的工作流，點擊右上角 **`Re-run jobs` ➔ `Re-run all jobs`**！重新跑一次即刻轉為綠色勾勾 ✅！
+
+---
+
+### 🛠️ 若是程式碼打包錯誤（如 npm run build 失敗）：如何把錯誤日誌回傳給 AI Studio 自動修復
+
+若錯誤發生在編譯打包步驟（`Run npm run build`），請依照以下 3 個步驟，讓 Google AI Studio 幫你一秒抓出錯誤並修復：
 
 ### 步驟 1：在 GitHub 找到真正的「出錯日誌 (Error Log)」
 1. 在 GitHub 倉庫中，點擊頂部的 **Actions** 分頁。
@@ -283,3 +303,10 @@ Source:
   3. **自動化觸發機制不同**：
      - `git push` 會**自動**觸發 GitHub Pages 更新。
      - Google AI Studio **不會自動監聽** GitHub 的 Push；若要更新 AI Studio 上的網頁，只要回到 AI Studio 介面手動點擊 **`Republish`** 即可。
+
+### Q5：Actions 報錯「Dependencies lock file is not found (package-lock.json)」？
+- **原因**：Google AI Studio 產出的專案只有 `package.json`，在瀏覽器端尚未於本地執行過安裝，因此倉庫中**根本沒有 `package-lock.json`**！若工作流中開啟了 `cache: 'npm'` 或執行 `npm ci`，GitHub 就會因找不到鎖定檔而中斷報錯。
+- **解法**：在 `.github/workflows/deploy.yml` 中：
+  1. 移除 `cache: 'npm'` 行。
+  2. 將安裝指令 `run: npm ci` 改為 `run: npm install`。
+  再次 Commit Push 即可順利通過安裝與編譯！
