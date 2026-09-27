@@ -28,6 +28,8 @@
 | 專案 | 說明 | 備註 |
 |------|------|------|
 | [📑 Excel 佔位符單據產生器](./Excel佔位符單據產生器/README.md) | 通用型單據產生器：動態解析 `{{變數 \| 預設值}}` 佔位符、支援上傳自訂範本與純前端保留樣式下載 | 純前端 ExcelJS 模板引擎 |
+| [⚡ Workspace 智慧單據報銷系統](./Workspace智慧單據報銷系統/README.md) | 發票收據照片辨識、動態解析明細，一鍵寫入雲端 Google Sheets 試算表並生成請款單 | Google Workspace 整合 ⚡ |
+| [📅 AI 會議紀錄與行事曆整合](./AI會議紀錄與行事曆整合/README.md) | 貼上雜亂會議紀錄，AI 自動萃取待辦寫入試算表，並將關鍵 Deadline 同步排入 Google 日曆 | Sheets + Calendar 雙整合 🗓️ |
 
 ### ☁️ 部署教學
 
