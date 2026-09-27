@@ -44,8 +44,10 @@
    - 執行流程：安裝套件 (npm ci)、執行編譯 (npm run build)、將 dist 作為 Artifact 上傳並自動發布到 GitHub Pages。
    - 設定必要的 GITHUB_TOKEN 權限 (permissions: contents: read, pages: write, id-token: write)。
 
-2. 修改 vite.config.ts（防 404 關鍵）：
-   - 請根據我上方提供的倉庫專案名稱，將 base 路徑精確設定為 base: '/[請替換為你的倉庫名稱]/'，確保部署到 GitHub Pages 後所有 CSS、JS 與圖片資源路徑 100% 正確載入。
+2. 修改 vite.config.ts（防 404 兼雙棲相容關鍵）：
+   - 請將 base 路徑設定為動態環境變數判斷：
+     base: process.env.GITHUB_ACTIONS ? '/[請替換為你的倉庫名稱]/' : '/'
+   - 目的：確保在 GitHub Actions 編譯時自動套用倉庫子路徑（徹底防範 GitHub Pages 404）；同時在 Google AI Studio 介面重新發布 (Republish / Cloud Run) 或本機開發時維持根路徑 '/'，讓兩者完美共存不衝突。
 
 3. 檢查 package.json：
    - 確保 scripts 中的 "build" 指令為 "tsc && vite build"，能正確輸出靜態檔案至 dist 目錄。
@@ -113,17 +115,24 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
-### 2. `vite.config.ts` 中的 `base` 設定（精準對齊倉庫名稱）
+### 2. `vite.config.ts` 中的 `base` 設定（雙棲相容關鍵）
 ```typescript
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  // 關鍵：精確設定為你的倉庫名稱，前後皆需斜線，徹底根絕 404
-  base: '/my-universal-template/', 
+  // 🌟 雙棲完美配置：
+  // 1. 在 GitHub Actions (GitHub Pages) 編譯時套用倉庫子路徑，防 404
+  // 2. 在 Google AI Studio (Cloud Run) 或本機執行時維持根路徑 '/'，避免 Republish 壞掉
+  base: process.env.GITHUB_ACTIONS ? '/my-universal-template/' : '/', 
 })
 ```
+
+> 💡 **為什麼要用環境變數判斷？**  
+> - **GitHub Pages** 的網址是子目錄（例如 `username.github.io/my-universal-template/`），需要設定倉庫前綴。  
+> - **Google AI Studio (Cloud Run)** 的網址是專屬獨立根網域（例如 `my-app.ai.studio/`），必須設定為 `'/'`。  
+> - 透過 `process.env.GITHUB_ACTIONS ? ... : ...`，GitHub Actions 執行時環境變數自動帶入 `GITHUB_ACTIONS=true`，就能達成**雙平台自動切換、互不干擾**！
 
 ---
 
@@ -207,7 +216,7 @@ Source:
 
 ### Q1：開啟網址後畫面一片空白，按 F12 發現所有 `.js` 與 `.css` 都報 404？
 - **原因**：`vite.config.ts` 中的 `base` 路徑沒有設定正確。
-- **解法**：請確保 `vite.config.ts` 內有加上你的倉庫名稱（例如 `base: '/my-repo-name/'`，前後都要有斜線），再次 Commit Push，GitHub Actions 就會自動重新建置並恢復正常！
+- **解法**：請確保 `vite.config.ts` 內有加上動態判斷（例如 `base: process.env.GITHUB_ACTIONS ? '/my-repo-name/' : '/'`，前後都要有斜線），再次 Commit Push，GitHub Actions 就會自動重新建置並恢復正常！
 
 ### Q2：GitHub Actions 執行失敗，提示「Permission to ... denied」？
 - **原因**：GitHub 倉庫預設的工作流權限被鎖定。
@@ -215,3 +224,11 @@ Source:
 
 ### Q3：這個全靜態網頁能放 Gemini API Key 嗎？
 - 🚨 **絕對不行！** 請牢記上一節的資安防線：全靜態網頁（GitHub Pages）的程式碼會被訪客看光。若專案包含 Gemini API 或資料庫，**必須採用 Google AI Studio 的 Backend Proxy 一鍵發布至 Cloud Run**，切勿部署在 GitHub Pages！
+
+### Q4：改成 GitHub Pages 的 Actions 後，是否無法再發布至 Google AI Studio (Cloud Run)？
+- **解答**：**完全不會！兩者可以完美並存**，只要注意以下 3 點：
+  1. **部署通道各自獨立**：GitHub Actions 是由 GitHub 雲端執行靜態網頁打包；而 Google AI Studio 是由 Google 後台直接打包部署到 Cloud Run，兩套系統互不衝突。
+  2. **避免路徑衝突（已解決）**：透過前述的 `base: process.env.GITHUB_ACTIONS ? '/倉庫名稱/' : '/'`，在 Google AI Studio 點擊 `Republish` 時會自動採用根目錄 `'/'`，不會因為寫死子路徑而出現 404 破圖。
+  3. **自動化觸發機制不同**：
+     - `git push` 會**自動**觸發 GitHub Pages 更新。
+     - Google AI Studio **不會自動監聽** GitHub 的 Push；若要更新 AI Studio 上的網頁，只要回到 AI Studio 介面手動點擊 **`Republish`** 即可。
