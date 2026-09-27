@@ -1,42 +1,36 @@
-# ⚡ Workspace 智慧單據報銷系統 (AI Expense & Sheets Automation) - Prompt 指南
+# 📑 AI First 實戰進階：Workspace 智慧單據報銷系統（Google Sheets 原生整合 ⚡）
 
-> **開發工具建議**：本專案推薦使用 **Google AI Studio (Build Mode)** 進行開發，技術棧採用 Vite、React、TypeScript、Tailwind CSS，並啟用官方原生的 **Google Sheets Integration**。
-> 
-> 💼 **上班族職場必備・月底報帳神器**：每到月底總是被淹沒在咖啡店、加油站、計程車與文具店的發票收據中嗎？傳統人工作業必須肉眼盯著發票打統編、手動分類會計科目、再一筆筆敲進 Excel 或 Google 試算表，枯燥又容易出錯。本單元透過 **Gemini 多模態視覺辨識** 結合 **Google AI Studio 最新「Integrations」面板**，讓員工直接拍照上傳發票，AI 瞬間自動拆解金額明細，點擊授權後**直接將整筆記錄寫入個人雲端 Google 試算表**，更支援一鍵下載正式 Excel 請款單！
-
----
-
-## 專案設計思維：從「單據拍照」到「雲端試算表自動化登錄」
-
-在職場實務中，財務與報銷作業的核心流轉可分為「**資料擷取 ➜ 智慧驗證 ➜ 雲端歸檔 ➜ 紙本簽核**」四大環節。
-
-為了讓學員體驗最流暢的加速工作流，本單元已預先設計好完整的**示範偽資料集（包含 SVG 發票圖片、Google Sheets CSV 匯入檔、文字明細）**，各模組對應關係如下：
-
-| 工作流環節 (Stage) | 處理內容與對應偽資料 | 技術實作機制 | 辦公室價值 (Business Value) |
-| :--- | :--- | :--- | :--- |
-| **1. 單據輸入 (Ingestion)** | 支援拖曳或相機拍照上傳發票圖檔（提供 `sample_receipt_invoice.svg` 供下載測試） | HTML5 Drag & Drop + Gemini 視覺模型多模態解析 | 告別人工看字打統編，1 秒完成資料擷取 |
-| **2. 欄位結構化 (Extraction)** | 提取日期、賣方店家、統編、品項明細、金額、稅額與會計科目（對應 `receipt_mock_data.md`） | 結構化 JSON Prompt 工程 + 會計規則分類器 | 自動分類差旅費、交際費、文具費，省去查科目時間 |
-| **3. 雲端同步 (Cloud Sync)** | 登入 Google 帳號後，一鍵將報銷明細寫入試算表（提供 `2026公司報銷流水帳_範本.csv`） | Google AI Studio 原生 **Google Sheets Integration** | 零後端程式碼，自動建立 OAuth 授權並寫入試算表 |
-| **4. 離線簽核 (Offline Export)** | 點擊一鍵匯出保留排版與加總公式的 `.xlsx` 單據請款單 | 前端 ExcelJS 模板引擎 | 兼顧雲端儲存與傳統實體紙本簽呈蓋章需求 |
+> **30 秒專案介紹**：  
+> 每到月底總是被淹沒在超商、加油站、計程車與文具店的發票收據中嗎？傳統人工作業必須肉眼盯著發票打統編、手動分類會計科目、再一筆筆敲進 Excel 或 Google 試算表，枯燥又容易出錯。  
+> 本專案透過 **Gemini 多模態視覺模型** 結合 **Google AI Studio 最新「Integrations 原生整合面板」**，讓員工直接拍照或拖曳上傳發票，AI 瞬間自動拆解金額明細與會計科目，點擊授權後**直接將整筆記錄以新列寫入個人雲端 Google 試算表**，更支援一鍵下載保留公式與排版的正式 Excel 請款單！  
+> 透過 Google AI Studio 一鍵部署至 **Google Cloud Run**，享有 **Backend Proxy 伺服器代理機制**，零金鑰與憑證外洩風險！
 
 ---
 
-## 一、 專案建立階段：準備偽資料與生成應用程式
+## ⚡ Google Workspace 原生整合亮點
 
-### 📥 步驟 1：下載或預覽「報銷示範偽資料檔案」
+本專案深度整合 Google AI Studio 的官方原生能力，無須自行在 GCP 建立複雜的 OAuth 2.0 Client ID 與處理 Token：
+
+| 整合服務 | 官方功能卡片 | 核心串接機制 | 專題全景指引 |
+| :--- | :---: | :--- | :--- |
+| **Google Sheets** | ![Google Sheets](../GoogleWorkspace原生整合說明/images/workspace_integrations/google_sheets.png) | 透過 Google 帳號一鍵授權，直接調用 Sheets API 將結構化報銷紀錄批次追加（Append Row）至指定的雲端試算表末端。 | [👉 查看 Google Workspace 14 大原生整合完整指南](../GoogleWorkspace原生整合說明/README.md) |
+
+---
+
+## 📥 第一步：下載課程素材檔案
 
 我們為大家準備了 3 個可直接下載的教學素材，讓你在課堂上無須拿出個人私人發票即可立即測試：
 
-| 檔案名稱 | 說明 | 點擊下載 |
-| :--- | :--- | :---: |
-| **sample_receipt_invoice.svg** | 台灣電子發票證明聯示範圖（含 QR Code、超商咖啡點心明細、統編與條碼） | [📥 點我下載圖檔](./sample_receipt_invoice.svg) |
-| **2026公司報銷流水帳_範本.csv** | Google 試算表範本（含標準 7 大欄位與 4 筆預設歷史報帳紀錄，可直接匯入 Google Sheets） | [📥 點我下載 CSV](./2026公司報銷流水帳_範本.csv) |
-| **receipt_mock_data.md** | 4 筆超詳細企業日常報帳文字明細（超商茶點、加油油資、文具耗材、高鐵車票） | [📥 點我檢視 Markdown](./receipt_mock_data.md) |
+| 檔案名稱 | 格式 | 說明與用途 | 下載連結 |
+| :--- | :---: | :--- | :---: |
+| **sample_receipt_invoice.svg** | `SVG` | 台灣電子發票證明聯示範圖（含 QR Code、超商咖啡點心明細、統編與條碼） | [📥 點我下載圖檔](./sample_receipt_invoice.svg) |
+| **2026公司報銷流水帳_範本.csv** | `CSV` | Google 試算表範本（含標準 7 大欄位與 4 筆預設歷史報帳紀錄，可直接匯入 Google Sheets） | [📥 點我下載 CSV](./2026公司報銷流水帳_範本.csv) |
+| **receipt_mock_data.md** | `MD` | 4 筆超詳細企業日常報帳文字明細（超商茶點、加油油資、文具耗材、高鐵車票） | [📥 點我檢視 Markdown](./receipt_mock_data.md) |
 
 <br>
 
 <details>
-<summary>👉 點擊展開：檢視 receipt_mock_data.md 完整文字偽資料（可直接複製測試）</summary>
+<summary>📋 點擊展開：檢視 receipt_mock_data.md 完整文字偽資料（可直接複製測試）</summary>
 
 ```markdown
 # 📌 案例一：【統一超商 7-ELEVEN 電子發票】（跨部門會議茶點）
@@ -67,17 +61,65 @@
 
 </details>
 
-<br>
+---
 
-### 💡 步驟 2：如何用別的 AI 將「你公司自訂的報銷單欄位」轉成 RTCCF？
-如果你未來想客製化自己公司的報銷系統（例如：新增「專案代碼 (Project Code)」、「成本中心 (Cost Center)」或「主管審批人工號」），只要把欄位名稱貼入下方指令，讓 AI 幫你微調：
+## 🚀 第二步：Google AI Studio 實作 3 步驟（SOP）
+
+請依照以下簡單三步驟完成專案建置與 Google Cloud Run 雲端發布：
+
+```
+【步驟 1】開啟 AI Studio 右側 Integrations ──► 點擊 Google Sheets「Enable」
+                                                  ▼
+【步驟 2】複製第三步提示詞 ────────────────► 貼至 AI Studio 對話框生成專案
+                                                  ▼
+【步驟 3】網頁立即測試 ──────────────────► 上傳發票辨識、一鍵登錄 Sheets、一鍵 Publish！
+```
+
+### 1. 啟用 Google Sheets 原生整合
+- 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊右上角進入 **Build Mode** 建立新 Web 專案。
+- 查看右側工具列的 **`Integrations`** 面板，找到 **`Google Sheets`** 並點擊 **`Enable（啟用）`**。
+
+### 2. 貼入提示詞生成應用程式
+- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入 AI Studio 對話框發送生成。
+
+### 3. 測試與雲端發布
+- **發票圖片多模態辨識**：拖曳或點選上傳 `sample_receipt_invoice.svg`，點擊「⚡ 開始 AI 智慧解析」，Gemini 自動萃取店家、日期、金額與會計科目。
+- **一鍵登錄至 Google 試算表**：點擊「Sign in with Google」登入個人 Google 帳號，填入目標試算表 ID，點擊「📥 登錄至 Google 試算表」，資料立即以新列追加至雲端試算表！
+- **離線 Excel 請款單下載**：點擊「📑 匯出本筆報銷 Excel 請款單」，瀏覽器立即下載保留排版與加總公式的正式 `.xlsx` 請款單。
+- **一鍵發布至 Cloud Run**：
+  - 點擊右側工具列的 **`Publish`** 按鈕。
+  - 自訂 App URL（例如 `smart-expense-sheets-hub`），點擊 **`Publish your app`**，30~60 秒內由 Google Cloud Run 全託管發布上線！
+
+---
+
+## 💡 如何用別的 AI 將「你自己的簡報大綱」轉成 RTCCF？
+
+如果你未來想製作自己的專案簡報（或客製化專屬的企業報銷系統），只要把你的 Word/Notion 大綱或欄位需求整理好，貼上下方折疊區內的指令，讓其他 AI（如 ChatGPT、Claude 或 Gemini）協助你轉換成標準 RTCCF 規格書：
 
 <details>
-<summary>👉 點擊展開：請其他 AI 協助客製報銷欄位的自然語言指令（可直接複製）</summary>
+<summary>👉 點擊展開：請其他 AI 協助將「簡報大綱」轉成 RTCCF 的自然語言指令（可直接複製）</summary>
+
+```text
+我已經完成了一份簡報文字大綱 Markdown 檔案（包含 6 頁投影片的標題、重點條列、數據與版型規劃）。
+我想在 Google AI Studio 開發一個專為上班族設計的「現代科技感線上簡報單頁系統 (Interactive Web Presentation Deck SPA)」，技術棧使用 Vite + React + TypeScript + Tailwind CSS。
+功能需求：
+1. 支援鍵盤左右箭頭/空白鍵翻頁、全螢幕簡報模式、底部進度條、投影片大綱目錄抽屜。
+2. 簡報內容與版型必須抽離至 slidesData.ts。
+請扮演資深前端架構師與 Keynote 簡報設計專家，使用標準 RTCCF 框架（包含：# 角色 Role、## 任務目標 Task、## 背景情境 Context、## 核心規則與限制 Constraints、## 輸出規格與風格 Format），將我下方的大綱完整融入規格書中，讓我可以直接複製貼入 Google AI Studio 生成可運行的程式碼：
+
+[在此處貼上你自己的簡報大綱 Markdown 內容]
+```
+
+</details>
+
+<br>
+
+<details>
+<summary>👉 點擊展開：請其他 AI 協助將「自訂企業報銷單欄位與會計科目」轉成 RTCCF 的自然語言指令（報銷系統專用）</summary>
 
 ```text
 我已經完成了一份公司內部的報銷欄位規格與會計科目清單。
-我想在 Google AI Studio 開發一個專為辦公室員工設計的「AI 智慧單據報銷系統」，技術棧使用 Vite + React + TypeScript + Tailwind CSS，並使用 Google AI Studio 原生的 Google Sheets Integration。
+我想在 Google AI Studio 開發一個專為辦公室員工設計的「Workspace 智慧單據報銷系統 SPA」，技術棧使用 Vite + React + TypeScript + Tailwind CSS，並使用 Google AI Studio 原生的 Google Sheets Integration。
 功能需求：
 1. 支援發票收據圖片上傳，利用 Gemini 多模態視覺模型辨識。
 2. 自動萃取各項消費欄位並分類會計科目。
@@ -85,19 +127,18 @@
 4. 提供一鍵離線下載 Excel 請款單功能。
 請扮演資深全端架構師，使用標準 RTCCF 框架（包含：# 角色 Role、## 任務目標 Task、## 背景情境 Context、## 核心規則與限制 Constraints、## 輸出規格與風格 Format），將我自訂的報銷欄位融入規格中：
 
-[在此處貼上你公司自訂的報銷欄位與會計科目清單]
+[在此處貼上你公司自訂的報銷欄位、專案代碼、成本中心與會計科目清單]
 ```
 
 </details>
 
 <br>
 
-### 📋 步驟 3：專案建立 RTCCF Prompt（複製貼入 Google AI Studio）
+---
 
-請依照以下 3 個直覺步驟開始建立專案：
-1. 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊右上角進入 **Build Mode**。
-2. 查看右側側邊欄的 **Integrations 面板**，找到 **Google Sheets** 並點擊 **Enable（啟用）**。
-3. 直接複製下方整段 RTCCF 提示詞，貼入 AI Studio 對話框開始生成：
+## 🤖 第三步：專案生成提示詞（點擊代碼框右上角一鍵複製）
+
+請將以下整段提示詞複製，貼到 **Google AI Studio**：
 
 ```markdown
 # 角色 (Role)
@@ -165,3 +206,6 @@
 - 打開你在 Google 雲端硬碟建立的試算表，觀察網址列：
   `https://docs.google.com/spreadsheets/d/`**`1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms`**`/edit`
 - 中間粗體這串由英文大小寫與數字組成的代碼，就是你的 **Spreadsheet ID**！直接貼入網頁的設定欄位即可指定儲存目標。
+
+### Q3：發布到 Google Cloud Run 後，需要重新設定 Google 登入憑證嗎？
+- **完全不需要**！這正是 Google AI Studio 原生 Integrations 的巨大優勢。部署至 Google Cloud Run 後，系統自動由託管伺服器維持安全代理，使用者點擊登入授權即可無縫運作。
