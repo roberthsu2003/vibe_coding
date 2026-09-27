@@ -128,6 +128,51 @@ Gemini 3 系列（如 `gemini-3.8-flash`）具備 **1,000,000 (1M) Token** 的�
 
 ---
 
+## 💡 如何用別的 AI 將「你自己的簡報大綱」轉成 RTCCF？
+
+如果你未來想製作自己的專案簡報（或自訂金融與企業客服 Chatbot），只要把你的 Word/Notion 大綱或規章 FAQ 需求整理好，貼上下方折疊區內的指令，讓其他 AI（如 ChatGPT、Claude 或 Gemini）協助你轉換成標準 RTCCF 規格書：
+
+<details>
+<summary>👉 點擊展開：請其他 AI 協助將「簡報大綱」轉成 RTCCF 的自然語言指令（可直接複製）</summary>
+
+```text
+我已經完成了一份簡報文字大綱 Markdown 檔案（包含 6 頁投影片的標題、重點條列、數據與版型規劃）。
+我想在 Google AI Studio 開發一個專為上班族設計的「現代科技感線上簡報單頁系統 (Interactive Web Presentation Deck SPA)」，技術棧使用 Vite + React + TypeScript + Tailwind CSS。
+功能需求：
+1. 支援鍵盤左右箭頭/空白鍵翻頁、全螢幕簡報模式、底部進度條、投影片大綱目錄抽屜。
+2. 簡報內容與版型必須抽離至 slidesData.ts。
+請扮演資深前端架構師與 Keynote 簡報設計專家，使用標準 RTCCF 框架（包含：# 角色 Role、## 任務目標 Task、## 背景情境 Context、## 核心規則與限制 Constraints、## 輸出規格與風格 Format），將我下方的大綱完整融入規格書中，讓我可以直接複製貼入 Google AI Studio 生成可運行的程式碼：
+
+[在此處貼上你自己的簡報大綱 Markdown 內容]
+```
+
+</details>
+
+<br>
+
+<details>
+<summary>👉 點擊展開：請其他 AI 協助將「自訂企業規章與客服問答需求」轉成 RTCCF 的自然語言指令（客服機器人專用）</summary>
+
+```text
+我已經完成了一份我們公司內部/機構專屬的業務規章與客戶常見問答 (FAQ) 文件。
+我想在 Google AI Studio 開發一個專為企業客服設計的「企業權益與規章智慧客服 Chatbot SPA」，技術棧使用 Vite + React + TypeScript + Tailwind CSS，串接 Google Gen AI SDK（@google/genai）與 gemini-3.8-flash 模型，採用 In-Context RAG 原生檢索機制，並部署於 Google Cloud Run。
+功能需求：
+1. 預設自動透過 fetch 載入 public/ 目錄下的自訂規章文件（.txt）。
+2. 支援常見問題快捷標籤與多輪連續上下文對話。
+3. 具備嚴謹事實檢索（Strict Grounding），所有回覆必須有憑有據並引用條款章節，杜絕幻覺。
+4. 支援上傳自訂規章檔案，並具備即時清空歷史對話的防呆機制。
+5. 介面採用現代高階金融深藍質感設計，對話紀錄支援 Markdown 與代碼渲染。
+請扮演資深全端架構師與 AI 提示詞工程專家，使用標準 RTCCF 框架（包含：# 角色 Role、## 任務目標 Task、## 背景情境 Context、## 核心規則與限制 Constraints、## 輸出規格與風格 Format），將我自訂的企業規章與客服問答需求融入規格中：
+
+[在此處貼上你公司自訂的業務規章大綱、FAQ 清單或客服需求]
+```
+
+</details>
+
+<br>
+
+---
+
 ## 🤖 第三步：專案生成提示詞（點擊代碼框右上角一鍵複製）
 
 請將以下整段提示詞複製，貼到 **Google AI Studio**：
