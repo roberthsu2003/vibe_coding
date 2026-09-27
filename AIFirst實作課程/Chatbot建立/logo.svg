@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+  <defs>
+    <!-- 背景漸層 -->
+    <linearGradient id="bankBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#091322" />
+      <stop offset="50%" stop-color="#0F203C" />
+      <stop offset="100%" stop-color="#0A1628" />
+    </linearGradient>
+
+    <!-- 尊爵金漸層 -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+
+    <!-- 科技藍漸層 -->
+    <linearGradient id="blueCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D4ED8" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+
+    <!-- 柔和陰影 -->
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#2563EB" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- 外卡圓角框 -->
+  <rect width="240" height="240" rx="48" fill="url(#bankBgGrad)" />
+  <rect width="236" height="236" x="2" y="2" rx="46" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- 主視覺：信用卡與智慧客服耳機結合 -->
+  <g transform="translate(42, 38)" filter="url(#cardShadow)">
+    <!-- 信用卡本體 -->
+    <rect width="156" height="98" rx="14" fill="url(#blueCardGrad)" stroke="url(#goldGrad)" stroke-width="1.8" />
+    
+    <!-- 晶片圖示 (EMV Chip) -->
+    <rect x="20" y="24" width="24" height="20" rx="4" fill="url(#goldGrad)" />
+    <line x1="20" y1="34" x2="44" y2="34" stroke="#78350F" stroke-width="0.8" />
+    <line x1="32" y1="24" x2="32" y2="44" stroke="#78350F" stroke-width="0.8" />
+
+    <!-- 感應支付波形 (Contactless Wave) -->
+    <path d="M54,26 C58,30 58,38 54,42" fill="none" stroke="#93C5FD" stroke-width="1.8" stroke-linecap="round" />
+    <path d="M59,22 C65,28 65,42 59,48" fill="none" stroke="#BFDBFE" stroke-width="1.8" stroke-linecap="round" />
+
+    <!-- 虛擬卡號點矩陣 -->
+    <circle cx="24" cy="62" r="2" fill="#E2E8F0" />
+    <circle cx="32" cy="62" r="2" fill="#E2E8F0" />
+    <circle cx="40" cy="62" r="2" fill="#E2E8F0" />
+    <circle cx="48" cy="62" r="2" fill="#E2E8F0" />
+    <text x="64" y="66" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" fill="#F8FAFC" letter-spacing="1.5">8888</text>
+
+    <!-- 銀行標籤 -->
+    <text x="20" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9" font-weight="700" fill="url(#goldGrad)">TW BANK 尊榮卡</text>
+  </g>
+
+  <!-- 浮動客服對話氣泡與耳機圖標 (Chatbot Agent Badge) -->
+  <g transform="translate(132, 116)">
+    <!-- 氣泡外框 -->
+    <rect width="72" height="48" rx="16" fill="#0F172A" stroke="url(#goldGrad)" stroke-width="2" />
+    <!-- 氣泡小尾巴 -->
+    <polygon points="18,48 10,58 28,48" fill="#0F172A" />
+
+    <!-- 客服耳機圖標 -->
+    <path d="M26,26 C26,18 46,18 46,26" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" />
+    <rect x="22" y="24" width="6" height="10" rx="3" fill="#38BDF8" />
+    <rect x="44" y="24" width="6" height="10" rx="3" fill="#38BDF8" />
+    <path d="M46,30 L48,34 L40,36" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="38" cy="36" r="2" fill="#F59E0B" />
+  </g>
+
+  <!-- 底部銀行與客服文字 -->
+  <text x="120" y="214" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#E2E8F0" text-anchor="middle">台灣聯合銀行・信用卡權益客服</text>
+</svg>
