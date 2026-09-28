@@ -87,8 +87,9 @@
 請依照以下 3 個步驟開始建立專案：
 1. 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
    > 🚨 **注意**：首頁對話框僅支援純文字與圖片檔，無法直接放 docx/xlsx/pptx 檔案，請直接將下方完整提示詞複製貼入輸入框中！
-2. 複製下方整段 RTCCF 提示詞，貼入首頁對話框發送生成專案，進入 App 工作區。
-3. 進入專案工作區後，查看右側側邊欄的 **Integrations 面板**，找到 **Firebase Firestore & Auth** 並點擊 **Enable（啟用）**（享受免費 Spark Plan，免綁信用卡），即可在預覽畫面測試多人即時借還！
+2. 複製下方整段 RTCCF 提示詞，貼入首頁對話框發送生成專案。
+3. **對話框一鍵確認啟用整合**：由於提示詞明確寫入 Firebase 整合需求，**AI Studio 會在對話框中自動跳出整合提示卡片（如 `I accept, continue to enable Firebase...`）**，直接點擊即可自動啟用！
+   *(💡 備註：若對話框未自動跳出，也可在專案右側側邊欄的 `Integrations` 面板找到 Firebase 點擊 Enable)*。
 
 ```markdown
 # 角色 (Role)
@@ -146,3 +147,11 @@
 
 ### Q2：為什麼同仁借用後，我的畫面能自動更新？
 - 這歸功於 Firebase Firestore 的核心技術 **WebSockets 即時通道（`onSnapshot` 監聽器）**。當資料庫伺服器中的文件有任何欄位被修改，伺服器會主動將最新資料推播給所有連線中的瀏覽器，實現毫秒級無感更新。
+
+### Q3：在 AI Studio 畫面出現「⚠️ Quota exceeded. Please try again later.」或跑了數百秒報錯該怎麼辦？
+- **原因**：免費帳號（Free Tier）具備每分鐘請求數（RPM: 約 10~15 次）與每分鐘 Token 數（TPM: 約 1,000,000）上限。當模型在背景連續執行思考與修改代碼長達數分鐘時，短時間內極易觸發速率門檻。
+- **解法**：
+  1. **靜置等待 1~3 分鐘**：每分鐘額度為滾動時間窗口（Rolling Window），稍等 1~3 分鐘即可自動恢復重試。
+  2. **點擊 Checkpoint 還原**：若修改卡住，可點擊右下角 **`Restore`** 回復至上一版乾淨代碼。
+  3. **查看目前額度**：可直接造訪 [AI Studio 配額面板](https://aistudio.google.com/usage?tab=rate-limit) 查詢剩餘配額。
+  4. **升級 Pay-as-you-go**：點擊左下角「Upgrade to unlock more」綁定 GCP 帳單，享有專屬高額度保障算力（費用極低，每次微調約 $0.0001 美元），並可在 Dashboard 設定每月花費上限（Spend Cap）。

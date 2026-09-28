@@ -87,8 +87,9 @@
 請依照以下 3 個步驟開始建立專案：
 1. 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
    > 🚨 **注意**：首頁對話框僅支援純文字與圖片檔，無法直接放 docx/xlsx/pptx 檔案，請直接將下方完整提示詞複製貼入輸入框中！
-2. 複製下方整段 RTCCF 提示詞，貼入首頁對話框發送生成專案，進入 App 工作區。
-3. 進入專案工作區後，查看右側側邊欄的 **Integrations 面板**，找到 **Firebase Firestore & Auth** 並點擊 **Enable（啟用）**（享受免費 Spark Plan，免綁信用卡），即可在預覽畫面測試多人即時看板！
+2. 複製下方整段 RTCCF 提示詞，貼入首頁對話框發送生成專案。
+3. **對話框一鍵確認啟用整合**：由於提示詞明確寫入 Firebase 整合需求，**AI Studio 會在對話框中自動跳出整合提示卡片（如 `I accept, continue to enable Firebase...`）**，直接點擊即可自動啟用！
+   *(💡 備註：若對話框未自動跳出，也可在專案右側側邊欄的 `Integrations` 面板找到 Firebase 點擊 Enable)*。
 
 ```markdown
 # 角色 (Role)
@@ -152,3 +153,11 @@
 
 ### Q2：專案做完後如何分享給部門同事一起使用？
 - 專案完成後，只需在 Google AI Studio 頂部點擊 **Publish（火箭圖示）** 一鍵部署至 Google Cloud Run，系統會生成一個專屬網址。只要把網址丟到公司群組，同事點進去登入 Google 帳號，所有人就能立刻在同一個看板上協同作業！
+
+### Q3：在 AI Studio 畫面出現「⚠️ Quota exceeded. Please try again later.」或跑了數百秒報錯該怎麼辦？
+- **原因**：免費帳號（Free Tier）針對 `Gemini 3.8 Flash` 具備每分鐘請求數（RPM: 5 次）、每分鐘 Token（TPM: 250K）與每日總請求數（RPD: 僅 20 次）上限。當模型在背景連續執行思考與修改代碼（如修改 `src/lib/firebase.ts`）長達數分鐘時，短時間內極易衝破 RPM 或累積滿每日 20 次上限。
+- **解法**：
+  1. **靜置等待 1~3 分鐘**：每分鐘額度為滾動時間窗口（Rolling Window），若為短時衝破稍等 1~3 分鐘即可自動恢復。
+  2. **點擊 Checkpoint 還原**：若修改卡住，可點擊右下角 **`Restore`** 回復至上一版乾淨代碼。
+  3. **查看目前額度**：造訪 [AI Studio 配額面板](https://aistudio.google.com/usage?tab=rate-limit) 查詢即時剩餘量，亦可參考 [📸 官方 Rate Limit 儀表板圖解說明](../認識GoogleAIStudio/README.md#4--配額機制與quota-exceeded排查指南-rate-limits--quota)。
+  4. **升級 Pay-as-you-go**：點擊左下角「Upgrade to unlock more」綁定 GCP 帳單，享有專屬高額度保障算力（費用極低，每次微調約 $0.0001 美元），並可在 Dashboard 設定每月花費上限（Spend Cap）。

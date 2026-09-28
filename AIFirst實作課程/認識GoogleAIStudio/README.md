@@ -41,22 +41,27 @@
 
 ---
 
-## 🗺️ 實作流程地圖：專案建立與 Integrations 的正確順序
+## 🗺️ 實作流程地圖：專案建立與 Integrations 的極速啟用
 
 很多初學者常困惑：「*為什麼我在首頁找不到 Integrations（整合）面板？*」  
-這是因為 **Google AI Studio 的功能面板是「兩階段」的**：
+這是因為 **Google AI Studio 的功能面板是「兩階段」的**，而且**具備超聰明的「對話框自動啟用整合」機制**：
 
 ```
-【階段一：首頁建立】                        【階段二：專案工作區】
-輸入 RTCCF 提示詞 ──► 點擊發送生成專案 ──► 進入 App 預覽與代碼工作區
-(右上角可先調齒輪設定)                      (此時右側面板才會出現 Integrations、Secrets、Publish！)
+【階段一：首頁建立】                        【階段二：專案工作區（對話框自動提示）】
+輸入 RTCCF 提示詞 ──► 點擊發送生成專案 ──► 進入 App 預覽與對話工作區
+(右上角可先調齒輪設定)                      
                                                       ▼
-                                           至右側 Integrations 點擊 Enable 啟用
-                                           (如 Google Sheets, Calendar, Firebase)
+                                           💡 對話框自動跳出整合確認卡片：
+                                           「I accept, continue to enable Google Sheets」
+                                           ──► 直接點擊卡片完成授權，自動啟用！
+                                           (無需手動至右側 Integrations 面板尋找)
 ```
 
 1.  **專案生成 (Initial App Creation)**：在首頁對話框「Describe an app and let Gemini do the rest」貼入 Prompt，讓 Gemini 建立專案並進入應用程式開發工作區（Code & Preview）。
-2.  **啟用整合 (Enable Integrations)**：進入專案工作區後，**檢視右側側邊欄的 `Integrations` 標籤頁**，找到需要的服務（如 Google Sheets、Google Calendar、Firebase）點擊 **Enable** 並完成授權。
+2.  **一鍵確認啟用整合 (In-Chat Auto Enable)**：
+    *   只要你的 Prompt 中有明確提及需要使用 Google Sheets、Google Calendar 或 Firebase 等原生整合，**Gemini 生成時會在對話框中自動跳出「`I accept, continue to enable [服務名稱]`」的確認卡片**。
+    *   **直接點擊該卡片**，即可自動完成授權並啟用該項整合，完全不需要手動進入右側側邊欄！
+    *   *(備援方式：若對話未跳出提示，亦可在專案右側側邊欄的 `Integrations` 標籤頁中手動點擊 Enable)*。
 3.  **迭代與除錯 (Refinement & Code)**：在畫面中進行即時預覽測試，或在對話框中發送修改指令調整功能。
 4.  **發布上線 (Publish)**：在右側面板切換至 **`Publish`**，一鍵將全端網頁部署至 **Google Cloud Run**！
 
@@ -110,9 +115,49 @@ Google AI Studio 與 Gemini API 近期進行了重大的規則升級與架構調
     *   使用付費 API 金鑰時，**強烈建議在 Dashboard 設定「每月支付上限」（Spend Cap）**（路徑：「Google AI Studio -> Dashboard -> Spend」）。
     *   一旦當月呼叫金額達到上限，金鑰會自動暫停，防止因程式無窮迴圈或惡意流量刷爆帳單。
 
-### 4. ⚡ 配額與模型存取調整 (Rate Limits & Quota)
-*   **模型分級**：免費層（Free Tier）主力支援高速的 **Gemini Flash** 系列模型，適合原型開發；頂級 Pro 系列模型配額已大幅限縮或主要開放予付費帳戶及訂閱方案。
-*   **免費層頻率限制 (RPM / RPD / TPM)**：免費方案具備每分鐘請求數（RPM）與每日請求數（RPD）硬性上限，若高頻呼叫容易收到 `429 Too Many Requests`。
+### 4. ⚡ 配額機制與「Quota exceeded」排查指南 (Rate Limits & Quota)
+
+在 Google AI Studio 中使用免費帳號（Free Tier）時，系統針對每個專案設有三大維度的速率保護：
+*   **RPM (Requests Per Minute)**：每 60 秒內的 API 請求次數上限（免費版通常為 **10 ~ 15 RPM**）。
+*   **TPM (Tokens Per Minute)**：每分鐘處理的文字與代碼 Token 總量上限（免費版通常為 **1,000,000 TPM**）。
+*   **RPD (Requests Per Day)**：每日總請求數上限（免費版通常為 **1,500 RPD**，部分實驗性或大模型更低），於**太平洋時間午夜（台灣時間約下午 3:00~4:00）**重置。
+*   **全球共享算力池 (Shared Capacity)**：免費層資源由全球開發者共用，尖峰時段系統會動態調節單一專案的軟性配額。
+
+#### ❓ 為什麼會看到「`⚠️ Quota exceeded. Please try again later.`」？
+當你看到畫面標註 `Ran for 500s+`（模型在背景自動連續執行、讀取代碼並反覆修改多個檔案長達數分鐘），表示 AI 在短時間內發送了非常多次內部推理請求。這極容易在一分鐘內瞬間**衝破 RPM 或 TPM 門檻**，因而觸發暫時性限流！
+
+#### 🔍 如何查看你目前帳號的最新免費額度與使用狀況？
+Google 官方會依據模型更新與伺服器承載動態調整額度，請透過以下方式查看最新即時數據：
+1.  **直接開啟配額控制台（最快 ⚡）**：  
+    瀏覽器直接造訪 👉 **[https://aistudio.google.com/usage?tab=rate-limit](https://aistudio.google.com/usage?tab=rate-limit)**
+2.  **從 AI Studio 導覽列進入**：  
+    點選左側選單的 **`Dashboard`**（或左下角 ⚙️ 設定圖示），切換至 **Rate Limits** 標籤頁，即可一覽所有模型的 RPM、TPM、RPD 數值與目前剩餘配額。
+3.  **從 App 建立畫面查看**：  
+    點擊右上角齒輪 ⚙️ **Advanced settings**，在 **Usage (Free requests)** 區塊右側點擊小齒輪圖示，直接連至配額儀表板。
+4.  **Google Cloud Console 完整監控**：  
+    造訪 [GCP 配額頁面](https://console.cloud.google.com/iam-admin/quotas)，搜尋 `Generative Language API`，可查閱詳細使用折線圖。
+
+#### 📸 官方 Rate Limit 儀表板與真實超標畫面解析
+
+![Google AI Studio Gemini API Rate Limit 配額查詢與超標警示真實畫面](./images/aistudio_rate_limits_dashboard.svg)
+
+> 💡 **從真實後台數據看最新限制（Gemini 3.8 Flash 免費層）**：  
+> - **RPM（每分鐘請求數）**：上限為 **5 次**（截圖中當前達 `4 / 5` 橙色預警）。
+> - **TPM（每分鐘 Token 數）**：上限為 **250K**（當前達 `20.46K / 250K`）。
+> - **RPD（每日總請求數）**：上限為 **20 次**！截圖中數值已達 **`22 / 20` 鮮紅超額**，這正是系統跳出 `You have reached a rate limit` 與 `Quota exceeded` 的真正核心原因！
+
+#### 🛠️ 遇到 Quota exceeded 的 4 大應對 SOP：
+1.  **靜置 1 ~ 3 分鐘再重試（90% 立即解決）**：  
+    短時間內衝破的 RPM/TPM 屬於「滑動時間窗口（Rolling Window）」，只要停手稍等 1~3 分鐘，每分鐘額度就會自動釋放，即可繼續操作。
+2.  **使用 Checkpoint 還原（Restore）**：  
+    若模型跑了數百秒卡在代碼修改迴圈中，點擊右下角的 **`[↩️ Restore]`** 回復到前一個乾淨的 Checkpoint，避免無窮重試消耗額度。
+3.  **分步驟提示，降低單次 Token 暴衝**：  
+    避免一次丟出包含十幾個複雜功能的龐大 Prompt。建議採用「先搭好前端骨架 ➜ 再請 AI 串接特定服務」的分段迭代模式。
+4.  **升級為 Pay-as-you-go（徹底擺脫限流與尖峰排隊）**：  
+    點選左下角 **`Upgrade to unlock more`** 綁定 GCP 帳單帳戶：
+    *   **費用極其低廉**：Flash 模型每次代碼修正通常僅耗費 **$0.0001 ~ $0.001 美元**（不到台幣幾毛錢）。
+    *   **專屬獨立保障算力**：RPM/TPM 配額暴增數倍，且享有最高穩定度，不再與免費使用者擠共享算力池。
+    *   **安全防爆表**：可至 `Dashboard -> Spend` 設置「每月支付上限（Spend Cap，例如設 $5 美元）」，完全零風險。
 
 ### 5. 💰 雙重費用來源總結（Standard Tier 上線時）
 *   一旦專案以標準付費架構成功上線，費用包含兩部分：

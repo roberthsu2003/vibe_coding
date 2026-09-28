@@ -72,9 +72,9 @@
 請依照以下簡單三步驟完成專案建置與 Google Cloud Run 雲端發布：
 
 ```
-【步驟 1】複製第三步提示詞 ────────────────► 貼至 AI Studio 首頁對話框生成專案進入工作區
+【步驟 1】複製第三步提示詞 ────────────────► 貼至 AI Studio 首頁對話框生成專案
                                                   ▼
-【步驟 2】開啟專案右側 Integrations 面板 ──► 找到 Google Sheets 點擊「Enable」完成授權
+【步驟 2】對話框彈出整合提示 ──────────────► 點擊「I accept, continue to enable Google Sheets」
                                                   ▼
 【步驟 3】網頁預覽立即測試 ────────────────► 上傳發票辨識、一鍵登錄 Sheets、一鍵 Publish！
 ```
@@ -82,11 +82,13 @@
 ### 1. 貼入提示詞生成應用程式
 - 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
 - （可選）點擊右上角齒輪 ⚙️ **Advanced settings**，確認模型為 Gemini 3.8 Flash、Framework 為 React，System instructions 可設定自訂繁體中文要求。
-- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入首頁對話框「Describe an app and let Gemini do the rest」，點擊發送開始生成專案並進入專案工作區（Code & Preview 介面）。
+- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入首頁對話框「Describe an app and let Gemini do the rest」，點擊發送開始生成專案。
 
-### 2. 在專案中啟用 Google Sheets 原生整合
-- 專案建立完成後，查看右側側邊欄的 **`Integrations`** 面板（專案建立後才會出現）。
-- 找到 **`Google Sheets`** 並點擊 **`Enable（啟用）`**，依視窗引導完成 Google 帳號授權。
+### 2. 對話框一鍵確認啟用 Google Sheets 整合（極速自動化 ⚡）
+- 由於我們的提示詞已明確聲明需要 Google Sheets 整合，**AI Studio 會在對話框中主動彈出整合提示卡片**：
+  > **`I accept, continue to enable Google Sheets`**
+- **直接點擊該卡片按鈕**，依 Google 彈窗引導完成帳號授權，系統便會**自動為專案啟用 Google Sheets 整合**，完全不需要自己切換至右側面板手動開啟！
+  *(💡 備註：若對話框未自動跳出，也可隨時在專案右側側邊欄的 `Integrations` 面板找到 Google Sheets 點擊 Enable)*。
 
 ### 3. 測試與雲端發布
 - **發票圖片多模態辨識**：在產出的網頁中，拖曳或點選上傳剛才下載的 `sample_receipt_invoice.svg`，點擊「⚡ 開始 AI 智慧解析」，Gemini 自動萃取店家、日期、金額與會計科目。
@@ -197,3 +199,11 @@
 
 ### Q3：發布到 Google Cloud Run 後，需要重新設定 Google 登入憑證嗎？
 - **完全不需要**！這正是 Google AI Studio 原生 Integrations 的巨大優勢。部署至 Google Cloud Run 後，系統自動由託管伺服器維持安全代理，使用者點擊登入授權即可無縫運作。
+
+### Q4：在 AI Studio 畫面出現「⚠️ Quota exceeded. Please try again later.」或跑了數百秒報錯該怎麼辦？
+- **原因**：免費帳號（Free Tier）針對 `Gemini 3.8 Flash` 具備每分鐘請求數（RPM: 5 次）、每分鐘 Token（TPM: 250K）與每日總請求數（RPD: 僅 20 次）上限。當模型在背景連續執行思考與修改代碼長達數分鐘時，短時間內極易衝破 RPM 或累積滿每日 20 次上限。
+- **解法**：
+  1. **靜置等待 1~3 分鐘**：每分鐘額度為滾動時間窗口（Rolling Window），若為短時衝破稍等 1~3 分鐘即可自動恢復。
+  2. **點擊 Checkpoint 還原**：若修改卡住，可點擊右下角 **`Restore`** 回復至上一版乾淨代碼。
+  3. **查看目前額度**：造訪 [AI Studio 配額面板](https://aistudio.google.com/usage?tab=rate-limit) 查詢即時剩餘量，亦可參考 [📸 官方 Rate Limit 儀表板圖解說明](../認識GoogleAIStudio/README.md#4--配額機制與quota-exceeded排查指南-rate-limits--quota)。
+  4. **升級 Pay-as-you-go**：點擊左下角「Upgrade to unlock more」綁定 GCP 帳單，享有專屬高額度保障算力（費用極低，每次微調約 $0.0001 美元），並可在 Dashboard 設定每月花費上限（Spend Cap）。

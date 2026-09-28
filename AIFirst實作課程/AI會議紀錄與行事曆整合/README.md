@@ -58,9 +58,9 @@
 請依照以下簡單三步驟完成專案建置與 Google Cloud Run 雲端發布：
 
 ```
-【步驟 1】複製第三步提示詞 ────────────────► 貼至 AI Studio 首頁對話框生成專案進入工作區
+【步驟 1】複製第三步提示詞 ────────────────► 貼至 AI Studio 首頁對話框生成專案
                                                   ▼
-【步驟 2】開啟專案右側 Integrations 面板 ──► 啟用 Google Sheets 與 Google Calendar 完成授權
+【步驟 2】對話框彈出整合提示 ──────────────► 點擊「I accept, continue to enable...」授權
                                                   ▼
 【步驟 3】網頁預覽立即測試 ────────────────► 貼上逐字稿、一鍵同步試算表與日曆、一鍵 Publish！
 ```
@@ -68,12 +68,13 @@
 ### 1. 貼入提示詞生成應用程式
 - 開啟 [Google AI Studio](https://aistudio.google.com/)，點擊「**+ New app**」。
 - （可選）點擊右上角齒輪 ⚙️ **Advanced settings**，確認模型為 Gemini 3.8 Flash、Framework 為 React，System instructions 可設定自訂繁體中文要求。
-- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入首頁對話框「Describe an app and let Gemini do the rest」，點擊發送開始生成專案並進入專案工作區（Code & Preview 介面）。
+- 複製下方**「第三步」**的完整 RTCCF 提示詞，直接貼入首頁對話框「Describe an app and let Gemini do the rest」，點擊發送開始生成專案。
 
-### 2. 在專案中啟用 Google Sheets 與 Google Calendar 原生雙整合
-- 專案建立完成後，查看右側側邊欄的 **`Integrations`** 面板（專案建立後才會出現）：
-  - 找到 **`Google Sheets`** 並點擊 **`Enable（啟用）`** 完成授權。
-  - 找到 **`Google Calendar`** 並點擊 **`Enable（啟用）`** 完成授權。
+### 2. 對話框一鍵確認啟用 Sheets & Calendar 雙整合（極速自動化 ⚡）
+- 由於提示詞中已清楚列出需要 Google Sheets 與 Google Calendar 雙整合，**AI Studio 會在對話框中自動跳出整合提示卡片**：
+  > **`I accept, continue to enable Google Sheets`** 與 **`Google Calendar`**
+- **直接點擊卡片完成授權**，系統便會**自動為專案啟用雙整合**，完全無需手動進入右側面板設定！
+  *(💡 備註：若對話框未自動跳出，也可在專案右側側邊欄的 `Integrations` 面板分別找到 Google Sheets 與 Google Calendar 點擊 Enable)*。
 
 ### 3. 測試與雲端發布
 - **點擊一鍵填入範例**：在產出的網頁中，點擊「📋 填入示範會議紀錄」按鈕，快速帶入 1500 字跨部門籌備會議內容。
@@ -176,3 +177,11 @@
 
 ### Q3：AI 如何將「下週四」或「明天」轉換為正確的西元年月份？
 - 在提示詞中已指示系統注入基準系統時間（System Time Context），Gemini 會以今天的日期為原點精準推算出具體的 `YYYY-MM-DD`，再送給 Google Calendar 與 Sheets API，完全避免日期格式錯亂。
+
+### Q4：在 AI Studio 畫面出現「⚠️ Quota exceeded. Please try again later.」或跑了數百秒報錯該怎麼辦？
+- **原因**：免費帳號（Free Tier）具備每分鐘請求數（RPM: 約 10~15 次）與每分鐘 Token 數（TPM: 約 1,000,000）上限。當模型在背景連續執行思考與修改代碼長達數分鐘時，短時間內極易觸發速率門檻。
+- **解法**：
+  1. **靜置等待 1~3 分鐘**：每分鐘額度為滾動時間窗口（Rolling Window），稍等 1~3 分鐘即可自動恢復重試。
+  2. **點擊 Checkpoint 還原**：若修改卡住，可點擊右下角 **`Restore`** 回復至上一版乾淨代碼。
+  3. **查看目前額度**：可直接造訪 [AI Studio 配額面板](https://aistudio.google.com/usage?tab=rate-limit) 查詢剩餘配額。
+  4. **升級 Pay-as-you-go**：點擊左下角「Upgrade to unlock more」綁定 GCP 帳單，享有專屬高額度保障算力（費用極低，每次微調約 $0.0001 美元），並可在 Dashboard 設定每月花費上限（Spend Cap）。

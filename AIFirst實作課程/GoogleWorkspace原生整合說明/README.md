@@ -194,15 +194,20 @@
 
 ## 🎯 實戰教學：如何在 Google AI Studio 中啟用與呼叫？
 
-要在你的 Web 應用中串接這些 Workspace 整合，請遵循「先建專案、再至專案右側啟用 Integrations」的標準兩階段流程：
+要在你的 Web 應用中串接這些 Workspace 整合，體驗極為極速自動化：只要在 Prompt 中指明需求，對話框會主動詢問授權，完全不需要手動翻找設定！
 
 ```
-【步驟 1】在 AI Studio 首頁貼入提示詞生成專案（進入 App 工作區）
+【步驟 1】在 AI Studio 首頁對話框貼入 RTCCF 提示詞生成專案
                     ▼
-【步驟 2】切換至專案右側「Integrations」面板，在欲串接服務點擊「Enable」完成授權
+【步驟 2】對話框主動彈出整合卡片 ──► 點擊「I accept, continue to enable...」授權
                     ▼
-【步驟 3】在預覽畫面測試（或於右側對話中請 AI 完善串接），最後點擊「Publish」發布！
+【步驟 3】在預覽畫面測試功能，最後點擊「Publish」一鍵發布至 Cloud Run！
 ```
+
+> ⚡ **AI 智慧整合小技巧**：  
+> 當你的 Prompt 提示詞中明確寫入「使用 Google Sheets 原生整合」或「使用 Firebase Auth」時，**Google AI Studio 生成時會在對話框中自動跳出確認卡片**（如：`I accept, continue to enable Google Sheets`）。  
+> 你**不需要**特地切換到右側 Integrations 面板尋找，**直接在對話框點擊該按鈕**即可完成授權並自動啟用！  
+> *(💡 備註：若對話框未自動提示，亦可隨時至專案右側側邊欄的 `Integrations` 面板手動點擊 Enable)*。
 
 > 🚨 **極重要提醒：初始檔案格式支援限制**  
 > Google AI Studio 首頁輸入框的「Upload Files」功能**只支援純文字檔案（如 `.txt`、`.md`、`.csv`、代碼檔）與圖片檔案（如 `.jpg`、`.png`、`.webp`、`.svg`）**，**無法直接上傳 Word (`.docx`)、Excel (`.xlsx`)、PowerPoint (`.pptx`) 等 Office 二進位檔案**！  
