@@ -1,5 +1,7 @@
 # 📋 部門專案即時協作看板 (Team Kanban & Task Hub) - Prompt 指南
 
+## 尚未測議
+
 > **開發工具建議**：本專案推薦使用 **Google AI Studio (Build Mode)** 進行開發，技術棧採用 Vite、React、TypeScript、Tailwind CSS，並啟用官方原生的 **Firebase Firestore & Auth Integration**。
 > 
 > 💼 **上班族職場必備・專案追蹤神器**：團隊同時跑好幾個專案，大家進度卡在哪裡總要一直開會問「那份文件寫好了嗎？」、「API 測完了沒？」用 Excel 管理待辦容易互相覆寫衝突，用外部專業專案管理軟體又太繁重且要付費授權。本單元透過 **Firebase Auth 會員認證** 結合 **Firestore 雲端 NoSQL 即時資料庫**，打造專屬團隊的輕量級即時看板（Kanban Board）。同仁在自己的螢幕上將卡片從「進行中」拖到「已完成」，**全組成員與主管的螢幕瞬間同步跳動更新**，讓專案進度一目了然！

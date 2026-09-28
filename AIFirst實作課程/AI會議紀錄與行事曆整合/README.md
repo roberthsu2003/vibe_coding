@@ -1,5 +1,7 @@
 # 📑 AI First 實戰進階：AI 會議紀錄與行事曆中心（Google Sheets + Calendar 雙整合 🗓️）
 
+## 尚未測試
+
 > **30 秒專案介紹**：  
 > 每天在會議室或 Google Meet 耗費數小時，會後筆記密密麻麻，但常因沒人認真追蹤而「開完會就石沉大海」嗎？手動把 Action Items 敲進試算表、再手動切換到 Google 日曆一個個設提醒，往往耗掉半天工時。  
 > 本專案運用 **Gemini 語言推理模型** 與 **Google AI Studio 原生「雙 Workspace 整合」**，讓員工直接貼入雜亂筆記或錄音逐字稿，AI 秒級拆解出「決策重點」、「待辦負責人與截止日」及「關鍵會議日程」，**一鍵同步寫入 Google 試算表，並直接將 Deadline 與會議排入個人 Google 日曆**！  
