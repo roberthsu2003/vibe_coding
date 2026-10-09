@@ -13,11 +13,6 @@
 2. **文字牆抗拒感（Text Wall Fatigue）**：超過 100 行的密集文字讓人類產生閱讀排斥，無法快速抓出結構與漏洞。
 3. **人類審核頻寬超載**：AI 一秒能產出千字，但人類閱讀、校對與驗證需要數分鐘甚至數小時。
 
-![傳統純文字牆 vs. Karpathy 四層輸出階梯](./llm_output_ladder_comparison.svg)
-
-<details>
-<summary>點擊展開查看原始 Mermaid 圖表代碼</summary>
-
 ```mermaid
 graph TD
     A["❌ 傳統純文字互動 (Plain Text)"] --> B["AI 輸出 1,000 字密集文字牆"]
@@ -25,15 +20,13 @@ graph TD
     C --> D["人類肉眼逐字審核，大腦認知超載"]
 
     E["⭐ Karpathy 四層階梯體系"] --> F["L1: 受控語言 (8 成 ASD STE100)<br/>逼模型把話說死，短句直接給結論"]
-    E --> G["L2: 視覺圖表 (Diagrams / Mermaid)<br/>先圖後文，架構與流程一目了然"]
+    E --> G["L2: 視覺圖表 (Diagrams / Mermaid / SVG)<br/>先圖後文，架構與流程一目了然"]
     E --> H["L3: 互動網頁 (Self-contained HTML)<br/>HTML 是新的 Markdown，折疊與導覽"]
     E --> I["L4: 客製解說影片 (Explainer Video)<br/>Manim 動畫 + AI 配音，極致直觀"]
 
     style A fill:#fee2e2,stroke:#ef4444,stroke-width:2px,color:#991b1b
     style E fill:#dcfce7,stroke:#22c55e,stroke-width:2px,color:#166534
 ```
-
-</details>
 
 
 > [!IMPORTANT]
