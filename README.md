@@ -34,6 +34,9 @@
 - **[作品迭代與修改技巧](./作品迭代與修改技巧/README.md)**
   - *學會四大黃金法則與 Console 除錯，小步迭代把原型打磨成完整作品。*
 
+- **[Karpathy 的 LLM 四層輸出階梯](./AIFirst實作課程/LLM四層輸出階梯/README.md)**
+  - *前 OpenAI 創始成員 / Tesla AI 總監的 400 萬瀏覽神級方法：破除「純文字回答」迷思，從受控文字、視覺圖表、互動網頁到解說影片的高效輸出心法。*
+
 
 ### [實作範例：AI First（Google AI Studio）](./AIFirst實作課程/README.md)
 
