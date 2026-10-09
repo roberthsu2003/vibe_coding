@@ -254,3 +254,12 @@ flowchart LR
   [在此處貼上 Console 報錯，例如：Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first]
   請幫我分析原因，並加入適當的 Audio 生命週期防呆處理，提供修改後的完整程式碼。
   ```
+
+---
+
+## 🧭 四、 延伸推薦：破除文字迷思的 AI 高效輸出法則
+
+想要進一步了解為什麼我們應該透過「互動式網頁與多媒體」來消費 AI 的輸出，而不是只看冗長的純文字回答嗎？
+
+- 📺 **精選影片推薦**：[Karpathy：LLM四層輸出階梯，400萬+瀏覽 5.7萬+收藏的方法 (YouTube 連結)](https://www.youtube.com/watch?v=FESIfabbzy8&list=WL&index=1)
+- 📖 **專題詳解筆記**：[🪜 Karpathy LLM 四層輸出階梯：從純文字、圖表、互動網頁到解說影片](../LLM四層輸出階梯/README.md)
