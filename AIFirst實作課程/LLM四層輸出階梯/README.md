@@ -1,6 +1,5 @@
 # 🪜 Karpathy 的 LLM 四層輸出階梯：從受控寫作到互動多媒體的高效輸出法則
 
-> 📺 **影片來源**：[Karpathy：LLM四層輸出階梯，400萬+瀏覽 5.7萬+收藏的方法 (YouTube 連結)](https://www.youtube.com/watch?v=FESIfabbzy8&list=WL&index=1)  
 > 💡 **核心靈感**：前 OpenAI 創始成員、Tesla 前 AI 總監 **Andrej Karpathy** 於 X 平台發布的現象級觀點（獲得超過 400 萬次瀏覽、5.7 萬次收藏）。  
 > 🎯 **核心宗旨**：解決「AI 產出速度極快，而人類大腦讀取與審核不及」的致命頻寬瓶頸。
 
@@ -13,6 +12,11 @@
 1. **AI 車咕嚕話與無責任套話**：AI 極其擅長生成「聽起來自信流暢、但實質含糊且無法究責」的水詞（例如：「一般來說...」、「視具體情況而定...」、「值得注意的是...」）。
 2. **文字牆抗拒感（Text Wall Fatigue）**：超過 100 行的密集文字讓人類產生閱讀排斥，無法快速抓出結構與漏洞。
 3. **人類審核頻寬超載**：AI 一秒能產出千字，但人類閱讀、校對與驗證需要數分鐘甚至數小時。
+
+![傳統純文字牆 vs. Karpathy 四層輸出階梯](./llm_output_ladder_comparison.svg)
+
+<details>
+<summary>點擊展開查看原始 Mermaid 圖表代碼</summary>
 
 ```mermaid
 graph TD
@@ -28,6 +32,9 @@ graph TD
     style A fill:#fee2e2,stroke:#ef4444,stroke-width:2px,color:#991b1b
     style E fill:#dcfce7,stroke:#22c55e,stroke-width:2px,color:#166534
 ```
+
+</details>
+
 
 > [!IMPORTANT]
 > ### 💡 關鍵洞察：「格式不能減少廢話，但能讓廢話現形」

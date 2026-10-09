@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <!-- 定義漸層色彩 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <linearGradient id="leftCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b2e"/>
+      <stop offset="100%" stop-color="#181326"/>
+    </linearGradient>
+
+    <linearGradient id="rightCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f293a"/>
+      <stop offset="100%" stop-color="#0b1e2c"/>
+    </linearGradient>
+
+    <linearGradient id="badPill" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+
+    <linearGradient id="goodPill" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+
+    <filter id="glowGreen" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#10b981" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- 背景圖底 -->
+  <rect width="960" height="540" rx="16" fill="url(#bgGrad)"/>
+  <rect width="958" height="538" x="1" y="1" rx="15" fill="none" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- 頂部標題區 -->
+  <g transform="translate(480, 45)" text-anchor="middle">
+    <text font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" fill="#f8fafc" letter-spacing="1">
+      傳統純文字牆 vs. Karpathy 四層輸出階梯
+    </text>
+    <text y="24" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#94a3b8">
+      「格式不能減少廢話，但能讓廢話現形」— 降低人類認知負擔與審核頻寬
+    </text>
+  </g>
+
+  <!-- 左側欄位：傳統純文字互動模式 (警示/低效) -->
+  <g transform="translate(50, 95)">
+    <!-- 卡片外框 -->
+    <rect width="400" height="400" rx="14" fill="url(#leftCardGrad)" stroke="#ef4444" stroke-opacity="0.35" stroke-width="1.5" filter="url(#cardShadow)"/>
+    
+    <!-- 頂部標籤 -->
+    <rect x="24" y="24" width="220" height="32" rx="16" fill="#fee2e2" fill-opacity="0.12" stroke="#ef4444" stroke-width="1"/>
+    <circle cx="42" cy="40" r="6" fill="#ef4444"/>
+    <text x="56" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#fca5a5">
+      傳統模式：純文字文字牆
+    </text>
+
+    <!-- 步驟 1 -->
+    <g transform="translate(24, 78)">
+      <rect width="352" height="70" rx="10" fill="#261b2c" stroke="#3f273f" stroke-width="1"/>
+      <text x="18" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#f8fafc">
+        1. AI 產出 1,000+ 字純文字
+      </text>
+      <text x="18" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">
+        Markdown 平鋪直敘，充斥段落長文與客套贅字
+      </text>
+    </g>
+
+    <!-- 連接箭頭 1 -->
+    <path d="M 200 156 L 200 174" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
+    <polygon points="196,174 204,174 200,180" fill="#ef4444"/>
+
+    <!-- 步驟 2 -->
+    <g transform="translate(24, 186)">
+      <rect width="352" height="70" rx="10" fill="#261b2c" stroke="#3f273f" stroke-width="1"/>
+      <text x="18" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#fca5a5">
+        2. 藏匿含糊套話與邏輯漏洞
+      </text>
+      <text x="18" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#94a3b8">
+        「一般來說、視情況而定」等車咕嚕話免除責任
+      </text>
+    </g>
+
+    <!-- 連接箭頭 2 -->
+    <path d="M 200 264 L 200 282" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"/>
+    <polygon points="196,282 204,282 200,288" fill="#ef4444"/>
+
+    <!-- 步驟 3 -->
+    <g transform="translate(24, 294)">
+      <rect width="352" height="76" rx="10" fill="#3b1d28" stroke="#ef4444" stroke-opacity="0.4" stroke-width="1.2"/>
+      <text x="18" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#f87171">
+        3. 人類肉眼逐字審核，大腦過載
+      </text>
+      <text x="18" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#fca5a5">
+        閱讀極其疲累、錯漏頻出，驗證時間遠超預期
+      </text>
+    </g>
+  </g>
+
+  <!-- 中間 VS 徽章 -->
+  <g transform="translate(480, 295)">
+    <circle r="22" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text text-anchor="middle" y="5" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="900" fill="#38bdf8">
+      VS
+    </text>
+  </g>
+
+  <!-- 右側欄位：Karpathy 四層階梯體系 (高效/進階) -->
+  <g transform="translate(510, 95)">
+    <!-- 卡片外框 -->
+    <rect width="400" height="400" rx="14" fill="url(#rightCardGrad)" stroke="#10b981" stroke-opacity="0.4" stroke-width="1.5" filter="url(#cardShadow)"/>
+    
+    <!-- 頂部標籤 -->
+    <rect x="24" y="24" width="240" height="32" rx="16" fill="#064e3b" fill-opacity="0.3" stroke="#10b981" stroke-width="1"/>
+    <circle cx="42" cy="40" r="6" fill="#10b981" filter="url(#glowGreen)"/>
+    <text x="56" y="45" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#6ee7b7">
+      階梯體系：高密度降維輸出
+    </text>
+
+    <!-- 階梯 1 -->
+    <g transform="translate(24, 74)">
+      <rect width="352" height="66" rx="8" fill="#0c2333" stroke="#134e4a" stroke-width="1"/>
+      <rect x="12" y="14" width="30" height="20" rx="4" fill="#0284c7"/>
+      <text x="27" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#ffffff">L1</text>
+      <text x="50" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#38bdf8">受控文字 (8成 ASD STE100)</text>
+      <text x="14" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#94a3b8">限制 20/25 字短句、主動語態，逼模型把話說死</text>
+    </g>
+
+    <!-- 階梯 2 -->
+    <g transform="translate(24, 148)">
+      <rect width="352" height="66" rx="8" fill="#0c2333" stroke="#134e4a" stroke-width="1"/>
+      <rect x="12" y="14" width="30" height="20" rx="4" fill="#0d9488"/>
+      <text x="27" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#ffffff">L2</text>
+      <text x="50" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#2dd4bf">視覺圖表 (Diagrams / Mermaid)</text>
+      <text x="14" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#94a3b8">先圖後文，系統架構、時序與分支一眼看透</text>
+    </g>
+
+    <!-- 階梯 3 -->
+    <g transform="translate(24, 222)">
+      <rect width="352" height="66" rx="8" fill="#082b35" stroke="#059669" stroke-width="1.2"/>
+      <rect x="12" y="14" width="30" height="20" rx="4" fill="#10b981"/>
+      <text x="27" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#ffffff">L3</text>
+      <text x="50" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#34d399">互動網頁 (Self-contained HTML)</text>
+      <text x="14" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#a7f3d0">HTML 是新 Markdown！內建導覽、折疊與標籤頁</text>
+    </g>
+
+    <!-- 階梯 4 -->
+    <g transform="translate(24, 296)">
+      <rect width="352" height="66" rx="8" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.2"/>
+      <rect x="12" y="14" width="30" height="20" rx="4" fill="#8b5cf6"/>
+      <text x="27" y="28" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#ffffff">L4</text>
+      <text x="50" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#c084fc">客製解說影片 (Explainer Videos)</text>
+      <text x="14" y="50" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" fill="#ddd6fe">3b1b 式 Manim 動畫 + AI 語音，直觀抽象本質</text>
+    </g>
+  </g>
+
+  <!-- 底部微標籤 -->
+  <g transform="translate(480, 515)" text-anchor="middle">
+    <text font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748b">
+      💡 審核效率大幅提升 • 錯誤無所遁形 • 保留底層 Markdown/JSON 作為驗證錨點
+    </text>
+  </g>
+</svg>
